@@ -17,11 +17,10 @@ struct SplashScreenView: View {
             
             VStack(spacing: 20) {
                 // Logo App (Thay bằng Image Asset của bạn nếu có)
-                Image(systemName: "book.fill")
+                Image("img_hi_capy")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100, height: 100)
-                    .foregroundColor(.white)
                 
                 Text("English Master")
                     .font(.largeTitle)

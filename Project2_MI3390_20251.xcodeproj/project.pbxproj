@@ -56,6 +56,35 @@
 			path = Source;
 			sourceTree = "<group>";
 		};
+		083369DD2EE58503003B2FEF /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		083369DE2EE58545003B2FEF /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				083369E02EE58551003B2FEF /* Authentication */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		083369DF2EE58550003B2FEF /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		083369E02EE58551003B2FEF /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
 		088F25CB2EE50A4200E89167 = {
 			isa = PBXGroup;
 			children = (
@@ -100,6 +129,7 @@
 		088F25EE2EE50A9F00E89167 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				083369DE2EE58545003B2FEF /* Managers */,
 				088F25F52EE50AFC00E89167 /* Models */,
 				088F25F62EE50B0200E89167 /* Services */,
 			);
@@ -161,6 +191,7 @@
 		088F25F52EE50AFC00E89167 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				083369DD2EE58503003B2FEF /* Authentication */,
 				088F26072EE50D2500E89167 /* Onboarding */,
 			);
 			path = Models;
@@ -169,6 +200,7 @@
 		088F25F62EE50B0200E89167 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				083369DF2EE58550003B2FEF /* Authentication */,
 			);
 			path = Services;
 			sourceTree = "<group>";

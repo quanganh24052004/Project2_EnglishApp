@@ -11,6 +11,7 @@
 		088F25EA2EE50A8000E89167 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088F25E52EE50A8000E89167 /* ContentView.swift */; };
 		088F25EB2EE50A8000E89167 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088F25E62EE50A8000E89167 /* Item.swift */; };
 		088F25EC2EE50A8000E89167 /* Project2_MI3390_20251App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088F25E72EE50A8000E89167 /* Project2_MI3390_20251App.swift */; };
+		088F26062EE50C0900E89167 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 088F26052EE50C0900E89167 /* .gitignore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		088F25E52EE50A8000E89167 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		088F25E62EE50A8000E89167 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		088F25E72EE50A8000E89167 /* Project2_MI3390_20251App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project2_MI3390_20251App.swift; sourceTree = "<group>"; };
+		088F26052EE50C0900E89167 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +53,7 @@
 		088F25E82EE50A8000E89167 /* Project2_MI3390_20251 */ = {
 			isa = PBXGroup;
 			children = (
+				088F26052EE50C0900E89167 /* .gitignore */,
 				088F25ED2EE50A9D00E89167 /* App */,
 				088F25F12EE50AD400E89167 /* Core */,
 				088F25EE2EE50A9F00E89167 /* Data */,
@@ -280,6 +283,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				088F26062EE50C0900E89167 /* .gitignore in Resources */,
 				088F25E92EE50A8000E89167 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

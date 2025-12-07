@@ -48,6 +48,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		083369DC2EE58426003B2FEF /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				088F25E42EE50A8000E89167 /* Assets.xcassets */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
 		088F25CB2EE50A4200E89167 = {
 			isa = PBXGroup;
 			children = (
@@ -71,9 +79,9 @@
 				088F25ED2EE50A9D00E89167 /* App */,
 				088F25F12EE50AD400E89167 /* Core */,
 				088F25EE2EE50A9F00E89167 /* Data */,
+				083369DC2EE58426003B2FEF /* Source */,
 				088F25EF2EE50AAB00E89167 /* Views */,
 				088F25F02EE50AAE00E89167 /* ViewModels */,
-				088F25E42EE50A8000E89167 /* Assets.xcassets */,
 				088F25E62EE50A8000E89167 /* Item.swift */,
 			);
 			path = Project2_MI3390_20251;

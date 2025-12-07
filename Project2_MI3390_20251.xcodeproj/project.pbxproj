@@ -12,6 +12,10 @@
 		088F25EB2EE50A8000E89167 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088F25E62EE50A8000E89167 /* Item.swift */; };
 		088F25EC2EE50A8000E89167 /* Project2_MI3390_20251App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088F25E72EE50A8000E89167 /* Project2_MI3390_20251App.swift */; };
 		088F26062EE50C0900E89167 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 088F26052EE50C0900E89167 /* .gitignore */; };
+		088F26092EE50D3100E89167 /* SurveyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088F26082EE50D3100E89167 /* SurveyModel.swift */; };
+		088F260C2EE50D3900E89167 /* SurveyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088F260A2EE50D3900E89167 /* SurveyView.swift */; };
+		088F260D2EE50D3900E89167 /* SurveyOptionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088F260B2EE50D3900E89167 /* SurveyOptionRow.swift */; };
+		088F26102EE50D4700E89167 /* SurveyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088F260F2EE50D4700E89167 /* SurveyViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +25,10 @@
 		088F25E62EE50A8000E89167 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		088F25E72EE50A8000E89167 /* Project2_MI3390_20251App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project2_MI3390_20251App.swift; sourceTree = "<group>"; };
 		088F26052EE50C0900E89167 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		088F26082EE50D3100E89167 /* SurveyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyModel.swift; sourceTree = "<group>"; };
+		088F260A2EE50D3900E89167 /* SurveyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyView.swift; sourceTree = "<group>"; };
+		088F260B2EE50D3900E89167 /* SurveyOptionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyOptionRow.swift; sourceTree = "<group>"; };
+		088F260F2EE50D4700E89167 /* SurveyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +106,7 @@
 		088F25F02EE50AAE00E89167 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				088F260E2EE50D4200E89167 /* Onboarding */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -136,6 +145,7 @@
 		088F25F52EE50AFC00E89167 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				088F26072EE50D2500E89167 /* Onboarding */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -157,6 +167,8 @@
 		088F25F82EE50B1300E89167 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				088F260A2EE50D3900E89167 /* SurveyView.swift */,
+				088F260B2EE50D3900E89167 /* SurveyOptionRow.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -220,6 +232,22 @@
 			children = (
 			);
 			path = Setting;
+			sourceTree = "<group>";
+		};
+		088F26072EE50D2500E89167 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				088F26082EE50D3100E89167 /* SurveyModel.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		088F260E2EE50D4200E89167 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				088F260F2EE50D4700E89167 /* SurveyViewModel.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -295,9 +323,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				088F26102EE50D4700E89167 /* SurveyViewModel.swift in Sources */,
 				088F25EA2EE50A8000E89167 /* ContentView.swift in Sources */,
+				088F260C2EE50D3900E89167 /* SurveyView.swift in Sources */,
+				088F260D2EE50D3900E89167 /* SurveyOptionRow.swift in Sources */,
 				088F25EB2EE50A8000E89167 /* Item.swift in Sources */,
 				088F25EC2EE50A8000E89167 /* Project2_MI3390_20251App.swift in Sources */,
+				088F26092EE50D3100E89167 /* SurveyModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,6 +16,8 @@
 		088F260C2EE50D3900E89167 /* SurveyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088F260A2EE50D3900E89167 /* SurveyView.swift */; };
 		088F260D2EE50D3900E89167 /* SurveyOptionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088F260B2EE50D3900E89167 /* SurveyOptionRow.swift */; };
 		088F26102EE50D4700E89167 /* SurveyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088F260F2EE50D4700E89167 /* SurveyViewModel.swift */; };
+		088F26122EE510E300E89167 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088F26112EE510E300E89167 /* SplashScreenView.swift */; };
+		088F26142EE5113C00E89167 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088F26132EE5113C00E89167 /* RootView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +31,8 @@
 		088F260A2EE50D3900E89167 /* SurveyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyView.swift; sourceTree = "<group>"; };
 		088F260B2EE50D3900E89167 /* SurveyOptionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyOptionRow.swift; sourceTree = "<group>"; };
 		088F260F2EE50D4700E89167 /* SurveyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyViewModel.swift; sourceTree = "<group>"; };
+		088F26112EE510E300E89167 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
+		088F26132EE5113C00E89167 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +80,7 @@
 		088F25ED2EE50A9D00E89167 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				088F26132EE5113C00E89167 /* RootView.swift */,
 				088F25E52EE50A8000E89167 /* ContentView.swift */,
 				088F25E72EE50A8000E89167 /* Project2_MI3390_20251App.swift */,
 			);
@@ -167,6 +172,7 @@
 		088F25F82EE50B1300E89167 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				088F26112EE510E300E89167 /* SplashScreenView.swift */,
 				088F260A2EE50D3900E89167 /* SurveyView.swift */,
 				088F260B2EE50D3900E89167 /* SurveyOptionRow.swift */,
 			);
@@ -328,8 +334,10 @@
 				088F260C2EE50D3900E89167 /* SurveyView.swift in Sources */,
 				088F260D2EE50D3900E89167 /* SurveyOptionRow.swift in Sources */,
 				088F25EB2EE50A8000E89167 /* Item.swift in Sources */,
+				088F26142EE5113C00E89167 /* RootView.swift in Sources */,
 				088F25EC2EE50A8000E89167 /* Project2_MI3390_20251App.swift in Sources */,
 				088F26092EE50D3100E89167 /* SurveyModel.swift in Sources */,
+				088F26122EE510E300E89167 /* SplashScreenView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

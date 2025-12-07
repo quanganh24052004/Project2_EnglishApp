@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		083369DB2EE57F1D003B2FEF /* String+Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083369DA2EE57F1D003B2FEF /* String+Validation.swift */; };
 		088F25E92EE50A8000E89167 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 088F25E42EE50A8000E89167 /* Assets.xcassets */; };
 		088F25EA2EE50A8000E89167 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088F25E52EE50A8000E89167 /* ContentView.swift */; };
 		088F25EB2EE50A8000E89167 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088F25E62EE50A8000E89167 /* Item.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		083369DA2EE57F1D003B2FEF /* String+Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Validation.swift"; sourceTree = "<group>"; };
 		088F25D42EE50A4200E89167 /* Project2_MI3390_20251.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project2_MI3390_20251.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		088F25E42EE50A8000E89167 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		088F25E52EE50A8000E89167 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 		088F25F22EE50AEB00E89167 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				083369DA2EE57F1D003B2FEF /* String+Validation.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				088F26102EE50D4700E89167 /* SurveyViewModel.swift in Sources */,
+				083369DB2EE57F1D003B2FEF /* String+Validation.swift in Sources */,
 				088F25EA2EE50A8000E89167 /* ContentView.swift in Sources */,
 				088F260C2EE50D3900E89167 /* SurveyView.swift in Sources */,
 				088F260D2EE50D3900E89167 /* SurveyOptionRow.swift in Sources */,

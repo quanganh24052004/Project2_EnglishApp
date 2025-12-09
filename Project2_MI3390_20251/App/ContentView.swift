@@ -14,10 +14,8 @@ struct ContentView: View {
     
     var body: some View {
         if isOnboardingDone {
-            // Màn hình chính sau khi xong khảo sát
             Text("Màn hình Trang chủ (Sau khi đã thu thập dữ liệu)")
         } else {
-            // Màn hình Khảo sát
             SurveyView(isOnboardingDone: $isOnboardingDone)
         }
     }

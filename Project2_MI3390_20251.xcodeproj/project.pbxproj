@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0804F2F62EE79E4B00A982D3 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0804F2F52EE79E4B00A982D3 /* MainTabView.swift */; };
+		0804F2F92EE79FDC00A982D3 /* AppTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0804F2F82EE79FDC00A982D3 /* AppTab.swift */; };
 		083369DB2EE57F1D003B2FEF /* String+Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083369DA2EE57F1D003B2FEF /* String+Validation.swift */; };
 		083369E22EE58583003B2FEF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083369E12EE58583003B2FEF /* LoginView.swift */; };
 		083369E42EE585A2003B2FEF /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083369E32EE585A2003B2FEF /* RegistrationView.swift */; };
@@ -21,9 +23,12 @@
 		088F26102EE50D4700E89167 /* SurveyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088F260F2EE50D4700E89167 /* SurveyViewModel.swift */; };
 		088F26122EE510E300E89167 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088F26112EE510E300E89167 /* SplashScreenView.swift */; };
 		088F26142EE5113C00E89167 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088F26132EE5113C00E89167 /* RootView.swift */; };
+		08BE81712EE7A5BF004181EE /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BE81702EE7A5BF004181EE /* SearchView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0804F2F52EE79E4B00A982D3 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		0804F2F82EE79FDC00A982D3 /* AppTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTab.swift; sourceTree = "<group>"; };
 		083369DA2EE57F1D003B2FEF /* String+Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Validation.swift"; sourceTree = "<group>"; };
 		083369E12EE58583003B2FEF /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		083369E32EE585A2003B2FEF /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
@@ -39,6 +44,7 @@
 		088F260F2EE50D4700E89167 /* SurveyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyViewModel.swift; sourceTree = "<group>"; };
 		088F26112EE510E300E89167 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 		088F26132EE5113C00E89167 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		08BE81702EE7A5BF004181EE /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +58,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0804F2F72EE79FD900A982D3 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				0804F2F82EE79FDC00A982D3 /* AppTab.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
 		083369DC2EE58426003B2FEF /* Source */ = {
 			isa = PBXGroup;
 			children = (
@@ -195,6 +209,7 @@
 		088F25F52EE50AFC00E89167 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				0804F2F72EE79FD900A982D3 /* Main */,
 				083369DD2EE58503003B2FEF /* Authentication */,
 				088F26072EE50D2500E89167 /* Onboarding */,
 			);
@@ -231,6 +246,7 @@
 		088F25F92EE50B1800E89167 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				0804F2F52EE79E4B00A982D3 /* MainTabView.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -238,10 +254,10 @@
 		088F25FC2EE50B2200E89167 /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
-				088F25FE2EE50B2F00E89167 /* Search */,
-				088F25FF2EE50B3600E89167 /* Learn */,
 				088F26002EE50B3A00E89167 /* Review */,
-				088F26012EE50B3D00E89167 /* Forum */,
+				088F25FF2EE50B3600E89167 /* Learn */,
+				088F25FE2EE50B2F00E89167 /* Search */,
+				088F26012EE50B3D00E89167 /* Person */,
 				088F26022EE50B4000E89167 /* Setting */,
 			);
 			path = Tabs;
@@ -257,6 +273,7 @@
 		088F25FE2EE50B2F00E89167 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				08BE81702EE7A5BF004181EE /* SearchView.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -275,11 +292,11 @@
 			path = Review;
 			sourceTree = "<group>";
 		};
-		088F26012EE50B3D00E89167 /* Forum */ = {
+		088F26012EE50B3D00E89167 /* Person */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = Forum;
+			path = Person;
 			sourceTree = "<group>";
 		};
 		088F26022EE50B4000E89167 /* Setting */ = {
@@ -380,6 +397,7 @@
 			files = (
 				088F26102EE50D4700E89167 /* SurveyViewModel.swift in Sources */,
 				083369DB2EE57F1D003B2FEF /* String+Validation.swift in Sources */,
+				0804F2F62EE79E4B00A982D3 /* MainTabView.swift in Sources */,
 				088F25EA2EE50A8000E89167 /* ContentView.swift in Sources */,
 				083369E42EE585A2003B2FEF /* RegistrationView.swift in Sources */,
 				088F260C2EE50D3900E89167 /* SurveyView.swift in Sources */,
@@ -387,9 +405,11 @@
 				088F25EB2EE50A8000E89167 /* Item.swift in Sources */,
 				088F26142EE5113C00E89167 /* RootView.swift in Sources */,
 				088F25EC2EE50A8000E89167 /* Project2_MI3390_20251App.swift in Sources */,
+				08BE81712EE7A5BF004181EE /* SearchView.swift in Sources */,
 				083369E22EE58583003B2FEF /* LoginView.swift in Sources */,
 				088F26092EE50D3100E89167 /* SurveyModel.swift in Sources */,
 				088F26122EE510E300E89167 /* SplashScreenView.swift in Sources */,
+				0804F2F92EE79FDC00A982D3 /* AppTab.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

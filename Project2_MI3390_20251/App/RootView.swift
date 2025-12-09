@@ -9,10 +9,8 @@
 import SwiftUI
 
 struct RootView: View {
-    // 1. Trạng thái điều khiển Splash Screen
     @State private var showSplash: Bool = true
     
-    // 2. Trạng thái lưu trữ (từ code cũ của bạn)
     @AppStorage("isOnboardingDone") var isOnboardingDone: Bool = false
     
     var body: some View {

@@ -26,6 +26,8 @@
 		08BE81712EE7A5BF004181EE /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BE81702EE7A5BF004181EE /* SearchView.swift */; };
 		08BE81732EE7A779004181EE /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BE81722EE7A779004181EE /* ReviewView.swift */; };
 		08BE81752EE7A83D004181EE /* LearnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BE81742EE7A83D004181EE /* LearnView.swift */; };
+		08BE81772EE7A874004181EE /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BE81762EE7A874004181EE /* ProfileView.swift */; };
+		08BE81792EE7A879004181EE /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BE81782EE7A879004181EE /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +51,8 @@
 		08BE81702EE7A5BF004181EE /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		08BE81722EE7A779004181EE /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
 		08BE81742EE7A83D004181EE /* LearnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnView.swift; sourceTree = "<group>"; };
+		08BE81762EE7A874004181EE /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		08BE81782EE7A879004181EE /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -260,9 +264,9 @@
 			children = (
 				088F26002EE50B3A00E89167 /* Review */,
 				088F25FF2EE50B3600E89167 /* Learn */,
-				088F25FE2EE50B2F00E89167 /* Search */,
 				088F26012EE50B3D00E89167 /* Person */,
 				088F26022EE50B4000E89167 /* Setting */,
+				088F25FE2EE50B2F00E89167 /* Search */,
 			);
 			path = Tabs;
 			sourceTree = "<group>";
@@ -301,6 +305,7 @@
 		088F26012EE50B3D00E89167 /* Person */ = {
 			isa = PBXGroup;
 			children = (
+				08BE81762EE7A874004181EE /* ProfileView.swift */,
 			);
 			path = Person;
 			sourceTree = "<group>";
@@ -308,6 +313,7 @@
 		088F26022EE50B4000E89167 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				08BE81782EE7A879004181EE /* SettingsView.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -406,7 +412,9 @@
 				0804F2F62EE79E4B00A982D3 /* MainTabView.swift in Sources */,
 				088F25EA2EE50A8000E89167 /* ContentView.swift in Sources */,
 				083369E42EE585A2003B2FEF /* RegistrationView.swift in Sources */,
+				08BE81772EE7A874004181EE /* ProfileView.swift in Sources */,
 				088F260C2EE50D3900E89167 /* SurveyView.swift in Sources */,
+				08BE81792EE7A879004181EE /* SettingsView.swift in Sources */,
 				088F260D2EE50D3900E89167 /* SurveyOptionRow.swift in Sources */,
 				088F25EB2EE50A8000E89167 /* Item.swift in Sources */,
 				08BE81732EE7A779004181EE /* ReviewView.swift in Sources */,

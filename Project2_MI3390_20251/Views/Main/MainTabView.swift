@@ -17,8 +17,17 @@ struct MainTabView: View {
                 ReviewView()
             }
                         
-            Tab(AppTab.learn.title, systemImage: AppTab.learn.icon, value: .learn) {
+            Tab(value: .learn) {
                 LearnView()
+            } label: {
+                // Logic hiển thị Icon
+                if selectedTab == .learn {
+                    Image(systemName: AppTab.learn.selectedIcon)
+                    Text(AppTab.learn.title)
+                } else {
+                    Image(systemName: AppTab.learn.icon)
+                    Text(AppTab.learn.title)
+                }
             }
             
             Tab(AppTab.profile.title, systemImage: AppTab.profile.icon, value: .profile) {

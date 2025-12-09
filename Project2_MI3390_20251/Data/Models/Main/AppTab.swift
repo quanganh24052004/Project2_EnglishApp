@@ -26,4 +26,14 @@ enum AppTab: Int, Identifiable, CaseIterable {
         case .search: return "magnifyingglass"
         }
     }
+    
+    var selectedIcon: String {
+        switch self {
+        case .review: return "chart.bar.fill"
+        case .learn: return "book.fill"
+        case .profile: return "person.fill"
+        case .settings: return "gearshape.fill"
+        case .search: return "magnifyingglass"
+        }
+    }
 }

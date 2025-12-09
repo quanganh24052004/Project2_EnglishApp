@@ -13,7 +13,6 @@ struct Project2_MI3390_20251App: App {
     let sharedModelContainer: ModelContainer
     
     init() {
-        // 1. Cấu hình Schema đầy đủ
         let schema = Schema([
             Course.self, Lesson.self, Word.self, Meaning.self,
             User.self, Account.self, StudyRecord.self, LessonRecord.self
@@ -24,7 +23,6 @@ struct Project2_MI3390_20251App: App {
         do {
             sharedModelContainer = try ModelContainer(for: schema, configurations: [modelConfiguration])
             
-            // Gọi hàm kiểm tra và nạp dữ liệu
             checkAndSeedData()
             
         } catch {
@@ -36,13 +34,9 @@ struct Project2_MI3390_20251App: App {
     func checkAndSeedData() {
         let context = sharedModelContainer.mainContext
         
-        // KIỂM TRA DỮ LIỆU CŨ
         let descriptor = FetchDescriptor<Course>()
         do {
             let existingCourses = try context.fetch(descriptor)
-            
-            // Logic cho Dev: Nếu trong DB đã có dữ liệu nhưng bạn muốn nạp lại từ JSON mới sửa -> Uncomment dòng dưới
-            // if !existingCourses.isEmpty { try? context.delete(model: Course.self) }
             
             if !existingCourses.isEmpty {
                 print("✅ Dữ liệu đã tồn tại: \(existingCourses.count) khóa học.")
@@ -57,10 +51,8 @@ struct Project2_MI3390_20251App: App {
             print("⚠️ Lỗi khi fetch dữ liệu cũ: \(error)")
         }
         
-        // TIẾN HÀNH NẠP DỮ LIỆU
         print("⏳ Database trống. Bắt đầu nạp JSON...")
         
-        // Validate File JSON
         guard let url = Bundle.main.url(forResource: "courses_data", withExtension: "json") else {
             print("❌ LỖI LỚN: Không tìm thấy file 'courses_data.json'!")
             print("👉 Hướng dẫn fix: Kiểm tra file inspector bên phải Xcode -> Tích chọn Target Membership.")
@@ -70,11 +62,7 @@ struct Project2_MI3390_20251App: App {
         do {
             let data = try Data(contentsOf: url)
             
-            // Sử dụng JSONDecoder để decode
             let decoder = JSONDecoder()
-            
-            // In ra JSON dạng String để debug nếu cần
-            // if let jsonString = String(data: data, encoding: .utf8) { print("JSON Content: \(jsonString)") }
             
             let courses = try decoder.decode([Course].self, from: data)
             
@@ -83,7 +71,6 @@ struct Project2_MI3390_20251App: App {
                 return
             }
             
-            // Lưu vào SwiftData
             for course in courses {
                 context.insert(course)
             }

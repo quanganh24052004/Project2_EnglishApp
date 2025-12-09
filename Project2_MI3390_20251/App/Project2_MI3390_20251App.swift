@@ -107,8 +107,7 @@ struct Project2_MI3390_20251App: App {
 
     var body: some Scene {
         WindowGroup {
-//            RootView()
-            MainTabView()
+            RootView()
         }
         .modelContainer(sharedModelContainer)
     }

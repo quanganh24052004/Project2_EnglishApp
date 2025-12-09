@@ -25,8 +25,7 @@ struct RootView: View {
                 if isOnboardingDone {
                     // Màn hình chính sau khi đã hoàn thành khảo sát
                     // (Bạn có thể thay bằng MainTabView hoặc HomeView của bạn)
-                    Text("Màn hình chính (Home View)")
-                        .font(.title)
+                    MainTabView()
                 } else {
                     // Màn hình khảo sát (Code bạn đã gửi)
                     SurveyView(isOnboardingDone: $isOnboardingDone)

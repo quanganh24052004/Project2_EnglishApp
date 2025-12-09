@@ -78,6 +78,8 @@ struct LessonListView: View {
 
 // --- MÀN HÌNH 3: DANH SÁCH TỪ VỰNG (WORD) ---
 struct WordListView: View {
+    @State private var isLearningSessionActive: Bool = false
+    
     let lesson: Lesson
     
     var body: some View {
@@ -135,6 +137,35 @@ struct WordListView: View {
         }
         .navigationTitle(lesson.name)
         .navigationBarTitleDisplayMode(.inline)
+        
+        // NÚT HỌC TRÊN TOOLBAR
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Button(action: {
+                    if !lesson.words.isEmpty {
+                        isLearningSessionActive = true
+                    }
+                }) {
+                    Text("Học ngay").bold()
+                }
+                .disabled(lesson.words.isEmpty)
+            }
+        }
+        
+        // FULL SCREEN COVER
+        .fullScreenCover(isPresented: $isLearningSessionActive) {
+            // LOGIC MAPPING: [Word] (Database) -> [LearningItem] (Học)
+            let learningItems = lesson.words.map { dbWord in
+                LearningItem(
+                    term: dbWord.english,
+                    meaning: dbWord.meanings.first?.vietnamese ?? "Chưa có nghĩa",
+                    audioUrl: dbWord.audioUrl
+                )
+            }
+            
+            // Truyền danh sách đã map vào View
+            LessonContainerView(items: learningItems)
+        }
     }
 }
 

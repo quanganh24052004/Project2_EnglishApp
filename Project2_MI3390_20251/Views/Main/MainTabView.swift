@@ -8,37 +8,35 @@
 import SwiftUI
 
 struct MainTabView: View {
-    @State private var selectedTab: Int = 0
+    @State private var selectedTab: AppTab = .review
+    
     var body: some View {
-        // Khởi tạo TabView
-        SwiftUI.TabView(selection: $selectedTab) {
+        // --- 4 Tab chính ---
+        TabView(selection: $selectedTab) {
+            Tab(AppTab.review.title, systemImage: AppTab.review.icon, value: .review) {
+                Text("Màn hình review")
+            }
+                        
+            Tab(AppTab.learn.title, systemImage: AppTab.learn.icon, value: .learn) {
+                Text("Màn hình bài học")
+            }
             
-            // Màn hình 1
-            Text("Màn hình Trang chủ")
-                .tabItem {
-                    Image(systemName: "house.fill")
-                    Text("Home")
-                }
-                .tag(0) // Tag dùng để định danh tab này
+            Tab(AppTab.profile.title, systemImage: AppTab.profile.icon, value: .profile) {
+                Text("Màn hình cá nhân")
+            }
             
-            // Màn hình 2
-            Text("Màn hình Cài đặt")
-                .tabItem {
-                    Image(systemName: "gearshape.fill")
-                    Text("Settings")
-                }
-                .tag(1)
+            Tab(AppTab.settings.title, systemImage: AppTab.settings.icon, value: .settings) {
+                Text("Màn hình cài đặt")
+            }
             
-            // Màn hình 3
-            Text("Màn hình Cá nhân")
-                .tabItem {
-                    Image(systemName: "person.fill")
-                    Text("Profile")
-                }
-                .tag(2)
+
+            
+            Tab(AppTab.search.title, systemImage: AppTab.search.icon, value: .search, role: .search) {
+                SearchView()
+            }
         }
-        // Thay đổi màu sắc của icon khi được chọn (tuỳ chọn)
-        .accentColor(.blue)
+        .tabViewStyle(.sidebarAdaptable)
+
     }
 }
 

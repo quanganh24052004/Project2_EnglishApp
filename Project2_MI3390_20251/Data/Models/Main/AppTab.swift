@@ -1,26 +1,29 @@
 import Foundation
 import SwiftUI
 
-enum AppTab: Hashable {
-    case search, learn, review, forum, settings
-
+enum AppTab: Int, Identifiable, CaseIterable {
+    case review, learn, settings, profile, search
+    
+    var id: Int { rawValue }
+    
     var title: String {
         switch self {
-        case .search:   return "Tra từ"
-        case .learn:    return "Học"
-        case .review:   return "Ôn tập"
-        case .forum:    return "Diễn đàn"
+        case .review: return "Ôn tập"
+        case .learn: return "Học từ vựng"
+        case .profile: return "Cá nhân"
         case .settings: return "Cài đặt"
+
+        case .search: return "Tìm kiếm"
         }
     }
-
-    var systemImage: String {
+    
+    var icon: String {
         switch self {
-        case .search:   return "magnifyingglass"
-        case .learn:    return "book.fill"
-        case .review:   return "clock.fill"
-        case .forum:    return "bubble.left.and.bubble.right.fill"
-        case .settings: return "gearshape"
+        case .review: return "chart.bar.fill"
+        case .learn: return "character.book.closed.fill"
+        case .profile: return "person.fill"
+        case .settings: return "gearshape.fill"
+        case .search: return "magnifyingglass"
         }
     }
 }

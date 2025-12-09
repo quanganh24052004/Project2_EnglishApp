@@ -194,6 +194,7 @@
 		088F25F02EE50AAE00E89167 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				08BE81BF2EE7E0C7004181EE /* Learn */,
 				088F260E2EE50D4200E89167 /* Onboarding */,
 			);
 			path = ViewModels;
@@ -299,7 +300,7 @@
 		088F25FE2EE50B2F00E89167 /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				08BE818A2EE7B50E004181EE /* WordRow.swift */,
+				08BE81C02EE7E107004181EE /* Components */,
 				08BE81702EE7A5BF004181EE /* SearchView.swift */,
 			);
 			path = Search;
@@ -373,13 +374,44 @@
 		08BE819E2EE7B7D3004181EE /* LearnLesson */ = {
 			isa = PBXGroup;
 			children = (
+				08BE81C22EE7F13D004181EE /* FlipCard */,
+				08BE81C12EE7F126004181EE /* ProcessStudy */,
+			);
+			path = LearnLesson;
+			sourceTree = "<group>";
+		};
+		08BE81BF2EE7E0C7004181EE /* Learn */ = {
+			isa = PBXGroup;
+			children = (
+				08BE81A32EE7B7E5004181EE /* LessonViewModel.swift */,
+			);
+			path = Learn;
+			sourceTree = "<group>";
+		};
+		08BE81C02EE7E107004181EE /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				08BE818A2EE7B50E004181EE /* WordRow.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		08BE81C12EE7F126004181EE /* ProcessStudy */ = {
+			isa = PBXGroup;
+			children = (
 				08BE819F2EE7B7E5004181EE /* FeedbackSheetView.swift */,
 				08BE81A02EE7B7E5004181EE /* FlashcardStepView.swift */,
 				08BE81A12EE7B7E5004181EE /* InputStepView.swift */,
 				08BE81A22EE7B7E5004181EE /* LessonContainerView.swift */,
-				08BE81A32EE7B7E5004181EE /* LessonViewModel.swift */,
 			);
-			path = LearnLesson;
+			path = ProcessStudy;
+			sourceTree = "<group>";
+		};
+		08BE81C22EE7F13D004181EE /* FlipCard */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = FlipCard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

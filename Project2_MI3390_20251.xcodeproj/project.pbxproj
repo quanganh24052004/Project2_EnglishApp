@@ -29,6 +29,7 @@
 		08BE81772EE7A874004181EE /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BE81762EE7A874004181EE /* ProfileView.swift */; };
 		08BE81792EE7A879004181EE /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BE81782EE7A879004181EE /* SettingsView.swift */; };
 		08BE81862EE7ABDA004181EE /* courses_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 08BE81852EE7ABDA004181EE /* courses_data.json */; };
+		08BE81892EE7AD40004181EE /* LearningModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BE81882EE7AD40004181EE /* LearningModels.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 		08BE81762EE7A874004181EE /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		08BE81782EE7A879004181EE /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		08BE81852EE7ABDA004181EE /* courses_data.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = courses_data.json; sourceTree = "<group>"; };
+		08BE81882EE7AD40004181EE /* LearningModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningModels.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,6 +223,7 @@
 		088F25F52EE50AFC00E89167 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				08BE81872EE7AD39004181EE /* Learn */,
 				0804F2F72EE79FD900A982D3 /* Main */,
 				083369DD2EE58503003B2FEF /* Authentication */,
 				088F26072EE50D2500E89167 /* Onboarding */,
@@ -345,6 +348,14 @@
 			path = Dictionary;
 			sourceTree = "<group>";
 		};
+		08BE81872EE7AD39004181EE /* Learn */ = {
+			isa = PBXGroup;
+			children = (
+				08BE81882EE7AD40004181EE /* LearningModels.swift */,
+			);
+			path = Learn;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -430,6 +441,7 @@
 				088F260D2EE50D3900E89167 /* SurveyOptionRow.swift in Sources */,
 				088F25EB2EE50A8000E89167 /* Item.swift in Sources */,
 				08BE81732EE7A779004181EE /* ReviewView.swift in Sources */,
+				08BE81892EE7AD40004181EE /* LearningModels.swift in Sources */,
 				088F26142EE5113C00E89167 /* RootView.swift in Sources */,
 				088F25EC2EE50A8000E89167 /* Project2_MI3390_20251App.swift in Sources */,
 				08BE81712EE7A5BF004181EE /* SearchView.swift in Sources */,

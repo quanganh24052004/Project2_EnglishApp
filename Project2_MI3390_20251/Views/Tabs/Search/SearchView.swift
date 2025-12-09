@@ -1,3 +1,11 @@
+//
+//  SearchView.swift
+//  Project2_MI3390_20251
+//
+//  Created by Nguyễn Quang Anh on 9/12/25.
+//
+import SwiftUI
+
 struct SearchView: View {
     // 1. Biến state để lưu từ khóa tìm kiếm
     @State private var searchText = ""

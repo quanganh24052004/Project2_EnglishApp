@@ -36,6 +36,9 @@
 		08BE81A82EE7B7E5004181EE /* FeedbackSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BE819F2EE7B7E5004181EE /* FeedbackSheetView.swift */; };
 		08BE81AA2EE7B7E5004181EE /* InputStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BE81A12EE7B7E5004181EE /* InputStepView.swift */; };
 		08BE81BE2EE7C41A004181EE /* LearningItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BE81BD2EE7C41A004181EE /* LearningItem.swift */; };
+		08BE81C82EE7F713004181EE /* FlipCardContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BE81C72EE7F713004181EE /* FlipCardContainer.swift */; };
+		08BE81CB2EE7F743004181EE /* WordCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BE81CA2EE7F743004181EE /* WordCardView.swift */; };
+		08BE81CE2EE852D2004181EE /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BE81CD2EE852D2004181EE /* AudioManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +72,9 @@
 		08BE81A22EE7B7E5004181EE /* LessonContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonContainerView.swift; sourceTree = "<group>"; };
 		08BE81A32EE7B7E5004181EE /* LessonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonViewModel.swift; sourceTree = "<group>"; };
 		08BE81BD2EE7C41A004181EE /* LearningItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningItem.swift; sourceTree = "<group>"; };
+		08BE81C72EE7F713004181EE /* FlipCardContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipCardContainer.swift; sourceTree = "<group>"; };
+		08BE81CA2EE7F743004181EE /* WordCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCardView.swift; sourceTree = "<group>"; };
+		08BE81CD2EE852D2004181EE /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -246,6 +252,7 @@
 		088F25F62EE50B0200E89167 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				08BE81CC2EE852CD004181EE /* AudioPlayer */,
 				083369DF2EE58550003B2FEF /* Authentication */,
 			);
 			path = Services;
@@ -410,8 +417,26 @@
 		08BE81C22EE7F13D004181EE /* FlipCard */ = {
 			isa = PBXGroup;
 			children = (
+				08BE81C92EE7F72D004181EE /* Components */,
 			);
 			path = FlipCard;
+			sourceTree = "<group>";
+		};
+		08BE81C92EE7F72D004181EE /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				08BE81CA2EE7F743004181EE /* WordCardView.swift */,
+				08BE81C72EE7F713004181EE /* FlipCardContainer.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		08BE81CC2EE852CD004181EE /* AudioPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				08BE81CD2EE852D2004181EE /* AudioManager.swift */,
+			);
+			path = AudioPlayer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -502,13 +527,16 @@
 				08BE81892EE7AD40004181EE /* LearningModels.swift in Sources */,
 				088F26142EE5113C00E89167 /* RootView.swift in Sources */,
 				088F25EC2EE50A8000E89167 /* Project2_MI3390_20251App.swift in Sources */,
+				08BE81CE2EE852D2004181EE /* AudioManager.swift in Sources */,
 				08BE81A52EE7B7E5004181EE /* FlashcardStepView.swift in Sources */,
 				08BE81A62EE7B7E5004181EE /* LessonContainerView.swift in Sources */,
 				08BE81A72EE7B7E5004181EE /* LessonViewModel.swift in Sources */,
 				08BE81A82EE7B7E5004181EE /* FeedbackSheetView.swift in Sources */,
+				08BE81C82EE7F713004181EE /* FlipCardContainer.swift in Sources */,
 				08BE81AA2EE7B7E5004181EE /* InputStepView.swift in Sources */,
 				08BE81712EE7A5BF004181EE /* SearchView.swift in Sources */,
 				083369E22EE58583003B2FEF /* LoginView.swift in Sources */,
+				08BE81CB2EE7F743004181EE /* WordCardView.swift in Sources */,
 				088F26092EE50D3100E89167 /* SurveyModel.swift in Sources */,
 				08BE818B2EE7B50E004181EE /* WordRow.swift in Sources */,
 				08BE81752EE7A83D004181EE /* LearnView.swift in Sources */,
@@ -657,6 +685,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -693,6 +722,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

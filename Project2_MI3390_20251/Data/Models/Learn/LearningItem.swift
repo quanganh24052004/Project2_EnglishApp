@@ -5,13 +5,15 @@
 //  Created by Nguyễn Quang Anh on 9/12/25.
 //
 
-
-// File: LearningItem.swift (hoặc thay thế nội dung Word.swift cũ)
 import Foundation
 
 struct LearningItem: Identifiable {
     let id = UUID()
-    let term: String       // Từ tiếng Anh (Lấy từ word.english)
-    let meaning: String    // Nghĩa tiếng Việt (Lấy từ meaning.vietnamese)
-    let audioUrl: String   // Link audio
+    let word: String           // Thay vì chứa object Word, ta chứa String (English)
+    let phonetic: String       // [MỚI] Thêm trường phiên âm
+    let partOfSpeech: String   // [MỚI] Thêm từ loại (Noun, Verb...)
+    let meaning: String        // Nghĩa tiếng Việt
+    let example: String        // [MỚI] Câu ví dụ
+//    let audioUrl: String
+    let vietnamese: String
 }

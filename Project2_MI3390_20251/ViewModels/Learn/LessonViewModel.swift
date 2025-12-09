@@ -64,12 +64,12 @@ class LessonViewModel: ObservableObject {
     
     func checkAnswer(userAnswer: String) {
         // SỬA 2: So sánh trực tiếp với currentItem.term
-        let isCorrect = userAnswer.lowercased().trimmingCharacters(in: .whitespaces) == currentItem.term.lowercased()
+        let isCorrect = userAnswer.lowercased().trimmingCharacters(in: .whitespaces) == currentItem.word.lowercased()
         
         if isCorrect {
             currentFeedback = .correct
         } else {
-            currentFeedback = .wrong(correctAnswer: currentItem.term)
+            currentFeedback = .wrong(correctAnswer: currentItem.word)
         }
         showFeedbackSheet = true
     }

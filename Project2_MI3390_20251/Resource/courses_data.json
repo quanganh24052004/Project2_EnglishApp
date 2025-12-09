@@ -8965,5 +8965,33 @@
         ]
       }
     ]
+  },
+  {
+    "name": "Test API Audio",
+    "description": "Test API Audio",
+    "subDescription": "Cái này dùng để tést API Audio thôi nha",
+    "lessons": [
+      {
+        "name": "Từ vựng cơ bảm",
+        "subName": "Basic Vocabulary",
+        "quantityOfWord": 12,
+        "words": [
+          {
+            "english": "hello",
+            "phonetic": "hɛˈləʊ",
+            "partOfSpeech": "n.",
+            "audioUrl": "https://api.dictionaryapi.dev/media/pronunciations/en/hello-uk.mp3",
+            "CEFR": "BASIC",
+            "meanings": [
+              {
+                "vietnamese": "Xin chào",
+                "exampleEn": "Hello, nice to meet you!",
+                "exampleVi": "Xin chào, rất vui được gặp bạn."
+              }
+            ]
+          }
+        ]
+      }
+    ]
   }
 ]

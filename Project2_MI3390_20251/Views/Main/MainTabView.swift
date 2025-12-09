@@ -14,19 +14,19 @@ struct MainTabView: View {
         // --- 4 Tab chính ---
         TabView(selection: $selectedTab) {
             Tab(AppTab.review.title, systemImage: AppTab.review.icon, value: .review) {
-                Text("Màn hình review")
+                ReviewView()
             }
                         
             Tab(AppTab.learn.title, systemImage: AppTab.learn.icon, value: .learn) {
-                Text("Màn hình bài học")
+                LearnView()
             }
             
             Tab(AppTab.profile.title, systemImage: AppTab.profile.icon, value: .profile) {
-                Text("Màn hình cá nhân")
+                ProfileView()
             }
             
             Tab(AppTab.settings.title, systemImage: AppTab.settings.icon, value: .settings) {
-                Text("Màn hình cài đặt")
+                SettingsView()
             }
             
 

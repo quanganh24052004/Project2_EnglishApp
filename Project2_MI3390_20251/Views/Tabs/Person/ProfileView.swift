@@ -11,8 +11,8 @@ struct ProfileView: View {
     var body: some View {
         NavigationStack {
             Text("Xin chào")
+                .navigationTitle(Text("Profile View"))
         }
-        .navigationTitle(Text("Profile View"))
     }
 }
 

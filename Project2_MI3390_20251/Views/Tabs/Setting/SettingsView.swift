@@ -11,8 +11,8 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             Text("Xin chào")
+                .navigationTitle(Text("SettingsView"))
         }
-        .navigationTitle(Text("SettingsView"))
     }
 }
 

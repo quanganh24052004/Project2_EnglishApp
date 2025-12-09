@@ -11,8 +11,8 @@ struct LearnView: View {
     var body: some View {
         NavigationStack {
             Text("Xin chào")
+                .navigationTitle(Text("LearnView"))
         }
-        .navigationTitle(Text("LearnView"))
     }
 }
 

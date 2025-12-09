@@ -11,8 +11,9 @@ struct ReviewView: View {
     var body: some View {
         NavigationStack {
             Text("Xin chào")
+                .navigationTitle(Text("Review"))
         }
-        .navigationTitle(Text("Review"))
+        
     }
 }
 

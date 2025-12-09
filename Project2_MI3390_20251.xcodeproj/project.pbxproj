@@ -14,7 +14,6 @@
 		083369E42EE585A2003B2FEF /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083369E32EE585A2003B2FEF /* RegistrationView.swift */; };
 		088F25E92EE50A8000E89167 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 088F25E42EE50A8000E89167 /* Assets.xcassets */; };
 		088F25EA2EE50A8000E89167 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088F25E52EE50A8000E89167 /* ContentView.swift */; };
-		088F25EB2EE50A8000E89167 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088F25E62EE50A8000E89167 /* Item.swift */; };
 		088F25EC2EE50A8000E89167 /* Project2_MI3390_20251App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088F25E72EE50A8000E89167 /* Project2_MI3390_20251App.swift */; };
 		088F26062EE50C0900E89167 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 088F26052EE50C0900E89167 /* .gitignore */; };
 		088F26092EE50D3100E89167 /* SurveyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088F26082EE50D3100E89167 /* SurveyModel.swift */; };
@@ -48,7 +47,6 @@
 		088F25D42EE50A4200E89167 /* Project2_MI3390_20251.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project2_MI3390_20251.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		088F25E42EE50A8000E89167 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		088F25E52EE50A8000E89167 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		088F25E62EE50A8000E89167 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		088F25E72EE50A8000E89167 /* Project2_MI3390_20251App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project2_MI3390_20251App.swift; sourceTree = "<group>"; };
 		088F26052EE50C0900E89167 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		088F26082EE50D3100E89167 /* SurveyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyModel.swift; sourceTree = "<group>"; };
@@ -156,7 +154,6 @@
 				083369DC2EE58426003B2FEF /* Resource */,
 				088F25EF2EE50AAB00E89167 /* Views */,
 				088F25F02EE50AAE00E89167 /* ViewModels */,
-				088F25E62EE50A8000E89167 /* Item.swift */,
 			);
 			path = Project2_MI3390_20251;
 			sourceTree = "<group>";
@@ -469,7 +466,6 @@
 				088F260C2EE50D3900E89167 /* SurveyView.swift in Sources */,
 				08BE81792EE7A879004181EE /* SettingsView.swift in Sources */,
 				088F260D2EE50D3900E89167 /* SurveyOptionRow.swift in Sources */,
-				088F25EB2EE50A8000E89167 /* Item.swift in Sources */,
 				08BE81732EE7A779004181EE /* ReviewView.swift in Sources */,
 				08BE81892EE7AD40004181EE /* LearningModels.swift in Sources */,
 				088F26142EE5113C00E89167 /* RootView.swift in Sources */,

@@ -25,10 +25,10 @@ struct InputStepView: View {
                     .font(.subheadline)
                     .foregroundColor(.gray)
             }
-
-            TextField("Nhập từ vựng...", text: $textInput)
-                .textFieldStyle(.roundedBorder)
-                .padding()
+            AppTextField(text: $textInput, placeholder: "Nhập từ vựng...", iconName: "", isSecure: false)
+//            TextField("Nhập từ vựng...", text: $textInput)
+//                .textFieldStyle(.roundedBorder)
+//                .padding()
             
             Spacer()
             

@@ -177,7 +177,3 @@ struct WordListView: View {
 }
 
 
-#Preview {
-    ReviewView()
-}
-

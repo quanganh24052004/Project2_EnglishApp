@@ -19,6 +19,8 @@
 		0857816E2EEFDFC50003618D /* ChalkboardSE-Regular-02_0.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 085781692EEFDFC50003618D /* ChalkboardSE-Regular-02_0.ttf */; };
 		0857816F2EEFDFC50003618D /* ChalkboardSE-Bold-03_0.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 085781672EEFDFC50003618D /* ChalkboardSE-Bold-03_0.ttf */; };
 		085781722EEFE14F0003618D /* Font+AppFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085781712EEFE14F0003618D /* Font+AppFont.swift */; };
+		085781782EEFE4340003618D /* CusomTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085781772EEFE4340003618D /* CusomTF.swift */; };
+		0857817A2EEFE65F0003618D /* AppTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085781792EEFE65F0003618D /* AppTextField.swift */; };
 		085B5FF62EEC32B200B6BE5F /* DictionaryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085B5FF52EEC32B200B6BE5F /* DictionaryEntry.swift */; };
 		085B5FF92EEC366400B6BE5F /* DictionaryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085B5FF82EEC366400B6BE5F /* DictionaryService.swift */; };
 		088F25E92EE50A8000E89167 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 088F25E42EE50A8000E89167 /* Assets.xcassets */; };
@@ -64,6 +66,8 @@
 		0857816A2EEFDFC50003618D /* COPYRIGHT.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = COPYRIGHT.txt; sourceTree = "<group>"; };
 		085781702EEFE0D40003618D /* Project2-MI3390-20251-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Project2-MI3390-20251-Info.plist"; sourceTree = SOURCE_ROOT; };
 		085781712EEFE14F0003618D /* Font+AppFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+AppFont.swift"; sourceTree = "<group>"; };
+		085781772EEFE4340003618D /* CusomTF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CusomTF.swift; sourceTree = "<group>"; };
+		085781792EEFE65F0003618D /* AppTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTextField.swift; sourceTree = "<group>"; };
 		085B5FF52EEC32B200B6BE5F /* DictionaryEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryEntry.swift; sourceTree = "<group>"; };
 		085B5FF82EEC366400B6BE5F /* DictionaryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryService.swift; sourceTree = "<group>"; };
 		088F25D42EE50A4200E89167 /* Project2_MI3390_20251.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project2_MI3390_20251.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -353,6 +357,8 @@
 		088F25FD2EE50B2700E89167 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				085781792EEFE65F0003618D /* AppTextField.swift */,
+				085781772EEFE4340003618D /* CusomTF.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -575,6 +581,7 @@
 				088F26102EE50D4700E89167 /* SurveyViewModel.swift in Sources */,
 				083369DB2EE57F1D003B2FEF /* String+Validation.swift in Sources */,
 				0804F2F62EE79E4B00A982D3 /* MainTabView.swift in Sources */,
+				0857817A2EEFE65F0003618D /* AppTextField.swift in Sources */,
 				085B5FF62EEC32B200B6BE5F /* DictionaryEntry.swift in Sources */,
 				088F25EA2EE50A8000E89167 /* ContentView.swift in Sources */,
 				083369E42EE585A2003B2FEF /* RegistrationView.swift in Sources */,
@@ -596,6 +603,7 @@
 				08BE81AA2EE7B7E5004181EE /* InputStepView.swift in Sources */,
 				08BE81712EE7A5BF004181EE /* SearchView.swift in Sources */,
 				083369E22EE58583003B2FEF /* LoginView.swift in Sources */,
+				085781782EEFE4340003618D /* CusomTF.swift in Sources */,
 				085781642EEFDAF70003618D /* PressableButtonStyle.swift in Sources */,
 				08BE81CB2EE7F743004181EE /* WordCardView.swift in Sources */,
 				085781722EEFE14F0003618D /* Font+AppFont.swift in Sources */,

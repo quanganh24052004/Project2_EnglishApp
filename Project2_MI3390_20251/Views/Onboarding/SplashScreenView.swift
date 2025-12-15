@@ -4,8 +4,6 @@
 //
 //  Created by Nguyễn Quang Anh on 7/12/25.
 //
-
-
 import SwiftUI
 
 struct SplashScreenView: View {
@@ -13,17 +11,16 @@ struct SplashScreenView: View {
 
     var body: some View {
         ZStack {
-            Color.orange.ignoresSafeArea() // Màu nền chủ đạo (theo style Survey của bạn)
+            Color.orange.ignoresSafeArea()
             
             VStack(spacing: 20) {
-                // Logo App (Thay bằng Image Asset của bạn nếu có)
                 Image("img_hi_capy")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 200, height: 200)
                 
                 Text("Capy Vocab")
-                    .font(.largeTitle)
+                    .font(.appFont(size: 48))
                     .fontWeight(.bold)
                     .foregroundColor(.white)
             }

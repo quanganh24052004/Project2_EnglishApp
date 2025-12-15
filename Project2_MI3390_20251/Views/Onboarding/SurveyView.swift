@@ -18,7 +18,7 @@ struct SurveyView: View {
             VStack(alignment: .leading, spacing: 10) {
                 HStack(alignment: .top, spacing: 10) {
                     // Mascot (Thay bằng Image Asset của bạn)
-                    Image(systemName: "face.smiling.fill")
+                    Image(.imgWelcome)
                         .resizable()
                         .frame(width: 50, height: 50)
                         .foregroundColor(.orange)

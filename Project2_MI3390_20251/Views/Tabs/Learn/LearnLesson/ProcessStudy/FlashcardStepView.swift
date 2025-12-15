@@ -9,6 +9,7 @@ import SwiftUI
 import Combine
 
 struct FlashcardStepView: View {
+    @StateObject private var audioManager = AudioManager()
     // Input dữ liệu từ màn hình cha
     let item: LearningItem
     
@@ -30,7 +31,7 @@ struct FlashcardStepView: View {
             // MARK: - 2. Các nút chức năng (Audio)
             HStack(spacing: 40) {
                 Button(action: {
-//                    playAudio(url: item.word.audio, speed: 1.0)
+                    audioManager.playAudio(url: item.audioUrl, speed: 1.0)
                 }) {
                     VStack(spacing: 8) {
                         Image(systemName: "speaker.wave.2.fill")
@@ -41,7 +42,7 @@ struct FlashcardStepView: View {
                 }
                 
                 Button(action: {
-//                    playAudio(url: item.word.audio, speed: 0.5)
+                    audioManager.playAudio(url: item.audioUrl, speed: 0.5)
                 }) {
                     VStack(spacing: 8) {
                         Image(systemName: "tortoise.fill")
@@ -68,7 +69,10 @@ struct FlashcardStepView: View {
             .padding(.horizontal)
             .padding(.bottom, 20)
         }
-        .background(Color(UIColor.systemGroupedBackground)) // Màu nền xám nhẹ dịu mắt
+        .background(Color(UIColor.systemGroupedBackground))// Màu nền xám nhẹ dịu mắt
+        .onDisappear {
+                    audioManager.stop()
+        }
     }
     
     // MARK: - Helper Functions

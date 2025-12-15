@@ -165,6 +165,7 @@ struct WordListView: View {
                     partOfSpeech: dbWord.partOfSpeech, // Lấy từ DB
                     meaning: firstMeaning?.vietnamese ?? "Chưa có nghĩa",
                     example: firstMeaning?.exampleEn ?? "",
+                    audioUrl: dbWord.audioUrl,
                     vietnamese: firstMeaning?.vietnamese ?? "Chưa có nghĩa"
                 )
             }

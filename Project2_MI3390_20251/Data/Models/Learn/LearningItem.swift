@@ -9,11 +9,11 @@ import Foundation
 
 struct LearningItem: Identifiable {
     let id = UUID()
-    let word: String           // Thay vì chứa object Word, ta chứa String (English)
-    let phonetic: String       // [MỚI] Thêm trường phiên âm
-    let partOfSpeech: String   // [MỚI] Thêm từ loại (Noun, Verb...)
-    let meaning: String        // Nghĩa tiếng Việt
-    let example: String        // [MỚI] Câu ví dụ
-//    let audioUrl: String
+    let word: String           
+    let phonetic: String
+    let partOfSpeech: String
+    let meaning: String
+    let example: String
+    let audioUrl: String?
     let vietnamese: String
 }

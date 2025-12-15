@@ -4,120 +4,213 @@
 //
 //  Created by Nguyễn Quang Anh on 9/12/25.
 //
+
 import SwiftUI
 import SwiftData
 
+// 1. Định nghĩa Enum để quản lý chế độ tìm kiếm
+enum SearchMode: String, CaseIterable, Identifiable {
+    case local = "Dữ liệu có sẵn"
+    case online = "Online API"
+    
+    var id: String { self.rawValue }
+    
+    // Icon đại diện cho từng chế độ
+    var iconName: String {
+        switch self {
+        case .local: return "internaldrive" // Icon ổ cứng/nội bộ
+        case .online: return "globe"        // Icon quả địa cầu
+        }
+    }
+}
+
 struct SearchView: View {
-    // 1. Lấy context để thực hiện truy vấn thủ công
+    // --- Môi trường & SwiftData ---
     @Environment(\.modelContext) private var context
     
-    // 2. State quản lý tìm kiếm
+    // --- State Quản lý chung ---
     @State private var searchText = ""
-    @State private var searchResults: [Word] = [] // Mảng chứa kết quả
-    @State private var hasSearched = false // Biến cờ để biết đã bấm tìm chưa
+    @State private var searchMode: SearchMode = .local // Mặc định tìm Local
+    @State private var hasSearched = false
+    
+    // --- State cho Local Search ---
+    @State private var localResults: [Word] = [] // (Giả sử model của bạn tên là Word)
+    
+    // --- State cho Online Search ---
+    @State private var apiResults: [DictionaryEntry] = []
+    @State private var isLoading = false
+    @State private var errorMessage: String? = nil
     
     var body: some View {
         NavigationStack {
-            Group { // Dùng Group để tránh lồng quá nhiều lớp View không cần thiết
-                if !hasSearched {
-                    // TRẠNG THÁI 1: Chưa tìm
-                    ContentUnavailableView("Nhập từ vựng để tra cứu", systemImage: "magnifyingglass")
-                } else if searchResults.isEmpty {
-                    // TRẠNG THÁI 2: Không tìm thấy
-                    ContentUnavailableView.search(text: searchText)
-                } else {
-                    // TRẠNG THÁI 3: Có kết quả
-                    // Bỏ VStack lồng nhau, dùng thẳng List
-                    List {
-                        // Hiển thị số lượng kết quả như một Section Header (Chuẩn iOS)
-                        Section(header: Text("\(searchResults.count) kết quả tìm được")) {
-                            ForEach(searchResults) { word in
-                                WordRow(word: word)
-                            }
-                        }
-                    }
-                    .listStyle(.plain)
+            Group {
+                // Điều hướng giao diện dựa trên chế độ đang chọn
+                switch searchMode {
+                case .local:
+                    localSearchContent
+                case .online:
+                    onlineSearchContent
                 }
             }
-            .navigationTitle("Tra Từ Điển")
-            // Modifier search chuẩn
-            .searchable(text: $searchText, placement: .automatic, prompt: "Nhập từ tiếng Anh...")
+            .navigationTitle(searchMode == .local ? "Tra cứu Offline" : "Tra cứu Online")
+            .searchable(text: $searchText, placement: .automatic, prompt: searchMode == .local ? "Tìm trong máy..." : "Tìm tiếng Anh online...")
             
-            // QUAN TRỌNG: Chặn tìm kiếm live, chỉ tìm khi ấn Return (Submit)
+            // Xử lý khi nhấn Enter/Search
             .onSubmit(of: .search) {
-                performSearch()
+                if searchMode == .local {
+                    performLocalSearch()
+                } else {
+                    Task { await performOnlineSearch() }
+                }
             }
-            // (Tuỳ chọn) Xoá kết quả khi người dùng xoá hết chữ trên thanh search
+            // Reset khi xoá text hoặc đổi chế độ
             .onChange(of: searchText) { oldValue, newValue in
-                if newValue.isEmpty {
-                    hasSearched = false
-                    searchResults = []
+                if newValue.isEmpty { resetState() }
+            }
+            .onChange(of: searchMode) { oldValue, newValue in
+                // Khi đổi chế độ tìm kiếm, xoá kết quả cũ đi cho đỡ rối
+                resetState()
+                searchText = ""
+            }
+            
+            // --- TOOLBAR ---
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    // Menu cho phép chọn chế độ
+                    Menu {
+                        Picker("Chế độ tìm kiếm", selection: $searchMode) {
+                            ForEach(SearchMode.allCases) { mode in
+                                Label(mode.rawValue, systemImage: mode.iconName)
+                                    .tag(mode)
+                            }
+                        }
+                    } label: {
+                        // Hiển thị icon của chế độ đang chọn
+                        Image(systemName: searchMode.iconName)
+                            .imageScale(.large)
+                    }
                 }
             }
         }
     }
     
-    // --- Logic Tìm Kiếm SwiftData ---
-    private func performSearch() {
+    // MARK: - Local Search View
+    @ViewBuilder
+    private var localSearchContent: some View {
+        if !hasSearched {
+            ContentUnavailableView("Tra từ điển Offline", systemImage: "book.closed", description: Text("Tìm kiếm trong dữ liệu đã lưu."))
+        } else if localResults.isEmpty {
+            ContentUnavailableView.search(text: searchText)
+        } else {
+            List {
+                Section(header: Text("\(localResults.count) kết quả trong máy")) {
+                    ForEach(localResults) { word in
+                        // Giả sử bạn có View hiển thị từ (WordRow)
+                        // Nếu chưa có, thay bằng Text(word.english)
+                        NavigationLink(destination: Text(word.english)) { // Demo destination
+                            VStack(alignment: .leading) {
+                                Text(word.english).font(.headline)
+                                // Text(word.vietnamese).font(.subheadline) // Ví dụ
+                            }
+                        }
+                    }
+                }
+            }
+            .listStyle(.plain)
+        }
+    }
+    
+    // MARK: - Online Search View
+    @ViewBuilder
+    private var onlineSearchContent: some View {
+        if isLoading {
+            ProgressView("Đang tải dữ liệu...")
+        } else if let error = errorMessage {
+            ContentUnavailableView("Lỗi", systemImage: "wifi.exclamationmark", description: Text(error))
+        } else if !hasSearched {
+            ContentUnavailableView("Tra từ điển Online", systemImage: "globe", description: Text("Tra cứu định nghĩa tiếng Anh chi tiết."))
+        } else if apiResults.isEmpty {
+            ContentUnavailableView.search(text: searchText)
+        } else {
+            List(apiResults) { entry in
+                VStack(alignment: .leading, spacing: 8) {
+                    HStack {
+                        Text(entry.word).font(.headline).foregroundStyle(.blue)
+                        if let phonetic = entry.phonetic {
+                            Text(phonetic).font(.subheadline).foregroundStyle(.secondary)
+                        }
+                    }
+                    
+                    ForEach(entry.meanings) { meaning in
+                        VStack(alignment: .leading) {
+                            Text(meaning.partOfSpeech)
+                                .font(.caption).bold().foregroundStyle(.orange)
+                            
+                            ForEach(meaning.definitions.prefix(2)) { def in
+                                Text("• \(def.definition)").font(.body)
+                            }
+                        }
+                    }
+                }
+                .padding(.vertical, 4)
+            }
+            .listStyle(.plain)
+        }
+    }
+    
+    // MARK: - Logic Functions
+    
+    private func resetState() {
+        hasSearched = false
+        localResults = []
+        apiResults = []
+        errorMessage = nil
+        isLoading = false
+    }
+    
+    // Logic tìm SwiftData cũ của bạn
+    private func performLocalSearch() {
         guard !searchText.isEmpty else { return }
+        hasSearched = true
         
         let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
         
+        // Lưu ý: Thay 'Word' bằng tên Model thật trong SwiftData của bạn
         let predicate = #Predicate<Word> { word in
             word.english.localizedStandardContains(query)
         }
         
         let descriptor = FetchDescriptor<Word>(
             predicate: predicate,
-            sortBy: [SortDescriptor(\.english)] // Sắp xếp theo tên tiếng Anh
+            sortBy: [SortDescriptor(\.english)]
         )
         
         do {
-            searchResults = try context.fetch(descriptor)
-            hasSearched = true
+            localResults = try context.fetch(descriptor)
         } catch {
-            print("❌ Lỗi tìm kiếm: \(error)")
+            print("❌ Lỗi tìm kiếm local: \(error)")
+        }
+    }
+    
+    // Logic tìm API mới
+    private func performOnlineSearch() async {
+        guard !searchText.isEmpty else { return }
+        
+        isLoading = true
+        errorMessage = nil
+        hasSearched = true
+        apiResults = []
+        
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+        
+        do {
+            let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+            let results = try await DictionaryService.shared.search(word: query)
+            self.apiResults = results
+            self.isLoading = false
+        } catch {
+            self.isLoading = false
+            self.errorMessage = "Không tìm thấy hoặc lỗi mạng."
         }
     }
 }
-
-// Subview để hiển thị từng dòng từ vựng cho đẹp
-//struct WordRow: View {
-//    let word: Word
-//    
-//    var body: some View {
-//        VStack(alignment: .leading, spacing: 6) {
-//            HStack {
-//                Text(word.english)
-//                    .font(.headline)
-//                    .foregroundColor(.blue)
-//                
-//                // 2. Phiên âm (phonetic)
-//                Text(word.phonetic)
-//                    .font(.caption)
-//                    .foregroundColor(.secondary)
-//                
-//                // 3. Loại từ (partOfSpeech)
-//                Text("(\(word.partOfSpeech))")
-//                    .font(.caption2)
-//                    .italic()
-//                    .foregroundColor(.gray)
-//            }
-//            
-//            // 4. Hiển thị nghĩa (lấy từ mảng meanings)
-//            if let firstMeaning = word.meanings.first {
-//                Text(firstMeaning.vietnamese) // Model dùng 'vietnamese', không phải 'definition'
-//                    .font(.body)
-//                
-//                // 5. Ví dụ (exampleEn)
-//                if !firstMeaning.exampleEn.isEmpty {
-//                    Text("Ex: \(firstMeaning.exampleEn)")
-//                        .font(.caption)
-//                        .foregroundColor(.secondary)
-//                        .padding(.top, 2)
-//                }
-//            }
-//        }
-//        .padding(.vertical, 4)
-//    }
-//}

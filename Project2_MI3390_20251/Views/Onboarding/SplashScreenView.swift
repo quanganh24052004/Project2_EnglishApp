@@ -22,7 +22,7 @@ struct SplashScreenView: View {
                     .scaledToFit()
                     .frame(width: 200, height: 200)
                 
-                Text("English Master")
+                Text("Capy Vocab")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(.white)

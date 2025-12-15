@@ -1,47 +1,53 @@
+//
+//  AudioManager.swift
+//  Project2_MI3390_20251
+//
+//  Created by Nguyễn Quang Anh on 9/12/25.
+//
+
 import Foundation
 import AVFoundation
+import Combine
 
 class AudioManager: ObservableObject {
-    // Singleton (tuỳ chọn, nhưng tiện nếu dùng chung toàn app)
+    // Singleton để dùng chung (nếu muốn), hoặc tạo instance riêng trong View
     static let shared = AudioManager()
     
     private var player: AVPlayer?
     
     init() {
-        configureAudioSession()
-    }
-    
-    // Cấu hình để nghe được âm thanh ngay cả khi bật chế độ Silent (Gạt rung)
-    private func configureAudioSession() {
+        // Cấu hình để âm thanh phát được ngay cả khi điện thoại để chế độ Silent
         do {
-            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .spokenAudio)
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .spokenAudio, options: [])
             try AVAudioSession.sharedInstance().setActive(true)
         } catch {
-            print("Lỗi cấu hình Audio Session: \(error.localizedDescription)")
+            print("Lỗi cấu hình AudioSession: \(error.localizedDescription)")
         }
     }
     
-    // Hàm phát âm thanh
-    func playAudio(url: String, rate: Float = 1.0) {
-        // 1. Kiểm tra URL hợp lệ
-        guard let validURL = URL(string: url) else {
-            print("Invalid URL: \(url)")
+    /// Hàm phát audio từ URL với tốc độ tuỳ chỉnh
+    /// - Parameters:
+    ///   - urlString: Đường dẫn file mp3
+    ///   - speed: Tốc độ phát (1.0 là bình thường, 0.5 là chậm)
+    func playAudio(url urlString: String?, speed: Float = 1.0) {
+        // 1. Kiểm tra URL có tồn tại và hợp lệ không
+        guard let urlString = urlString, let url = URL(string: urlString) else {
+            print("Audio URL không hợp lệ hoặc bị nil")
             return
         }
         
         // 2. Tạo PlayerItem
-        let playerItem = AVPlayerItem(url: validURL)
+        let playerItem = AVPlayerItem(url: url)
         
-        // 3. Khởi tạo hoặc cập nhật Player
-        // Lưu ý: Tạo mới AVPlayer mỗi lần play để đảm bảo reset state cũ
+        // 3. Khởi tạo Player
         player = AVPlayer(playerItem: playerItem)
         
         // 4. Phát ngay lập tức với tốc độ mong muốn
-        // playImmediately(atRate:) hiệu quả hơn việc gọi play() rồi set rate sau
-        player?.playImmediately(atRate: rate)
+        // Lưu ý: playImmediately(atRate:) hiệu quả hơn gọi play() rồi setRate
+        player?.playImmediately(atRate: speed)
     }
     
-    func stopAudio() {
+    func stop() {
         player?.pause()
     }
 }

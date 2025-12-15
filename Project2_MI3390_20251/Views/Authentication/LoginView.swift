@@ -8,21 +8,30 @@
 import SwiftUI
 
 struct LoginView: View {
+    @State private var email = ""
+    @State private var password = ""
+    @State private var isLoading = false
+    
     var body: some View {
-        VStack(spacing: 8) {
-            Image("img_login")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 64, height: 64)
-            
-            Text("For free, join now and \n start learning")
-                .lineLimit(2)
-                .multilineTextAlignment(.center)
-                .font(.system(size: 22, weight: .medium))
+        NavigationStack {
+            VStack(spacing: 8) {
+                Spacer()
+                Image("img_login")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 128, height: 128)
+                
+                Text("Miễn phí, tham gia ngay bây giờ\nvà bắt đầu học ngay hôm nay!")
+                    .lineLimit(2)
+                    .multilineTextAlignment(.center)
+                    .font(.system(size: 22, weight: .medium))
+                Spacer()
+            }
         }
+
     }
 }
 
-#Preview {
-    LoginView()
-}
+//#Preview {
+//    LoginView()
+//}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>chalkboardse.otf</string>
+		<string>ChalkboardSE-Bold-03_0.ttf</string>
+		<string>ChalkboardSE-Light-01_0.ttf</string>
+		<string>ChalkboardSE-Regular-02_0.ttf</string>
+	</array>
+</dict>
+</plist>

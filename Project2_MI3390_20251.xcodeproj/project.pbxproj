@@ -13,6 +13,12 @@
 		083369E22EE58583003B2FEF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083369E12EE58583003B2FEF /* LoginView.swift */; };
 		083369E42EE585A2003B2FEF /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083369E32EE585A2003B2FEF /* RegistrationView.swift */; };
 		085781642EEFDAF70003618D /* PressableButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085781632EEFDAF70003618D /* PressableButtonStyle.swift */; };
+		0857816B2EEFDFC50003618D /* COPYRIGHT.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0857816A2EEFDFC50003618D /* COPYRIGHT.txt */; };
+		0857816C2EEFDFC50003618D /* chalkboardse.otf in Resources */ = {isa = PBXBuildFile; fileRef = 085781662EEFDFC50003618D /* chalkboardse.otf */; };
+		0857816D2EEFDFC50003618D /* ChalkboardSE-Light-01_0.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 085781682EEFDFC50003618D /* ChalkboardSE-Light-01_0.ttf */; };
+		0857816E2EEFDFC50003618D /* ChalkboardSE-Regular-02_0.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 085781692EEFDFC50003618D /* ChalkboardSE-Regular-02_0.ttf */; };
+		0857816F2EEFDFC50003618D /* ChalkboardSE-Bold-03_0.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 085781672EEFDFC50003618D /* ChalkboardSE-Bold-03_0.ttf */; };
+		085781722EEFE14F0003618D /* Font+AppFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085781712EEFE14F0003618D /* Font+AppFont.swift */; };
 		085B5FF62EEC32B200B6BE5F /* DictionaryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085B5FF52EEC32B200B6BE5F /* DictionaryEntry.swift */; };
 		085B5FF92EEC366400B6BE5F /* DictionaryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085B5FF82EEC366400B6BE5F /* DictionaryService.swift */; };
 		088F25E92EE50A8000E89167 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 088F25E42EE50A8000E89167 /* Assets.xcassets */; };
@@ -51,6 +57,13 @@
 		083369E12EE58583003B2FEF /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		083369E32EE585A2003B2FEF /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		085781632EEFDAF70003618D /* PressableButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PressableButtonStyle.swift; sourceTree = "<group>"; };
+		085781662EEFDFC50003618D /* chalkboardse.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = chalkboardse.otf; sourceTree = "<group>"; };
+		085781672EEFDFC50003618D /* ChalkboardSE-Bold-03_0.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ChalkboardSE-Bold-03_0.ttf"; sourceTree = "<group>"; };
+		085781682EEFDFC50003618D /* ChalkboardSE-Light-01_0.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ChalkboardSE-Light-01_0.ttf"; sourceTree = "<group>"; };
+		085781692EEFDFC50003618D /* ChalkboardSE-Regular-02_0.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ChalkboardSE-Regular-02_0.ttf"; sourceTree = "<group>"; };
+		0857816A2EEFDFC50003618D /* COPYRIGHT.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = COPYRIGHT.txt; sourceTree = "<group>"; };
+		085781702EEFE0D40003618D /* Project2-MI3390-20251-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Project2-MI3390-20251-Info.plist"; sourceTree = SOURCE_ROOT; };
+		085781712EEFE14F0003618D /* Font+AppFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+AppFont.swift"; sourceTree = "<group>"; };
 		085B5FF52EEC32B200B6BE5F /* DictionaryEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryEntry.swift; sourceTree = "<group>"; };
 		085B5FF82EEC366400B6BE5F /* DictionaryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryService.swift; sourceTree = "<group>"; };
 		088F25D42EE50A4200E89167 /* Project2_MI3390_20251.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project2_MI3390_20251.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,6 +118,8 @@
 		083369DC2EE58426003B2FEF /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				085781712EEFE14F0003618D /* Font+AppFont.swift */,
+				085781652EEFDFA30003618D /* Font */,
 				08BE81852EE7ABDA004181EE /* courses_data.json */,
 				088F25E42EE50A8000E89167 /* Assets.xcassets */,
 			);
@@ -138,6 +153,18 @@
 			children = (
 			);
 			path = Authentication;
+			sourceTree = "<group>";
+		};
+		085781652EEFDFA30003618D /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				085781662EEFDFC50003618D /* chalkboardse.otf */,
+				085781672EEFDFC50003618D /* ChalkboardSE-Bold-03_0.ttf */,
+				085781682EEFDFC50003618D /* ChalkboardSE-Light-01_0.ttf */,
+				085781692EEFDFC50003618D /* ChalkboardSE-Regular-02_0.ttf */,
+				0857816A2EEFDFC50003618D /* COPYRIGHT.txt */,
+			);
+			path = Font;
 			sourceTree = "<group>";
 		};
 		085B5FF42EEC327E00B6BE5F /* SearchAPI */ = {
@@ -175,6 +202,7 @@
 		088F25E82EE50A8000E89167 /* Project2_MI3390_20251 */ = {
 			isa = PBXGroup;
 			children = (
+				085781702EEFE0D40003618D /* Project2-MI3390-20251-Info.plist */,
 				088F26052EE50C0900E89167 /* .gitignore */,
 				088F25ED2EE50A9D00E89167 /* App */,
 				088F25F12EE50AD400E89167 /* Core */,
@@ -494,7 +522,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 2610;
-				LastUpgradeCheck = 2610;
+				LastUpgradeCheck = 2620;
 				TargetAttributes = {
 					088F25D32EE50A4200E89167 = {
 						CreatedOnToolsVersion = 26.1.1;
@@ -526,6 +554,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				088F26062EE50C0900E89167 /* .gitignore in Resources */,
+				0857816B2EEFDFC50003618D /* COPYRIGHT.txt in Resources */,
+				0857816C2EEFDFC50003618D /* chalkboardse.otf in Resources */,
+				0857816D2EEFDFC50003618D /* ChalkboardSE-Light-01_0.ttf in Resources */,
+				0857816E2EEFDFC50003618D /* ChalkboardSE-Regular-02_0.ttf in Resources */,
+				0857816F2EEFDFC50003618D /* ChalkboardSE-Bold-03_0.ttf in Resources */,
 				08BE81862EE7ABDA004181EE /* courses_data.json in Resources */,
 				088F25E92EE50A8000E89167 /* Assets.xcassets in Resources */,
 			);
@@ -565,6 +598,7 @@
 				083369E22EE58583003B2FEF /* LoginView.swift in Sources */,
 				085781642EEFDAF70003618D /* PressableButtonStyle.swift in Sources */,
 				08BE81CB2EE7F743004181EE /* WordCardView.swift in Sources */,
+				085781722EEFE14F0003618D /* Font+AppFont.swift in Sources */,
 				088F26092EE50D3100E89167 /* SurveyModel.swift in Sources */,
 				08BE818B2EE7B50E004181EE /* WordRow.swift in Sources */,
 				08BE81752EE7A83D004181EE /* LearnView.swift in Sources */,
@@ -635,6 +669,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -692,6 +727,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -707,6 +743,7 @@
 				DEVELOPMENT_TEAM = WT5PJGD97N;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Project2-MI3390-20251-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = CapyVocab;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -744,6 +781,7 @@
 				DEVELOPMENT_TEAM = WT5PJGD97N;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Project2-MI3390-20251-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = CapyVocab;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

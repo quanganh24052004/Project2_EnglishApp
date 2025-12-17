@@ -18,7 +18,7 @@ struct SurveyView: View {
             VStack(alignment: .leading, spacing: 10) {
                 HStack(alignment: .top, spacing: 10) {
                     // Mascot (Thay bằng Image Asset của bạn)
-                    Image(.imgWelcome)
+                    Image(.imgHappy)
                         .resizable()
                         .frame(width: 50, height: 50)
                         .foregroundColor(.orange)
@@ -40,7 +40,7 @@ struct SurveyView: View {
                 .padding(.top, 20)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            .background(Color(UIColor.systemGray6)) // Nền xám nhạt phía trên
+            .background(Color(.primary01))
             
             // --- CONTENT: Danh sách đáp án ---
             ScrollView {
@@ -60,7 +60,7 @@ struct SurveyView: View {
                 }
                 .padding()
             }
-            .background(Color(UIColor.systemGray6)) // Nền toàn màn hình
+            .background(Color(.primary01)) // Nền toàn màn hình
             
             // --- FOOTER: Nút Tiếp tục ---
             VStack {
@@ -83,7 +83,7 @@ struct SurveyView: View {
                 .disabled(!viewModel.canProceed) // Disable nếu chưa chọn gì
                 .padding()
             }
-            .background(Color.white)
+            .background(Color(.primary01))
         }
     }
 }

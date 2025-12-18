@@ -19,7 +19,6 @@ enum CheckResult {
 }
 
 class LessonViewModel: ObservableObject {
-    // SỬA 1: Dùng LearningItem thay vì Word
     private let items: [LearningItem]
     
     @Published var currentItemIndex: Int = 0
@@ -30,7 +29,8 @@ class LessonViewModel: ObservableObject {
     @Published var currentFeedback: CheckResult? = nil
     @Published var isLessonFinished: Bool = false
     
-    // Getter lấy từ hiện tại
+    var learningManager: LearningManager?
+    
     var currentItem: LearningItem {
         items[currentItemIndex]
     }
@@ -63,9 +63,17 @@ class LessonViewModel: ObservableObject {
     }
     
     func checkAnswer(userAnswer: String) {
-        // SỬA 2: So sánh trực tiếp với currentItem.term
+        // Logic kiểm tra cũ
         let isCorrect = userAnswer.lowercased().trimmingCharacters(in: .whitespaces) == currentItem.word.lowercased()
         
+        // 2. CHÈN LOGIC LƯU VÀO DATABASE TẠI ĐÂY
+        if let manager = learningManager {
+            print("Đang lưu tiến độ cho từ: \(currentItem.word) - Kết quả: \(isCorrect)")
+            // Gọi hàm trong LearningManager để lưu xuống SwiftData
+            manager.updateProgress(wordID: currentItem.wordID, isCorrect: isCorrect)
+        }
+        
+        // Logic feedback cũ
         if isCorrect {
             currentFeedback = .correct
         } else {

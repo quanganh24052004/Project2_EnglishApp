@@ -6,10 +6,12 @@
 //
 
 import Foundation
+import SwiftData
 
 struct LearningItem: Identifiable {
     let id = UUID()
-    let word: String           
+    let wordID: PersistentIdentifier
+    let word: String
     let phonetic: String
     let partOfSpeech: String
     let meaning: String

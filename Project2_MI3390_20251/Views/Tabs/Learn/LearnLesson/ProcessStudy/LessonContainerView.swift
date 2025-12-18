@@ -1,10 +1,12 @@
 // File: LessonContainerView.swift
 import SwiftUI
+import SwiftData
 
 struct LessonContainerView: View {
     @StateObject private var viewModel: LessonViewModel
     @Environment(\.dismiss) var dismiss
     
+    @Environment(\.modelContext) var modelContext
     // Init nhận danh sách đã chuyển đổi
     init(items: [LearningItem]) {
         _viewModel = StateObject(wrappedValue: LessonViewModel(items: items))
@@ -59,6 +61,10 @@ struct LessonContainerView: View {
                     }
                 }
             }
+        }
+        .onAppear {
+            // Khi màn hình hiện lên, tạo Manager và gắn vào ViewModel
+            viewModel.learningManager = LearningManager(modelContext: modelContext)
         }
         // Bottom Sheet Feedback
         .sheet(isPresented: $viewModel.showFeedbackSheet, onDismiss: {

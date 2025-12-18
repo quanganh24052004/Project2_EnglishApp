@@ -156,13 +156,13 @@ struct WordListView: View {
         .fullScreenCover(isPresented: $isLearningSessionActive) {
             // LOGIC MAPPING: [Word] (Database) -> [LearningItem] (Học)
             let learningItems = lesson.words.map { dbWord in
-                // 1. Lấy ra meaning đầu tiên để tránh truy cập .first nhiều lần (tối ưu nhẹ)
                 let firstMeaning = dbWord.meanings.first
                 
                 return LearningItem(
-                    word: dbWord.english,           // Tên biến trong struct là 'word' (không phải 'term')
-                    phonetic: dbWord.phonetic,      // Lấy từ DB
-                    partOfSpeech: dbWord.partOfSpeech, // Lấy từ DB
+                    wordID: dbWord.persistentModelID, // 👈 QUAN TRỌNG: Phải truyền dòng này (Cần sửa struct LearningItem ở Bước 1)
+                    word: dbWord.english,
+                    phonetic: dbWord.phonetic,
+                    partOfSpeech: dbWord.partOfSpeech,
                     meaning: firstMeaning?.vietnamese ?? "Chưa có nghĩa",
                     example: firstMeaning?.exampleEn ?? "",
                     audioUrl: dbWord.audioUrl,
@@ -170,7 +170,6 @@ struct WordListView: View {
                 )
             }
             
-            // Truyền danh sách đã map vào View
             LessonContainerView(items: learningItems)
         }
     }

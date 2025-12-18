@@ -31,6 +31,7 @@ struct Project2_MI3390_20251App: App {
     }
     
     @MainActor
+    @StateObject private var languageManager = LanguageManager()
     func checkAndSeedData() {
         let context = sharedModelContainer.mainContext
         
@@ -96,6 +97,10 @@ struct Project2_MI3390_20251App: App {
         WindowGroup {
             RootView()
                 .font(.appFont(size: 16, weight: .regular))
+                // Truyền môi trường ngôn ngữ cho toàn bộ App
+                .environment(\.locale, .init(identifier: languageManager.currentLanguage))
+                // Truyền object này xuống để màn hình Settings có thể thay đổi nó
+                .environmentObject(languageManager)
         }
         .modelContainer(sharedModelContainer)
     }

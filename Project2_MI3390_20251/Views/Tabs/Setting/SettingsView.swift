@@ -1,5 +1,5 @@
 //
-//  SettingsView 2.swift
+//  SettingsView.swift
 //  Project2_MI3390_20251
 //
 //  Created by Nguyễn Quang Anh on 18/12/25.
@@ -8,109 +8,124 @@
 import SwiftUI
 
 struct SettingsView: View {
-    // MARK: - ViewModel
-    // Dùng @StateObject vì View này sở hữu (tạo ra) ViewModel
+    // MARK: - ViewModel & Environment
     @StateObject private var viewModel = SettingsViewModel()
+    @EnvironmentObject var languageManager: LanguageManager
     
-    // MARK: - Properties (Settings UI)
-    // Section Trải nghiệm
-    @AppStorage("isDarkMode") private var isDarkMode = false // Dark mode
-    @AppStorage("enableNotifications") private var enableNotifications = true // Notification
+    // MARK: - AppStorage (Lưu cấu hình đơn giản)
+    // General
+    @AppStorage("isDarkMode") private var isDarkMode = false
     
-    // Section Âm thanh
-    @AppStorage("soundEffects") private var isSoundEffectsOn = true    // Sound Effect
-    @AppStorage("backgroundMusic") private var isMusicOn = false       // Music
-    @AppStorage("musicVolume") private var musicVolume = 0.5    // Volome
+    // Audio
+    @AppStorage("soundEffects") private var isSoundEffectsOn = true
+    @AppStorage("backgroundMusic") private var isMusicOn = false
+    @AppStorage("musicVolume") private var musicVolume = 0.5
     
-    // Tagget Study
+    // Study Target
     @AppStorage("dailyTarget") private var dailyTarget = 10
     
+    // MARK: - UI State
+    // Chỉ còn giữ lại Alert cho việc Reset dữ liệu
     @State private var showingResetAlert = false
     
     // MARK: - Body
     var body: some View {
         NavigationStack {
             Form {
-                // Section 1: Giao diện & Trải nghiệm
-                Section(header: Text("Trải nghiệm")) {
-                    Toggle("Chế độ tối (Dark Mode)", isOn: $isDarkMode)
-                    Toggle("Nhận thông báo nhắc nhở", isOn: $enableNotifications)
-                }
-
-                // 2. Section Âm thanh
-                Section(header: Text("Âm thanh")) {
-                    // Toggle Hiệu ứng đơn giản
-                    Toggle("Hiệu ứng âm thanh", isOn: $isSoundEffectsOn)
-                    
-                    // Group Nhạc nền + Slider
-                    VStack(alignment: .leading, spacing: 10) {
-                        Toggle("Nhạc nền", isOn: $isMusicOn)
-                        
-                        if isMusicOn {
-                            HStack {
-                                // Icon loa nhỏ
-                                Image(systemName: "speaker.fill")
-                                    .foregroundColor(.secondary)
-                                
-                                // Slider điều chỉnh volume
-                                Slider(value: $musicVolume, in: 0...1) {
-                                    Text("Âm lượng") // Label cho VoiceOver (Accessibility)
-                                }
-                                
-                                // Icon loa to
-                                Image(systemName: "speaker.wave.3.fill")
-                                    .foregroundColor(.secondary)
-                            }
-                            .transition(.opacity.combined(with: .move(edge: .top))) // Animation mượt
-                        }
-                    }
-                    .padding(.vertical, 4) // Tinh chỉnh khoảng cách cho đẹp hơn trong Form
-                }
-                
-                // Section 3: Cấu hình học tập
-                Section(header: Text("Mục tiêu học tập")) {
-                    Stepper("Mục tiêu: \(dailyTarget) từ/ngày", value: $dailyTarget, in: 5...50, step: 5)
-                }
-                
-                // Section 4: Quản lý dữ liệu
-                Section(header: Text("Dữ liệu")) {
-                    Button(role: .destructive) {
-                        showingResetAlert = true
-                    } label: {
-                        Label("Reset toàn bộ tiến độ", systemImage: "trash")
-                    }
-                }
-                
-                // Section 5: Thông tin App
-                Section(header: Text("Thông tin")) {
-                    HStack {
-                        Text("Phiên bản")
-                        Spacer()
-                        Text(Bundle.main.fullAppVersion)
-                            .foregroundColor(.secondary)
-                    }
-                    Link("Liên hệ tác giả", destination: URL(string: "https://www.facebook.com/quanganh.2405/")!)
-                }
+                languageSection
+                experienceSection
+                audioSection
+                studyTargetSection
+                dataSection
+                aboutSection
             }
-            .navigationTitle("Cài đặt")
-            .alert("Cảnh báo", isPresented: $showingResetAlert) {
-                Button("Hủy", role: .cancel) { }
-                Button("Xóa hết", role: .destructive) {
-                    viewModel.resetAllProgress()
-                }
+            .navigationTitle("Setting")
+            
+            // --- XỬ LÝ LOGIC (Chỉ còn mỗi cái này) ---
+            
+            // Alert Reset dữ liệu
+            .alert("Warning", isPresented: $showingResetAlert) {
+                Button("Cancel", role: .cancel) { }
+                Button("Delete all", role: .destructive) { viewModel.resetAllProgress() }
             } message: {
-                Text("Hành động này không thể hoàn tác. Toàn bộ lịch sử học sẽ bị xóa.")
+                Text("This action cannot be undone.")
             }
         }
         .preferredColorScheme(isDarkMode ? .dark : .light)
     }
 }
 
+// MARK: - Subviews (Tách nhỏ để code gọn)
+private extension SettingsView {
+    
+    var languageSection: some View {
+        Section(header: Text("Language")) {
+            Picker("Select Language", selection: $languageManager.currentLanguage) {
+                Text("English").tag("en")
+                Text("Vietnamese").tag("vi")
+            }
+            .pickerStyle(.menu)
+        }
+    }
+    
+    var experienceSection: some View {
+        Section(header: Text("Experience")) {
+            Toggle("Dark mode", isOn: $isDarkMode)
+        }
+    }
+    
+    var audioSection: some View {
+        Section(header: Text("Sound")) {
+            Toggle("Sound effect", isOn: $isSoundEffectsOn)
+            
+            VStack(alignment: .leading) {
+                Toggle("Background music", isOn: $isMusicOn)
+                if isMusicOn {
+                    HStack {
+                        Image(systemName: "speaker.fill").foregroundColor(.secondary)
+                        Slider(value: $musicVolume, in: 0...1)
+                        Image(systemName: "speaker.wave.3.fill").foregroundColor(.secondary)
+                    }
+                    .transition(.opacity)
+                }
+            }
+        }
+    }
+    
+    var studyTargetSection: some View {
+        Section(header: Text("Learning goals")) {
+            Stepper("Target: \(dailyTarget) word/day", value: $dailyTarget, in: 5...50, step: 5)
+        }
+    }
+    
+    var dataSection: some View {
+        Section(header: Text("Data")) {
+            Button(role: .destructive) {
+                showingResetAlert = true
+            } label: {
+                Label("Reset the entire progress", systemImage: "trash")
+            }
+        }
+    }
+    
+    var aboutSection: some View {
+        Section(header: Text("Information")) {
+            HStack {
+                Text("Version")
+                Spacer()
+                // Dùng extension Bundle nếu có, hoặc dùng code trực tiếp này cho nhanh
+                Text(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0.0")
+                    .foregroundColor(.secondary)
+            }
+            Link("Connect author", destination: URL(string: "https://github.com/yourusername")!)
+        }
+    }
+}
 
 // MARK: - Preview
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView()
+            .environmentObject(LanguageManager())
     }
 }
-

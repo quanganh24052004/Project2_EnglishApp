@@ -95,7 +95,7 @@ struct Project2_MI3390_20251App: App {
     var body: some Scene {
         WindowGroup {
             RootView()
-//                .font(.appFont(size: 16, weight: .regular))
+                .font(.appFont(size: 16, weight: .regular))
         }
         .modelContainer(sharedModelContainer)
     }

@@ -23,6 +23,7 @@
 		0857817A2EEFE65F0003618D /* AppTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085781792EEFE65F0003618D /* AppTextField.swift */; };
 		085B5FF62EEC32B200B6BE5F /* DictionaryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085B5FF52EEC32B200B6BE5F /* DictionaryEntry.swift */; };
 		085B5FF92EEC366400B6BE5F /* DictionaryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085B5FF82EEC366400B6BE5F /* DictionaryService.swift */; };
+		08625DD12EF594F900CD5619 /* SpellingGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08625DD02EF594F900CD5619 /* SpellingGameView.swift */; };
 		088881A22EF2B5AC00F8E198 /* LearningManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088881A12EF2B5AC00F8E198 /* LearningManager.swift */; };
 		088881A42EF2B9F000F8E198 /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088881A32EF2B9F000F8E198 /* ReviewView.swift */; };
 		088881A62EF3DBEE00F8E198 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088881A52EF3DBEE00F8E198 /* SettingsView.swift */; };
@@ -74,6 +75,7 @@
 		085781792EEFE65F0003618D /* AppTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTextField.swift; sourceTree = "<group>"; };
 		085B5FF52EEC32B200B6BE5F /* DictionaryEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryEntry.swift; sourceTree = "<group>"; };
 		085B5FF82EEC366400B6BE5F /* DictionaryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryService.swift; sourceTree = "<group>"; };
+		08625DD02EF594F900CD5619 /* SpellingGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpellingGameView.swift; sourceTree = "<group>"; };
 		088881A12EF2B5AC00F8E198 /* LearningManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningManager.swift; sourceTree = "<group>"; };
 		088881A32EF2B9F000F8E198 /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
 		088881A52EF3DBEE00F8E198 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -505,6 +507,7 @@
 				08BE81A02EE7B7E5004181EE /* FlashcardStepView.swift */,
 				08BE81A12EE7B7E5004181EE /* InputStepView.swift */,
 				08BE81A22EE7B7E5004181EE /* LessonContainerView.swift */,
+				08625DD02EF594F900CD5619 /* SpellingGameView.swift */,
 			);
 			path = ProcessStudy;
 			sourceTree = "<group>";
@@ -636,6 +639,7 @@
 				08BE81CE2EE852D2004181EE /* AudioManager.swift in Sources */,
 				085B5FF92EEC366400B6BE5F /* DictionaryService.swift in Sources */,
 				08BE81A52EE7B7E5004181EE /* FlashcardStepView.swift in Sources */,
+				08625DD12EF594F900CD5619 /* SpellingGameView.swift in Sources */,
 				08BE81A62EE7B7E5004181EE /* LessonContainerView.swift in Sources */,
 				088881A42EF2B9F000F8E198 /* ReviewView.swift in Sources */,
 				08BE81A72EE7B7E5004181EE /* LessonViewModel.swift in Sources */,

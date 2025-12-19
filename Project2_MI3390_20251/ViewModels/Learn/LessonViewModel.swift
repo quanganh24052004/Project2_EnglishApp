@@ -1,24 +1,28 @@
 //
 //  LessonViewModel.swift
-//  DemoQuaTrinhHoc1Tu
+//  Project2_EnglishApp
 //
 //  Created by Nguyễn Quang Anh on 28/11/25.
 //
+
 import SwiftUI
 import Combine
 
-enum LearningStep{
-    case flashcard      // Xem thẻ, nghe
-    case listenWrite    // Nghe và chép lại
-    case fillBlank      // Điền từ vào chỗ trống
+// Định nghĩa các bước học
+enum LearningStep {
+    case flashcard      // 1. Xem thẻ, nghe
+    case listenWrite    // 2. Nghe và Gõ lại (Đã nâng cấp với gợi ý mờ)
+    case fillBlank      // 3. Điền từ còn thiếu
 }
 
+// Kết quả kiểm tra
 enum CheckResult {
     case correct
     case wrong(correctAnswer: String)
 }
 
 class LessonViewModel: ObservableObject {
+    // MARK: - Properties
     private let items: [LearningItem]
     
     @Published var currentItemIndex: Int = 0
@@ -29,24 +33,71 @@ class LessonViewModel: ObservableObject {
     @Published var currentFeedback: CheckResult? = nil
     @Published var isLessonFinished: Bool = false
     
+    // Manager để lưu xuống SwiftData
     var learningManager: LearningManager?
     
+    // Lấy từ vựng hiện tại
     var currentItem: LearningItem {
         items[currentItemIndex]
     }
     
-    // Init nhận vào danh sách LearningItem
+    // MARK: - Init
     init(items: [LearningItem]) {
         self.items = items
         updateProgress()
     }
     
+    // MARK: - Logic Kiểm Tra (Core Logic)
+    
+    // 1. Kiểm tra phần Nghe & Viết (Spelling Game)
+    func checkListenWrite(userAnswer: String) {
+        // Chuẩn hóa: Xóa khoảng trắng thừa, đưa về chữ thường
+        let cleanInput = userAnswer.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        let cleanTarget = currentItem.word.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        
+        let isCorrect = cleanInput == cleanTarget
+        processResult(isCorrect: isCorrect, correctAnswer: currentItem.word)
+    }
+    
+    // 2. Kiểm tra phần Điền từ (Fill Blank) - Giữ logic cũ hoặc tùy chỉnh
+    func checkFillBlank(userAnswer: String) {
+        let cleanInput = userAnswer.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        let cleanTarget = currentItem.word.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        
+        let isCorrect = cleanInput == cleanTarget
+        processResult(isCorrect: isCorrect, correctAnswer: currentItem.word)
+    }
+    
+    // MARK: - Xử lý kết quả chung & Lưu Database
+    
+    private func processResult(isCorrect: Bool, correctAnswer: String) {
+        // A. Lưu tiến độ vào DB (SwiftData)
+        if let manager = learningManager {
+            print("Lưu tiến độ từ: \(currentItem.word) - Kết quả: \(isCorrect)")
+            manager.updateProgress(wordID: currentItem.wordID, isCorrect: isCorrect)
+        }
+        
+        // B. Cập nhật trạng thái Feedback để hiện Popup
+        if isCorrect {
+            currentFeedback = .correct
+        } else {
+            currentFeedback = .wrong(correctAnswer: correctAnswer)
+        }
+        
+        // C. Trigger hiển thị Sheet
+        showFeedbackSheet = true
+    }
+    
+    // MARK: - Navigation
+    
     func moveToNextStage() {
         switch currentStep {
         case .flashcard:
             currentStep = .listenWrite
+            
         case .listenWrite:
             currentStep = .fillBlank
+            
         case .fillBlank:
             moveToNextWord()
         }
@@ -56,32 +107,13 @@ class LessonViewModel: ObservableObject {
     private func moveToNextWord() {
         if currentItemIndex < items.count - 1 {
             currentItemIndex += 1
-            currentStep = .flashcard
+            currentStep = .flashcard // Quay lại bước 1 cho từ mới
         } else {
-            isLessonFinished = true
+            isLessonFinished = true // Hoàn thành bài học
         }
     }
     
-    func checkAnswer(userAnswer: String) {
-        // Logic kiểm tra cũ
-        let isCorrect = userAnswer.lowercased().trimmingCharacters(in: .whitespaces) == currentItem.word.lowercased()
-        
-        // 2. CHÈN LOGIC LƯU VÀO DATABASE TẠI ĐÂY
-        if let manager = learningManager {
-            print("Đang lưu tiến độ cho từ: \(currentItem.word) - Kết quả: \(isCorrect)")
-            // Gọi hàm trong LearningManager để lưu xuống SwiftData
-            manager.updateProgress(wordID: currentItem.wordID, isCorrect: isCorrect)
-        }
-        
-        // Logic feedback cũ
-        if isCorrect {
-            currentFeedback = .correct
-        } else {
-            currentFeedback = .wrong(correctAnswer: currentItem.word)
-        }
-        showFeedbackSheet = true
-    }
-    
+    // MARK: - Helper tính Progress Bar
     private func updateProgress() {
         let totalSteps = Double(items.count * 3)
         let currentStepsDone = Double(currentItemIndex * 3) + stepIndex(currentStep)

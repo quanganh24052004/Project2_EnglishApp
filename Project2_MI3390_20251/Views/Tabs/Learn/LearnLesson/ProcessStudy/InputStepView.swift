@@ -17,18 +17,15 @@ struct InputStepView: View {
         VStack(spacing: 20) {
             Text(title).font(.headline)
             
-            // Nếu là nghe chép thì hiện nút loa, điền từ thì hiện câu gợi ý...
             Button(action: {}) { Image(systemName: "speaker.wave.3.fill").font(.largeTitle) }
             
-            if !textInput.isEmpty || true { // Luôn hiện hoặc tùy logic
+            if !textInput.isEmpty || true {
                 Text("Gợi ý: \(item.meaning)")
                     .font(.subheadline)
                     .foregroundColor(.gray)
             }
-            AppTextField(text: $textInput, placeholder: "Nhập từ vựng...", iconName: "", isSecure: false)
-//            TextField("Nhập từ vựng...", text: $textInput)
-//                .textFieldStyle(.roundedBorder)
-//                .padding()
+            AppTextField(text: $textInput, placeholder: "Nhập từ vựng...")
+
             
             Spacer()
             

@@ -32,7 +32,6 @@
 		088ECA572EF6DE1C00323A08 /* PracticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088ECA562EF6DE1C00323A08 /* PracticeView.swift */; };
 		088ECA592EF6EB9900323A08 /* AppTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088ECA582EF6EB9900323A08 /* AppTextField.swift */; };
 		088F25E92EE50A8000E89167 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 088F25E42EE50A8000E89167 /* Assets.xcassets */; };
-		088F25EA2EE50A8000E89167 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088F25E52EE50A8000E89167 /* ContentView.swift */; };
 		088F25EC2EE50A8000E89167 /* Project2_MI3390_20251App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088F25E72EE50A8000E89167 /* Project2_MI3390_20251App.swift */; };
 		088F26062EE50C0900E89167 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 088F26052EE50C0900E89167 /* .gitignore */; };
 		088F26092EE50D3100E89167 /* SurveyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088F26082EE50D3100E89167 /* SurveyModel.swift */; };
@@ -86,7 +85,6 @@
 		088ECA582EF6EB9900323A08 /* AppTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTextField.swift; sourceTree = "<group>"; };
 		088F25D42EE50A4200E89167 /* Project2_MI3390_20251.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project2_MI3390_20251.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		088F25E42EE50A8000E89167 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		088F25E52EE50A8000E89167 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		088F25E72EE50A8000E89167 /* Project2_MI3390_20251App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project2_MI3390_20251App.swift; sourceTree = "<group>"; };
 		088F26052EE50C0900E89167 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		088F26082EE50D3100E89167 /* SurveyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyModel.swift; sourceTree = "<group>"; };
@@ -261,7 +259,6 @@
 			isa = PBXGroup;
 			children = (
 				088F26132EE5113C00E89167 /* RootView.swift */,
-				088F25E52EE50A8000E89167 /* ContentView.swift */,
 				088F25E72EE50A8000E89167 /* Project2_MI3390_20251App.swift */,
 			);
 			path = App;
@@ -628,7 +625,6 @@
 				088881A22EF2B5AC00F8E198 /* LearningManager.swift in Sources */,
 				0804F2F62EE79E4B00A982D3 /* MainTabView.swift in Sources */,
 				085B5FF62EEC32B200B6BE5F /* DictionaryEntry.swift in Sources */,
-				088F25EA2EE50A8000E89167 /* ContentView.swift in Sources */,
 				083369E42EE585A2003B2FEF /* RegistrationView.swift in Sources */,
 				08BE81772EE7A874004181EE /* ProfileView.swift in Sources */,
 				088ECA572EF6DE1C00323A08 /* PracticeView.swift in Sources */,

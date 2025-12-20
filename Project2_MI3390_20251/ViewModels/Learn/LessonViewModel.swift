@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import SwiftData
 
 // Định nghĩa các bước học
 enum LearningStep {
@@ -69,23 +70,24 @@ class LessonViewModel: ObservableObject {
     }
     
     // MARK: - Xử lý kết quả chung & Lưu Database
-    
     private func processResult(isCorrect: Bool, correctAnswer: String) {
-        // A. Lưu tiến độ vào DB (SwiftData)
-        if let manager = learningManager {
-            print("Lưu tiến độ từ: \(currentItem.word) - Kết quả: \(isCorrect)")
-            manager.updateProgress(wordID: currentItem.wordID, isCorrect: isCorrect)
-        }
         
-        // B. Cập nhật trạng thái Feedback để hiện Popup
+        // A. Cập nhật UI Feedback trước (để App phản hồi nhanh với người dùng)
         if isCorrect {
             currentFeedback = .correct
         } else {
             currentFeedback = .wrong(correctAnswer: correctAnswer)
         }
-        
-        // C. Trigger hiển thị Sheet
         showFeedbackSheet = true
+        
+        // B. Lưu tiến độ vào DB (SwiftData)
+        if let manager = learningManager {
+            // Không cần fetch "wordObject" thủ công nữa
+            // Truyền thẳng ID có sẵn trong currentItem
+            manager.updateProgress(wordID: currentItem.wordID, isCorrect: isCorrect)
+            
+            print("✅ Đã gửi yêu cầu lưu tiến độ cho từ ID: \(currentItem.wordID)")
+        }
     }
     
     // MARK: - Navigation

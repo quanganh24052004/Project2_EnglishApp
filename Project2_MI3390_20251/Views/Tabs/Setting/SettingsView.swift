@@ -117,7 +117,7 @@ private extension SettingsView {
                 Text(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0.0")
                     .foregroundColor(.secondary)
             }
-            Link("Connect author", destination: URL(string: "https://github.com/yourusername")!)
+            Link("Connect author (Quang Anh)", destination: URL(string: "https://m.me/quanganh.2405")!)
         }
     }
 }

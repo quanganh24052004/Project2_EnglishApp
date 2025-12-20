@@ -20,7 +20,6 @@
 		0857816E2EEFDFC50003618D /* ChalkboardSE-Regular-02_0.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 085781692EEFDFC50003618D /* ChalkboardSE-Regular-02_0.ttf */; };
 		0857816F2EEFDFC50003618D /* ChalkboardSE-Bold-03_0.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 085781672EEFDFC50003618D /* ChalkboardSE-Bold-03_0.ttf */; };
 		085781722EEFE14F0003618D /* Font+AppFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085781712EEFE14F0003618D /* Font+AppFont.swift */; };
-		0857817A2EEFE65F0003618D /* AppTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085781792EEFE65F0003618D /* AppTextField.swift */; };
 		085B5FF62EEC32B200B6BE5F /* DictionaryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085B5FF52EEC32B200B6BE5F /* DictionaryEntry.swift */; };
 		085B5FF92EEC366400B6BE5F /* DictionaryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085B5FF82EEC366400B6BE5F /* DictionaryService.swift */; };
 		08625DD12EF594F900CD5619 /* SpellingGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08625DD02EF594F900CD5619 /* SpellingGameView.swift */; };
@@ -30,6 +29,8 @@
 		088881A92EF3DDBE00F8E198 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088881A82EF3DDBE00F8E198 /* SettingsViewModel.swift */; };
 		088881AF2EF3F5BA00F8E198 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 088881AE2EF3F5BA00F8E198 /* Localizable.xcstrings */; };
 		088881B32EF3F81A00F8E198 /* LanguageManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088881B22EF3F81A00F8E198 /* LanguageManage.swift */; };
+		088ECA572EF6DE1C00323A08 /* PracticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088ECA562EF6DE1C00323A08 /* PracticeView.swift */; };
+		088ECA592EF6EB9900323A08 /* AppTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088ECA582EF6EB9900323A08 /* AppTextField.swift */; };
 		088F25E92EE50A8000E89167 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 088F25E42EE50A8000E89167 /* Assets.xcassets */; };
 		088F25EA2EE50A8000E89167 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088F25E52EE50A8000E89167 /* ContentView.swift */; };
 		088F25EC2EE50A8000E89167 /* Project2_MI3390_20251App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088F25E72EE50A8000E89167 /* Project2_MI3390_20251App.swift */; };
@@ -72,7 +73,6 @@
 		0857816A2EEFDFC50003618D /* COPYRIGHT.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = COPYRIGHT.txt; sourceTree = "<group>"; };
 		085781702EEFE0D40003618D /* Project2-MI3390-20251-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Project2-MI3390-20251-Info.plist"; sourceTree = SOURCE_ROOT; };
 		085781712EEFE14F0003618D /* Font+AppFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+AppFont.swift"; sourceTree = "<group>"; };
-		085781792EEFE65F0003618D /* AppTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTextField.swift; sourceTree = "<group>"; };
 		085B5FF52EEC32B200B6BE5F /* DictionaryEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryEntry.swift; sourceTree = "<group>"; };
 		085B5FF82EEC366400B6BE5F /* DictionaryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryService.swift; sourceTree = "<group>"; };
 		08625DD02EF594F900CD5619 /* SpellingGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpellingGameView.swift; sourceTree = "<group>"; };
@@ -82,6 +82,8 @@
 		088881A82EF3DDBE00F8E198 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		088881AE2EF3F5BA00F8E198 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		088881B22EF3F81A00F8E198 /* LanguageManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManage.swift; sourceTree = "<group>"; };
+		088ECA562EF6DE1C00323A08 /* PracticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeView.swift; sourceTree = "<group>"; };
+		088ECA582EF6EB9900323A08 /* AppTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTextField.swift; sourceTree = "<group>"; };
 		088F25D42EE50A4200E89167 /* Project2_MI3390_20251.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project2_MI3390_20251.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		088F25E42EE50A8000E89167 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		088F25E52EE50A8000E89167 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -396,7 +398,7 @@
 		088F25FD2EE50B2700E89167 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				085781792EEFE65F0003618D /* AppTextField.swift */,
+				088ECA582EF6EB9900323A08 /* AppTextField.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -422,6 +424,7 @@
 		088F26002EE50B3A00E89167 /* Review */ = {
 			isa = PBXGroup;
 			children = (
+				088ECA562EF6DE1C00323A08 /* PracticeView.swift */,
 				088881A32EF2B9F000F8E198 /* ReviewView.swift */,
 			);
 			path = Review;
@@ -506,8 +509,8 @@
 				08BE819F2EE7B7E5004181EE /* FeedbackSheetView.swift */,
 				08BE81A02EE7B7E5004181EE /* FlashcardStepView.swift */,
 				08BE81A12EE7B7E5004181EE /* InputStepView.swift */,
-				08BE81A22EE7B7E5004181EE /* LessonContainerView.swift */,
 				08625DD02EF594F900CD5619 /* SpellingGameView.swift */,
+				08BE81A22EE7B7E5004181EE /* LessonContainerView.swift */,
 			);
 			path = ProcessStudy;
 			sourceTree = "<group>";
@@ -624,11 +627,11 @@
 				083369DB2EE57F1D003B2FEF /* String+Validation.swift in Sources */,
 				088881A22EF2B5AC00F8E198 /* LearningManager.swift in Sources */,
 				0804F2F62EE79E4B00A982D3 /* MainTabView.swift in Sources */,
-				0857817A2EEFE65F0003618D /* AppTextField.swift in Sources */,
 				085B5FF62EEC32B200B6BE5F /* DictionaryEntry.swift in Sources */,
 				088F25EA2EE50A8000E89167 /* ContentView.swift in Sources */,
 				083369E42EE585A2003B2FEF /* RegistrationView.swift in Sources */,
 				08BE81772EE7A874004181EE /* ProfileView.swift in Sources */,
+				088ECA572EF6DE1C00323A08 /* PracticeView.swift in Sources */,
 				088F260C2EE50D3900E89167 /* SurveyView.swift in Sources */,
 				088F260D2EE50D3900E89167 /* SurveyOptionRow.swift in Sources */,
 				088881A92EF3DDBE00F8E198 /* SettingsViewModel.swift in Sources */,
@@ -657,6 +660,7 @@
 				08BE81752EE7A83D004181EE /* LearnView.swift in Sources */,
 				088F26122EE510E300E89167 /* SplashScreenView.swift in Sources */,
 				0804F2F92EE79FDC00A982D3 /* AppTab.swift in Sources */,
+				088ECA592EF6EB9900323A08 /* AppTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

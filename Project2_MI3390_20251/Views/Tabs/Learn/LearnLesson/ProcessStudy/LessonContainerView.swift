@@ -61,7 +61,6 @@ struct LessonContainerView: View {
                         )
                         
                     case .fillBlank:
-                        // Giữ lại InputStepView cũ cho phần điền từ (nếu muốn)
                         InputStepView(
                             title: "Điền từ còn thiếu",
                             item: viewModel.currentItem,

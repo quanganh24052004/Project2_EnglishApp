@@ -1,16 +1,22 @@
+//
+//  PracticeView.swift
+//  Project2_MI3390_20251
+//
+//  Created by Nguyễn Quang Anh on 20/12/25.
+//
+
+import SwiftUI
+// Struct hỗ trợ (nếu chưa có trong file khác)
 struct PracticeView: View {
-    let recordsToReview: [StudyRecord]
-    
+    let records: [StudyRecord]
     var body: some View {
-        VStack {
-            if recordsToReview.isEmpty {
-                Text("Không có từ nào để ôn!")
-            } else {
-                Text("Đang ôn tập \(recordsToReview.count) từ")
-                // Ở đây bạn sẽ tái sử dụng logic Flashcard hoặc QuizView
-                // Ví dụ: QuizView(words: recordsToReview.compactMap { $0.word })
-            }
-        }
-        .navigationTitle("Ôn tập")
+        Text("Màn hình ôn tập (Placeholder)")
     }
+}
+
+struct LevelStat: Identifiable {
+    let id = UUID()
+    let level: String
+    let count: Int
+    let color: Color
 }

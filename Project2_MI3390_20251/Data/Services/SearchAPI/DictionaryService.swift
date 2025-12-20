@@ -5,14 +5,6 @@
 //  Created by Nguyễn Quang Anh on 12/12/25.
 //
 
-
-//
-//  DictionaryService.swift
-//  Project2_MI3390_20251
-//
-//  Created by [Tên của bạn] on 12/12/25.
-//
-
 import Foundation
 
 class DictionaryService {

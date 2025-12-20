@@ -32,7 +32,7 @@ struct LearnView: View {
                     }
                 }
             }
-            .navigationTitle("Khóa học của tôi")
+            .navigationTitle("course_screen_title")
         }
     }
 }
@@ -84,10 +84,8 @@ struct WordListView: View {
     
     var body: some View {
         List {
-            // Lấy danh sách words từ model Lesson
             ForEach(lesson.words) { word in
                 HStack(alignment: .top) {
-                    // Cột bên trái: Từ tiếng Anh và phát âm
                     VStack(alignment: .leading, spacing: 4) {
                         Text(word.english)
                             .font(.title3)
@@ -99,7 +97,6 @@ struct WordListView: View {
                             .foregroundStyle(.secondary)
                             .italic()
                         
-                        // Hiển thị loại từ (noun, verb...)
                         Text(word.partOfSpeech)
                             .font(.caption2)
                             .padding(.horizontal, 6)
@@ -107,13 +104,11 @@ struct WordListView: View {
                             .background(Color.gray.opacity(0.2))
                             .cornerRadius(4)
                     }
-                    .frame(width: 100, alignment: .leading) // Cố định chiều rộng cột trái
+                    .frame(width: 100, alignment: .leading)
                     
                     Divider()
                     
-                    // Cột bên phải: Nghĩa tiếng Việt
                     VStack(alignment: .leading, spacing: 4) {
-                        // Lấy nghĩa đầu tiên (nếu có) để hiển thị tóm tắt
                         if let firstMeaning = word.meanings.first {
                             Text(firstMeaning.vietnamese)
                                 .font(.body)
@@ -126,7 +121,7 @@ struct WordListView: View {
                                     .italic()
                             }
                         } else {
-                            Text("Chưa có nghĩa")
+                            Text("No meaning")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                         }
@@ -138,7 +133,6 @@ struct WordListView: View {
         .navigationTitle(lesson.name)
         .navigationBarTitleDisplayMode(.inline)
         
-        // NÚT HỌC TRÊN TOOLBAR
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 Button(action: {
@@ -146,7 +140,7 @@ struct WordListView: View {
                         isLearningSessionActive = true
                     }
                 }) {
-                    Text("Học ngay").bold()
+                    Text("Learn now").bold()
                 }
                 .disabled(lesson.words.isEmpty)
             }
@@ -159,14 +153,14 @@ struct WordListView: View {
                 let firstMeaning = dbWord.meanings.first
                 
                 return LearningItem(
-                    wordID: dbWord.persistentModelID, // 👈 QUAN TRỌNG: Phải truyền dòng này (Cần sửa struct LearningItem ở Bước 1)
+                    wordID: dbWord.persistentModelID,
                     word: dbWord.english,
                     phonetic: dbWord.phonetic,
                     partOfSpeech: dbWord.partOfSpeech,
-                    meaning: firstMeaning?.vietnamese ?? "Chưa có nghĩa",
-                    example: firstMeaning?.exampleEn ?? "",
+                    meaning: firstMeaning?.vietnamese ?? "It's not meaningful yet",
+                    example: firstMeaning?.exampleEn ?? "There is no example yet",
                     audioUrl: dbWord.audioUrl,
-                    vietnamese: firstMeaning?.vietnamese ?? "Chưa có nghĩa"
+                    vietnamese: firstMeaning?.vietnamese ?? "t's not meaningful yet"
                 )
             }
             

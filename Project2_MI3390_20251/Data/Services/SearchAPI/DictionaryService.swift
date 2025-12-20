@@ -27,7 +27,7 @@ class DictionaryService {
         // 2. Gọi API (async/await)
         let (data, response) = try await URLSession.shared.data(from: url)
         
-        // 3. Kiểm tra HTTP Status Code (200 là OK)
+        // 3. Kiểm tra HTTP Status Code
         if let httpResponse = response as? HTTPURLResponse {
             if httpResponse.statusCode == 404 {
                 // API trả về 404 nghĩa là không tìm thấy từ
@@ -39,7 +39,6 @@ class DictionaryService {
         }
         
         // 4. Decode JSON sang mảng DictionaryEntry
-        // Vì bạn đã viết hàm init(from decoder:) rất chuẩn trong Model, việc decode sẽ tự động sinh UUID
         let results = try JSONDecoder().decode([DictionaryEntry].self, from: data)
         return results
     }

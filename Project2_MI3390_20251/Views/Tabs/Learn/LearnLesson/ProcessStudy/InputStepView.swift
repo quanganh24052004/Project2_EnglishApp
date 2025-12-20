@@ -24,12 +24,12 @@ struct InputStepView: View {
                     .font(.subheadline)
                     .foregroundColor(.gray)
             }
-            AppTextField(text: $textInput, placeholder: "Nhập từ vựng...")
+            AppTextField(text: $textInput, placeholder: "Enter vocabulary...")
 
             
             Spacer()
             
-            Button("Kiểm tra") {
+            Button("Checking") {
                 onCheck(textInput)
                 textInput = ""
             }

@@ -34,10 +34,8 @@ class LessonViewModel: ObservableObject {
     @Published var currentFeedback: CheckResult? = nil
     @Published var isLessonFinished: Bool = false
     
-    // Manager để lưu xuống SwiftData
     var learningManager: LearningManager?
     
-    // Lấy từ vựng hiện tại
     var currentItem: LearningItem {
         items[currentItemIndex]
     }

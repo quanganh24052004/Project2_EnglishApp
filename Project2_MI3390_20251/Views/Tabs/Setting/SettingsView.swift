@@ -40,9 +40,7 @@ struct SettingsView: View {
                 aboutSection
             }
             .navigationTitle("Setting")
-            
-            // --- XỬ LÝ LOGIC (Chỉ còn mỗi cái này) ---
-            
+                        
             // Alert Reset dữ liệu
             .alert("Warning", isPresented: $showingResetAlert) {
                 Button("Cancel", role: .cancel) { }

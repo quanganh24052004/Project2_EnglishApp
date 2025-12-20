@@ -34,7 +34,7 @@ struct ReviewView: View {
             .min()
     }
     
-    // C. Thống kê (Giữ nguyên logic cũ)
+    // C. Thống kê
     var levelStats: [LevelStat] {
         var counts = [0, 0, 0, 0, 0, 0]
         for record in studyRecords {
@@ -69,7 +69,7 @@ struct ReviewView: View {
                 }
                 .padding()
             }
-            .navigationTitle("Tổng quan")
+            .navigationTitle("CapyVocab")
             .background(Color(UIColor.systemGroupedBackground))
             // Quan trọng: Cập nhật biến currentTime mỗi giây
             .onReceive(timer) { input in
@@ -83,7 +83,7 @@ struct ReviewView: View {
     // Card hiển thị khi có bài
     var activeReviewCard: some View {
         VStack(alignment: .leading) {
-            Text("Đã đến giờ học!")
+            Text("It's time to study")
                 .font(.headline)
                 .foregroundStyle(.white.opacity(0.8))
             
@@ -92,7 +92,7 @@ struct ReviewView: View {
                     Text("\(dueRecords.count)")
                         .font(.system(size: 48, weight: .bold))
                         .foregroundStyle(.white)
-                    Text("từ vựng cần ôn")
+                    Text("word to review")
                         .font(.subheadline)
                         .foregroundStyle(.white)
                 }
@@ -102,9 +102,8 @@ struct ReviewView: View {
                     .foregroundStyle(.white.opacity(0.8))
             }
             
-            // Nút chuyển sang màn hình PracticeView
             NavigationLink(destination: PracticeView(records: dueRecords)) {
-                Text("Bắt đầu ngay")
+                Text("Start now")
                     .font(.headline)
                     .foregroundColor(.blue)
                     .frame(maxWidth: .infinity)
@@ -129,9 +128,9 @@ struct ReviewView: View {
                     .foregroundStyle(.green)
                 
                 VStack(alignment: .leading) {
-                    Text("Hoàn thành!")
+                    Text("Finished!")
                         .font(.headline)
-                    Text("Bạn đã ôn tập hết các từ hiện tại.")
+                    Text("You have reviewed all the current words.")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
@@ -143,7 +142,7 @@ struct ReviewView: View {
             if let targetDate = nextReviewDate {
                 HStack {
                     VStack(alignment: .leading) {
-                        Text("Phiên tiếp theo sau:")
+                        Text("The next session:")
                             .font(.caption)
                             .foregroundStyle(.secondary)
                         
@@ -158,7 +157,7 @@ struct ReviewView: View {
                         .foregroundStyle(.orange.opacity(0.6))
                 }
             } else {
-                Text("Chưa có lịch ôn tập mới.")
+                Text("There is no new review schedule yet.")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }
@@ -172,16 +171,16 @@ struct ReviewView: View {
     // Card thống kê
     var statsCard: some View {
         VStack(alignment: .leading) {
-            Text("Tiến độ ghi nhớ")
+            Text("Memory progress")
                 .font(.title2.bold())
             
             if studyRecords.isEmpty {
-                ContentUnavailableView("Chưa có dữ liệu", systemImage: "chart.bar")
+                ContentUnavailableView("No data yet", systemImage: "chart.bar")
             } else {
                 Chart(levelStats) { item in
                     BarMark(
-                        x: .value("Mức độ", item.level),
-                        y: .value("Số từ", item.count)
+                        x: .value("Level", item.level),
+                        y: .value("Number of words", item.count)
                     )
                     .foregroundStyle(item.color.gradient)
                     .annotation(position: .top) {
@@ -213,10 +212,9 @@ struct ReviewView: View {
         // Nếu còn > 24 giờ thì hiện số ngày
         if hours > 24 {
             let days = hours / 24
-            return "\(days) ngày nữa"
+            return "\(days) more days"
         }
         
-        // Format dạng 01:05:09
         return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
     }
 }

@@ -36,7 +36,7 @@ struct FlashcardStepView: View {
                     VStack(spacing: 8) {
                         Image(systemName: "speaker.wave.2.fill")
                             .font(.title2)
-                        Text("Nghe")
+                        Text("Listen")
                             .font(.caption)
                     }
                 }
@@ -47,7 +47,7 @@ struct FlashcardStepView: View {
                     VStack(spacing: 8) {
                         Image(systemName: "tortoise.fill")
                             .font(.title2)
-                        Text("Chậm")
+                        Text("Slow")
                             .font(.caption)
                     }
                 }
@@ -59,7 +59,7 @@ struct FlashcardStepView: View {
             
             // MARK: - 3. Nút điều hướng
             Button(action: onContinue) {
-                Text("Tiếp tục")
+                Text("Continue")
                     .font(.headline)
                     .frame(maxWidth: .infinity)
                     .padding()
@@ -78,7 +78,7 @@ struct FlashcardStepView: View {
     // MARK: - Helper Functions
     func playAudio(url: String?, speed: Float) {
         guard let url = url else { return }
-        print("Đang phát audio: \(url) với tốc độ \(speed)x")
+        print("Audio is playing: \(url) with speed \(speed)x")
         // TODO: Gọi Service phát âm thanh của bạn ở đây
         // AudioService.shared.play(url: url, rate: speed)
     }

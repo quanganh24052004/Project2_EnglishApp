@@ -56,7 +56,7 @@ struct SpellingGameView: View {
                 VStack(spacing: 30) {
                     
                     VStack(spacing: 12) {
-                        Text("Nghe và viết lại")
+                        Text("Listen and write")
                             .font(.subheadline)
                             .foregroundColor(.gray)
                         

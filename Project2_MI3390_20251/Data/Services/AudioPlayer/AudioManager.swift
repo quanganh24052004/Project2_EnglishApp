@@ -25,10 +25,10 @@ class AudioManager: ObservableObject {
         }
     }
     
-    /// Hàm phát audio từ URL với tốc độ tuỳ chỉnh
-    /// - Parameters:
-    ///   - urlString: Đường dẫn file mp3
-    ///   - speed: Tốc độ phát (1.0 là bình thường, 0.5 là chậm)
+    // Hàm phát audio từ URL với tốc độ tuỳ chỉnh
+    // - Parameters:
+    //   - urlString: Đường dẫn file mp3
+    //   - speed: Tốc độ phát (1.0 là bình thường, 0.5 là chậm)
     func playAudio(url urlString: String?, speed: Float = 1.0) {
         // 1. Kiểm tra URL có tồn tại và hợp lệ không
         guard let urlString = urlString, let url = URL(string: urlString) else {
@@ -43,7 +43,6 @@ class AudioManager: ObservableObject {
         player = AVPlayer(playerItem: playerItem)
         
         // 4. Phát ngay lập tức với tốc độ mong muốn
-        // Lưu ý: playImmediately(atRate:) hiệu quả hơn gọi play() rồi setRate
         player?.playImmediately(atRate: speed)
     }
     

@@ -49,6 +49,6 @@ struct SurveyOptionRow: View {
                     .stroke(isSelected ? Color.orange : Color.gray.opacity(0.2), lineWidth: 1) // Viền
             )
         }
-        .buttonStyle(PlainButtonStyle()) // Bỏ hiệu ứng nhấp nháy mặc định
+        .buttonStyle(PlainButtonStyle())
     }
 }

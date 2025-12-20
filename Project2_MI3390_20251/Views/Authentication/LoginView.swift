@@ -21,7 +21,7 @@ struct LoginView: View {
                     .scaledToFit()
                     .frame(width: 128, height: 128)
                 
-                Text("Miễn phí, tham gia ngay bây giờ\nvà bắt đầu học ngay hôm nay!")
+                Text("Free, join now\nand start learning today!")
                     .lineLimit(2)
                     .multilineTextAlignment(.center)
                     .font(.system(size: 22, weight: .medium))

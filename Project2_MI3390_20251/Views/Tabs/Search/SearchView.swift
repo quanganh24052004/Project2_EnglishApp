@@ -10,8 +10,8 @@ import SwiftData
 
 // 1. Định nghĩa Enum để quản lý chế độ tìm kiếm
 enum SearchMode: String, CaseIterable, Identifiable {
-    case local = "Dữ liệu có sẵn"
-    case online = "Online API"
+    case local = "Handbook"
+    case online = "Online"
     
     var id: String { self.rawValue }
     
@@ -52,8 +52,8 @@ struct SearchView: View {
                     onlineSearchContent
                 }
             }
-            .navigationTitle(searchMode == .local ? "Tra cứu Offline" : "Tra cứu Online")
-            .searchable(text: $searchText, placement: .automatic, prompt: searchMode == .local ? "Tìm trong máy..." : "Tìm tiếng Anh online...")
+            .navigationTitle(searchMode == .local ? "Look up Offline" : "Look up Online")
+            .searchable(text: $searchText, placement: .automatic, prompt: searchMode == .local ? "Find it in the notebook..." : "Search online...")
             
             // Xử lý khi nhấn Enter/Search
             .onSubmit(of: .search) {
@@ -78,7 +78,7 @@ struct SearchView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     // Menu cho phép chọn chế độ
                     Menu {
-                        Picker("Chế độ tìm kiếm", selection: $searchMode) {
+                        Picker("Search mode", selection: $searchMode) {
                             ForEach(SearchMode.allCases) { mode in
                                 Label(mode.rawValue, systemImage: mode.iconName)
                                     .tag(mode)
@@ -98,12 +98,12 @@ struct SearchView: View {
     @ViewBuilder
     private var localSearchContent: some View {
         if !hasSearched {
-            ContentUnavailableView("Tra từ điển Offline", systemImage: "book.closed", description: Text("Tìm kiếm trong dữ liệu đã lưu."))
+            ContentUnavailableView("Look up Offline dictionary", systemImage: "book.closed", description: Text("Search in saved data."))
         } else if localResults.isEmpty {
             ContentUnavailableView.search(text: searchText)
         } else {
             List {
-                Section(header: Text("\(localResults.count) kết quả trong máy")) {
+                Section(header: Text("\(localResults.count) Results in the machine")) {
                     ForEach(localResults) { word in
                         // Giả sử bạn có View hiển thị từ (WordRow)
                         // Nếu chưa có, thay bằng Text(word.english)
@@ -124,11 +124,11 @@ struct SearchView: View {
     @ViewBuilder
     private var onlineSearchContent: some View {
         if isLoading {
-            ProgressView("Đang tải dữ liệu...")
+            ProgressView("Loading data...")
         } else if let error = errorMessage {
-            ContentUnavailableView("Lỗi", systemImage: "wifi.exclamationmark", description: Text(error))
+            ContentUnavailableView("Error", systemImage: "wifi.exclamationmark", description: Text(error))
         } else if !hasSearched {
-            ContentUnavailableView("Tra từ điển Online", systemImage: "globe", description: Text("Tra cứu định nghĩa tiếng Anh chi tiết."))
+            ContentUnavailableView("Look up online dictionary", systemImage: "globe", description: Text("Look up the detailed English definition."))
         } else if apiResults.isEmpty {
             ContentUnavailableView.search(text: searchText)
         } else {

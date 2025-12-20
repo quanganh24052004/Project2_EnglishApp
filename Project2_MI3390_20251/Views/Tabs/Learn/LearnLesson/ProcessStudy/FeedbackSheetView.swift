@@ -18,19 +18,19 @@ struct FeedbackSheetView: View {
                     Image(systemName: "checkmark.circle.fill")
                         .font(.system(size: 60))
                         .foregroundColor(.green)
-                    Text("Chính xác!").font(.title).bold()
+                    Text("That's right!").font(.title).bold()
                     
                 case .wrong(let correctAnswer):
                     Image(systemName: "xmark.circle.fill")
                         .font(.system(size: 60))
                         .foregroundColor(.red)
-                    Text("Chưa đúng rồi!").font(.title).bold()
-                    Text("Đáp án đúng là: \(correctAnswer)")
+                    Text("It's not right!").font(.title).bold()
+                    Text("The correct answer is: \(correctAnswer)")
                         .foregroundColor(.secondary)
                 }
             }
             
-            Button("Tiếp tục") {
+            Button("Continue") {
                 dismiss() // Đóng sheet -> Trigger onDismiss ở Parent View
             }
             .buttonStyle(.borderedProminent)

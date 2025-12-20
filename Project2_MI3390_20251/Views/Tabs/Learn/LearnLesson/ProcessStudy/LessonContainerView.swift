@@ -35,11 +35,11 @@ struct LessonContainerView: View {
                         Image(systemName: "trophy.fill")
                             .font(.system(size: 80))
                             .foregroundStyle(.yellow)
-                        Text("Chúc mừng! Bạn đã hoàn thành bài học.")
+                        Text("Congratulations! You have finished the lesson.")
                             .font(.title2).bold()
                             .multilineTextAlignment(.center)
                         
-                        Button("Hoàn tất") { dismiss() }
+                        Button("Complete") { dismiss() }
                             .buttonStyle(.borderedProminent)
                     }
                 } else {
@@ -62,7 +62,7 @@ struct LessonContainerView: View {
                         
                     case .fillBlank:
                         InputStepView(
-                            title: "Điền từ còn thiếu",
+                            title: "Fill in the missing words",
                             item: viewModel.currentItem,
                             onCheck: { answer in
                                 viewModel.checkFillBlank(userAnswer: answer)

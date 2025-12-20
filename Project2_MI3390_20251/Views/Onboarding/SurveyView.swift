@@ -10,7 +10,7 @@ import SwiftUI
 
 struct SurveyView: View {
     @StateObject private var viewModel = SurveyViewModel()
-    @Binding var isOnboardingDone: Bool // Binding để báo ra ngoài là đã xong
+    @Binding var isOnboardingDone: Bool
     
     var body: some View {
         VStack(spacing: 0) {
@@ -33,7 +33,7 @@ struct SurveyView: View {
                             .cornerRadius(20, corners: [.topRight, .bottomLeft, .bottomRight])
                             .shadow(color: .black.opacity(0.05), radius: 5, x: 2, y: 2)
                             .transition(.opacity) // Hiệu ứng mờ dần khi đổi câu hỏi
-                            .id("Question-\(viewModel.currentIndex)") // Giúp SwiftUI nhận biết text thay đổi để chạy animation
+                            .id("Question-\(viewModel.currentIndex)") // 
                     }
                 }
                 .padding(.horizontal)
@@ -72,7 +72,7 @@ struct SurveyView: View {
                         }
                     }
                 }) {
-                    Text(viewModel.currentIndex == viewModel.questions.count - 1 ? "Hoàn thành" : "Tiếp tục")
+                    Text(viewModel.currentIndex == viewModel.questions.count - 1 ? "Finish" : "Continue")
                         .font(.headline)
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)

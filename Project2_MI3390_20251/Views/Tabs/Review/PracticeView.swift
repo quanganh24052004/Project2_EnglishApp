@@ -6,11 +6,11 @@
 //
 
 import SwiftUI
-// Struct hỗ trợ (nếu chưa có trong file khác)
+
 struct PracticeView: View {
     let records: [StudyRecord]
     var body: some View {
-        Text("Màn hình ôn tập (Placeholder)")
+        Text("Review Screen")
     }
 }
 

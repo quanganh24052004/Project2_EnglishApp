@@ -9,8 +9,7 @@ import Foundation
 import Combine
 
 class LanguageManager: ObservableObject {
-    // Lưu ngôn ngữ vào UserDefaults, mặc định là tiếng Anh ("en")
-    @Published var currentLanguage: String = UserDefaults.standard.string(forKey: "selectedLanguage") ?? "en" {
+    @Published var currentLanguage: String = UserDefaults.standard.string(forKey: "selectedLanguage") ?? "vi" {
         didSet {
             UserDefaults.standard.set(currentLanguage, forKey: "selectedLanguage")
         }

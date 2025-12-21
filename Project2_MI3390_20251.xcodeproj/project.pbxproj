@@ -13,7 +13,7 @@
 		083369E22EE58583003B2FEF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083369E12EE58583003B2FEF /* LoginView.swift */; };
 		083369E42EE585A2003B2FEF /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083369E32EE585A2003B2FEF /* RegistrationView.swift */; };
 		084CB4A52EF406D600B1CBBE /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084CB4A42EF406D600B1CBBE /* NotificationManager.swift */; };
-		085781642EEFDAF70003618D /* PressableButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085781632EEFDAF70003618D /* PressableButtonStyle.swift */; };
+		085781642EEFDAF70003618D /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085781632EEFDAF70003618D /* ButtonStyle.swift */; };
 		0857816B2EEFDFC50003618D /* COPYRIGHT.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0857816A2EEFDFC50003618D /* COPYRIGHT.txt */; };
 		0857816C2EEFDFC50003618D /* chalkboardse.otf in Resources */ = {isa = PBXBuildFile; fileRef = 085781662EEFDFC50003618D /* chalkboardse.otf */; };
 		0857816D2EEFDFC50003618D /* ChalkboardSE-Light-01_0.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 085781682EEFDFC50003618D /* ChalkboardSE-Light-01_0.ttf */; };
@@ -64,7 +64,7 @@
 		083369E12EE58583003B2FEF /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		083369E32EE585A2003B2FEF /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		084CB4A42EF406D600B1CBBE /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
-		085781632EEFDAF70003618D /* PressableButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PressableButtonStyle.swift; sourceTree = "<group>"; };
+		085781632EEFDAF70003618D /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
 		085781662EEFDFC50003618D /* chalkboardse.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = chalkboardse.otf; sourceTree = "<group>"; };
 		085781672EEFDFC50003618D /* ChalkboardSE-Bold-03_0.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ChalkboardSE-Bold-03_0.ttf"; sourceTree = "<group>"; };
 		085781682EEFDFC50003618D /* ChalkboardSE-Light-01_0.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ChalkboardSE-Light-01_0.ttf"; sourceTree = "<group>"; };
@@ -326,7 +326,7 @@
 		088F25F42EE50AF400E89167 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				085781632EEFDAF70003618D /* PressableButtonStyle.swift */,
+				085781632EEFDAF70003618D /* ButtonStyle.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -647,7 +647,7 @@
 				08BE81AA2EE7B7E5004181EE /* InputStepView.swift in Sources */,
 				08BE81712EE7A5BF004181EE /* SearchView.swift in Sources */,
 				083369E22EE58583003B2FEF /* LoginView.swift in Sources */,
-				085781642EEFDAF70003618D /* PressableButtonStyle.swift in Sources */,
+				085781642EEFDAF70003618D /* ButtonStyle.swift in Sources */,
 				08BE81CB2EE7F743004181EE /* WordCardView.swift in Sources */,
 				085781722EEFE14F0003618D /* Font+AppFont.swift in Sources */,
 				088F26092EE50D3100E89167 /* SurveyModel.swift in Sources */,

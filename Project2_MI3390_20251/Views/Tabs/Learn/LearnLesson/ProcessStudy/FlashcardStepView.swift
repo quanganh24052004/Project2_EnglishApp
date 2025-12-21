@@ -58,16 +58,11 @@ struct FlashcardStepView: View {
             Spacer()
             
             // MARK: - 3. Nút điều hướng
-            Button(action: onContinue) {
-                Text("Continue")
-                    .font(.headline)
-                    .frame(maxWidth: .infinity)
-                    .padding()
+            Button("Continue") {
+                onContinue()
             }
-            .buttonStyle(.borderedProminent)
-            .controlSize(.large)
-            .padding(.horizontal)
-            .padding(.bottom, 20)
+            .buttonStyle(ThreeDButtonStyle())
+            .padding(100)
         }
         .background(Color(UIColor.systemGroupedBackground))// Màu nền xám nhẹ dịu mắt
         .onDisappear {
@@ -79,7 +74,5 @@ struct FlashcardStepView: View {
     func playAudio(url: String?, speed: Float) {
         guard let url = url else { return }
         print("Audio is playing: \(url) with speed \(speed)x")
-        // TODO: Gọi Service phát âm thanh của bạn ở đây
-        // AudioService.shared.play(url: url, rate: speed)
     }
 }

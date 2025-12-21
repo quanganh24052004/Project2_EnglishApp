@@ -10,69 +10,101 @@ import Combine
 
 struct FlashcardStepView: View {
     @StateObject private var audioManager = AudioManager()
-    // Input dữ liệu từ màn hình cha
     let item: LearningItem
-    
-    // Callback khi nhấn nút "Tiếp tục"
     var onContinue: () -> Void
     
-    // State để quản lý việc phát âm thanh (nếu cần xử lý tại đây)
-    // @StateObject private var audioPlayer = AudioService() // Ví dụ
+    // Tận dụng màu chủ đạo từ extension cũ (hoặc dùng .blue/.green tùy logic app)
+    // Giả sử màu chính của app là màu nút Continue
+    let mainColor: Color = .buttonMain
     
     var body: some View {
-        VStack(spacing: 24) {
-            Spacer()
+        ZStack {
+            // MARK: - 1. Background đồng bộ
+            Color(.neutral01)
+                .ignoresSafeArea()
             
-            // MARK: - 1. Khu vực hiển thị thẻ (Flip Card)
-            WordCardView(item: item)
-                .id(item.id)
-                .padding(.horizontal)
-            
-            // MARK: - 2. Các nút chức năng (Audio)
-            HStack(spacing: 40) {
-                Button(action: {
-                    audioManager.playAudio(url: item.audioUrl, speed: 1.0)
-                }) {
-                    VStack(spacing: 8) {
-                        Image(systemName: "speaker.wave.2.fill")
-                            .font(.title2)
-                        Text("Listen")
-                            .font(.caption)
-                    }
-                }
+            VStack(spacing: 30) {
+
+                Spacer()
                 
-                Button(action: {
-                    audioManager.playAudio(url: item.audioUrl, speed: 0.5)
-                }) {
-                    VStack(spacing: 8) {
-                        Image(systemName: "tortoise.fill")
-                            .font(.title2)
-                        Text("Slow")
-                            .font(.caption)
+                // MARK: - 2. Khu vực hiển thị thẻ (Flip Card)
+                WordCardView(item: item)
+                    .id(item.id)
+                
+                // MARK: - 3. Các nút chức năng (Audio)
+                HStack(spacing: 40) {
+                    AudioControlButton(
+                        icon: "speaker.wave.2.fill",
+                        text: "Nghe",
+                        color: Color(.orange)
+                    ) {
+                        audioManager.playAudio(url: item.audioUrl, speed: 1.0)
+                    }
+                    
+                    AudioControlButton(
+                        icon: "tortoise.fill",
+                        text: "Chậm",
+                        color: Color(.orange)
+                    ) {
+                        audioManager.playAudio(url: item.audioUrl, speed: 0.5)
                     }
                 }
+                .padding(.top, 10)
+                
+                Spacer()
+                
+                // MARK: - 4. Nút điều hướng chính
+                Button("Tiếp tục") {
+                    onContinue()
+                }
+                .buttonStyle(ThreeDButtonStyle(color: mainColor))
+                .padding(.horizontal, 100)
+                .padding(.bottom, 40)
             }
-            .foregroundColor(.blue)
-            .padding(.top, 10)
-            
-            Spacer()
-            
-            // MARK: - 3. Nút điều hướng
-            Button("Continue") {
-                onContinue()
-            }
-            .buttonStyle(ThreeDButtonStyle())
-            .padding(100)
         }
-        .background(Color(UIColor.systemGroupedBackground))// Màu nền xám nhẹ dịu mắt
         .onDisappear {
-                    audioManager.stop()
+            audioManager.stop()
         }
     }
+}
+
+// MARK: - Subview: Nút Audio
+// Tách ra để code chính gọn hơn và dễ style lại đồng loạt
+struct AudioControlButton: View {
+    let icon: String
+    let text: String
+    let color: Color
+    let action: () -> Void
     
-    // MARK: - Helper Functions
-    func playAudio(url: String?, speed: Float) {
-        guard let url = url else { return }
-        print("Audio is playing: \(url) with speed \(speed)x")
+    var body: some View {
+        Button(action: action) {
+            VStack(spacing: 8) {
+                ZStack {
+                    Circle()
+                        .fill(color.opacity(0.1))
+                        .frame(width: 50, height: 50)
+                    
+                    Image(systemName: icon)
+                        .font(.system(size: 20, weight: .semibold))
+                        .foregroundColor(color)
+                }
+                
+                Text(text)
+                    .font(.caption)
+                    .fontWeight(.medium)
+                    .foregroundColor(.gray)
+            }
+        }
+        .buttonStyle(ScaleButtonStyle())
+    }
+}
+
+// Style hiệu ứng nhún nhẹ cho các nút phụ (không cần 3D như nút chính)
+struct ScaleButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? 0.9 : 1.0)
+            .opacity(configuration.isPressed ? 0.8 : 1.0)
+            .animation(.easeInOut(duration: 0.1), value: configuration.isPressed)
     }
 }

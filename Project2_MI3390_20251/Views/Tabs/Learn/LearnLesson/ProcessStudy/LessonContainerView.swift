@@ -73,6 +73,7 @@ struct LessonContainerView: View {
             }
             Spacer()
         }
+        .background(Color(.neutral01))
         // --- LIFECYCLE ---
         .onAppear {
             if viewModel.learningManager == nil {

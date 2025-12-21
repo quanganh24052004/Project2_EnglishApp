@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct SplashScreenView: View {
-    @State private var isAnimating = false // State để làm hiệu ứng fade-in
+    @State private var isAnimating = false
 
     var body: some View {
         ZStack {

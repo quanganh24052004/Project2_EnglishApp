@@ -18,30 +18,25 @@ struct WordCardView: View {
     var body: some View {
         FlipCardContainer(isFlipped: isFlipped) {
             // MARK: - FRONT CARD
-            cardFace(color: Color(UIColor.systemGray6)) {
-                VStack(spacing: 15) {
+            cardFace(color: .white) {
+                VStack(spacing: 16) {
                     Text(item.word)
-                        .font(.largeTitle)
-                        .bold()
-                        .foregroundColor(.blue)
+                        .font(.system(size: 28, weight: .bold))
                     
                     Text(item.phonetic) // Word.phonetic
-                        .font(.title3)
-                        .italic()
-                        .foregroundColor(.gray)
+                        .font(.system(size: 20))
                     
                     Divider()
-                        .frame(width: 100)
+                        .frame(width: 150)
                     
                     Text(item.partOfSpeech) // Word.partOfSpeech
-                        .font(.headline)
-                        .padding(5)
+                        .font(.system(size: 18, weight: .semibold))
+                        .padding(8)
                         .background(Color.blue.opacity(0.1))
-                        .cornerRadius(5)
+                        .cornerRadius(8)
                     
                     Text(item.vietnamese) // Meaning: vietnamese
-                        .font(.title2)
-                        .foregroundColor(.black)
+                        .font(.system(size: 18, weight: .regular))
                 }
             }
 
@@ -51,13 +46,10 @@ struct WordCardView: View {
                 VStack(spacing: 20) {
                     Text(item.word) // Word.English
                         .font(.system(size: 32, weight: .bold))
-                        .foregroundColor(.black)
                     
-                    // Hàm xử lý gạch chân text
                     Text(highlightedExample(sentence: item.example, target: item.word))
-                        .font(.title3)
+                        .font(.system(size: 20, weight: .light))
                         .multilineTextAlignment(.center)
-                        .foregroundColor(.gray)
                         .padding(.horizontal)
                 }
             }
@@ -67,7 +59,7 @@ struct WordCardView: View {
         }
     }
     
-    // Helper tạo khung thẻ (DRY - Don't Repeat Yourself)
+    // Helper tạo khung thẻ
     @ViewBuilder
     func cardFace<Content: View>(color: Color, @ViewBuilder content: () -> Content) -> some View {
         ZStack {
@@ -80,21 +72,66 @@ struct WordCardView: View {
             
             content()
         }
-        .frame(height: cardHeight) // Chiều cao thẻ
-        .padding()
+        .frame(height: cardHeight)
+        .frame(maxWidth: .infinity)
+        .padding(.horizontal, 32)
     }
     
     // MARK: - Helper Logic: Gạch chân từ trong câu
     func highlightedExample(sentence: String, target: String) -> AttributedString {
         var attributedString = AttributedString(sentence)
         
-        // Tìm range của từ cần gạch chân (case insensitive)
         if let range = attributedString.range(of: target, options: .caseInsensitive) {
             attributedString[range].underlineStyle = .single
-            attributedString[range].foregroundColor = .red // Highlight thêm màu đỏ cho rõ
-            attributedString[range].font = .system(size: 20, weight: .bold)
+            attributedString[range].foregroundColor = .black //
+            attributedString[range].font = .system(size: 20, weight: .semibold)
         }
         
         return attributedString
+    }
+}
+
+// MARK: PREVIEW
+import SwiftData
+import Foundation
+
+@Model
+class PreviewStubEntity {
+    var timestamp: Date
+    init(timestamp: Date = Date()) { self.timestamp = timestamp }
+}
+
+extension LearningItem {
+    static var dummy: LearningItem {
+        // BƯỚC 1: Tạo môi trường SwiftData ảo (In-Memory)
+        // Việc này giúp tạo ra ID hợp lệ mà không cần database thật
+        let schema = Schema([PreviewStubEntity.self])
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try! ModelContainer(for: schema, configurations: config)
+        
+        // BƯỚC 2: Tạo một object giả và insert vào context để nó sinh ra ID
+        let mockEntity = PreviewStubEntity()
+        container.mainContext.insert(mockEntity)
+        
+        // BƯỚC 3: Trả về LearningItem với cái ID thật vừa lấy được
+        return LearningItem(
+            wordID: mockEntity.id,
+            word: "Serendipity",
+            phonetic: "/ˌser.ənˈdɪp.ə.ti/",
+            partOfSpeech: "noun",
+            meaning: "Sự tình cờ may mắn",
+            example: "Finding this shop was pure serendipity.",
+            audioUrl: nil,
+            vietnamese: "Sự may mắn tình cờ"
+        )
+    }
+}
+
+#Preview {
+    ZStack {
+        Color(UIColor.systemGroupedBackground)
+            .ignoresSafeArea()
+        
+        WordCardView(item: LearningItem.dummy)
     }
 }

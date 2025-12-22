@@ -43,7 +43,7 @@ struct AppTextField: View {
                     isShowPassword.toggle()
                 } label: {
                     Image(systemName: isShowPassword ? "eye.slash.fill" : "eye.fill")
-                        .foregroundColor(.gray)
+                        .foregroundColor(.neutral04)
                 }
             } else {
                 if !text.isEmpty && isFocused {
@@ -51,16 +51,17 @@ struct AppTextField: View {
                         text = ""
                     } label: {
                         Image(systemName: "xmark.circle.fill")
-                            .foregroundColor(.gray)
+                            .foregroundColor(.neutral04)
                     }
                 }
             }
         }
-        .padding(12)
+        .padding(16)
         .background(
-            RoundedRectangle(cornerRadius: 10)
-                .stroke(isFocused ? Color.blue : Color.gray.opacity(0.3), lineWidth: 1.5)
-                .background(Color.white) // Thêm nền trắng để che layer dưới
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(isFocused ? Color.blue : Color.neutral04, lineWidth: 2)
+                .background(Color.white)
+                .cornerRadius(16)
         )
         .padding(.horizontal)
         .animation(.easeInOut(duration: 0.2), value: isFocused)

@@ -14,20 +14,22 @@ struct LessonContainerView: View {
     
     var body: some View {
         VStack {
-            // --- HEADER ---
             HStack {
                 Button(action: { dismiss() }) {
                     Image(systemName: "xmark")
-                        .font(.system(size: 18, weight: .bold))
+                        .font(.system(size: 32, weight: .bold))
                         .foregroundColor(.gray)
                 }
-                ProgressView(value: viewModel.progress)
-                    .tint(.green)
-                    .scaleEffect(x: 1, y: 1.5, anchor: .center)
+                ProgressBar(
+                    value: viewModel.progress,
+                    height: 16,
+                    color: .orange,
+                    iconName: "iconProgressBar"
+                )
+                .padding(.horizontal, 4)
             }
             .padding()
             
-            // --- BODY ---
             Group {
                 if viewModel.isLessonFinished {
                     // Màn hình hoàn thành
@@ -43,7 +45,6 @@ struct LessonContainerView: View {
                             .buttonStyle(.borderedProminent)
                     }
                 } else {
-                    // Switch các bước học
                     switch viewModel.currentStep {
                     case .flashcard:
                         FlashcardStepView(
@@ -52,7 +53,6 @@ struct LessonContainerView: View {
                         )
                         
                     case .listenWrite:
-                        // *** TÍNH NĂNG MỚI: SPELLING GAME ***
                         SpellingGameView(
                             item: viewModel.currentItem,
                             onCheck: { userAnswer in
@@ -62,7 +62,6 @@ struct LessonContainerView: View {
                         
                     case .fillBlank:
                         InputStepView(
-                            title: "Fill in the missing words",
                             item: viewModel.currentItem,
                             onCheck: { answer in
                                 viewModel.checkFillBlank(userAnswer: answer)
@@ -74,13 +73,11 @@ struct LessonContainerView: View {
             Spacer()
         }
         .background(Color(.neutral01))
-        // --- LIFECYCLE ---
         .onAppear {
             if viewModel.learningManager == nil {
                 viewModel.learningManager = LearningManager(modelContext: modelContext)
             }
         }
-        // --- FEEDBACK SHEET ---
         .sheet(isPresented: $viewModel.showFeedbackSheet, onDismiss: {
             viewModel.moveToNextStage()
         }) {

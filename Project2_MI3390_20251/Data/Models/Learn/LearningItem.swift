@@ -19,3 +19,11 @@ struct LearningItem: Identifiable {
     let audioUrl: String?
     let vietnamese: String
 }
+
+struct Address: Identifiable {
+    let id = UUID()
+    let province: String
+    let commune: String
+    let village: String
+    let stressAdress: String
+}

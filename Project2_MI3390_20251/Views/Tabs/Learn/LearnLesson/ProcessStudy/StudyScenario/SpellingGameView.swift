@@ -27,7 +27,7 @@ struct SpellingGameView: View {
     @State private var hintIndices: Set<Int> = []
     
     private var fontSize: CGFloat {
-        item.word.count > 12 ? 16 : 22
+        item.word.count > 12 ? 14 : 18
     }
     
     private let underlineHeight: CGFloat = 2.5
@@ -54,31 +54,20 @@ struct SpellingGameView: View {
             
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(spacing: 30) {
-                    
-                    VStack(spacing: 12) {
-                        Text("Listen and write")
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
+                    VStack(spacing: 20) {
+                        Text("Fill in the word")
+                            .font(.system(size: 20, weight: .semibold))
+                            .foregroundColor(Color.neutral06)
                         
                         Text(item.meaning)
-                            .font(.title2)
-                            .fontWeight(.bold)
+                            .font(.system(size: 24, weight: .regular))
                             .multilineTextAlignment(.center)
                             .padding(.horizontal)
                         
-                        if let _ = item.audioUrl {
-                            Button(action: {
-                                print("Play: \(item.word)")
-                            }) {
-                                Image(systemName: "speaker.wave.2.circle.fill")
-                                    .font(.system(size: 44))
-                                    .foregroundColor(.blue)
-                                    .symbolEffect(.bounce, value: item.id)
-                            }
-                        }
                     }
                     .padding(.top, 20)
-                    
+
+                    // MARK: - KHU VỰC ĐIỀN TỪ (Đã bọc khung)
                     VStack(spacing: 24) {
                         ForEach(lines) { line in
                             HStack(spacing: 12) {
@@ -88,8 +77,15 @@ struct SpellingGameView: View {
                             }
                         }
                     }
+                    .padding(.vertical, 16)
+                    .padding(.horizontal, 16)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(Color(UIColor.neutral04), lineWidth: 1.5)
+                    )
+                    .background(Color.white)
+                    .cornerRadius(16)
                     .padding(.horizontal)
-                    .frame(maxWidth: .infinity)
                     
                     if userInput.count < item.word.count {
                         Text("\(userInput.count) / \(item.word.count)")
@@ -191,11 +187,11 @@ struct SpellingGameView: View {
     
     func lineColor(userChar: String?, isActive: Bool) -> Color {
         if userChar != nil {
-            return .blue
+            return .orange
         } else if isActive {
-            return .blue.opacity(0.6)
+            return .orange.opacity(0.6)
         } else {
-            return Color(UIColor.systemGray4)
+            return Color(UIColor.neutral04)
         }
     }
     

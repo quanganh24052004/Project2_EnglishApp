@@ -13,7 +13,6 @@ struct LessonContainerView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.modelContext) var modelContext
 
-    // State cho Sheet cảnh báo thoát
     @State private var showExitSheet = false
 
     init(items: [LearningItem]) {
@@ -26,7 +25,7 @@ struct LessonContainerView: View {
             HStack {
                 Button(action: { showExitSheet = true }) {
                     Image(systemName: "xmark")
-                        .font(.system(size: 28, weight: .bold)) // Chỉnh lại size cho đẹp
+                        .font(.system(size: 28, weight: .bold))
                         .foregroundColor(.gray)
                 }
                 
@@ -43,7 +42,6 @@ struct LessonContainerView: View {
             // MARK: - Main Content
             Group {
                 if viewModel.isLessonFinished {
-                    // ⭐️ MÀN HÌNH TỔNG KẾT & CHỌN TỪ (MỚI)
                     SummarizeView(
                         items: viewModel.items,
                         onSave: { selectedIDs in
@@ -65,12 +63,12 @@ struct LessonContainerView: View {
                             item: viewModel.currentItem,
                             onContinue: { viewModel.moveToNextStage() }
                         )
-                    case .listenWrite:
+                    case .fillBlank:
                         SpellingGameView(
                             item: viewModel.currentItem,
                             onCheck: { viewModel.checkListenWrite(userAnswer: $0) }
                         )
-                    case .fillBlank:
+                    case .listenWrite:
                         InputStepView(
                             item: viewModel.currentItem,
                             onCheck: { viewModel.checkFillBlank(userAnswer: $0) }
@@ -80,13 +78,12 @@ struct LessonContainerView: View {
             }
             Spacer()
         }
-        .background(Color(.neutral01)) // Hoặc màu nền của bạn
+        .background(Color(.neutral01))
         .onAppear {
              if viewModel.learningManager == nil {
                  viewModel.learningManager = LearningManager(modelContext: modelContext)
              }
         }
-        // Sheet Feedback
         .sheet(isPresented: $viewModel.showFeedbackSheet, onDismiss: {
             viewModel.moveToNextStage()
         }) {
@@ -96,7 +93,6 @@ struct LessonContainerView: View {
                     .presentationDragIndicator(.visible)
             }
         }
-        // Sheet Exit Warning
         .sheet(isPresented: $showExitSheet) {
             ExitConfirmationSheet(
                 onContinue: { showExitSheet = false },
@@ -107,5 +103,6 @@ struct LessonContainerView: View {
             )
             .presentationDetents([.fraction(0.40)])
         }
+        .environmentObject(viewModel)
     }
 }

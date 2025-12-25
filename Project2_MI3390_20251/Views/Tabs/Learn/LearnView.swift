@@ -9,14 +9,12 @@ import SwiftUI
 import SwiftData
 
 struct LearnView: View {
-    // Lấy dữ liệu Course từ Database, sắp xếp theo ngày tạo
     @Query(sort: \Course.createdAt, order: .forward) private var courses: [Course]
 
     var body: some View {
         NavigationStack {
             List {
                 ForEach(courses) { course in
-                    // NavigationLink để chuyển sang màn hình danh sách bài học
                     NavigationLink(destination: LessonListView(course: course)) {
                         VStack(alignment: .leading) {
                             Text(course.name)
@@ -37,13 +35,11 @@ struct LearnView: View {
     }
 }
 
-// --- MÀN HÌNH 2: DANH SÁCH BÀI HỌC (LESSON) ---
 struct LessonListView: View {
     let course: Course
     
     var body: some View {
         List {
-            // Lấy danh sách lesson từ quan hệ trong model Course
             ForEach(course.lessons.sorted(by: { $0.createdAt < $1.createdAt })) { lesson in
                 NavigationLink(destination: WordListView(lesson: lesson)) {
                     HStack {
@@ -57,7 +53,6 @@ struct LessonListView: View {
                         
                         Spacer()
                         
-                        // Hiển thị số lượng từ thực tế có trong database
                         HStack(spacing: 4) {
                             Image(systemName: "book.closed")
                             Text("\(lesson.words.count)")
@@ -76,7 +71,6 @@ struct LessonListView: View {
     }
 }
 
-// --- MÀN HÌNH 3: DANH SÁCH TỪ VỰNG (WORD) ---
 struct WordListView: View {
     @State private var isLearningSessionActive: Bool = false
     
@@ -146,9 +140,7 @@ struct WordListView: View {
             }
         }
         
-        // FULL SCREEN COVER
         .fullScreenCover(isPresented: $isLearningSessionActive) {
-            // LOGIC MAPPING: [Word] (Database) -> [LearningItem] (Học)
             let learningItems = lesson.words.map { dbWord in
                 let firstMeaning = dbWord.meanings.first
                 

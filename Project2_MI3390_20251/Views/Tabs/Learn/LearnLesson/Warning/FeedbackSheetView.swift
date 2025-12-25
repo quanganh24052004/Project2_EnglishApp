@@ -4,6 +4,7 @@
 //
 //  Created by Nguyễn Quang Anh on 28/11/25.
 //
+
 import SwiftUI
 
 struct FeedbackSheetView: View {
@@ -40,7 +41,6 @@ struct FeedbackSheetView: View {
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        // Đổi màu nền sheet tùy kết quả
         .background(
             (result != nil && isCorrect(result!)) ? Color.green.opacity(0.1) : Color.red.opacity(0.1)
         )

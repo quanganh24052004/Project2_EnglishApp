@@ -19,6 +19,7 @@ struct LineModel: Identifiable {
 }
 
 struct SpellingGameView: View {
+    @EnvironmentObject var viewModel: LessonViewModel
     let item: LearningItem
     var onCheck: (String) -> Void
     
@@ -54,7 +55,7 @@ struct SpellingGameView: View {
             
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(spacing: 30) {
-                    VStack(spacing: 20) {
+                    VStack(spacing: 15) {
                         Text("Fill in the word")
                             .font(.system(size: 20, weight: .semibold))
                             .foregroundColor(Color.neutral06)
@@ -63,11 +64,10 @@ struct SpellingGameView: View {
                             .font(.system(size: 24, weight: .regular))
                             .multilineTextAlignment(.center)
                             .padding(.horizontal)
-                        
                     }
                     .padding(.top, 20)
 
-                    // MARK: - KHU VỰC ĐIỀN TỪ (Đã bọc khung)
+                    // MARK: - KHU VỰC ĐIỀN TỪ
                     VStack(spacing: 24) {
                         ForEach(lines) { line in
                             HStack(spacing: 12) {
@@ -87,21 +87,32 @@ struct SpellingGameView: View {
                     .cornerRadius(16)
                     .padding(.horizontal)
                     
-                    if userInput.count < item.word.count {
-                        Text("\(userInput.count) / \(item.word.count)")
-                            .font(.caption)
-                            .foregroundColor(.gray)
-                            .monospacedDigit()
-                            .padding(.top, 20)
-                    }
+                    Text("\(userInput.count) / \(item.word.count)")
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                        .monospacedDigit()
+                        .padding(.top, 10)
                 }
-                .padding(.bottom, 50)
+                .padding(.bottom, 20)
             }
             .onTapGesture {
                 isFocused = true
+                viewModel.playCurrentAudio()
             }
+            
+            Spacer()
+            
+            // MARK: - [MỚI] Nút Check
+            Button("Check") {
+                onCheck(userInput)
+            }
+            .buttonStyle(ThreeDButtonStyle(color: .blue)) // Dùng style giống dự án
+            .padding(.horizontal, 40)
+            .padding(.bottom, 20) // Khoảng cách với đáy màn hình/bàn phím
         }
-        .onAppear { setupGame() }
+        .onAppear {
+            setupGame()
+        }
         .onChange(of: item.id) { _ in setupGame() }
     }
         
@@ -117,11 +128,6 @@ struct SpellingGameView: View {
         if newValue.count > item.word.count {
             userInput = String(newValue.prefix(item.word.count))
         }
-        if userInput.count == item.word.count {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                onCheck(userInput)
-            }
-        }
     }
     
     func generateHints() {
@@ -129,10 +135,12 @@ struct SpellingGameView: View {
         let totalChars = word.count
         let hintCount = max(1, Int(ceil(Double(totalChars) * 0.2)))
         var indices = Set<Int>()
-        while indices.count < hintCount {
+        var attempts = 0
+        while indices.count < hintCount && attempts < 100 {
             let rIndex = Int.random(in: 0..<totalChars)
             let char = getChar(at: rIndex, from: word)
             if char != " " { indices.insert(rIndex) }
+            attempts += 1
         }
         hintIndices = indices
     }
@@ -187,11 +195,11 @@ struct SpellingGameView: View {
     
     func lineColor(userChar: String?, isActive: Bool) -> Color {
         if userChar != nil {
-            return .orange
+            return .orange // Màu khi đã nhập
         } else if isActive {
-            return .orange.opacity(0.6)
+            return .orange.opacity(0.6) // Màu con trỏ nhấp nháy (hoặc vị trí active)
         } else {
-            return Color(UIColor.neutral04)
+            return Color(UIColor.neutral04) // Màu mặc định
         }
     }
     

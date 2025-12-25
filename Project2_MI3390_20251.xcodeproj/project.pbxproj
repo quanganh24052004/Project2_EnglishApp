@@ -175,6 +175,7 @@
 		083369DE2EE58545003B2FEF /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				08BE81CC2EE852CD004181EE /* AudioPlayer */,
 				084CB4A42EF406D600B1CBBE /* NotificationManager.swift */,
 				088881A02EF2B5A400F8E198 /* Learning */,
 				083369E02EE58551003B2FEF /* Authentication */,
@@ -392,7 +393,6 @@
 			isa = PBXGroup;
 			children = (
 				085B5FF72EEC366000B6BE5F /* SearchAPI */,
-				08BE81CC2EE852CD004181EE /* AudioPlayer */,
 				083369DF2EE58550003B2FEF /* Authentication */,
 			);
 			path = Services;

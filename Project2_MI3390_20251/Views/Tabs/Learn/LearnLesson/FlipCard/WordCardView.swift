@@ -23,19 +23,19 @@ struct WordCardView: View {
                     Text(item.word)
                         .font(.system(size: 28, weight: .bold))
                     
-                    Text(item.phonetic) // Word.phonetic
+                    Text(item.phonetic)
                         .font(.system(size: 20))
                     
                     Divider()
                         .frame(width: 150)
                     
-                    Text(item.partOfSpeech) // Word.partOfSpeech
+                    Text(item.partOfSpeech)
                         .font(.system(size: 18, weight: .semibold))
                         .padding(8)
                         .background(Color.blue.opacity(0.1))
                         .cornerRadius(8)
                     
-                    Text(item.vietnamese) // Meaning: vietnamese
+                    Text(item.vietnamese)
                         .font(.system(size: 18, weight: .regular))
                 }
             }
@@ -44,7 +44,7 @@ struct WordCardView: View {
             // MARK: - BACK CARD
             cardFace(color: .white) {
                 VStack(spacing: 20) {
-                    Text(item.word) // Word.English
+                    Text(item.word)
                         .font(.system(size: 32, weight: .bold))
                     
                     Text(highlightedExample(sentence: item.example, target: item.word))
@@ -59,7 +59,6 @@ struct WordCardView: View {
         }
     }
     
-    // Helper tạo khung thẻ
     @ViewBuilder
     func cardFace<Content: View>(color: Color, @ViewBuilder content: () -> Content) -> some View {
         ZStack {
@@ -103,17 +102,13 @@ class PreviewStubEntity {
 
 extension LearningItem {
     static var dummy: LearningItem {
-        // BƯỚC 1: Tạo môi trường SwiftData ảo (In-Memory)
-        // Việc này giúp tạo ra ID hợp lệ mà không cần database thật
         let schema = Schema([PreviewStubEntity.self])
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try! ModelContainer(for: schema, configurations: config)
         
-        // BƯỚC 2: Tạo một object giả và insert vào context để nó sinh ra ID
         let mockEntity = PreviewStubEntity()
         container.mainContext.insert(mockEntity)
         
-        // BƯỚC 3: Trả về LearningItem với cái ID thật vừa lấy được
         return LearningItem(
             wordID: mockEntity.id,
             word: "Serendipity",
@@ -127,11 +122,3 @@ extension LearningItem {
     }
 }
 
-//#Preview {
-//    ZStack {
-//        Color(UIColor.systemGroupedBackground)
-//            .ignoresSafeArea()
-//        
-//        WordCardView(item: LearningItem.dummy)
-//    }
-//}

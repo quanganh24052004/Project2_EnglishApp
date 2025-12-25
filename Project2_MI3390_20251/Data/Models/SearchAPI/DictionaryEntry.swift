@@ -10,7 +10,6 @@ import Combine
 import SwiftUI
 import SwiftData
 
-// Cấu trúc phản hồi từ API
 struct DictionaryEntry: Codable, Identifiable {
     let id: UUID
     let word: String
@@ -21,7 +20,6 @@ struct DictionaryEntry: Codable, Identifiable {
         case word, phonetic, meanings
     }
 
-    // Khởi tạo tiện lợi khi tạo thủ công
     init(id: UUID = UUID(), word: String, phonetic: String?, meanings: [DictionaryMeaning]) {
         self.id = id
         self.word = word
@@ -29,7 +27,6 @@ struct DictionaryEntry: Codable, Identifiable {
         self.meanings = meanings
     }
 
-    // Tự triển khai Decodable để bỏ qua id trong JSON
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.word = try container.decode(String.self, forKey: .word)
@@ -38,7 +35,6 @@ struct DictionaryEntry: Codable, Identifiable {
         self.id = UUID()
     }
 
-    // Tự triển khai Encodable để bỏ qua id khi encode JSON
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(word, forKey: .word)
@@ -49,7 +45,7 @@ struct DictionaryEntry: Codable, Identifiable {
 
 struct DictionaryMeaning: Codable, Identifiable {
     let id: UUID
-    let partOfSpeech: String // Danh từ, động từ...
+    let partOfSpeech: String
     let definitions: [DictionaryDefinition]
 
     enum CodingKeys: String, CodingKey {

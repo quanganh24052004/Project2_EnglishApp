@@ -13,19 +13,15 @@ struct SettingsView: View {
     @EnvironmentObject var languageManager: LanguageManager
     
     // MARK: - AppStorage (Lưu cấu hình đơn giản)
-    // General
     @AppStorage("isDarkMode") private var isDarkMode = false
     
-    // Audio
     @AppStorage("soundEffects") private var isSoundEffectsOn = true
     @AppStorage("backgroundMusic") private var isMusicOn = false
     @AppStorage("musicVolume") private var musicVolume = 0.5
     
-    // Study Target
     @AppStorage("dailyTarget") private var dailyTarget = 10
     
     // MARK: - UI State
-    // Chỉ còn giữ lại Alert cho việc Reset dữ liệu
     @State private var showingResetAlert = false
     
     // MARK: - Body
@@ -41,7 +37,6 @@ struct SettingsView: View {
             }
             .navigationTitle(languageManager.currentLanguage == "vi" ? "Cài đặt" : "Settings")
                         
-            // Alert Reset dữ liệu
             .alert("Warning", isPresented: $showingResetAlert) {
                 Button("Cancel", role: .cancel) { }
                 Button("Delete all", role: .destructive) { viewModel.resetAllProgress() }
@@ -111,7 +106,6 @@ private extension SettingsView {
             HStack {
                 Text("Version")
                 Spacer()
-                // Dùng extension Bundle nếu có, hoặc dùng code trực tiếp này cho nhanh
                 Text(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0.0")
                     .foregroundColor(.secondary)
             }

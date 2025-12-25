@@ -9,12 +9,11 @@
 import SwiftUI
 
 struct ExitConfirmationSheet: View {
-    var onContinue: () -> Void // Hành động ở lại
-    var onExit: () -> Void     // Hành động thoát
+    var onContinue: () -> Void
+    var onExit: () -> Void
     
     var body: some View {
         VStack(spacing: 24) {
-            // Icon cảnh báo
             Image(.imgWarning)
                 .resizable()
                 .scaledToFit()
@@ -27,16 +26,14 @@ struct ExitConfirmationSheet: View {
                 .font(.system(size: 18))
                 .fontWeight(.bold)
                 .foregroundColor(Color.black)
-                .fixedSize(horizontal: false, vertical: true) // Giúp text tự giãn chiều cao đủ để hiển thị hết
+                .fixedSize(horizontal: false, vertical: true)
                 .padding(.horizontal)
             
             HStack(spacing: 24) {
-                // Button 1: Ở lại (Nổi bật)
                 Button(action: onContinue) {
                     Text("Ở lại học tiếp")
                 }
                 .buttonStyle(ThreeDButtonStyle(color: .pGreen))
-                // Button 2: Thoát (Màu đỏ/Xám)
                 Button(action: onExit) {
                     Text("Thoát")
                 }
@@ -50,7 +47,7 @@ struct ExitConfirmationSheet: View {
 
 #Preview {
     ExitConfirmationSheet(
-        onContinue: { /* preview continue */ },
-        onExit: { /* preview exit */ }
+        onContinue: {},
+        onExit: {}
     )
 }

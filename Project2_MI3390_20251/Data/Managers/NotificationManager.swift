@@ -15,7 +15,6 @@ class NotificationManager {
     
     private init() {}
         
-    // 1. Xin quyền thông báo (Gọi ở App init)
     func requestPermission() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
             if granted {
@@ -26,9 +25,7 @@ class NotificationManager {
         }
     }
     
-    // 2. Lên lịch thông báo ôn tập
     func scheduleReviewNotification(for word: Word, at date: Date) {
-        // Hủy thông báo cũ của từ này (nếu có) để tránh trùng lặp
         cancelNotification(for: word)
         
         let content = UNMutableNotificationContent()
@@ -36,11 +33,9 @@ class NotificationManager {
         content.body = "Từ vựng '\(word.english)' đang chờ bạn ôn lại để ghi nhớ lâu hơn."
         content.sound = .default
         
-        // Tạo Trigger theo ngày giờ cụ thể
         let components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
         let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
         
-        // ID duy nhất dựa trên ID của từ vựng
         let identifier = "\(word.persistentModelID)"
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
         
@@ -53,17 +48,15 @@ class NotificationManager {
         }
     }
     
-    // 3. Hủy thông báo (Khi user đã học xong hoặc reset)
     func cancelNotification(for word: Word) {
         let identifier = "\(word.persistentModelID)"
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [identifier])
     }
     
-    // 4. (Tùy chọn) Hủy tất cả
     func cancelAll() {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
     }
-    // 1. Xin quyền thông báo
+
     func requestPermission(completion: @escaping (Bool) -> Void) {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
             DispatchQueue.main.async {
@@ -72,7 +65,6 @@ class NotificationManager {
         }
     }
     
-    // 2. Kiểm tra trạng thái hiện tại (Đã cấp, Từ chối, hay Chưa hỏi)
     func checkPermissionStatus(completion: @escaping (UNAuthorizationStatus) -> Void) {
         UNUserNotificationCenter.current().getNotificationSettings { settings in
             DispatchQueue.main.async {
@@ -81,7 +73,6 @@ class NotificationManager {
         }
     }
     
-    // 3. Mở Cài đặt của iPhone (Dành cho trường hợp user đã chặn trước đó)
     func openSystemSettings() {
         if let url = URL(string: UIApplication.openSettingsURLString) {
             if UIApplication.shared.canOpenURL(url) {
@@ -90,7 +81,6 @@ class NotificationManager {
         }
     }
     
-    // 4. Hủy hết thông báo đang chờ (Khi user tắt toggle)
     func cancelAllPendingNotifications() {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         print("Đã hủy toàn bộ lịch nhắc nhở")

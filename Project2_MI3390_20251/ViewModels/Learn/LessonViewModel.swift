@@ -2,21 +2,19 @@
 //  LessonViewModel.swift
 //  Project2_EnglishApp
 //
-//  Refactored by Mentor: Defer saving to SummarizeView
+//
 //
 
 import SwiftUI
 import Combine
 import SwiftData
 
-// Định nghĩa các bước học
 enum LearningStep {
-    case flashcard      // 1. Xem thẻ
-    case listenWrite    // 2. Nghe & Viết
-    case fillBlank      // 3. Điền từ
+    case flashcard
+    case listenWrite
+    case fillBlank
 }
 
-// Kết quả kiểm tra
 enum CheckResult {
     case correct
     case wrong(correctAnswer: String)
@@ -24,12 +22,11 @@ enum CheckResult {
 
 class LessonViewModel: ObservableObject {
     // MARK: - Properties
-    let items: [LearningItem] // Public để View tổng kết truy cập được
+    let items: [LearningItem]
     
-    // --- LOGIC HÀNG ĐỢI (RETRY QUEUE) ---
-    @Published var retryQueue: [LearningItem] = [] // Danh sách từ làm sai
-    @Published var isRetryMode: Bool = false       // Đang ở chế độ học lại?
-    @Published var currentRetryItem: LearningItem? // Từ đang được học lại
+    @Published var retryQueue: [LearningItem] = []
+    @Published var isRetryMode: Bool = false
+    @Published var currentRetryItem: LearningItem?
     
     @Published var currentItemIndex: Int = 0
     @Published var currentStep: LearningStep = .flashcard
@@ -49,11 +46,18 @@ class LessonViewModel: ObservableObject {
         }
     }
     
+    
     // MARK: - Init
     init(items: [LearningItem], manager: LearningManager? = nil) {
         self.items = items
         self.learningManager = manager
         updateProgress()
+    }
+    
+    // MARK: - 1. Thêm hàm phát Audio (Dùng cho nút Loa ở các Game)
+        func playCurrentAudio(speed: Float = 1.0) {
+        let ttsSpeed: Float = (speed == 1.0) ? 0.5 : 0.2
+        AudioManager.shared.playTTS(text: currentItem.word, language: "en-US", speed: ttsSpeed)
     }
     
     // MARK: - Logic Kiểm Tra
@@ -68,6 +72,7 @@ class LessonViewModel: ObservableObject {
     }
     
     private func handleAnswerResult(isCorrect: Bool) {
+        AudioManager.shared.playFeedback(isCorrect: isCorrect)
         if isCorrect {
             currentFeedback = .correct
         } else {
@@ -88,16 +93,14 @@ class LessonViewModel: ObservableObject {
                target.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
     }
     
-    // MARK: - Navigation (CORE LOGIC ĐÃ SỬA)
+    // MARK: - Navigation
     func moveToNextStage() {
         showFeedbackSheet = false
         
-        // --- 1. Retry Mode ---
         if isRetryMode {
             if case .correct = currentFeedback {
                 if !retryQueue.isEmpty {
                     retryQueue.removeFirst()
-                    // ⚠️ Đã XÓA dòng lưu DB ở đây
                 }
             } else {
                 if let failedItem = currentRetryItem {
@@ -109,7 +112,6 @@ class LessonViewModel: ObservableObject {
             return
         }
         
-        // --- 2. Normal Mode ---
         switch currentStep {
         case .flashcard:
             currentStep = .listenWrite
@@ -118,8 +120,6 @@ class LessonViewModel: ObservableObject {
             currentStep = .fillBlank
             
         case .fillBlank:
-            // ⚠️ QUAN TRỌNG: Học xong từ này -> Chuyển từ tiếp theo
-            // KHÔNG LƯU DB Ở ĐÂY NỮA
             moveToNextWord()
         }
         
@@ -137,7 +137,7 @@ class LessonViewModel: ObservableObject {
     
     private func checkForRetryPhase() {
         if retryQueue.isEmpty {
-            isLessonFinished = true // Hiện SummarizeView
+            isLessonFinished = true
         } else {
             isRetryMode = true
             loadNextRetryItem()
@@ -154,19 +154,18 @@ class LessonViewModel: ObservableObject {
         updateProgress()
     }
     
-    // MARK: - NEW: Lưu danh sách được chọn (Gọi từ SummarizeView)
+    // MARK: Lưu danh sách được chọn (Gọi từ SummarizeView)
     func saveSelectedWords(_ selectedIDs: Set<PersistentIdentifier>) {
         guard let manager = learningManager else { return }
         
-        print("💾 Đang lưu \(selectedIDs.count) từ vào sổ tay...")
+        print("Đang lưu \(selectedIDs.count) từ vào sổ tay...")
         
         for id in selectedIDs {
-            // Gọi hàm Manager để tạo Record Level 0 và đặt lịch thông báo
             manager.markAsLearned(wordID: id)
         }
     }
     
-    // MARK: - Helper Progress
+    // MARK: Helper Progress
     private func updateProgress() {
         let totalSteps = Double(items.count * 3)
         var currentStepsDone = Double(currentItemIndex * 3) + stepIndex(currentStep)
@@ -186,7 +185,6 @@ class LessonViewModel: ObservableObject {
     }
 }
 
-// Extension an toàn
 extension Array {
     subscript(safe index: Int) -> Element? {
         return indices.contains(index) ? self[index] : nil

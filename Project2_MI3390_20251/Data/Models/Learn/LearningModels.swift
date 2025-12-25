@@ -1,6 +1,6 @@
 //
 //  LearningModels.swift
-//  DataDemo
+//  Project2_MI3390_20251
 //
 //  Created by Nguyễn Quang Anh on 3/12/25.
 //
@@ -8,7 +8,6 @@
 import Foundation
 import SwiftData
 
-// --- CONTENT GROUP ---
 
 @Model
 final class Course: Codable {

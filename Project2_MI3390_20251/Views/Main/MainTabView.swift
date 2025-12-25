@@ -11,7 +11,6 @@ struct MainTabView: View {
     @State private var selectedTab: AppTab = .review
     
     var body: some View {
-        // --- 4 Tab chính ---
         TabView(selection: $selectedTab) {
             Tab(AppTab.review.title, systemImage: AppTab.review.icon, value: .review) {
                 ReviewView()

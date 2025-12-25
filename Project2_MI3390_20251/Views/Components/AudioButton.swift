@@ -7,7 +7,6 @@
 
 import SwiftUI
 // MARK: - Subview: Nút Audio
-// Tách ra để code chính gọn hơn và dễ style lại đồng loạt
 struct AudioButton: View {
     let action: () -> Void
     

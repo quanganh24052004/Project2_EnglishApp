@@ -8,19 +8,17 @@
 import SwiftUI
 
 struct ThreeDCircleButtonStyle: ButtonStyle {
-    // 1. Cấu hình Input
-    let iconColor: Color      // Màu của biểu tượng
-    let backgroundColor: Color // Màu của nút
+    
+    let iconColor: Color
+    let backgroundColor: Color
     let size: CGFloat
     let depth: CGFloat
     
-    // 2. Thuộc tính tự tính toán (Shadow ăn theo màu nền)
     private let shadowColor: Color
     
-    // 3. Init: Nhận 2 màu riêng biệt
     init(
-        iconColor: Color = .white,       // Mặc định icon trắng
-        backgroundColor: Color = .blue,  // Mặc định nền xanh
+        iconColor: Color = .white,
+        backgroundColor: Color = .blue,
         size: CGFloat = 48,
         depth: CGFloat = 4
     ) {
@@ -29,8 +27,6 @@ struct ThreeDCircleButtonStyle: ButtonStyle {
         self.size = size
         self.depth = depth
         
-        // LOGIC SHADOW: Shadow phải ăn theo màu NỀN (không phải màu icon)
-        // Dùng opacity 0.5 hoặc 0.6 của màu nền để tạo bóng trùng tông
         self.shadowColor = backgroundColor.opacity(0.5)
     }
     
@@ -38,27 +34,22 @@ struct ThreeDCircleButtonStyle: ButtonStyle {
         let isPressed = configuration.isPressed
         
         configuration.label
-            // A. ÁP DỤNG MÀU ICON
             .font(.system(size: size * 0.45, weight: .bold))
             .foregroundColor(iconColor)
             
-            // B. ĐỊNH HÌNH KHUNG
             .frame(width: size, height: size)
             
-            // C. ÁP DỤNG MÀU NỀN
             .background(backgroundColor)
             .clipShape(Circle())
             
-            // D. HIỆU ỨNG 3D (SHADOW + OFFSET)
             .shadow(
                 color: shadowColor,
                 radius: 0,
                 x: 0,
-                y: isPressed ? 0 : depth // Nhấn thì mất bóng
+                y: isPressed ? 0 : depth
             )
-            .offset(y: isPressed ? depth : 0) // Nhấn thì lún xuống
+            .offset(y: isPressed ? depth : 0)
             
-            // E. ANIMATION
             .animation(
                 .interactiveSpring(response: 0.3, dampingFraction: 0.6),
                 value: isPressed
@@ -71,7 +62,6 @@ struct CircleColorPreview: View {
     var body: some View {
         HStack(spacing: 30) {
             
-            // CASE 1: Icon Trắng, Nền Xanh (Chuẩn 3D)
             Button {
                 print("Play")
             } label: {
@@ -82,7 +72,6 @@ struct CircleColorPreview: View {
                 backgroundColor: .blue
             ))
             
-            // CASE 2: Icon Đỏ, Nền Vàng nhạt (Style cảnh báo/vui nhộn)
             Button { print("Stop") } label: {
                 Image(systemName: "tortoise.fill")
             }
@@ -93,7 +82,6 @@ struct CircleColorPreview: View {
                 depth: 6
             ))
             
-            // CASE 3: Icon Xanh, Nền Xanh Nhạt (Style cũ của bạn)
             Button { print("Sound") } label: {
                 Image(systemName: "speaker.wave.2.fill")
             }

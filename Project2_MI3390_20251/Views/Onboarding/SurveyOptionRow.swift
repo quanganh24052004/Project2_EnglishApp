@@ -16,14 +16,12 @@ struct SurveyOptionRow: View {
     var body: some View {
         Button(action: action) {
             HStack(spacing: 15) {
-                // Icon
                 Image(systemName: option.iconName)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 24, height: 24)
                     .foregroundColor(isSelected ? .white : .orange) // Giữ logic đổi màu nội dung
                 
-                // Text
                 Text(option.text)
                     .font(.body)
                     .fontWeight(.medium)
@@ -32,7 +30,6 @@ struct SurveyOptionRow: View {
                 
                 Spacer()
                 
-                // Dấu tick (Chỉ hiện khi chọn)
                 if isSelected {
                     Image(systemName: "checkmark.circle.fill")
                         .foregroundColor(.white)
@@ -40,7 +37,6 @@ struct SurveyOptionRow: View {
             }
             .frame(maxWidth: .infinity) // Đảm bảo nút rộng full chiều ngang
         }
-        // ÁP DỤNG STYLE Ở ĐÂY
         .buttonStyle(SelectionThreeDButtonStyle(isSelected: isSelected))
     }
 }

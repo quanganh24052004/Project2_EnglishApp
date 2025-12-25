@@ -28,7 +28,6 @@ struct Project2_MI3390_20251App: App {
         } catch {
             fatalError("❌ Lỗi nghiêm trọng: Không thể tạo ModelContainer: \(error)")
         }
-        // 🔥 Xin quyền thông báo ngay khi khởi chạy App
         NotificationManager.shared.requestPermission()
     }
     
@@ -43,7 +42,6 @@ struct Project2_MI3390_20251App: App {
             
             if !existingCourses.isEmpty {
                 print("✅ Dữ liệu đã tồn tại: \(existingCourses.count) khóa học.")
-                // Kiểm tra sơ bộ xem dữ liệu có con không
                 if let firstCourse = existingCourses.first {
                     print("   - Khóa học đầu: \(firstCourse.name)")
                     print("   - Số bài học: \(firstCourse.lessons.count)")
@@ -98,10 +96,7 @@ struct Project2_MI3390_20251App: App {
     var body: some Scene {
         WindowGroup {
             RootView()
-                .font(.appFont(size: 16, weight: .regular))
-                // Truyền môi trường ngôn ngữ cho toàn bộ App
                 .environment(\.locale, .init(identifier: languageManager.currentLanguage))
-                // Truyền object này xuống để màn hình Settings có thể thay đổi nó
                 .environmentObject(languageManager)
         }
         .modelContainer(sharedModelContainer)

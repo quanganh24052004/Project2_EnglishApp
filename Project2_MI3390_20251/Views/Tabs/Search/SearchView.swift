@@ -168,14 +168,12 @@ struct SearchView: View {
         isLoading = false
     }
     
-    // Logic tìm SwiftData cũ của bạn
     private func performLocalSearch() {
         guard !searchText.isEmpty else { return }
         hasSearched = true
         
         let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
         
-        // Lưu ý: Thay 'Word' bằng tên Model thật trong SwiftData của bạn
         let predicate = #Predicate<Word> { word in
             word.english.localizedStandardContains(query)
         }
@@ -192,7 +190,6 @@ struct SearchView: View {
         }
     }
     
-    // Logic tìm API mới
     private func performOnlineSearch() async {
         guard !searchText.isEmpty else { return }
         

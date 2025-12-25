@@ -7,20 +7,17 @@
 
 import Foundation
 
-// Loại câu hỏi
 enum QuestionType {
     case singleSelect
     case multiSelect
 }
 
-// Cấu trúc một đáp án
 struct SurveyOption: Identifiable, Hashable {
     let id: UUID = UUID()
     let iconName: String
     let text: String
 }
 
-// Cấu trúc một câu hỏi
 struct SurveyQuestion: Identifiable {
     let id = UUID()
     let text: String
@@ -33,7 +30,6 @@ struct SurveySubmission: Codable {
     let answer: [String]
 }
 
-// Dữ liệu mẫu (Mock Data dựa trên ảnh bạn gửi)
 extension SurveyQuestion {
     static let samples: [SurveyQuestion] = [
         SurveyQuestion(

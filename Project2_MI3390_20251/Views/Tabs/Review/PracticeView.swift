@@ -9,19 +9,15 @@ import SwiftUI
 import SwiftData
 
 struct PracticeView: View {
-    // Nhận danh sách các từ cần ôn từ ReviewView truyền sang
     var records: [StudyRecord]
     
-    // Inject Manager
     @Environment(\.modelContext) private var modelContext
     @State private var learningManager: LearningManager?
     
-    // State quản lý luồng
     @State private var currentIndex: Int = 0
     @State private var isFlipped: Bool = false
     @State private var showResult: Bool = false // Hiện popup kết quả cuối cùng
     
-    // Lấy record hiện tại an toàn
     var currentRecord: StudyRecord? {
         if records.isEmpty || currentIndex >= records.count { return nil }
         return records[currentIndex]
@@ -29,7 +25,6 @@ struct PracticeView: View {
     
     var body: some View {
         VStack {
-            // Progress Bar
             ProgressView(value: Double(currentIndex), total: Double(max(records.count, 1)))
                 .padding()
             
@@ -44,19 +39,15 @@ struct PracticeView: View {
                     
                     VStack(spacing: 20) {
                         if isFlipped {
-                            // Mặt sau: Tiếng Việt + Nghĩa
-                            // Lấy nghĩa đầu tiên trong mảng meanings, nếu không có thì để chuỗi rỗng
                             Text(word.meanings.first?.vietnamese ?? "Chưa cập nhật nghĩa")
                                 .font(.largeTitle)
                                 .foregroundColor(.blue)
-                                .multilineTextAlignment(.center) // Căn giữa nếu nghĩa dài
+                                .multilineTextAlignment(.center)
                             
-                            // Sửa 'type' thành 'partOfSpeech' đúng với Model
                             Text(word.partOfSpeech)
                                 .italic()
                                 .foregroundColor(.secondary)
                         } else {
-                            // Mặt trước: Tiếng Anh
                             Text(word.english)
                                 .font(.system(size: 40, weight: .bold))
                         }
@@ -80,7 +71,6 @@ struct PracticeView: View {
                 // MARK: - BUTTONS AREA
                 if isFlipped {
                     HStack(spacing: 30) {
-                        // Button SAI
                         Button(action: { handleAnswer(isCorrect: false) }) {
                             VStack {
                                 Image(systemName: "xmark.circle.fill")
@@ -95,7 +85,6 @@ struct PracticeView: View {
                             .cornerRadius(15)
                         }
                         
-                        // Button ĐÚNG
                         Button(action: { handleAnswer(isCorrect: true) }) {
                             VStack {
                                 Image(systemName: "checkmark.circle.fill")
@@ -118,7 +107,6 @@ struct PracticeView: View {
                         .padding(.bottom)
                 }
             } else {
-                // Hết bài
                 VStack {
                     Text("🎉")
                         .font(.system(size: 80))
@@ -136,7 +124,6 @@ struct PracticeView: View {
         }
         .alert("Hoàn thành", isPresented: $showResult) {
             Button("Đóng", role: .cancel) {
-                // Dismiss view logic here (cần Environment dismiss)
             }
         }
     }
@@ -145,10 +132,8 @@ struct PracticeView: View {
     func handleAnswer(isCorrect: Bool) {
         guard let record = currentRecord else { return }
         
-        // 1. Gọi Manager để tính toán ngày ôn tiếp theo
         learningManager?.processReviewResult(record: record, isCorrect: isCorrect)
         
-        // 2. Chuyển sang từ tiếp theo
         withAnimation {
             isFlipped = false // Úp thẻ lại
             

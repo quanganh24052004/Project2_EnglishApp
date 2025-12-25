@@ -24,8 +24,8 @@ struct SplashScreenView: View {
                     .fontWeight(.bold)
                     .foregroundColor(.white)
             }
-            .scaleEffect(isAnimating ? 1.0 : 0.8) // Hiệu ứng scale nhẹ
-            .opacity(isAnimating ? 1.0 : 0.0)     // Hiệu ứng hiện dần
+            .scaleEffect(isAnimating ? 1.0 : 0.8)
+            .opacity(isAnimating ? 1.0 : 0.0)
         }
         .onAppear {
             withAnimation(.easeOut(duration: 1.0)) {

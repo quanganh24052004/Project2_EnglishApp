@@ -5,39 +5,6 @@
 //  Created by Nguyễn Quang Anh on 9/12/25.
 //
 
-
-import SwiftUI
-
-//struct FlipCardContainer<Front: View, Back: View>: View {
-//    var isFlipped: Bool
-//    var front: () -> Front
-//    var back: () -> Back
-//    
-//    init(isFlipped: Bool, @ViewBuilder front: @escaping () -> Front, @ViewBuilder back: @escaping () -> Back) {
-//        self.isFlipped = isFlipped
-//        self.front = front
-//        self.back = back
-//    }
-//    
-//    var body: some View {
-//        ZStack {
-//            // Mặt trước
-//            front()
-//                .rotation3DEffect(.degrees(isFlipped ? 180 : 0), axis: (x: 0, y: 1, z: 0))
-//                .opacity(isFlipped ? 0 : 1)
-//                .accessibilityHidden(isFlipped)
-//            
-//            // Mặt sau
-//            back()
-//                .rotation3DEffect(.degrees(isFlipped ? 0 : -180), axis: (x: 0, y: 1, z: 0))
-//                .opacity(isFlipped ? 1 : 0)
-//                .accessibilityHidden(!isFlipped)
-//        }
-//        .animation(.spring(response: 0.6, dampingFraction: 0.8), value: isFlipped)
-//    }
-//}
-
-
 import SwiftUI
 
 struct FlipCardContainer<Front: View, Back: View>: View {

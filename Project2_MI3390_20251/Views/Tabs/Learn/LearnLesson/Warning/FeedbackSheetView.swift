@@ -8,7 +8,6 @@ import SwiftUI
 
 struct FeedbackSheetView: View {
     let result: CheckResult?
-    let mainColor: Color = .buttonMain
 
     @Environment(\.dismiss) var dismiss
     
@@ -35,7 +34,7 @@ struct FeedbackSheetView: View {
             Button("Continue") {
                 dismiss()
             }
-            .buttonStyle(ThreeDButtonStyle(color: mainColor))
+            .buttonStyle(ThreeDButtonStyle(color: .pGreen))
             .padding(.horizontal, 100)
             .padding(.vertical, 20)
         }

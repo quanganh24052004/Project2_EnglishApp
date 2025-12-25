@@ -72,18 +72,19 @@ struct SurveyView: View {
                         }
                     }
                 }) {
+                    // Bên trong Label chỉ giữ lại Text, Style sẽ lo phần trang trí
                     Text(viewModel.currentIndex == viewModel.questions.count - 1 ? "Finish" : "Continue")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(viewModel.canProceed ? Color.green : Color.gray)
-                        .cornerRadius(30)
+                        // .font(.headline) -> Bạn có thể giữ hoặc bỏ, vì Style đã set font bold 16
                 }
-                .disabled(!viewModel.canProceed) // Disable nếu chưa chọn gì
+                // ÁP DỤNG STYLE Ở ĐÂY
+                .buttonStyle(ThreeDButtonStyle(
+                    // Logic màu: Nếu được đi tiếp thì dùng màu chính (buttonMain/Green), không thì màu xám
+                    color: viewModel.canProceed ? .buttonMain : .gray
+                ))
+                .disabled(!viewModel.canProceed) // Vẫn giữ disable logic để chặn tương tác
                 .padding()
             }
-            .background(Color(.primary01))
+            .background(Color(.primary01)) // Nền toàn màn hình
         }
     }
 }

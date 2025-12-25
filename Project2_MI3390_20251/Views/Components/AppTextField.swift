@@ -25,15 +25,21 @@ struct AppTextField: View {
             if let iconName = iconName {
                 Image(systemName: iconName)
                     .font(.system(size: 20))
-                    .foregroundColor(isFocused ? .blue : .gray)
+                    .foregroundColor(isFocused ? .orange : .gray)
                     .frame(width: 24)
             }
             
             Group {
                 if isSecure && !isShowPassword {
                     SecureField(placeholder, text: $text)
+                        .font(.system(size: 15))
+                        .foregroundColor(.black)
+                        .frame(height: 20)
                 } else {
                     TextField(placeholder, text: $text)
+                        .font(.system(size: 15))
+                        .foregroundColor(.black)
+                        .frame(height: 20)
                 }
             }
             .focused($isFocused)
@@ -43,6 +49,7 @@ struct AppTextField: View {
                     isShowPassword.toggle()
                 } label: {
                     Image(systemName: isShowPassword ? "eye.slash.fill" : "eye.fill")
+                        .font(.system(size: 15))
                         .foregroundColor(.neutral04)
                 }
             } else {
@@ -59,11 +66,10 @@ struct AppTextField: View {
         .padding(16)
         .background(
             RoundedRectangle(cornerRadius: 16)
-                .stroke(isFocused ? Color.blue : Color.neutral04, lineWidth: 2)
+                .stroke(isFocused ? Color.orange : Color.neutral04, lineWidth: 2)
                 .background(Color.white)
                 .cornerRadius(16)
         )
-        .padding(.horizontal)
         .animation(.easeInOut(duration: 0.2), value: isFocused)
     }
 }

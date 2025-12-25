@@ -40,7 +40,7 @@ struct ThreeDButtonStyle: ButtonStyle {
                 y: isPressed ? 0 : depth
             )
             .offset(y: isPressed ? depth : 0)
-            .animation(.interactiveSpring(response: 0.3, dampingFraction: 0.6), value: isPressed)
+            .animation(.interactiveSpring(response: 0.15, dampingFraction: 0.6), value: isPressed)
     }
 }
 // Preview để test ngay

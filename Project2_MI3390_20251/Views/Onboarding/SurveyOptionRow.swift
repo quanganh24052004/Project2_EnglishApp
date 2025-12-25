@@ -16,39 +16,31 @@ struct SurveyOptionRow: View {
     var body: some View {
         Button(action: action) {
             HStack(spacing: 15) {
-                // Icon (Thay đổi màu sắc dựa trên trạng thái chọn)
+                // Icon
                 Image(systemName: option.iconName)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 24, height: 24)
-                    .foregroundColor(isSelected ? .white : .orange) // Màu icon
+                    .foregroundColor(isSelected ? .white : .orange) // Giữ logic đổi màu nội dung
                 
                 // Text
                 Text(option.text)
                     .font(.body)
                     .fontWeight(.medium)
-                    .foregroundColor(isSelected ? .white : .black) // Màu chữ
+                    .foregroundColor(isSelected ? .white : .black) // Giữ logic đổi màu chữ
                     .multilineTextAlignment(.leading)
                 
                 Spacer()
                 
-                // Dấu tick nếu được chọn
+                // Dấu tick (Chỉ hiện khi chọn)
                 if isSelected {
                     Image(systemName: "checkmark.circle.fill")
                         .foregroundColor(.white)
                 }
             }
-            .padding()
-            .background(
-                RoundedRectangle(cornerRadius: 16)
-                    .fill(isSelected ? Color.orange : Color.white) // Màu nền
-                    .shadow(color: .black.opacity(0.05), radius: 5, x: 0, y: 2)
-            )
-            .overlay(
-                RoundedRectangle(cornerRadius: 16)
-                    .stroke(isSelected ? Color.orange : Color.gray.opacity(0.2), lineWidth: 1) // Viền
-            )
+            .frame(maxWidth: .infinity) // Đảm bảo nút rộng full chiều ngang
         }
-        .buttonStyle(PlainButtonStyle())
+        // ÁP DỤNG STYLE Ở ĐÂY
+        .buttonStyle(SelectionThreeDButtonStyle(isSelected: isSelected))
     }
 }

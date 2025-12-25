@@ -34,19 +34,38 @@ struct ReviewView: View {
             .min()
     }
     
-    // C. Thống kê
+    // C. Thống kê (Refactored cho 6 cấp độ: 0 -> 5)
     var levelStats: [LevelStat] {
-        var counts = [0, 0, 0, 0, 0, 0]
+        // Tạo mảng đếm có 6 phần tử (tương ứng index 0 -> 5), khởi tạo bằng 0
+        var counts = [Int](repeating: 0, count: 6)
+        
         for record in studyRecords {
+            // Đảm bảo level luôn nằm trong khoảng 0-5 để tránh crash index
             let level = min(max(record.memoryLevel, 0), 5)
-            if level >= 1 { counts[level] += 1 }
+            
+            // Tăng biến đếm tại index tương ứng (bao gồm cả level 0)
+            counts[level] += 1
         }
+        
+        // Trả về dữ liệu cho biểu đồ
         return [
-            LevelStat(level: "Mới", count: counts[1], color: .blue),
-            LevelStat(level: "Nhớ ít", count: counts[2], color: .cyan),
-            LevelStat(level: "Khá", count: counts[3], color: .green),
-            LevelStat(level: "Tốt", count: counts[4], color: .orange),
-            LevelStat(level: "Thuộc", count: counts[5], color: .purple)
+            // Level 0: Vừa học xong, chưa ôn lần nào
+            LevelStat(level: "Mới (0)", count: counts[0], color: .gray.opacity(0.8)),
+            
+            // Level 1: Đợi 10p
+            LevelStat(level: "Lv 1", count: counts[1], color: .blue.opacity(0.6)),
+            
+            // Level 2: Đợi 1h
+            LevelStat(level: "Lv 2", count: counts[2], color: .blue),
+            
+            // Level 3: Đợi 1 ngày
+            LevelStat(level: "Lv 3", count: counts[3], color: .green),
+            
+            // Level 4: Đợi 3 ngày
+            LevelStat(level: "Lv 4", count: counts[4], color: .orange),
+            
+            // Level 5: Đợi 7 ngày (Thành thạo)
+            LevelStat(level: "Master (5)", count: counts[5], color: .purple)
         ]
     }
     
@@ -219,3 +238,10 @@ struct ReviewView: View {
     }
 }
 
+// Định nghĩa Model cho biểu đồ
+struct LevelStat: Identifiable {
+    let id = UUID()
+    let level: String
+    let count: Int
+    let color: Color
+}

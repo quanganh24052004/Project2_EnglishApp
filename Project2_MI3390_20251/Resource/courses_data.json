@@ -8972,7 +8972,7 @@
     "subDescription": "Cái này dùng để tést API Audio thôi nha",
     "lessons": [
       {
-        "name": "Từ vựng cơ bảm",
+        "name": "Từ vựng cơ bản",
         "subName": "Basic Vocabulary",
         "quantityOfWord": 12,
         "words": [
@@ -8987,6 +8987,104 @@
                 "vietnamese": "Xin chào",
                 "exampleEn": "Hello, nice to meet you!",
                 "exampleVi": "Xin chào, rất vui được gặp bạn."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Chào hỏi cơ bản",
+    "description": "Từ vựng cơ bản về các cách chào hỏi trong tiếng Anh.",
+    "subDescription": "Các từ và cụm từ thông dụng để chào hỏi trong các tình huống hàng ngày.",
+    "lessons": [
+      {
+        "name": "Chào hỏi cơ bản",
+        "subName": "Basic greetings",
+        "quantityOfWord": 6,
+        "words": [
+          {
+            "english": "hello",
+            "phonetic": "həˈləʊ",
+            "partOfSpeech": "n.",
+            "audioUrl": "https://api.dictionaryapi.dev/media/pronunciations/en/hello-uk.mp3",
+            "CEFR": "BASIC",
+            "meanings": [
+              {
+                "vietnamese": "Xin chào",
+                "exampleEn": "Hello, everyone.",
+                "exampleVi": "Xin chào, mọi người."
+              }
+            ]
+          },
+          {
+            "english": "hi",
+            "phonetic": "",
+            "partOfSpeech": "adj.",
+            "audioUrl": "https://api.dictionaryapi.dev/media/pronunciations/en/hi-1-uk.mp3",
+            "CEFR": "BASIC",
+            "meanings": [
+              {
+                "vietnamese": "Chào",
+                "exampleEn": "Hi, how are you?",
+                "exampleVi": "Chào. Bạn có khỏe không?"
+              }
+            ]
+          },
+          {
+            "english": "good morning",
+            "phonetic": "ˌɡʊd ˈmɔː.nɪŋ",
+            "partOfSpeech": "n.",
+            "audioUrl": "https://api.dictionaryapi.dev/media/pronunciations/en/good%20morning-uk.mp3",
+            "CEFR": "BASIC",
+            "meanings": [
+              {
+                "vietnamese": "Chào buổi sáng",
+                "exampleEn": "Good morning, Joan",
+                "exampleVi": "Chào buổi sáng, Joan"
+              }
+            ]
+          },
+          {
+            "english": "good evening",
+            "phonetic": "",
+            "partOfSpeech": "n.",
+            "audioUrl": "https://api.dictionaryapi.dev/media/pronunciations/en/good%20evening-uk.mp3",
+            "CEFR": "BASIC",
+            "meanings": [
+              {
+                "vietnamese": "Chào buổi tối",
+                "exampleEn": "We say 'good evening' when we meet someone in the evening.",
+                "exampleVi": "Chúng ta nói 'chào buổi tối' khi chúng ta gặp ai đó vào buổi tối."
+              }
+            ]
+          },
+          {
+            "english": "goodbye",
+            "phonetic": "ɡədˈbaɪ",
+            "partOfSpeech": "n.",
+            "audioUrl": "https://api.dictionaryapi.dev/media/pronunciations/en/goodbye-us.mp3",
+            "CEFR": "BASIC",
+            "meanings": [
+              {
+                "vietnamese": "Tạm biệt",
+                "exampleEn": "They made their good-byes.",
+                "exampleVi": "Họ đã nói lời tạm biệt."
+              }
+            ]
+          },
+          {
+            "english": "bye",
+            "phonetic": "baɪ",
+            "partOfSpeech": "n.",
+            "audioUrl": "https://api.dictionaryapi.dev/media/pronunciations/en/bye-au.mp3",
+            "CEFR": "BASIC",
+            "meanings": [
+              {
+                "vietnamese": "Tạm biệt",
+                "exampleEn": "Craig's Crew plays the bye next week.",
+                "exampleVi": "Craig's Crew chơi tạm biệt vào tuần tới."
               }
             ]
           }

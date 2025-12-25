@@ -1,4 +1,10 @@
-// File: LessonContainerView.swift
+//
+//  LessonContainerView.swift
+//  Project2_EnglishApp
+//
+//  Created by Nguyễn Quang Anh on 28/11/25.
+//
+
 import SwiftUI
 import SwiftData
 
@@ -7,19 +13,23 @@ struct LessonContainerView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.modelContext) var modelContext
 
-    // Init nhận danh sách items
+    // State cho Sheet cảnh báo thoát
+    @State private var showExitSheet = false
+
     init(items: [LearningItem]) {
         _viewModel = StateObject(wrappedValue: LessonViewModel(items: items))
     }
     
     var body: some View {
         VStack {
+            // MARK: - Header
             HStack {
-                Button(action: { dismiss() }) {
+                Button(action: { showExitSheet = true }) {
                     Image(systemName: "xmark")
-                        .font(.system(size: 32, weight: .bold))
+                        .font(.system(size: 28, weight: .bold)) // Chỉnh lại size cho đẹp
                         .foregroundColor(.gray)
                 }
+                
                 ProgressBar(
                     value: viewModel.progress,
                     height: 16,
@@ -30,20 +40,24 @@ struct LessonContainerView: View {
             }
             .padding()
             
+            // MARK: - Main Content
             Group {
                 if viewModel.isLessonFinished {
-                    // Màn hình hoàn thành
-                    VStack(spacing: 20) {
-                        Image(systemName: "trophy.fill")
-                            .font(.system(size: 80))
-                            .foregroundStyle(.yellow)
-                        Text("Congratulations! You have finished the lesson.")
-                            .font(.title2).bold()
-                            .multilineTextAlignment(.center)
-                        
-                        Button("Complete") { dismiss() }
-                            .buttonStyle(.borderedProminent)
-                    }
+                    // ⭐️ MÀN HÌNH TỔNG KẾT & CHỌN TỪ (MỚI)
+                    SummarizeView(
+                        items: viewModel.items,
+                        onSave: { selectedIDs in
+                            // 1. Lưu các từ user đã chọn
+                            viewModel.saveSelectedWords(selectedIDs)
+                            // 2. Thoát ra ngoài
+                            dismiss()
+                        },
+                        onCancel: {
+                            dismiss()
+                        }
+                    )
+                    .transition(.move(edge: .trailing))
+                    
                 } else {
                     switch viewModel.currentStep {
                     case .flashcard:
@@ -51,42 +65,47 @@ struct LessonContainerView: View {
                             item: viewModel.currentItem,
                             onContinue: { viewModel.moveToNextStage() }
                         )
-                        
                     case .listenWrite:
                         SpellingGameView(
                             item: viewModel.currentItem,
-                            onCheck: { userAnswer in
-                                viewModel.checkListenWrite(userAnswer: userAnswer)
-                            }
+                            onCheck: { viewModel.checkListenWrite(userAnswer: $0) }
                         )
-                        
                     case .fillBlank:
                         InputStepView(
                             item: viewModel.currentItem,
-                            onCheck: { answer in
-                                viewModel.checkFillBlank(userAnswer: answer)
-                            }
+                            onCheck: { viewModel.checkFillBlank(userAnswer: $0) }
                         )
                     }
                 }
             }
             Spacer()
         }
-        .background(Color(.neutral01))
+        .background(Color(.neutral01)) // Hoặc màu nền của bạn
         .onAppear {
-            if viewModel.learningManager == nil {
-                viewModel.learningManager = LearningManager(modelContext: modelContext)
-            }
+             if viewModel.learningManager == nil {
+                 viewModel.learningManager = LearningManager(modelContext: modelContext)
+             }
         }
+        // Sheet Feedback
         .sheet(isPresented: $viewModel.showFeedbackSheet, onDismiss: {
             viewModel.moveToNextStage()
         }) {
             if let result = viewModel.currentFeedback {
                 FeedbackSheetView(result: result)
                     .presentationDetents([.fraction(0.40)])
-                    .interactiveDismissDisabled()
+                    .presentationDragIndicator(.visible)
             }
+        }
+        // Sheet Exit Warning
+        .sheet(isPresented: $showExitSheet) {
+            ExitConfirmationSheet(
+                onContinue: { showExitSheet = false },
+                onExit: {
+                    showExitSheet = false
+                    dismiss()
+                }
+            )
+            .presentationDetents([.fraction(0.40)])
         }
     }
 }
-

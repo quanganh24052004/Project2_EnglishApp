@@ -2,7 +2,7 @@
 //  LessonViewModel.swift
 //  Project2_EnglishApp
 //
-//  Created by Nguyễn Quang Anh on 28/11/25.
+//  Refactored by Mentor: Defer saving to SummarizeView
 //
 
 import SwiftUI
@@ -11,9 +11,9 @@ import SwiftData
 
 // Định nghĩa các bước học
 enum LearningStep {
-    case flashcard      // 1. Xem thẻ, nghe
-    case listenWrite    // 2. Nghe và Gõ lại (Đã nâng cấp với gợi ý mờ)
-    case fillBlank      // 3. Điền từ còn thiếu
+    case flashcard      // 1. Xem thẻ
+    case listenWrite    // 2. Nghe & Viết
+    case fillBlank      // 3. Điền từ
 }
 
 // Kết quả kiểm tra
@@ -24,7 +24,12 @@ enum CheckResult {
 
 class LessonViewModel: ObservableObject {
     // MARK: - Properties
-    private let items: [LearningItem]
+    let items: [LearningItem] // Public để View tổng kết truy cập được
+    
+    // --- LOGIC HÀNG ĐỢI (RETRY QUEUE) ---
+    @Published var retryQueue: [LearningItem] = [] // Danh sách từ làm sai
+    @Published var isRetryMode: Bool = false       // Đang ở chế độ học lại?
+    @Published var currentRetryItem: LearningItem? // Từ đang được học lại
     
     @Published var currentItemIndex: Int = 0
     @Published var currentStep: LearningStep = .flashcard
@@ -37,60 +42,74 @@ class LessonViewModel: ObservableObject {
     var learningManager: LearningManager?
     
     var currentItem: LearningItem {
-        items[currentItemIndex]
+        if isRetryMode {
+            return currentRetryItem ?? items[0]
+        } else {
+            return items[safe: currentItemIndex] ?? items[0]
+        }
     }
     
     // MARK: - Init
-    init(items: [LearningItem]) {
+    init(items: [LearningItem], manager: LearningManager? = nil) {
         self.items = items
+        self.learningManager = manager
         updateProgress()
     }
     
-    // MARK: - Logic Kiểm Tra (Core Logic)
-    
-    // 1. Kiểm tra phần Nghe & Viết (Spelling Game)
+    // MARK: - Logic Kiểm Tra
     func checkListenWrite(userAnswer: String) {
-        // Chuẩn hóa: Xóa khoảng trắng thừa, đưa về chữ thường
-        let cleanInput = userAnswer.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-        let cleanTarget = currentItem.word.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-        
-        let isCorrect = cleanInput == cleanTarget
-        processResult(isCorrect: isCorrect, correctAnswer: currentItem.word)
+        let isCorrect = cleanAndCompare(input: userAnswer, target: currentItem.word)
+        handleAnswerResult(isCorrect: isCorrect)
     }
     
-    // 2. Kiểm tra phần Điền từ (Fill Blank) - Giữ logic cũ hoặc tùy chỉnh
     func checkFillBlank(userAnswer: String) {
-        let cleanInput = userAnswer.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-        let cleanTarget = currentItem.word.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-        
-        let isCorrect = cleanInput == cleanTarget
-        processResult(isCorrect: isCorrect, correctAnswer: currentItem.word)
+        let isCorrect = cleanAndCompare(input: userAnswer, target: currentItem.word)
+        handleAnswerResult(isCorrect: isCorrect)
     }
     
-    // MARK: - Xử lý kết quả chung & Lưu Database
-    private func processResult(isCorrect: Bool, correctAnswer: String) {
-        
-        // A. Cập nhật UI Feedback trước (để App phản hồi nhanh với người dùng)
+    private func handleAnswerResult(isCorrect: Bool) {
         if isCorrect {
             currentFeedback = .correct
         } else {
-            currentFeedback = .wrong(correctAnswer: correctAnswer)
+            currentFeedback = .wrong(correctAnswer: currentItem.word)
+            addToRetryQueue(item: currentItem)
         }
         showFeedbackSheet = true
-        
-        // B. Lưu tiến độ vào DB (SwiftData)
-        if let manager = learningManager {
-            // Không cần fetch "wordObject" thủ công nữa
-            // Truyền thẳng ID có sẵn trong currentItem
-            manager.updateProgress(wordID: currentItem.wordID, isCorrect: isCorrect)
-            
-            print("✅ Đã gửi yêu cầu lưu tiến độ cho từ ID: \(currentItem.wordID)")
+    }
+    
+    private func addToRetryQueue(item: LearningItem) {
+        if !retryQueue.contains(where: { $0.id == item.id }) {
+            retryQueue.append(item)
         }
     }
     
-    // MARK: - Navigation
+    private func cleanAndCompare(input: String, target: String) -> Bool {
+        return input.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() ==
+               target.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+    }
     
+    // MARK: - Navigation (CORE LOGIC ĐÃ SỬA)
     func moveToNextStage() {
+        showFeedbackSheet = false
+        
+        // --- 1. Retry Mode ---
+        if isRetryMode {
+            if case .correct = currentFeedback {
+                if !retryQueue.isEmpty {
+                    retryQueue.removeFirst()
+                    // ⚠️ Đã XÓA dòng lưu DB ở đây
+                }
+            } else {
+                if let failedItem = currentRetryItem {
+                    retryQueue.append(failedItem)
+                    retryQueue.removeFirst()
+                }
+            }
+            loadNextRetryItem()
+            return
+        }
+        
+        // --- 2. Normal Mode ---
         switch currentStep {
         case .flashcard:
             currentStep = .listenWrite
@@ -99,25 +118,63 @@ class LessonViewModel: ObservableObject {
             currentStep = .fillBlank
             
         case .fillBlank:
+            // ⚠️ QUAN TRỌNG: Học xong từ này -> Chuyển từ tiếp theo
+            // KHÔNG LƯU DB Ở ĐÂY NỮA
             moveToNextWord()
         }
+        
         updateProgress()
     }
     
     private func moveToNextWord() {
         if currentItemIndex < items.count - 1 {
             currentItemIndex += 1
-            currentStep = .flashcard // Quay lại bước 1 cho từ mới
+            currentStep = .flashcard
         } else {
-            isLessonFinished = true // Hoàn thành bài học
+            checkForRetryPhase()
         }
     }
     
-    // MARK: - Helper tính Progress Bar
+    private func checkForRetryPhase() {
+        if retryQueue.isEmpty {
+            isLessonFinished = true // Hiện SummarizeView
+        } else {
+            isRetryMode = true
+            loadNextRetryItem()
+        }
+    }
+    
+    private func loadNextRetryItem() {
+        if retryQueue.isEmpty {
+            isLessonFinished = true
+            return
+        }
+        currentRetryItem = retryQueue.first
+        currentStep = Bool.random() ? .listenWrite : .fillBlank
+        updateProgress()
+    }
+    
+    // MARK: - NEW: Lưu danh sách được chọn (Gọi từ SummarizeView)
+    func saveSelectedWords(_ selectedIDs: Set<PersistentIdentifier>) {
+        guard let manager = learningManager else { return }
+        
+        print("💾 Đang lưu \(selectedIDs.count) từ vào sổ tay...")
+        
+        for id in selectedIDs {
+            // Gọi hàm Manager để tạo Record Level 0 và đặt lịch thông báo
+            manager.markAsLearned(wordID: id)
+        }
+    }
+    
+    // MARK: - Helper Progress
     private func updateProgress() {
         let totalSteps = Double(items.count * 3)
-        let currentStepsDone = Double(currentItemIndex * 3) + stepIndex(currentStep)
-        progress = totalSteps > 0 ? currentStepsDone / totalSteps : 0
+        var currentStepsDone = Double(currentItemIndex * 3) + stepIndex(currentStep)
+        if isRetryMode { currentStepsDone = totalSteps }
+        
+        withAnimation {
+            progress = totalSteps > 0 ? min(currentStepsDone / totalSteps, 1.0) : 0
+        }
     }
     
     private func stepIndex(_ step: LearningStep) -> Double {
@@ -126,5 +183,12 @@ class LessonViewModel: ObservableObject {
         case .listenWrite: return 1
         case .fillBlank: return 2
         }
+    }
+}
+
+// Extension an toàn
+extension Array {
+    subscript(safe index: Int) -> Element? {
+        return indices.contains(index) ? self[index] : nil
     }
 }

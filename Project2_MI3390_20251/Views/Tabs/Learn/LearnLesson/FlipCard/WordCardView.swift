@@ -11,7 +11,7 @@ import SwiftUI
 struct WordCardView: View {
     let item: LearningItem 
     
-    @State private var isFlipped: Bool = false
+    @Binding var isFlipped: Bool
     
     let cardHeight: CGFloat = 400
     
@@ -127,11 +127,11 @@ extension LearningItem {
     }
 }
 
-#Preview {
-    ZStack {
-        Color(UIColor.systemGroupedBackground)
-            .ignoresSafeArea()
-        
-        WordCardView(item: LearningItem.dummy)
-    }
-}
+//#Preview {
+//    ZStack {
+//        Color(UIColor.systemGroupedBackground)
+//            .ignoresSafeArea()
+//        
+//        WordCardView(item: LearningItem.dummy)
+//    }
+//}

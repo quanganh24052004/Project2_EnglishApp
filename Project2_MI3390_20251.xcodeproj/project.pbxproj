@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		0804F2F62EE79E4B00A982D3 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0804F2F52EE79E4B00A982D3 /* MainTabView.swift */; };
 		0804F2F92EE79FDC00A982D3 /* AppTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0804F2F82EE79FDC00A982D3 /* AppTab.swift */; };
+		082EC9FF2EFCF42C00645D3A /* ExitConfirmationSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082EC9FE2EFCF42C00645D3A /* ExitConfirmationSheet.swift */; };
+		082ECA032EFD079400645D3A /* SummarizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082ECA022EFD079400645D3A /* SummarizeView.swift */; };
+		082ECA052EFD098900645D3A /* CorrectSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082ECA042EFD098900645D3A /* CorrectSheetView.swift */; };
 		083369DB2EE57F1D003B2FEF /* String+Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083369DA2EE57F1D003B2FEF /* String+Validation.swift */; };
 		083369E22EE58583003B2FEF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083369E12EE58583003B2FEF /* LoginView.swift */; };
 		083369E42EE585A2003B2FEF /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083369E32EE585A2003B2FEF /* RegistrationView.swift */; };
@@ -58,11 +61,15 @@
 		08BE81C82EE7F713004181EE /* FlipCardContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BE81C72EE7F713004181EE /* FlipCardContainer.swift */; };
 		08BE81CB2EE7F743004181EE /* WordCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BE81CA2EE7F743004181EE /* WordCardView.swift */; };
 		08BE81CE2EE852D2004181EE /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BE81CD2EE852D2004181EE /* AudioManager.swift */; };
+		08D648B92EFD45AE004F9C65 /* SelectionThreeDButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D648B82EFD45AE004F9C65 /* SelectionThreeDButtonStyle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0804F2F52EE79E4B00A982D3 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		0804F2F82EE79FDC00A982D3 /* AppTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTab.swift; sourceTree = "<group>"; };
+		082EC9FE2EFCF42C00645D3A /* ExitConfirmationSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitConfirmationSheet.swift; sourceTree = "<group>"; };
+		082ECA022EFD079400645D3A /* SummarizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummarizeView.swift; sourceTree = "<group>"; };
+		082ECA042EFD098900645D3A /* CorrectSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorrectSheetView.swift; sourceTree = "<group>"; };
 		083369DA2EE57F1D003B2FEF /* String+Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Validation.swift"; sourceTree = "<group>"; };
 		083369E12EE58583003B2FEF /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		083369E32EE585A2003B2FEF /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
@@ -114,6 +121,7 @@
 		08BE81C72EE7F713004181EE /* FlipCardContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipCardContainer.swift; sourceTree = "<group>"; };
 		08BE81CA2EE7F743004181EE /* WordCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCardView.swift; sourceTree = "<group>"; };
 		08BE81CD2EE852D2004181EE /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
+		08D648B82EFD45AE004F9C65 /* SelectionThreeDButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionThreeDButtonStyle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +141,17 @@
 				0804F2F82EE79FDC00A982D3 /* AppTab.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		082EC9FD2EFCF42400645D3A /* Warning */ = {
+			isa = PBXGroup;
+			children = (
+				082EC9FE2EFCF42C00645D3A /* ExitConfirmationSheet.swift */,
+				08BE819F2EE7B7E5004181EE /* FeedbackSheetView.swift */,
+				082ECA022EFD079400645D3A /* SummarizeView.swift */,
+				082ECA042EFD098900645D3A /* CorrectSheetView.swift */,
+			);
+			path = Warning;
 			sourceTree = "<group>";
 		};
 		083369DC2EE58426003B2FEF /* Resource */ = {
@@ -156,9 +175,9 @@
 		083369DE2EE58545003B2FEF /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				084CB4A42EF406D600B1CBBE /* NotificationManager.swift */,
 				088881A02EF2B5A400F8E198 /* Learning */,
 				083369E02EE58551003B2FEF /* Authentication */,
-				084CB4A42EF406D600B1CBBE /* NotificationManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -236,7 +255,6 @@
 				08BE81A02EE7B7E5004181EE /* FlashcardStepView.swift */,
 				08625DD02EF594F900CD5619 /* SpellingGameView.swift */,
 				08BE81A12EE7B7E5004181EE /* InputStepView.swift */,
-				08BE819F2EE7B7E5004181EE /* FeedbackSheetView.swift */,
 			);
 			path = StudyScenario;
 			sourceTree = "<group>";
@@ -351,8 +369,9 @@
 		088F25F42EE50AF400E89167 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				088ECA5A2EF7DD5400323A08 /* AudioButtonStyle.swift */,
+				08D648B82EFD45AE004F9C65 /* SelectionThreeDButtonStyle.swift */,
 				085781632EEFDAF70003618D /* ButtonStyle.swift */,
+				088ECA5A2EF7DD5400323A08 /* AudioButtonStyle.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -505,6 +524,7 @@
 		08BE819E2EE7B7D3004181EE /* LearnLesson */ = {
 			isa = PBXGroup;
 			children = (
+				082EC9FD2EFCF42400645D3A /* Warning */,
 				088ECA5D2EF7EABE00323A08 /* ProgressBar */,
 				08BE81C22EE7F13D004181EE /* FlipCard */,
 				08BE81C12EE7F126004181EE /* ProcessStudy */,
@@ -645,6 +665,7 @@
 				083369E42EE585A2003B2FEF /* RegistrationView.swift in Sources */,
 				08BE81772EE7A874004181EE /* ProfileView.swift in Sources */,
 				088ECA572EF6DE1C00323A08 /* PracticeView.swift in Sources */,
+				082EC9FF2EFCF42C00645D3A /* ExitConfirmationSheet.swift in Sources */,
 				088F260C2EE50D3900E89167 /* SurveyView.swift in Sources */,
 				088F260D2EE50D3900E89167 /* SurveyOptionRow.swift in Sources */,
 				088881A92EF3DDBE00F8E198 /* SettingsViewModel.swift in Sources */,
@@ -655,6 +676,7 @@
 				088F25EC2EE50A8000E89167 /* Project2_MI3390_20251App.swift in Sources */,
 				08BE81CE2EE852D2004181EE /* AudioManager.swift in Sources */,
 				085B5FF92EEC366400B6BE5F /* DictionaryService.swift in Sources */,
+				082ECA052EFD098900645D3A /* CorrectSheetView.swift in Sources */,
 				088ECA612EF7FB0200323A08 /* AudioButton.swift in Sources */,
 				08BE81A52EE7B7E5004181EE /* FlashcardStepView.swift in Sources */,
 				08625DD12EF594F900CD5619 /* SpellingGameView.swift in Sources */,
@@ -672,8 +694,10 @@
 				088F26092EE50D3100E89167 /* SurveyModel.swift in Sources */,
 				088ECA5F2EF7EAC800323A08 /* ProgressBar.swift in Sources */,
 				08BE818B2EE7B50E004181EE /* WordRow.swift in Sources */,
+				082ECA032EFD079400645D3A /* SummarizeView.swift in Sources */,
 				084CB4A52EF406D600B1CBBE /* NotificationManager.swift in Sources */,
 				08BE81752EE7A83D004181EE /* LearnView.swift in Sources */,
+				08D648B92EFD45AE004F9C65 /* SelectionThreeDButtonStyle.swift in Sources */,
 				088F26122EE510E300E89167 /* SplashScreenView.swift in Sources */,
 				0804F2F92EE79FDC00A982D3 /* AppTab.swift in Sources */,
 				088ECA592EF6EB9900323A08 /* AppTextField.swift in Sources */,
@@ -813,6 +837,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WT5PJGD97N;
@@ -833,6 +858,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "quanganh2405.Project2-MI3390-20251";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -851,6 +877,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WT5PJGD97N;
@@ -871,6 +898,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "quanganh2405.Project2-MI3390-20251";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

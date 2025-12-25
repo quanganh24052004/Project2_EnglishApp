@@ -39,7 +39,7 @@ struct SettingsView: View {
                 dataSection
                 aboutSection
             }
-            .navigationTitle("Setting")
+            .navigationTitle(languageManager.currentLanguage == "vi" ? "Cài đặt" : "Settings")
                         
             // Alert Reset dữ liệu
             .alert("Warning", isPresented: $showingResetAlert) {

@@ -1,10 +1,4 @@
 //
-//  Course.swift
-//  DataDemo
-//
-//  Created by Nguyễn Quang Anh on 3/12/25.
-//
-//
 //  LearningModels.swift
 //  DataDemo
 //

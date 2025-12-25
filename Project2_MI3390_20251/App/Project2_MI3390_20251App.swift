@@ -28,6 +28,8 @@ struct Project2_MI3390_20251App: App {
         } catch {
             fatalError("❌ Lỗi nghiêm trọng: Không thể tạo ModelContainer: \(error)")
         }
+        // 🔥 Xin quyền thông báo ngay khi khởi chạy App
+        NotificationManager.shared.requestPermission()
     }
     
     @MainActor

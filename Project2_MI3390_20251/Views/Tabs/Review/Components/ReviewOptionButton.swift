@@ -1,3 +1,11 @@
+//
+//  ReviewOptionButton.swift
+//  Project2_MI3390_20251
+//
+//  Created by Nguyễn Quang Anh on 26/12/25.
+//
+
+
 import SwiftUI
 
 // Component hiển thị 1 lựa chọn trắc nghiệm
@@ -36,7 +44,7 @@ struct ReviewOptionButton: View {
         .onAppear {
             if isAudioMode && isSelected {
                 // Logic play sound (nếu cần play khi vừa chọn)
-                // AudioManager.shared.playTTS(text) 
+                AudioManager.shared.playTTS(text: text)
             }
         }
     }

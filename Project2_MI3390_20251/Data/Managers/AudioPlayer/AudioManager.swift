@@ -77,7 +77,7 @@ class AudioManager: NSObject, ObservableObject {
         if isCorrect {
             AudioServicesPlaySystemSound(1407)
         } else {
-            AudioServicesPlaySystemSound(1053)
+            AudioServicesPlaySystemSound(1073)
         }
         
         let generator = UINotificationFeedbackGenerator()

@@ -132,7 +132,7 @@ struct PracticeView: View {
     func handleAnswer(isCorrect: Bool) {
         guard let record = currentRecord else { return }
         
-        learningManager?.processReviewResult(record: record, isCorrect: isCorrect)
+        learningManager?.processReviewResult(for: record, isCorrect: isCorrect)
         
         withAnimation {
             isFlipped = false // Úp thẻ lại

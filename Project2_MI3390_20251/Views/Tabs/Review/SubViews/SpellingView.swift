@@ -1,3 +1,11 @@
+//
+//  SpellingView.swift
+//  Project2_MI3390_20251
+//
+//  Created by Nguyễn Quang Anh on 26/12/25.
+//
+import SwiftUI
+
 struct SpellingView: View {
     let question: ReviewQuestion
     @Binding var currentInput: [String] // Mảng các ký tự người dùng đã chọn

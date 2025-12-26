@@ -12,7 +12,8 @@ struct ReviewSummaryView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.modelContext) var modelContext
     
-    // Kiểm tra xem còn từ nào cần ôn nữa không (ngoài phiên vừa xong)
+    // Query để đếm số lượng từ CẦN ôn (NextReview <= Hiện tại)
+    // Lưu ý: Logic này chạy độc lập để xem còn bài tồn đọng không
     @Query var studyRecords: [StudyRecord]
     
     var dueRecordsCount: Int {
@@ -20,20 +21,19 @@ struct ReviewSummaryView: View {
         return studyRecords.filter { $0.nextReview <= now }.count
     }
     
-    // Callback để điều hướng về các tab chính
-    var onGoToLearn: () -> Void
-    var onContinueReview: () -> Void
-    var onDismiss: () -> Void
+    // Callback hành động
+    var onContinueReview: () -> Void // Reset session để ôn tiếp
     
     var body: some View {
         VStack(spacing: 30) {
             Spacer()
             
             // 1. Ảnh minh họa & Chúc mừng
-            Image("img_happy") // Đảm bảo bạn có ảnh này hoặc thay bằng systemImage
+            Image("img_happy") // Dùng ảnh có sẵn trong Assets của bạn
                 .resizable()
                 .scaledToFit()
                 .frame(height: 200)
+                .padding()
             
             Text("Tuyệt vời! 🎉")
                 .font(.largeTitle)
@@ -44,16 +44,15 @@ struct ReviewSummaryView: View {
                 .font(.body)
                 .foregroundColor(.gray)
                 .multilineTextAlignment(.center)
-                .padding(.horizontal)
             
             Spacer()
             
-            // 2. Các nút hành động
+            // 2. Các nút điều hướng
             VStack(spacing: 16) {
                 
-                // Nút A: Học từ mới (Luôn hiện) -> Trỏ về Tab Learning
+                // Nút A: Học từ mới -> Đóng ReviewView để lộ ra Tab Learning bên dưới
                 Button(action: {
-                    onGoToLearn()
+                    dismiss()
                 }) {
                     HStack {
                         Image(systemName: "book.fill")
@@ -67,7 +66,7 @@ struct ReviewSummaryView: View {
                     .cornerRadius(16)
                 }
                 
-                // Nút B: Ôn tập ngay (Chỉ hiện nếu còn từ cần ôn)
+                // Nút B: Ôn tập ngay (Chỉ hiện nếu còn từ tồn đọng)
                 if dueRecordsCount > 0 {
                     Button(action: {
                         onContinueReview()
@@ -85,18 +84,19 @@ struct ReviewSummaryView: View {
                     }
                 }
                 
-                // Nút C: Về trang chủ (Đóng review)
+                // Nút phụ: Về trang chủ
                 Button(action: {
-                    onDismiss()
+                    dismiss()
                 }) {
                     Text("Về trang chủ")
                         .font(.body)
                         .foregroundColor(.gray)
-                        .padding()
+                        .padding(.top, 4)
                 }
             }
             .padding(.horizontal)
             .padding(.bottom, 20)
         }
+        .padding()
     }
 }

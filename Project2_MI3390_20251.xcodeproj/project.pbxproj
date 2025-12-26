@@ -62,6 +62,15 @@
 		08BE81CB2EE7F743004181EE /* WordCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BE81CA2EE7F743004181EE /* WordCardView.swift */; };
 		08BE81CE2EE852D2004181EE /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BE81CD2EE852D2004181EE /* AudioManager.swift */; };
 		08D648B92EFD45AE004F9C65 /* SelectionThreeDButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D648B82EFD45AE004F9C65 /* SelectionThreeDButtonStyle.swift */; };
+		08D649102EFE9AC6004F9C65 /* ReviewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D6490F2EFE9AC6004F9C65 /* ReviewModels.swift */; };
+		08D649142EFEA4E2004F9C65 /* ReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D649132EFEA4E2004F9C65 /* ReviewViewModel.swift */; };
+		08D649192EFEAAF1004F9C65 /* ReviewOptionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D649182EFEAAF1004F9C65 /* ReviewOptionButton.swift */; };
+		08D6491C2EFEAB55004F9C65 /* MultipleChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D6491B2EFEAB55004F9C65 /* MultipleChoiceView.swift */; };
+		08D6491E2EFEAB78004F9C65 /* SpellingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D6491D2EFEAB78004F9C65 /* SpellingView.swift */; };
+		08D649202EFEAB88004F9C65 /* TypingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D6491F2EFEAB88004F9C65 /* TypingView.swift */; };
+		08D649222EFEAB96004F9C65 /* ReviewPromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D649212EFEAB96004F9C65 /* ReviewPromptView.swift */; };
+		08D649242EFEAC33004F9C65 /* ReviewContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D649232EFEAC33004F9C65 /* ReviewContainerView.swift */; };
+		08D649262EFEB575004F9C65 /* ReviewSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D649252EFEB575004F9C65 /* ReviewSummaryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -122,6 +131,15 @@
 		08BE81CA2EE7F743004181EE /* WordCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCardView.swift; sourceTree = "<group>"; };
 		08BE81CD2EE852D2004181EE /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		08D648B82EFD45AE004F9C65 /* SelectionThreeDButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionThreeDButtonStyle.swift; sourceTree = "<group>"; };
+		08D6490F2EFE9AC6004F9C65 /* ReviewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewModels.swift; sourceTree = "<group>"; };
+		08D649132EFEA4E2004F9C65 /* ReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewModel.swift; sourceTree = "<group>"; };
+		08D649182EFEAAF1004F9C65 /* ReviewOptionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewOptionButton.swift; sourceTree = "<group>"; };
+		08D6491B2EFEAB55004F9C65 /* MultipleChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleChoiceView.swift; sourceTree = "<group>"; };
+		08D6491D2EFEAB78004F9C65 /* SpellingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpellingView.swift; sourceTree = "<group>"; };
+		08D6491F2EFEAB88004F9C65 /* TypingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypingView.swift; sourceTree = "<group>"; };
+		08D649212EFEAB96004F9C65 /* ReviewPromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewPromptView.swift; sourceTree = "<group>"; };
+		08D649232EFEAC33004F9C65 /* ReviewContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewContainerView.swift; sourceTree = "<group>"; };
+		08D649252EFEB575004F9C65 /* ReviewSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewSummaryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -334,8 +352,7 @@
 		088F25F02EE50AAE00E89167 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				088881A72EF3DDB400F8E198 /* Setting */,
-				08BE81BF2EE7E0C7004181EE /* Learn */,
+				08D649112EFEA4CD004F9C65 /* Tab */,
 				088F260E2EE50D4200E89167 /* Onboarding */,
 			);
 			path = ViewModels;
@@ -380,10 +397,8 @@
 		088F25F52EE50AFC00E89167 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				085B5FF42EEC327E00B6BE5F /* SearchAPI */,
-				08BE81872EE7AD39004181EE /* Learn */,
+				08D6490D2EFE9A91004F9C65 /* Tab */,
 				0804F2F72EE79FD900A982D3 /* Main */,
-				083369DD2EE58503003B2FEF /* Authentication */,
 				088F26072EE50D2500E89167 /* Onboarding */,
 			);
 			path = Models;
@@ -467,8 +482,11 @@
 		088F26002EE50B3A00E89167 /* Review */ = {
 			isa = PBXGroup;
 			children = (
+				08D649232EFEAC33004F9C65 /* ReviewContainerView.swift */,
 				088ECA562EF6DE1C00323A08 /* PracticeView.swift */,
 				088881A32EF2B9F000F8E198 /* ReviewView.swift */,
+				08D6491A2EFEAB46004F9C65 /* SubViews */,
+				08D649172EFEAAE9004F9C65 /* Components */,
 			);
 			path = Review;
 			sourceTree = "<group>";
@@ -574,6 +592,63 @@
 			path = AudioPlayer;
 			sourceTree = "<group>";
 		};
+		08D6490D2EFE9A91004F9C65 /* Tab */ = {
+			isa = PBXGroup;
+			children = (
+				08D6490E2EFE9AAC004F9C65 /* Review */,
+				08BE81872EE7AD39004181EE /* Learn */,
+				083369DD2EE58503003B2FEF /* Authentication */,
+				085B5FF42EEC327E00B6BE5F /* SearchAPI */,
+			);
+			path = Tab;
+			sourceTree = "<group>";
+		};
+		08D6490E2EFE9AAC004F9C65 /* Review */ = {
+			isa = PBXGroup;
+			children = (
+				08D6490F2EFE9AC6004F9C65 /* ReviewModels.swift */,
+			);
+			path = Review;
+			sourceTree = "<group>";
+		};
+		08D649112EFEA4CD004F9C65 /* Tab */ = {
+			isa = PBXGroup;
+			children = (
+				08D649122EFEA4D6004F9C65 /* Review */,
+				08BE81BF2EE7E0C7004181EE /* Learn */,
+				088881A72EF3DDB400F8E198 /* Setting */,
+			);
+			path = Tab;
+			sourceTree = "<group>";
+		};
+		08D649122EFEA4D6004F9C65 /* Review */ = {
+			isa = PBXGroup;
+			children = (
+				08D649132EFEA4E2004F9C65 /* ReviewViewModel.swift */,
+			);
+			path = Review;
+			sourceTree = "<group>";
+		};
+		08D649172EFEAAE9004F9C65 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				08D649182EFEAAF1004F9C65 /* ReviewOptionButton.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		08D6491A2EFEAB46004F9C65 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				08D649252EFEB575004F9C65 /* ReviewSummaryView.swift */,
+				08D649212EFEAB96004F9C65 /* ReviewPromptView.swift */,
+				08D6491F2EFEAB88004F9C65 /* TypingView.swift */,
+				08D6491D2EFEAB78004F9C65 /* SpellingView.swift */,
+				08D6491B2EFEAB55004F9C65 /* MultipleChoiceView.swift */,
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -658,7 +733,9 @@
 				08BE81BE2EE7C41A004181EE /* LearningItem.swift in Sources */,
 				088881A62EF3DBEE00F8E198 /* SettingsView.swift in Sources */,
 				088F26102EE50D4700E89167 /* SurveyViewModel.swift in Sources */,
+				08D649192EFEAAF1004F9C65 /* ReviewOptionButton.swift in Sources */,
 				083369DB2EE57F1D003B2FEF /* String+Validation.swift in Sources */,
+				08D6491C2EFEAB55004F9C65 /* MultipleChoiceView.swift in Sources */,
 				088881A22EF2B5AC00F8E198 /* LearningManager.swift in Sources */,
 				0804F2F62EE79E4B00A982D3 /* MainTabView.swift in Sources */,
 				085B5FF62EEC32B200B6BE5F /* DictionaryEntry.swift in Sources */,
@@ -670,6 +747,7 @@
 				088F260D2EE50D3900E89167 /* SurveyOptionRow.swift in Sources */,
 				088881A92EF3DDBE00F8E198 /* SettingsViewModel.swift in Sources */,
 				088881B32EF3F81A00F8E198 /* LanguageManage.swift in Sources */,
+				08D649102EFE9AC6004F9C65 /* ReviewModels.swift in Sources */,
 				08BE81892EE7AD40004181EE /* LearningModels.swift in Sources */,
 				088F26142EE5113C00E89167 /* RootView.swift in Sources */,
 				088ECA5B2EF7DD5400323A08 /* AudioButtonStyle.swift in Sources */,
@@ -680,13 +758,16 @@
 				088ECA612EF7FB0200323A08 /* AudioButton.swift in Sources */,
 				08BE81A52EE7B7E5004181EE /* FlashcardStepView.swift in Sources */,
 				08625DD12EF594F900CD5619 /* SpellingGameView.swift in Sources */,
+				08D649222EFEAB96004F9C65 /* ReviewPromptView.swift in Sources */,
 				08BE81A62EE7B7E5004181EE /* LessonContainerView.swift in Sources */,
 				088881A42EF2B9F000F8E198 /* ReviewView.swift in Sources */,
 				08BE81A72EE7B7E5004181EE /* LessonViewModel.swift in Sources */,
 				08BE81A82EE7B7E5004181EE /* FeedbackSheetView.swift in Sources */,
 				08BE81C82EE7F713004181EE /* FlipCardContainer.swift in Sources */,
 				08BE81AA2EE7B7E5004181EE /* InputStepView.swift in Sources */,
+				08D649262EFEB575004F9C65 /* ReviewSummaryView.swift in Sources */,
 				08BE81712EE7A5BF004181EE /* SearchView.swift in Sources */,
+				08D649242EFEAC33004F9C65 /* ReviewContainerView.swift in Sources */,
 				083369E22EE58583003B2FEF /* LoginView.swift in Sources */,
 				085781642EEFDAF70003618D /* ButtonStyle.swift in Sources */,
 				08BE81CB2EE7F743004181EE /* WordCardView.swift in Sources */,
@@ -697,9 +778,12 @@
 				082ECA032EFD079400645D3A /* SummarizeView.swift in Sources */,
 				084CB4A52EF406D600B1CBBE /* NotificationManager.swift in Sources */,
 				08BE81752EE7A83D004181EE /* LearnView.swift in Sources */,
+				08D6491E2EFEAB78004F9C65 /* SpellingView.swift in Sources */,
 				08D648B92EFD45AE004F9C65 /* SelectionThreeDButtonStyle.swift in Sources */,
 				088F26122EE510E300E89167 /* SplashScreenView.swift in Sources */,
 				0804F2F92EE79FDC00A982D3 /* AppTab.swift in Sources */,
+				08D649202EFEAB88004F9C65 /* TypingView.swift in Sources */,
+				08D649142EFEA4E2004F9C65 /* ReviewViewModel.swift in Sources */,
 				088ECA592EF6EB9900323A08 /* AppTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

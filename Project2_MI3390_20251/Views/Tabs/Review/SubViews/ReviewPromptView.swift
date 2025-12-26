@@ -1,3 +1,11 @@
+//
+//  ReviewPromptView.swift
+//  Project2_MI3390_20251
+//
+//  Created by Nguyễn Quang Anh on 26/12/25.
+//
+import SwiftUI
+
 struct ReviewPromptView: View {
     let question: ReviewQuestion
     
@@ -5,8 +13,9 @@ struct ReviewPromptView: View {
         VStack(spacing: 16) {
             // Nếu có Audio đề bài (Kịch bản 8)
             if let audio = question.audioUrl, question.type == .listenToAudioChooseMeaning {
-                 AudioButton(url: audio) // Sử dụng Component có sẵn của bạn
-                     .frame(width: 60, height: 60)
+//                AudioButton() {
+//                    AudioManager.shared.playTTS(text: text, language: "en-US")
+//                }
             }
             
             // Hiển thị Text (Câu ví dụ hoặc Nghĩa)

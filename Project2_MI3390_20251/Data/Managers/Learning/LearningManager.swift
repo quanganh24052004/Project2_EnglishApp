@@ -3,6 +3,7 @@
 //  Project2_MI3390_20251
 //
 //  Created by Nguyễn Quang Anh on 17/12/25.
+//  
 //
 
 import Foundation
@@ -13,169 +14,115 @@ import SwiftUI
 class LearningManager {
     let modelContext: ModelContext
     
-    // Cache user để tối ưu hiệu năng
-    private var cachedUser: User?
-    
-        
     init(modelContext: ModelContext) {
         self.modelContext = modelContext
     }
     
-    // MARK: - 1. Helper: Định nghĩa thời gian cho từng cấp
-    private func getInterval(forCurrentLevel level: Int) -> TimeInterval {
-        switch level {
-        case 0: return 10 * 60
-        case 1: return 60 * 60          
-        case 2: return 24 * 60 * 60
-        case 3: return 3 * 24 * 60 * 60
-        case 4: return 7 * 24 * 60 * 60
-        case 5: return 7 * 24 * 60 * 60
-        default: return 10 * 60
-        }
-    }
-    
-    // MARK: - 2. Xử lý khi Học xong bài mới (Learn Mode)
+    // MARK: - 1. API: Đánh dấu đã học từ mới (Learn Mode)
     func markAsLearned(wordID: PersistentIdentifier) {
         guard let word = modelContext.model(for: wordID) as? Word else { return }
         
+        // Kiểm tra xem đã có record chưa để tránh tạo trùng
         let descriptor = FetchDescriptor<StudyRecord>(
             predicate: #Predicate { $0.word?.persistentModelID == wordID }
         )
         
-        if let existingRecord = try? modelContext.fetch(descriptor).first {
-            print("ℹ️ Từ '\(word.english)' đã tồn tại ở Level \(existingRecord.memoryLevel).")
-            return
-        }
-        
-        let user = getCurrentUser()
-        let newRecord = StudyRecord(user: user, word: word)
-        newRecord.memoryLevel = 0
-        newRecord.lastReview = Date()
-        
-        let nextDate = Date().addingTimeInterval(getInterval(forCurrentLevel: 0))
-        newRecord.nextReview = nextDate
-        
-        modelContext.insert(newRecord)
-        
-        saveContext()
-        
-        NotificationManager.shared.scheduleReviewNotification(for: word, at: nextDate)
-        print("🔔 Đã hẹn giờ ôn '\(word.english)' sau 10 phút.")
-    }
-    
-    // MARK: - 3. Xử lý khi Ôn tập (Review Mode)
-        func processReviewResult(record: StudyRecord, isCorrect: Bool) {
-        let now = Date()
-        record.lastReview = now
-        
-        if isCorrect {
-            let currentLevel = record.memoryLevel
-            let nextLevel = min(currentLevel + 1, 5) // Max là 5
-            
-            record.memoryLevel = nextLevel
-            
-            record.nextReview = now.addingTimeInterval(getInterval(forCurrentLevel: nextLevel))
-            
-            print("✅ Đúng: '\(record.word?.english ?? "")' lên Level \(nextLevel)")
-            
-        } else {
-            let currentLevel = record.memoryLevel
-            
-            record.nextReview = now.addingTimeInterval(getInterval(forCurrentLevel: currentLevel))
-            
-            print("❌ Sai: '\(record.word?.english ?? "")' giữ Level \(currentLevel)")
-        }
-        
-        saveContext()
-    }
-    
-    private func saveContext() {
-        do { try modelContext.save() } catch { print("Save error: \(error)") }
-    }
-    // MARK: - Helper lấy User
-    private func getCurrentUser() -> User {
-        if let cached = cachedUser { return cached }
-        
-        let descriptor = FetchDescriptor<User>()
-        if let user = try? modelContext.fetch(descriptor).first {
-            self.cachedUser = user
-            return user
-        }
-        
-        let newUser = User(name: "Learner", phone: "")
-        modelContext.insert(newUser)
-        try? modelContext.save()
-        self.cachedUser = newUser
-        return newUser
-    }
-    
-    // MARK: - Main Function: Update Progress
-    func updateProgress(wordID: PersistentIdentifier, isCorrect: Bool) {
-        guard let word = modelContext.model(for: wordID) as? Word else {
-            print("❌ Error: Word not found for ID \(wordID)")
-            return
-        }
-        
-        let user = getCurrentUser()
-        
-        let record: StudyRecord
-        
-        if let existingRecord = word.studyRecords.first(where: { $0.user?.persistentModelID == user.persistentModelID }) {
-            record = existingRecord
-        } else {
-            record = StudyRecord(user: user, word: word)
-            modelContext.insert(record)
-            record.word = word
-            record.user = user
-        }
-        
-        calculateNextReview(for: record, isCorrect: isCorrect)
-        
         do {
+            if let existingRecord = try modelContext.fetch(descriptor).first {
+                print("⚠️ Record already exists for \(word.english). Resetting.")
+                resetProgress(for: existingRecord)
+            } else {
+                // Tạo record mới (Level 0)
+                let newRecord = StudyRecord(user: User(name: "Default", phone: ""), word: word)
+                newRecord.memoryLevel = 0
+                newRecord.lastReview = Date()
+                newRecord.nextReview = calculateNextReviewDate(forLevel: 0)
+                
+                modelContext.insert(newRecord)
+                print("✅ Created new SRS record for: \(word.english)")
+            }
+            
             try modelContext.save()
-            print("✅ Saved: \(word.english) | Level: \(record.memoryLevel) | Next: \(record.nextReview.formatted())")
         } catch {
-            print("❌ Error saving progress: \(error.localizedDescription)")
+            print("❌ Error marking as learned: \(error.localizedDescription)")
         }
     }
     
-    // MARK: - SRS Logic (Refactored)
-    private func calculateNextReview(for record: StudyRecord, isCorrect: Bool) {
+    // MARK: - 2. API: Xử lý kết quả Ôn tập (Review Mode)
+    func processReviewResult(for record: StudyRecord, isCorrect: Bool) {
         record.lastReview = Date()
         record.updatedAt = Date()
         
         if isCorrect {
-            record.memoryLevel = min(record.memoryLevel + 1, 5)
+            // TRƯỜNG HỢP ĐÚNG: Tăng cấp (Max 5)
+            let nextLevel = min(record.memoryLevel + 1, 5)
+            record.memoryLevel = nextLevel
+            record.nextReview = calculateNextReviewDate(forLevel: nextLevel)
             
-            record.nextReview = getNextReviewDate(currentLevel: record.memoryLevel)
+            print("📈 Correct! Upgraded to Level \(nextLevel). Next review: \(record.nextReview.formatted())")
             
         } else {
-            record.memoryLevel = 1
+            // TRƯỜNG HỢP SAI (Logic Mới):
+            // Thay vì phạt về 0, ta giữ nguyên Level và lên lịch ôn lại theo đúng interval của Level đó.
+            // Ví dụ: Đang Level 4 (7 ngày) -> Trả lời sai -> Vẫn Level 4 -> Ôn lại sau 7 ngày.
             
-            record.nextReview = Date()
+            // Giữ nguyên level (Code tường minh, dù không gán cũng được)
+            let currentLevel = record.memoryLevel
+            record.memoryLevel = currentLevel
+            
+            // Tính lại ngày review dựa trên Level hiện tại (Không phải Date() ngay lập tức)
+            record.nextReview = calculateNextReviewDate(forLevel: currentLevel)
+            
+            print("🔁 Wrong! Kept at Level \(currentLevel). Next review: \(record.nextReview.formatted())")
+        }
+        
+        // Lưu xuống DB
+        do {
+            try modelContext.save()
+        } catch {
+            print("❌ Error saving review result: \(error)")
         }
     }
     
-    // MARK: - Logic Thời Gian (Core Changes)
-    private func getNextReviewDate(currentLevel: Int) -> Date {
-        let calendar = Calendar.current
+    // MARK: - 3. Helper: Reset Progress (Dùng khi học lại từ đầu hoàn toàn)
+    private func resetProgress(for record: StudyRecord) {
+        record.memoryLevel = 0
+        record.lastReview = Date()
+        record.nextReview = calculateNextReviewDate(forLevel: 0)
+    }
+    
+    // MARK: - 4. SRS CORE LOGIC (Tính toán thời gian)
+    private func calculateNextReviewDate(forLevel level: Int) -> Date {
         let now = Date()
+        let calendar = Calendar.current
         
-        switch currentLevel {
+        switch level {
+        case 0:
+            // Level 0 (Mới/Quên): 10 phút
+            return now.addingTimeInterval(10 * 60)
+            
+        case 1:
+            // Level 1: 1 giờ
+            return now.addingTimeInterval(60 * 60)
+            
         case 2:
-            return calendar.date(byAdding: .hour, value: 1, to: now) ?? now
+            // Level 2: 1 ngày
+            return calendar.date(byAdding: .day, value: 1, to: now) ?? now.addingTimeInterval(86400)
             
         case 3:
-            return calendar.date(byAdding: .hour, value: 12, to: now) ?? now
+            // Level 3: 3 ngày
+            return calendar.date(byAdding: .day, value: 3, to: now) ?? now.addingTimeInterval(3 * 86400)
             
         case 4:
-            return calendar.date(byAdding: .day, value: 1, to: now) ?? now
+            // Level 4: 7 ngày
+            return calendar.date(byAdding: .day, value: 7, to: now) ?? now.addingTimeInterval(7 * 86400)
             
         case 5:
-            return calendar.date(byAdding: .day, value: 5, to: now) ?? now
+            // Level 5 (Master): 15 ngày
+            return calendar.date(byAdding: .day, value: 15, to: now) ?? now.addingTimeInterval(15 * 86400)
             
         default:
-            return calendar.date(byAdding: .minute, value: 10, to: now) ?? now
+            return now.addingTimeInterval(24 * 60 * 60)
         }
     }
 }

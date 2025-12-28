@@ -5,45 +5,33 @@
 //  Created by Nguyễn Quang Anh on 26/12/25.
 //
 
-
 import SwiftUI
 
 // Component hiển thị 1 lựa chọn trắc nghiệm
 struct ReviewOptionButton: View {
     let text: String
     let isSelected: Bool
-    let isAudioMode: Bool // True nếu là nút nghe (Scenario 1, 6)
+    let isAudioMode: Bool
     let action: () -> Void
     
     var body: some View {
         Button(action: action) {
             HStack {
                 if isAudioMode {
-                    // Dùng lại AudioButton của bạn hoặc icon loa
-                    Image(systemName: isSelected ? "speaker.wave.3.fill" : "speaker.wave.2")
-                        .foregroundColor(isSelected ? .white : .blue)
-                    Text("Nghe đáp án") // Hoặc ẩn text đi nếu chỉ muốn hiện loa
+                    Image(systemName: "speaker.wave.3.fill")
+                        .font(.system(size: 24))
+                        .fontWeight(.bold)
                 } else {
                     Text(text)
-                        .font(.body)
-                        .fontWeight(.medium)
-                        .multilineTextAlignment(.center)
+                        .font(.system(size: 16))
+                        .fontWeight(.semibold)
+                        .foregroundColor(.black)
                 }
             }
-            .frame(maxWidth: .infinity)
-            .padding()
-            .background(isSelected ? Color.blue : Color.white)
-            .foregroundColor(isSelected ? .white : .black)
-            .cornerRadius(12)
-            .overlay(
-                RoundedRectangle(cornerRadius: 12)
-                    .stroke(isSelected ? Color.blue : Color.gray.opacity(0.3), lineWidth: 2)
-            )
-            .shadow(color: .black.opacity(0.05), radius: 2, x: 0, y: 2)
         }
+        .buttonStyle(SelectionThreeDButtonStyle(isSelected: isSelected))
         .onAppear {
             if isAudioMode && isSelected {
-                // Logic play sound (nếu cần play khi vừa chọn)
                 AudioManager.shared.playTTS(text: text)
             }
         }

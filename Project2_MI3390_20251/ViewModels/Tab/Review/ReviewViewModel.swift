@@ -119,7 +119,7 @@ class ReviewViewModel: ObservableObject {
         switch level {
         case 0...1: // Mới học -> Thiên về Nghe & Chọn
             return [.listenAndChooseWord, .listenAndChooseMeaning, .chooseWordFromContext].randomElement()!
-            
+
         case 2...3: // Đang nhớ -> Thiên về Điền từ (Spelling)
             return [.fillInTheBlank, .translateAndFill, .chooseMeaningFromContext].randomElement()!
             

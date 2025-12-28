@@ -18,7 +18,7 @@ struct FlashcardStepView: View {
     
     let item: LearningItem
     var onContinue: () -> Void
-    let mainColor: Color = .buttonMain
+    let mainColor: Color = .pGreen
     
     var body: some View {
         ZStack {

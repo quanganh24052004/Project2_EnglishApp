@@ -10,18 +10,41 @@ import Foundation
 // MARK: - 1. Định nghĩa 8 loại câu hỏi
 enum ReviewQuestionType: CaseIterable {
     // Nhóm 1: Nghe & Chọn
-    case listenAndChooseWord        // 1. Context: Câu (khuyết) - Đáp án: 4 Audio Button
-    case listenAndChooseMeaning     // 6. Context: Nghĩa Việt - Đáp án: 4 Audio Button
-    case listenToAudioChooseMeaning // 8. Context: Audio - Đáp án: 4 Text Button (Nghĩa Việt)
+    case listenAndChooseWord        // 1
+    case listenAndChooseMeaning     // 6
+    case listenToAudioChooseMeaning // 8
     
     // Nhóm 2: Điền từ (Spelling/Typing)
-    case fillInTheBlank             // 2. Context: Câu (khuyết) - Đáp án: Spelling (Xếp ký tự)
-    case listenAndWrite             // 3. Context: Audio - Đáp án: Typing (Gõ phím)
-    case translateAndFill           // 4. Context: Nghĩa Việt - Đáp án: Spelling (Xếp ký tự)
+    case fillInTheBlank             // 2
+    case listenAndWrite             // 3
+    case translateAndFill           // 4
     
     // Nhóm 3: Trắc nghiệm Từ vựng/Nghĩa
-    case chooseWordFromContext      // 5. Context: Câu (khuyết) - Đáp án: 4 Text Button (Tiếng Anh)
-    case chooseMeaningFromContext   // 7. Context: Câu (gạch chân) - Đáp án: 4 Text Button (Nghĩa Việt)
+    case chooseWordFromContext      // 5
+    case chooseMeaningFromContext   // 7
+    
+    // MARK: - Tiêu đề hiển thị (Computed Property)
+    var title: String {
+        switch self {
+        case .listenAndChooseWord, .listenAndChooseMeaning, .listenToAudioChooseMeaning:
+            return "Nghe và chọn đáp án đúng"
+            
+        case .fillInTheBlank:
+            return "Điền từ vào chỗ trống" // Đã sửa nhẹ cho rõ nghĩa hơn, hoặc bạn có thể giữ là "Điền từ"
+            
+        case .listenAndWrite:
+            return "Nghe và viết lại"
+            
+        case .translateAndFill:
+            return "Sắp xếp lại ký tự"
+            
+        case .chooseWordFromContext:
+            return "Chọn từ thích hợp điền vào chỗ trống"
+            
+        case .chooseMeaningFromContext:
+            return "Chọn nghĩa của từ được gạch chân"
+        }
+    }
 }
 
 // MARK: - 2. Model cho một lựa chọn (Option)

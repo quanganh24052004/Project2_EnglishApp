@@ -15,17 +15,15 @@ struct SurveyOptionRow: View {
     
     var body: some View {
         Button(action: action) {
-            HStack(spacing: 15) {
+            HStack(spacing: 16) {
                 Image(systemName: option.iconName)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 24, height: 24)
-                    .foregroundColor(isSelected ? .white : .orange) // Giữ logic đổi màu nội dung
                 
                 Text(option.text)
                     .font(.body)
                     .fontWeight(.medium)
-                    .foregroundColor(isSelected ? .white : .black) // Giữ logic đổi màu chữ
                     .multilineTextAlignment(.leading)
                 
                 Spacer()
@@ -35,6 +33,7 @@ struct SurveyOptionRow: View {
                         .foregroundColor(.white)
                 }
             }
+            .padding(.horizontal, 16)
             .frame(maxWidth: .infinity) // Đảm bảo nút rộng full chiều ngang
         }
         .buttonStyle(SelectionThreeDButtonStyle(isSelected: isSelected))

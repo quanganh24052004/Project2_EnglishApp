@@ -58,7 +58,6 @@ struct SurveyView: View {
             }
             .background(Color(.primary01))
             
-            // --- FOOTER: Nút Tiếp tục ---
             VStack {
                 Button(action: {
                     viewModel.nextStep {
@@ -70,9 +69,9 @@ struct SurveyView: View {
                     Text(viewModel.currentIndex == viewModel.questions.count - 1 ? "Finish" : "Continue")
                 }
                 .buttonStyle(ThreeDButtonStyle(
-                    color: viewModel.canProceed ? .buttonMain : .gray
+                    color: viewModel.canProceed ? .pGreen : .gray
                 ))
-                .disabled(!viewModel.canProceed) // Vẫn giữ disable logic để chặn tương tác
+                .disabled(!viewModel.canProceed)
                 .padding()
             }
             .background(Color(.primary01)) // Nền toàn màn hình

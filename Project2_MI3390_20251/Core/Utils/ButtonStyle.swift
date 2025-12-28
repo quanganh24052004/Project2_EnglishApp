@@ -7,17 +7,13 @@
 
 import SwiftUI
 
-extension Color {
-    static let buttonMain = pGreen
-}
-
 struct ThreeDButtonStyle: ButtonStyle {
     let color: Color
     let depth: CGFloat
     let height: CGFloat
     private let shadowColor: Color
     
-    init(color: Color = .buttonMain, depth: CGFloat = 5, height: CGFloat = 48) {
+    init(color: Color = .pGreen, depth: CGFloat = 5, height: CGFloat = 48) {
         self.color = color
         self.depth = depth
         self.height = height
@@ -44,24 +40,4 @@ struct ThreeDButtonStyle: ButtonStyle {
             .offset(y: isPressed ? depth : 0)
             .animation(.interactiveSpring(response: 0.15, dampingFraction: 0.6), value: isPressed)
     }
-}
-struct ButtonPreview: View {
-    var body: some View {
-        VStack(spacing: 30) {
-            Button("Tiếp tục") {
-                print("Tapped!")
-            }
-            .buttonStyle(ThreeDButtonStyle())
-            .padding(100)
-            Button("TIẾP TỤC") {
-                print("Next tapped!")
-            }
-            .buttonStyle(ThreeDButtonStyle(color: .blue, depth: 6))
-        }
-        .padding()
-    }
-}
-
-#Preview {
-    ButtonPreview()
 }

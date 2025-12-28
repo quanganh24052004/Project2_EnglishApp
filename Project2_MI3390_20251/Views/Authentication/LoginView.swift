@@ -42,7 +42,7 @@ struct LoginView: View {
                         HStack {
                             Text("Password")
                                 .font(.system(size: 15))
-                                .fontWeight(.regular)
+                                .fontWeight(.semibold)
                                 .frame(height: 20)
                                 .foregroundColor(.neutral08)
                             Spacer()
@@ -56,7 +56,6 @@ struct LoginView: View {
                             Text("Forget Password?")
                                 .font(.system(size: 15))
                                 .fontWeight(.semibold)
-                                .fontWeight(.regular)
                                 .frame(height: 20)
                                 .foregroundColor(.primary02)
                         }
@@ -69,7 +68,6 @@ struct LoginView: View {
                     print("Login")
                 }
                 .buttonStyle(ThreeDButtonStyle(color: .pGreen))
-                .padding(.bottom, 24)
                 
                 VStack (spacing: 16) {
                     HStack (spacing: 15) {
@@ -87,7 +85,7 @@ struct LoginView: View {
                             .foregroundColor(.neutral04)
                     }
                 }
-                
+                .padding(.vertical, 24)
                 HStack (spacing: 15) {
                     Button {
                         print("Login with Social")
@@ -113,11 +111,33 @@ struct LoginView: View {
                     }
                     .buttonStyle(ThreeDButtonStyle(color: .black, height: 50))
                 }
+                
+                Spacer()
+                
+                NavigationLink {
+                    RegistrationView()
+                        .navigationBarBackButtonHidden()
+                } label: {
+                    HStack (spacing: 3) {
+                        Text("Don't have an account?")
+                            .font(.system(size: 15))
+                            .frame(height: 20)
+                            .foregroundColor(Color.neutral08)
+                        Text("Sign up")
+                            .font(.system(size: 15))
+                            .fontWeight(.semibold)
+                            .frame(height: 20)
+                            .foregroundColor(Color.primary02)
+                    }
+                }
+                
                 Spacer()
             }
             .padding(.horizontal, 24)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.neutral01)
+            .ignoresSafeArea()
         }
-
     }
 }
 

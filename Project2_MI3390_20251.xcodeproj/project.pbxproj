@@ -72,6 +72,7 @@
 		08D649262EFEB575004F9C65 /* ReviewSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D649252EFEB575004F9C65 /* ReviewSummaryView.swift */; };
 		08D6492A2EFEF637004F9C65 /* ChartPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D649292EFEF637004F9C65 /* ChartPath.swift */; };
 		08E36CCA2F01C81B00B86794 /* BackGroundMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 08E36CC92F01C81B00B86794 /* BackGroundMusic.mp3 */; };
+		08E4C4CA2F01EE2F00D18145 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E4C4C92F01EE2F00D18145 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -142,6 +143,7 @@
 		08D649252EFEB575004F9C65 /* ReviewSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewSummaryView.swift; sourceTree = "<group>"; };
 		08D649292EFEF637004F9C65 /* ChartPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartPath.swift; sourceTree = "<group>"; };
 		08E36CC92F01C81B00B86794 /* BackGroundMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = BackGroundMusic.mp3; sourceTree = "<group>"; };
+		08E4C4C92F01EE2F00D18145 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -383,6 +385,7 @@
 		088F25F32EE50AEF00E89167 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
+				08E4C4C92F01EE2F00D18145 /* Constants.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -789,6 +792,7 @@
 				08BE81712EE7A5BF004181EE /* SearchView.swift in Sources */,
 				08D649242EFEAC33004F9C65 /* ReviewContainerView.swift in Sources */,
 				083369E22EE58583003B2FEF /* LoginView.swift in Sources */,
+				08E4C4CA2F01EE2F00D18145 /* Constants.swift in Sources */,
 				085781642EEFDAF70003618D /* ButtonStyle.swift in Sources */,
 				08BE81CB2EE7F743004181EE /* WordCardView.swift in Sources */,
 				085781722EEFE14F0003618D /* Font+AppFont.swift in Sources */,

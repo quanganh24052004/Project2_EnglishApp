@@ -16,7 +16,6 @@ struct SettingsView: View {
     @AppStorage("isDarkMode") private var isDarkMode = false
     
     @AppStorage("soundEffects") private var isSoundEffectsOn = true
-    @AppStorage("backgroundMusic") private var isMusicOn = false
     @AppStorage("musicVolume") private var musicVolume = 0.5
     
     @AppStorage("dailyTarget") private var dailyTarget = 10
@@ -72,16 +71,39 @@ private extension SettingsView {
             Toggle("Sound effect", isOn: $isSoundEffectsOn)
             
             VStack(alignment: .leading) {
-                Toggle("Background music", isOn: $isMusicOn)
-                if isMusicOn {
-                    HStack {
-                        Image(systemName: "speaker.fill").foregroundColor(.secondary)
-                        Slider(value: $musicVolume, in: 0...1)
-                        Image(systemName: "speaker.wave.3.fill").foregroundColor(.secondary)
+                Toggle("Background music", isOn: $viewModel.isMusicEnabled)
+                .onChange(of: viewModel.isMusicEnabled) { oldValue, newValue in
+                    if newValue {
+                        AudioManager.shared.playBackgroundMusic()
+                    } else {
+                        AudioManager.shared.stopBackgroundMusic()
                     }
-                    .transition(.opacity)
                 }
             }
+            if viewModel.isMusicEnabled {
+            VStack(alignment: .leading) {
+                Text("Âm lượng: \(Int(viewModel.musicVolume * 100))%")
+                    .font(.caption)
+                    .foregroundColor(.gray)
+                
+                HStack {
+                    Image(systemName: "speaker.fill")
+                        .foregroundColor(.gray)
+                        .font(.caption)
+                    
+                    Slider(value: $viewModel.musicVolume, in: 0.0...1.0, step: 0.05)
+                        // THÊM: Cập nhật volume ngay khi kéo thanh trượt
+                        .onChange(of: viewModel.musicVolume) { oldValue, newValue in
+                            AudioManager.shared.setVolume(Float(newValue))
+                        }
+                    
+                    Image(systemName: "speaker.wave.3.fill")
+                        .foregroundColor(.gray)
+                        .font(.caption)
+                }
+            }
+            .padding(.vertical, 5)
+        }
         }
     }
     
@@ -121,3 +143,4 @@ struct SettingsView_Previews: PreviewProvider {
             .environmentObject(LanguageManager())
     }
 }
+

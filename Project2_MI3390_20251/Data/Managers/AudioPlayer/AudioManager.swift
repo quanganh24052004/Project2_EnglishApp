@@ -10,13 +10,31 @@ import AVFoundation
 import Combine
 import AudioToolbox
 import UIKit
+import SwiftUI
 
 class AudioManager: NSObject, ObservableObject {
     static let shared = AudioManager()
     
+    //Player riêng cho nhạc nền
+    private var backgroundPlayer: AVAudioPlayer?
+    
+    // Player cho âm thanh hiệu ứng (đúng/sai)
+    private var effectPlayer: AVPlayer?
+    private let synthesizer = AVSpeechSynthesizer()
+    
     private var player: AVPlayer?
     
-    private let synthesizer = AVSpeechSynthesizer()
+    // MARK: - Quản lý Trạng thái (Settings)
+    @AppStorage("isMusicEnabled") var isMusicEnabled: Bool = true {
+        didSet {
+            // Khi người dùng gạt switch trong Settings, xử lý ngay lập tức
+            if isMusicEnabled {
+                playBackgroundMusic()
+            } else {
+                stopBackgroundMusic()
+            }
+        }
+    }
     
     @Published var isSpeaking: Bool = false
     
@@ -28,10 +46,60 @@ class AudioManager: NSObject, ObservableObject {
     
     private func configureAudioSession() {
         do {
-            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .spokenAudio, options: .duckOthers)
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [.duckOthers, .mixWithOthers])
             try AVAudioSession.sharedInstance().setActive(true)
         } catch {
-            print("Lỗi cấu hình AudioSession: \(error.localizedDescription)")
+            print("Audio Config Error: \(error.localizedDescription)")
+        }
+    }
+    
+    // MARK: - Nhạc nền (Background Music)
+    func setVolume(_ volume: Float) {
+        backgroundPlayer?.volume = volume
+    }
+    
+    func playBackgroundMusic(filename: String = "BackGroundMusic", type: String = "mp3") {
+        guard isMusicEnabled else { return }
+        
+        // Nếu player đang chạy, chỉ cần đảm bảo volume đúng
+        if let player = backgroundPlayer, player.isPlaying {
+            // Lấy volume hiện tại từ UserDefaults (hoặc để nguyên nếu không muốn đọc lại từ disk liên tục)
+            // Ở đây ta set lại volume cho chắc chắn
+            let savedVolume = UserDefaults.standard.float(forKey: "musicVolume")
+            player.volume = (savedVolume == 0) ? 0.5 : savedVolume
+            return
+        }
+        
+        guard let path = Bundle.main.path(forResource: filename, ofType: type) else { return }
+        let url = URL(fileURLWithPath: path)
+        
+        do {
+            backgroundPlayer = try AVAudioPlayer(contentsOf: url)
+            backgroundPlayer?.numberOfLoops = -1
+            
+            // LẤY VOLUME TỪ USERDEFAULTS (Vì AppStorage lưu vào UserDefaults)
+            let savedVolume = UserDefaults.standard.double(forKey: "musicVolume")
+            // Nếu chưa có setting (bằng 0.0 do chưa lưu lần nào), ta lấy mặc định 0.5
+            // Lưu ý: Logic này check nếu user chưa từng chỉnh sửa setting
+            let volumeToPlay = (savedVolume == 0.0 && UserDefaults.standard.object(forKey: "musicVolume") == nil) ? 0.5 : Float(savedVolume)
+            
+            backgroundPlayer?.volume = volumeToPlay
+            
+            backgroundPlayer?.prepareToPlay()
+            backgroundPlayer?.play()
+        } catch {
+            print("Lỗi phát nhạc nền: \(error.localizedDescription)")
+        }
+    }
+    
+    func stopBackgroundMusic() {
+        backgroundPlayer?.stop()
+    }
+    
+    // Hàm này dùng để gọi lại nhạc khi quay về màn hình chính (nếu setting cho phép)
+    func resumeBackgroundMusic() {
+        if isMusicEnabled {
+            backgroundPlayer?.play()
         }
     }
     

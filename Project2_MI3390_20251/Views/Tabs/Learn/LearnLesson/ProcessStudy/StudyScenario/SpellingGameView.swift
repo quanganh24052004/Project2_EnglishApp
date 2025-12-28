@@ -49,7 +49,7 @@ struct SpellingGameView: View {
                 .foregroundColor(.clear)
                 .frame(width: 1, height: 1)
                 .opacity(0.01)
-                .onChange(of: userInput) { newValue in
+                .onChange(of: userInput) { oldValue, newValue in
                     handleInputChange(newValue)
                 }
             
@@ -66,7 +66,7 @@ struct SpellingGameView: View {
                             .padding(.horizontal)
                     }
                     .padding(.top, 20)
-
+                    
                     // MARK: - KHU VỰC ĐIỀN TỪ
                     VStack(spacing: 24) {
                         ForEach(lines) { line in
@@ -113,7 +113,9 @@ struct SpellingGameView: View {
         .onAppear {
             setupGame()
         }
-        .onChange(of: item.id) { _ in setupGame() }
+        .onChange(of: item.id) { oldValue, newValue in
+            setupGame()
+        }
     }
         
     func setupGame() {

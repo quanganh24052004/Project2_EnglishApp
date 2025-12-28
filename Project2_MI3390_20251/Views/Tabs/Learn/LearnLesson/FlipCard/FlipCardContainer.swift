@@ -32,7 +32,7 @@ struct FlipCardContainer<Front: View, Back: View>: View {
             back()
                 .rotation3DEffect(.degrees(backDegree), axis: (x: 0, y: 1, z: 0))
         }
-        .onChange(of: isFlipped) { newValue in
+        .onChange(of: isFlipped) { oldValue, newValue in
             flipCard(flipped: newValue)
         }
         .onAppear {
@@ -65,3 +65,4 @@ struct FlipCardContainer<Front: View, Back: View>: View {
         }
     }
 }
+

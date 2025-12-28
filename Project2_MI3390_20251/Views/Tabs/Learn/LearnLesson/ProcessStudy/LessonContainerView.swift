@@ -83,6 +83,12 @@ struct LessonContainerView: View {
              if viewModel.learningManager == nil {
                  viewModel.learningManager = LearningManager(modelContext: modelContext)
              }
+            AudioManager.shared.stopBackgroundMusic()
+        }
+        .onDisappear {
+            // Khi thoát màn hình học -> Gọi bật lại nhạc
+            // (Hàm này đã có logic check setting bên trong, nếu user tắt trong setting thì nó sẽ không phát)
+            AudioManager.shared.playBackgroundMusic()
         }
         .sheet(isPresented: $viewModel.showFeedbackSheet, onDismiss: {
             viewModel.moveToNextStage()

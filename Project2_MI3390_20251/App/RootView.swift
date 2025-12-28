@@ -32,6 +32,7 @@ struct RootView: View {
                     showSplash = false
                 }
             }
+            AudioManager.shared.playBackgroundMusic()
         }
     }
 }

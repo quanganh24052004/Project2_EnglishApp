@@ -71,6 +71,7 @@
 		08D649242EFEAC33004F9C65 /* ReviewContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D649232EFEAC33004F9C65 /* ReviewContainerView.swift */; };
 		08D649262EFEB575004F9C65 /* ReviewSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D649252EFEB575004F9C65 /* ReviewSummaryView.swift */; };
 		08D6492A2EFEF637004F9C65 /* ChartPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D649292EFEF637004F9C65 /* ChartPath.swift */; };
+		08E36CCA2F01C81B00B86794 /* BackGroundMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 08E36CC92F01C81B00B86794 /* BackGroundMusic.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -140,6 +141,7 @@
 		08D649232EFEAC33004F9C65 /* ReviewContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewContainerView.swift; sourceTree = "<group>"; };
 		08D649252EFEB575004F9C65 /* ReviewSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewSummaryView.swift; sourceTree = "<group>"; };
 		08D649292EFEF637004F9C65 /* ChartPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartPath.swift; sourceTree = "<group>"; };
+		08E36CC92F01C81B00B86794 /* BackGroundMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = BackGroundMusic.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,10 +177,10 @@
 		083369DC2EE58426003B2FEF /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				085781712EEFE14F0003618D /* Font+AppFont.swift */,
+				08E36CCC2F01C82E00B86794 /* Music */,
+				08E36CCB2F01C82200B86794 /* Asset */,
 				085781652EEFDFA30003618D /* Font */,
 				08BE81852EE7ABDA004181EE /* courses_data.json */,
-				088F25E42EE50A8000E89167 /* Assets.xcassets */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -218,6 +220,7 @@
 		085781652EEFDFA30003618D /* Font */ = {
 			isa = PBXGroup;
 			children = (
+				085781712EEFE14F0003618D /* Font+AppFont.swift */,
 				085781662EEFDFC50003618D /* chalkboardse.otf */,
 				085781672EEFDFC50003618D /* ChalkboardSE-Bold-03_0.ttf */,
 				085781682EEFDFC50003618D /* ChalkboardSE-Light-01_0.ttf */,
@@ -649,6 +652,22 @@
 			path = SubViews;
 			sourceTree = "<group>";
 		};
+		08E36CCB2F01C82200B86794 /* Asset */ = {
+			isa = PBXGroup;
+			children = (
+				088F25E42EE50A8000E89167 /* Assets.xcassets */,
+			);
+			path = Asset;
+			sourceTree = "<group>";
+		};
+		08E36CCC2F01C82E00B86794 /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				08E36CC92F01C81B00B86794 /* BackGroundMusic.mp3 */,
+			);
+			path = Music;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -714,6 +733,7 @@
 				088F26062EE50C0900E89167 /* .gitignore in Resources */,
 				0857816B2EEFDFC50003618D /* COPYRIGHT.txt in Resources */,
 				0857816C2EEFDFC50003618D /* chalkboardse.otf in Resources */,
+				08E36CCA2F01C81B00B86794 /* BackGroundMusic.mp3 in Resources */,
 				0857816D2EEFDFC50003618D /* ChalkboardSE-Light-01_0.ttf in Resources */,
 				0857816E2EEFDFC50003618D /* ChalkboardSE-Regular-02_0.ttf in Resources */,
 				0857816F2EEFDFC50003618D /* ChalkboardSE-Bold-03_0.ttf in Resources */,

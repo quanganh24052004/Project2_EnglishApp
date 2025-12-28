@@ -45,6 +45,10 @@ struct ReviewContainerView: View {
             if viewModel.questions.isEmpty && !viewModel.isSessionCompleted {
                 viewModel.loadReviewSession()
             }
+            AudioManager.shared.stopBackgroundMusic()
+        }
+        .onDisappear {
+            AudioManager.shared.playBackgroundMusic()
         }
         // Sheet kết quả
         .sheet(isPresented: $viewModel.showResult) {

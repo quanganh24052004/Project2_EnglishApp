@@ -30,11 +30,11 @@ struct FlashcardStepView: View {
                 // MARK: - 2. Flip Card với logic tự động
                 WordCardView(item: item, isFlipped: $isFlipped)
                     .id(item.id)
-                    .onChange(of: isFlipped) { newValue in
-                        if newValue == true {
-                            enableContinue()
-                        }
-                    }
+                    .onChange(of: isFlipped) { oldValue, newValue in
+                          if newValue == true {
+                              enableContinue()
+                          }
+                      }
                 
                 // MARK: - 3. Audio Buttons
                 HStack(spacing: 40) {

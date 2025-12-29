@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import AuthenticationServices
 
 struct RegistrationView: View {
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject var authVM: AuthViewModel
     
     @State private var firstname = ""
     @State private var lastname = ""
@@ -17,170 +19,175 @@ struct RegistrationView: View {
     @State private var password = ""
     @State private var comfirmPassword = ""
     @State private var passwordMatch = false
+    
     @State private var isLoading = false
+    @State private var errorMessage: String?
+    @State private var showingError = false
+    
+    func register() {
+        guard passwordMatch else {
+            errorMessage = "Passwords do not match"
+            showingError = true
+            return
+        }
+        
+        isLoading = true
+        Task {
+            do {
+                let _ = try await SupabaseAuthService.shared.signUp(
+                    email: email,
+                    password: password,
+                    firstName: firstname,
+                    lastName: lastname,
+                    phone: phone
+                )
+                
+                await MainActor.run {
+                    isLoading = false
+                    print("Registration Success")
+                    // Cập nhật AuthViewModel -> RootView sẽ tự đổi View
+                    authVM.isAuthenticated = true
+                }
+            } catch {
+                await MainActor.run {
+                    isLoading = false
+                    errorMessage = error.localizedDescription
+                    showingError = true
+                }
+            }
+        }
+    }
     
     var body: some View {
         ScrollView {
             VStack(spacing: 0) {
-                Spacer()
+                Spacer().frame(height: 56)
+                Text("Create an account").font(.system(size: 22, weight: .bold))
                 
-                Text("Create an account")
-                    .font(.system(size: 22, weight: .bold))
-                    .padding(.top, 56)
-                
-                VStack (spacing: 12) {
-                    VStack (spacing: 8) {
-                        HStack {
-                            Text("First Name")
-                                .font(.system(size: 15))
-                                .fontWeight(.semibold)
-                                .frame(height: 20)
-                                .foregroundColor(.neutral08)
-                            Spacer()
+                VStack(spacing: 12) {
+                    Group {
+                        VStack (spacing: 8) {
+                            HStack {
+                                Text("First name")
+                                    .font(.system(size: 15))
+                                    .fontWeight(.semibold)
+                                    .frame(height: 20)
+                                    .foregroundColor(.neutral08)
+                                Spacer()
+                            }
+                            AppTextField(text: $firstname, placeholder: "First name", isSecure: false)
                         }
-                        AppTextField(text: $firstname, placeholder: "Enter your first name", isSecure: false)
-                    }
-                    
-                    VStack (spacing: 8) {
-                        HStack {
-                            Text("Last name")
-                                .font(.system(size: 15))
-                                .fontWeight(.semibold)
-                                .frame(height: 20)
-                                .foregroundColor(.neutral08)
-                            Spacer()
+                        
+                        VStack (spacing: 8) {
+                            HStack {
+                                Text("Last name")
+                                    .font(.system(size: 15))
+                                    .fontWeight(.semibold)
+                                    .frame(height: 20)
+                                    .foregroundColor(.neutral08)
+                                Spacer()
+                            }
+                            AppTextField(text: $lastname, placeholder: "Last name", isSecure: false)
                         }
-                        AppTextField(text: $lastname, placeholder: "Enter your last name", isSecure: false)
-                    }
-                    
-                    VStack (spacing: 8) {
-                        HStack {
-                            Text("Phone")
-                                .font(.system(size: 15))
-                                .fontWeight(.semibold)
-                                .frame(height: 20)
-                                .foregroundColor(.neutral08)
-                            Spacer()
+                        
+                        VStack (spacing: 8) {
+                            HStack {
+                                Text("Phone number")
+                                    .font(.system(size: 15))
+                                    .fontWeight(.semibold)
+                                    .frame(height: 20)
+                                    .foregroundColor(.neutral08)
+                                Spacer()
+                            }
+                            AppTextField(text: $phone, placeholder: "Phone number", isSecure: false)
                         }
-                        AppTextField(text: $phone, placeholder: "Enter your number phone", isSecure: false)
-                    }
-                    
-                    VStack (spacing: 8) {
-                        HStack {
-                            Text("Email")
-                                .font(.system(size: 15))
-                                .fontWeight(.semibold)
-                                .frame(height: 20)
-                                .foregroundColor(.neutral08)
-                            Spacer()
+                        
+                        VStack (spacing: 8) {
+                            HStack {
+                                Text("Email address")
+                                    .font(.system(size: 15))
+                                    .fontWeight(.semibold)
+                                    .frame(height: 20)
+                                    .foregroundColor(.neutral08)
+                                Spacer()
+                            }
+                            AppTextField(text: $email, placeholder: "Email address", isSecure: false)
                         }
-                        AppTextField(text: $email, placeholder: "Enter your email address", isSecure: false)
-                    }
-                    VStack (spacing: 8) {
-                        HStack {
-                            Text("Password")
-                                .font(.system(size: 15))
-                                .fontWeight(.semibold)
-                                .frame(height: 20)
-                                .foregroundColor(.neutral08)
-                            Spacer()
+                        
+                        VStack (spacing: 8) {
+                            HStack {
+                                Text("Password")
+                                    .font(.system(size: 15))
+                                    .fontWeight(.semibold)
+                                    .frame(height: 20)
+                                    .foregroundColor(.neutral08)
+                                Spacer()
+                            }
+                            AppTextField(text: $password, placeholder: "Password", isSecure: true)
                         }
-                        AppTextField(text: $password, placeholder: "Enter your password", isSecure: true)
-                    }
-                    
-                    VStack (spacing: 8) {
-                        HStack {
-                            Text("Comfirm Password")
-                                .font(.system(size: 15))
-                                .fontWeight(.semibold)
-                                .frame(height: 20)
-                                .foregroundColor(.neutral08)
-                            Spacer()
+
+                        VStack(spacing: 8) {
+                            HStack {
+                                Text("Confirm password")
+                                    .font(.system(size: 15))
+                                    .fontWeight(.semibold)
+                                    .frame(height: 20)
+                                    .foregroundColor(.neutral08)
+                                Spacer()
+                            }
+                            AppTextField(text: $comfirmPassword, placeholder: "Confirm password", isSecure: true)
                         }
-                        AppTextField(text: $comfirmPassword, placeholder: "Enter your comfirm password", isSecure: true)
-                    }
-                    .onChange(of: comfirmPassword) { oldValue, newValue in
-                        passwordMatch = newValue == password
+                        .onChange(of: comfirmPassword) { oldValue, newValue in
+                            passwordMatch = newValue == password
+                        }
                     }
                 }
                 .padding(.vertical, 12)
                 
-                Button("Login") {
-                    print("Login")
+                Button(isLoading ? "Loading..." : "Sign Up") {
+                    register()
                 }
-                .buttonStyle(ThreeDButtonStyle(color: .pGreen))
-                
-                VStack (spacing: 16) {
-                    HStack (spacing: 15) {
-                        Rectangle()
-                            .frame(height: 0.8)
-                            .foregroundColor(.neutral04)
-                        Text("Or")
-                            .font(.system(size: 15))
-                            .fontWeight(.semibold)
-                            .fontWeight(.regular)
-                            .frame(height: 20)
-                            .foregroundColor(.neutral04)
-                        Rectangle()
-                            .frame(height: 0.8)
-                            .foregroundColor(.neutral04)
-                    }
-                }
-                .padding(.vertical, 16)
-                HStack (spacing: 15) {
-                    Button {
-                        print("Login with Social")
-                    } label: {
-                        HStack(spacing: 12) {
-                            Image("img_google")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 24, height: 24)
-                        }
-                    }
-                    .buttonStyle(ThreeDButtonStyle(color: .black, height: 50))
-                    
-                    Button {
-                        print("Login with Social")
-                    } label: {
-                        HStack(spacing: 12) {
-                            Image(systemName: "applelogo")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 24, height: 24)
-                        }
-                    }
-                    .buttonStyle(ThreeDButtonStyle(color: .black, height: 50))
-                }
-                
-                Spacer()
+                .buttonStyle(ThreeDButtonStyle(color: passwordMatch ? .pGreen : .gray))
+                .disabled(!passwordMatch || isLoading)
+                .alert("Error", isPresented: $showingError) { Button("OK") {} } message: { Text(errorMessage ?? "") }
                 
                 Button {
                     dismiss()
                 } label: {
-                    HStack (spacing: 3) {
-                        Text("Already have an account?")
-                            .font(.system(size: 15))
-                            .frame(height: 20)
-                            .foregroundColor(Color.neutral08)
-                        Text("Sign in")
-                            .font(.system(size: 15))
-                            .fontWeight(.semibold)
-                            .frame(height: 20)
-                            .foregroundColor(Color.primary02)
+                    HStack(spacing: 3) {
+                        Text("Already have an account?").foregroundColor(.neutral08)
+                        Text("Sign in").fontWeight(.semibold).foregroundColor(.primary02)
                     }
                 }
                 .padding(.top, 16)
+                // Divider OR
+                VStack(spacing: 16) {
+                    HStack(spacing: 15) {
+                        Rectangle().frame(height: 0.8).foregroundColor(.neutral04)
+                        Text("Or").font(.system(size: 15)).foregroundColor(.neutral04)
+                        Rectangle().frame(height: 0.8).foregroundColor(.neutral04)
+                    }
+                }
+                .padding(.vertical, 24)
+                
+                // Social Buttons
+                HStack(spacing: 15) {
+                    Button { print("Google Login") } label: {
+                        HStack { Image("img_google").resizable().frame(width: 24, height: 24) }
+                    }
+                    .buttonStyle(ThreeDButtonStyle(color: .black, height: 50))
+                    
+                    // Apple Button Overlay Wrapper
+                    Button { } label: {
+                        HStack { Image(systemName: "applelogo").resizable().scaledToFit().frame(width: 24, height: 24).foregroundColor(.white) }
+                    }
+                    .buttonStyle(ThreeDButtonStyle(color: .black, height: 50))
+                }
                 Spacer()
             }
             .padding(.horizontal, 24)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.neutral01)
         .ignoresSafeArea()
     }
-}
-
-#Preview {
-    RegistrationView()
 }

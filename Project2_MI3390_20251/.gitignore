@@ -18,7 +18,7 @@ fastlane/screenshots
 fastlane/test_output
 
 # APIKey
-Constants.swift
+Project2_MI3390-20251/Core/Constants.swift
 
 # Misc
 .DS_Store

@@ -21,29 +21,25 @@ struct LoginView: View {
 
     // Logic Login Email
     func login() {
-            // 1. Kiểm tra đầu vào
         guard !email.isEmpty, !password.isEmpty else { return }
         
         isLoading = true
-        
         Task {
             do {
-                // 2. Gọi API đăng nhập Supabase
+                // Bước 1: Gọi API Đăng nhập
                 let _ = try await SupabaseAuthService.shared.signIn(email: email, password: password)
                 
-                // 3. QUAN TRỌNG: Cập nhật trạng thái UI trên luồng chính
+                // Bước 2: QUAN TRỌNG - Tải ngay thông tin User về ViewModel
+                // Nếu thiếu dòng này, ProfileView sẽ không có dữ liệu để hiển thị
+                await authVM.fetchCurrentUser()
+                
+                // Bước 3: Cập nhật UI và chuyển màn hình
                 await MainActor.run {
                     isLoading = false
-                    
-                    // 👉 DÒNG NÀY SẼ CHUYỂN MÀN HÌNH
-                    // Khi biến này thành true, RootView sẽ thay thế LoginView bằng MainTabView ngay lập tức
                     authVM.isAuthenticated = true
-                    
-                    // Nếu LoginView được mở dạng sheet (từ Profile), dòng này sẽ đóng nó lại
                     dismiss()
                 }
             } catch {
-                // 4. Xử lý lỗi
                 await MainActor.run {
                     isLoading = false
                     errorMessage = error.localizedDescription

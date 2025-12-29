@@ -11,7 +11,7 @@ import AuthenticationServices
 struct RegistrationView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var authVM: AuthViewModel
-    
+
     @State private var firstname = ""
     @State private var lastname = ""
     @State private var phone = ""
@@ -26,12 +26,13 @@ struct RegistrationView: View {
     
     func register() {
         guard passwordMatch else {
-            errorMessage = "Passwords do not match"
+            errorMessage = "Mật khẩu không khớp"
             showingError = true
             return
         }
         
         isLoading = true
+        
         Task {
             do {
                 let _ = try await SupabaseAuthService.shared.signUp(
@@ -42,11 +43,15 @@ struct RegistrationView: View {
                     phone: phone
                 )
                 
+                await authVM.fetchCurrentUser()
+                
                 await MainActor.run {
                     isLoading = false
                     print("Registration Success")
-                    // Cập nhật AuthViewModel -> RootView sẽ tự đổi View
+                    
                     authVM.isAuthenticated = true
+                    dismiss()
+
                 }
             } catch {
                 await MainActor.run {
@@ -160,7 +165,6 @@ struct RegistrationView: View {
                     }
                 }
                 .padding(.top, 16)
-                // Divider OR
                 VStack(spacing: 16) {
                     HStack(spacing: 15) {
                         Rectangle().frame(height: 0.8).foregroundColor(.neutral04)
@@ -168,7 +172,7 @@ struct RegistrationView: View {
                         Rectangle().frame(height: 0.8).foregroundColor(.neutral04)
                     }
                 }
-                .padding(.vertical, 24)
+                .padding(.vertical, 12)
                 
                 // Social Buttons
                 HStack(spacing: 15) {

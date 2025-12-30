@@ -16,17 +16,45 @@ struct LearnView: View {
             List {
                 ForEach(courses) { course in
                     NavigationLink(destination: LessonListView(course: course)) {
-                        VStack(alignment: .leading) {
+                        VStack(alignment: .leading, spacing: 8) {
                             Text(course.name)
-                                .font(.headline)
-                                .foregroundColor(.primary)
-                            
-                            Text(course.desc)
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
-                                .lineLimit(2)
+                                .font(.system(size: 20, design: .rounded))
+                                .fontWeight(.bold)
+                                .foregroundColor(Color.black)
+                            HStack (spacing: 16) {
+                                VStack (spacing: 8) {
+                                    Image(systemName: "target")
+                                        .font(.system(size: 14, design: .rounded))
+                                        .foregroundColor(.orange)
+                                    
+                                    Image(systemName: "graduationcap.fill")
+                                        .font(.system(size: 14, design: .rounded))
+                                        .foregroundColor(.orange)
+                                }
+
+                                VStack (spacing: 8) {
+                                    HStack {
+                                        Text(course.desc)
+                                            .font(.system(size: 14, design: .rounded))
+                                            .fontWeight(.semibold)
+                                            .foregroundColor(Color.neutral06)
+                                            .multilineTextAlignment(.leading)
+                                            .lineLimit(2)
+                                        Spacer()
+                                    }
+                                    HStack {
+                                        Text(course.subDescription)
+                                            .font(.system(size: 14, design: .rounded))
+                                            .fontWeight(.semibold)
+                                            .foregroundColor(Color.neutral06)
+                                            .multilineTextAlignment(.leading)
+                                            .lineLimit(2)
+                                        Spacer()
+                                    }
+                                }
+                            }
                         }
-                        .padding(.vertical, 4)
+                        .padding(4)
                     }
                 }
             }
@@ -43,12 +71,17 @@ struct LessonListView: View {
             ForEach(course.lessons.sorted(by: { $0.createdAt < $1.createdAt })) { lesson in
                 NavigationLink(destination: WordListView(lesson: lesson)) {
                     HStack {
-                        VStack(alignment: .leading) {
+                        VStack(alignment: .leading, spacing: 8) {
                             Text(lesson.name)
-                                .font(.headline)
+                                .font(.system(size: 18, design: .rounded))
+                                .fontWeight(.semibold)
+                                .multilineTextAlignment(.leading)
+                                .lineLimit(2)
                             Text(lesson.subName)
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
+                                .font(.system(size: 14, design: .rounded))
+                                .foregroundColor(Color.neutral08)
+                                .multilineTextAlignment(.leading)
+                                .lineLimit(2)
                         }
                         
                         Spacer()
@@ -57,13 +90,14 @@ struct LessonListView: View {
                             Image(systemName: "book.closed")
                             Text("\(lesson.words.count)")
                         }
-                        .font(.caption)
-                        .foregroundStyle(.blue)
-                        .padding(6)
-                        .background(Color.blue.opacity(0.1))
-                        .cornerRadius(8)
+                        .font(.system(size: 12, design: .rounded))
+                        .foregroundStyle(.orange)
+                        .padding(8)
+                        .background(Color.orange.opacity(0.1))
+                        .cornerRadius(16)
                     }
                 }
+                .padding(8)
             }
         }
         .navigationTitle(course.name)
@@ -82,21 +116,23 @@ struct WordListView: View {
                 HStack(alignment: .top) {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(word.english)
-                            .font(.title3)
+                            .font(.system(size: 16, design: .rounded))
                             .fontWeight(.bold)
-                            .foregroundStyle(.blue)
+                            .foregroundStyle(.orange)
                         
                         Text(word.phonetic)
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
+                            .font(.system(size: 8, design: .rounded))
+                            .fontWeight(.regular)
+                            .foregroundStyle(.neutral07)
                             .italic()
                         
                         Text(word.partOfSpeech)
-                            .font(.caption2)
+                            .font(.system(size: 8, design: .rounded))
+                            .fontWeight(.semibold)
                             .padding(.horizontal, 6)
                             .padding(.vertical, 2)
                             .background(Color.gray.opacity(0.2))
-                            .cornerRadius(4)
+                            .cornerRadius(8)
                     }
                     .frame(width: 100, alignment: .leading)
                     
@@ -105,19 +141,28 @@ struct WordListView: View {
                     VStack(alignment: .leading, spacing: 4) {
                         if let firstMeaning = word.meanings.first {
                             Text(firstMeaning.vietnamese)
-                                .font(.body)
+                                .font(.system(size: 14, design: .rounded))
                                 .fontWeight(.medium)
                             
                             if !firstMeaning.exampleEn.isEmpty {
                                 Text("\"\(firstMeaning.exampleEn)\"")
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
+                                    .font(.system(size: 8, design: .rounded))
+                                    .fontWeight(.regular)
+                                    .foregroundStyle(.neutral07)
+                                    .italic()
+                            }
+                            
+                            if !firstMeaning.exampleVi.isEmpty {
+                                Text("\"\(firstMeaning.exampleVi)\"")
+                                    .font(.system(size: 8, design: .rounded))
+                                    .fontWeight(.regular)
+                                    .foregroundStyle(.neutral07)
                                     .italic()
                             }
                         } else {
                             Text("No meaning")
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
+                                .font(.system(size: 14, design: .rounded))
+                                .fontWeight(.medium)
                         }
                     }
                 }
@@ -134,7 +179,9 @@ struct WordListView: View {
                         isLearningSessionActive = true
                     }
                 }) {
-                    Text("Learn now").bold()
+                    Text("Learn now")
+                        .font(.system(size: 14,design: .rounded))
+                        .fontWeight(.bold)
                 }
                 .disabled(lesson.words.isEmpty)
             }

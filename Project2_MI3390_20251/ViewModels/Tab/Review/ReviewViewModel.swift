@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 import AVFoundation
 import Combine
+import Supabase
 
 @MainActor
 class ReviewViewModel: ObservableObject {
@@ -57,55 +58,65 @@ class ReviewViewModel: ObservableObject {
     func loadReviewSession() {
         isLoading = true
         
-        do {
-            // A. Lấy các từ đến hạn (NextReview <= Now)
-            let now = Date()
-            let descriptor = FetchDescriptor<StudyRecord>(
-                predicate: #Predicate { $0.nextReview <= now },
-                sortBy: [SortDescriptor(\.nextReview)]
-            )
-            let dueRecords = try modelContext.fetch(descriptor)
+        Task {
+            // 1. Lấy ID người dùng hiện tại (Async)
+            // Nếu chưa đăng nhập (nil) -> Lấy ID của Khách (đã quy định bên UserSyncManager)
+            let currentUser = await SupabaseAuthService.shared.currentUser
+            let currentUserID = currentUser?.id.uuidString ?? "guest_user_id" // "guest_user_id" phải khớp với bên UserSyncManager
             
-            if dueRecords.isEmpty {
-                self.questions = []
-                self.isLoading = false
-                return
-            }
-            
-            // B. Lấy pool từ vựng để làm đáp án nhiễu (Lấy khoảng 50 từ random)
-            // Lưu ý: Nếu DB ít từ quá thì lấy hết
-            let allWordsDescriptor = FetchDescriptor<Word>()
-            let allWords = try modelContext.fetch(allWordsDescriptor)
-            
-            var generatedQuestions: [ReviewQuestion] = []
-            
-            // C. Sinh câu hỏi cho từng Record
-            for record in dueRecords {
-                guard let targetWord = record.word else { continue }
-                
-                // 1. Xác định loại câu hỏi dựa trên Memory Level (Adaptive Logic)
-                let type = determineQuestionType(level: record.memoryLevel)
-                
-                // 2. Lấy Distractors (3 từ sai khác với targetWord)
-                let distractors = Array(allWords
-                    .filter { $0.english != targetWord.english } // Tránh trùng đáp án đúng
-                    .shuffled()
-                    .prefix(3))
-                
-                // 3. Tạo câu hỏi (Dùng Factory method ở bài trước)
-                if let question = ReviewQuestion.create(type: type, target: targetWord, distractors: distractors) {
-                    generatedQuestions.append(question)
-                    reviewMap[question.id] = record // Lưu vết để update sau này
+            await MainActor.run {
+                do {
+                    // A. Lấy các từ đến hạn VÀ thuộc về User này
+                    let now = Date()
+                    
+                    // 👇 QUAN TRỌNG: Thêm điều kiện record.user?.id == currentUserID
+                    let descriptor = FetchDescriptor<StudyRecord>(
+                        predicate: #Predicate { record in
+                            record.nextReview <= now && record.user?.id == currentUserID
+                        },
+                        sortBy: [SortDescriptor(\.nextReview)]
+                    )
+                    
+                    let dueRecords = try modelContext.fetch(descriptor)
+                    
+                    if dueRecords.isEmpty {
+                        self.questions = []
+                        self.isLoading = false
+                        return
+                    }
+                    
+                    // B. Lấy pool từ vựng (Distractors) - Cái này lấy tất cả cũng được, không cần lọc user
+                    // Vì từ điển là dùng chung cho mọi người
+                    let allWordsDescriptor = FetchDescriptor<Word>()
+                    let allWords = try modelContext.fetch(allWordsDescriptor)
+                    
+                    var generatedQuestions: [ReviewQuestion] = []
+                    
+                    // C. Sinh câu hỏi (Giữ nguyên logic cũ)
+                    for record in dueRecords {
+                        guard let targetWord = record.word else { continue }
+                        
+                        let type = determineQuestionType(level: record.memoryLevel)
+                        
+                        let distractors = Array(allWords
+                            .filter { $0.english != targetWord.english }
+                            .shuffled()
+                            .prefix(3))
+                        
+                        if let question = ReviewQuestion.create(type: type, target: targetWord, distractors: distractors) {
+                            generatedQuestions.append(question)
+                            reviewMap[question.id] = record
+                        }
+                    }
+                    
+                    self.questions = generatedQuestions.shuffled()
+                    self.isLoading = false
+                    
+                } catch {
+                    print("❌ Error loading review session: \(error)")
+                    self.isLoading = false
                 }
             }
-            
-            // D. Shuffle câu hỏi để không theo thứ tự bài học
-            self.questions = generatedQuestions.shuffled()
-            self.isLoading = false
-            
-        } catch {
-            print("❌ Error loading review session: \(error)")
-            self.isLoading = false
         }
     }
     

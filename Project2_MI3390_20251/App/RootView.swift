@@ -7,10 +7,11 @@
 
 import SwiftUI
 import Combine
+import SwiftData
 
 struct RootView: View {
     @State private var showSplash: Bool = true
-    
+    @Environment(\.modelContext) private var modelContext
     // Lưu trạng thái đã làm Survey hay chưa vào bộ nhớ máy
     @AppStorage("isOnboardingDone") var isOnboardingDone: Bool = false
     
@@ -33,6 +34,16 @@ struct RootView: View {
                     // Truyền $isOnboardingDone xuống để SurveyView có thể thay đổi nó
                     IntroView(isOnboardingDone: $isOnboardingDone)
                         .environmentObject(authViewModel)
+                }
+            }
+        }
+        .onChange(of: authViewModel.currentUser) { _, newUser in
+            if let user = newUser {
+                Task {
+                    await MainActor.run {
+                        // ĐỒNG BỘ USER SUPABASE -> SWIFTDATA
+                        UserSyncManager.shared.syncUser(from: user, in: modelContext)
+                    }
                 }
             }
         }

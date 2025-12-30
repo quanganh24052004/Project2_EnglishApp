@@ -18,33 +18,50 @@ class LearningManager {
         self.modelContext = modelContext
     }
     
-    // MARK: - 1. API: Đánh dấu đã học từ mới (Learn Mode)
-    func markAsLearned(wordID: PersistentIdentifier) {
+    // MARK: - 1. API: Đánh dấu đã học (Cập nhật nhận thêm supabaseUserID)
+    func markAsLearned(wordID: PersistentIdentifier, supabaseUserID: String?) {
         guard let word = modelContext.model(for: wordID) as? Word else { return }
         
-        // Kiểm tra xem đã có record chưa để tránh tạo trùng
-        let descriptor = FetchDescriptor<StudyRecord>(
-            predicate: #Predicate { $0.word?.persistentModelID == wordID }
-        )
+        let targetUser: User
         
-        do {
-            if let existingRecord = try modelContext.fetch(descriptor).first {
-                print("⚠️ Record already exists for \(word.english). Resetting.")
-                resetProgress(for: existingRecord)
+        // 1. Xác định User mục tiêu
+        if let id = supabaseUserID {
+            // Case A: Có ID (Đã đăng nhập) -> Tìm user thật
+            if let realUser = UserSyncManager.shared.getCurrentLocalUser(supabaseID: id, in: modelContext) {
+                targetUser = realUser
             } else {
-                // Tạo record mới (Level 0)
-                let newRecord = StudyRecord(user: User(name: "Default", phone: ""), word: word)
-                newRecord.memoryLevel = 0
-                newRecord.lastReview = Date()
-                newRecord.nextReview = calculateNextReviewDate(forLevel: 0)
-                
-                modelContext.insert(newRecord)
-                print("✅ Created new SRS record for: \(word.english)")
+                // Fallback: Có ID nhưng không tìm thấy trong DB -> return hoặc dùng Guest
+                print("❌ Error: Logged in but user not found in DB")
+                return
             }
+        } else {
+            // Case B: Không có ID (Chưa đăng nhập/Nil) -> Lấy user Khách
+            targetUser = UserSyncManager.shared.getGuestUser(in: modelContext)
+        }
+        
+        // 2. Logic lưu Record (Giữ nguyên)
+        let existingRecord = targetUser.studyRecords.first { $0.word?.persistentModelID == wordID }
+        
+        if let record = existingRecord {
+            print("⚠️ [User: \(targetUser.name)] Word already learned. Resetting.")
+            // Gọi hàm resetProgress private của bạn
+            resetProgress(for: record)
+        } else {
+            let newRecord = StudyRecord(user: targetUser, word: word)
+            newRecord.memoryLevel = 0
+            newRecord.lastReview = Date()
+            // Gọi hàm tính ngày private của bạn
+            newRecord.nextReview = calculateNextReviewDate(forLevel: 0)
             
+            targetUser.studyRecords.append(newRecord)
+            modelContext.insert(newRecord)
+            print("✅ [User: \(targetUser.name)] Marked as learned: \(word.english)")
+        }
+            
+        do {
             try modelContext.save()
         } catch {
-            print("❌ Error marking as learned: \(error.localizedDescription)")
+            print("❌ Save Error: \(error)")
         }
     }
     
@@ -123,6 +140,28 @@ class LearningManager {
             
         default:
             return now.addingTimeInterval(24 * 60 * 60)
+        }
+    }
+    
+    // MARK: - 5. API: Lấy danh sách từ đã học (Có lọc theo User)
+    // Dùng hàm này cho màn hình danh sách từ vựng (Notebook)
+    func fetchLearnedItems(for userID: String?) -> [StudyRecord] {
+        // Xác định ID cần lấy (Nếu nil -> Lấy của Guest)
+        let targetID = userID ?? "guest_user_id"
+        
+        let descriptor = FetchDescriptor<StudyRecord>(
+            predicate: #Predicate { record in
+                // Chỉ lấy record của User đó
+                record.user?.id == targetID
+            },
+            sortBy: [SortDescriptor(\.createdAt, order: .reverse)]
+        )
+        
+        do {
+            return try modelContext.fetch(descriptor)
+        } catch {
+            print("❌ Error fetching learned items: \(error)")
+            return []
         }
     }
 }

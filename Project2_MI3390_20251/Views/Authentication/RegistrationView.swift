@@ -191,7 +191,7 @@ struct RegistrationView: View {
             }
             .padding(.horizontal, 24)
         }
-        .background(Color.neutral01)
+        .background(Color.primary01)
         .ignoresSafeArea()
     }
 }

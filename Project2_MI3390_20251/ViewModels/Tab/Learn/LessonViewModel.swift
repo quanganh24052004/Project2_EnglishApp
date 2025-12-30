@@ -8,6 +8,7 @@
 import SwiftUI
 import Combine
 import SwiftData
+import Supabase
 
 enum LearningStep {
     case flashcard
@@ -158,10 +159,15 @@ class LessonViewModel: ObservableObject {
     func saveSelectedWords(_ selectedIDs: Set<PersistentIdentifier>) {
         guard let manager = learningManager else { return }
         
-        print("Đang lưu \(selectedIDs.count) từ vào sổ tay...")
-        
-        for id in selectedIDs {
-            manager.markAsLearned(wordID: id)
+        Task {
+            let currentUser = await SupabaseAuthService.shared.currentUser
+            let userID = currentUser?.id.uuidString
+            
+            await MainActor.run {
+                for id in selectedIDs {
+                    manager.markAsLearned(wordID: id, supabaseUserID: userID)
+                }
+            }
         }
     }
     

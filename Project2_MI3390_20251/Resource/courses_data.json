@@ -1,12 +1,12 @@
 [
   {
-    "name": "Toeic 600",
-    "description": "600 từ vựng TOEIC",
-    "subDescription": "Sinh dữ liệu từ file toeic_600_words.csv",
+    "name": "New Toeic",
+    "description": "Ôn TOEIC 500 Reading & Listening",
+    "subDescription": "600 từ TOEIC",
     "lessons": [
       {
         "name": "Salaries & Benefits",
-        "subName": "Salaries & Benefits",
+        "subName": "Lương & Phúc lợi",
         "quantityOfWord": 12,
         "words": [
           {
@@ -181,7 +181,7 @@
       },
       {
         "name": "Renting and Leasing",
-        "subName": "Renting and Leasing",
+        "subName": "Thuê ngắn hạn và dài hạn",
         "quantityOfWord": 12,
         "words": [
           {
@@ -356,7 +356,7 @@
       },
       {
         "name": "Quality Control",
-        "subName": "Quality Control",
+        "subName": "Quản lý chất lượng",
         "quantityOfWord": 12,
         "words": [
           {
@@ -531,7 +531,7 @@
       },
       {
         "name": "Health",
-        "subName": "Health",
+        "subName": "Sự lành mạnh",
         "quantityOfWord": 13,
         "words": [
           {
@@ -720,7 +720,7 @@
       },
       {
         "name": "Office Technology",
-        "subName": "Office Technology",
+        "subName": "Công nghệ văn phòng",
         "quantityOfWord": 12,
         "words": [
           {
@@ -895,7 +895,7 @@
       },
       {
         "name": "Hiring and Training",
-        "subName": "Hiring and Training",
+        "subName": "Tuyển dụng và Đào tạo",
         "quantityOfWord": 12,
         "words": [
           {
@@ -1070,7 +1070,7 @@
       },
       {
         "name": "Ordering Supplies",
-        "subName": "Ordering Supplies",
+        "subName": "Đặt hàng vật tư",
         "quantityOfWord": 12,
         "words": [
           {
@@ -1245,7 +1245,7 @@
       },
       {
         "name": "Marketing",
-        "subName": "Marketing",
+        "subName": "Tiếp thị",
         "quantityOfWord": 13,
         "words": [
           {
@@ -1434,7 +1434,7 @@
       },
       {
         "name": "Taxes",
-        "subName": "Taxes",
+        "subName": "Thuế",
         "quantityOfWord": 12,
         "words": [
           {
@@ -8967,9 +8967,9 @@
     ]
   },
   {
-    "name": "Test API Audio",
-    "description": "Test API Audio",
-    "subDescription": "Cái này dùng để tést API Audio thôi nha",
+    "name": "Tiếng Anh công sở",
+    "description": "Giao tiếp trong môi trường công sở",
+    "subDescription": "Từ vựng môi trường công sở",
     "lessons": [
       {
         "name": "Từ vựng cơ bản",
@@ -8995,9 +8995,9 @@
     ]
   },
   {
-    "name": "Chào hỏi cơ bản",
-    "description": "Từ vựng cơ bản về các cách chào hỏi trong tiếng Anh.",
-    "subDescription": "Các từ và cụm từ thông dụng để chào hỏi trong các tình huống hàng ngày.",
+    "name": "Tiếng Anh du lịch",
+    "description": "Giao tiếp chủ đề du lịch",
+    "subDescription": "Từ vựng khi đi du lịch",
     "lessons": [
       {
         "name": "Chào hỏi cơ bản",
@@ -9090,6 +9090,90 @@
           }
         ]
       }
+    ]
+  },
+  {
+    "name": "Tiếng Anh Công nghệ thông tin",
+    "description": "Giao tiếp chủ đề công nghệ thông tin",
+    "subDescription": "Từ vựng về công nghệ thông tin",
+    "lessons": [
+    ]
+  },
+  {
+    "name": "IELTS cơ bản",
+    "description": "Ôn IELTS 6.5 Reading & Listening",
+    "subDescription": "Hơn 1200 từ vựng IELTS cơ bản",
+    "lessons": [
+    ]
+  },
+  {
+    "name": "Cụm từ IELTS cơ bản",
+    "description": "Ôn IELTS 6.5 Writing & Speaking",
+    "subDescription": "Hơn 400 cụm từ thông dụng",
+    "lessons": [
+    ]
+  },
+  {
+    "name": "IELTS nâng cao",
+    "description": "Ôn IELTS 7.5",
+    "subDescription": "Hơn 500 từ IELTS nâng cao",
+    "lessons": [
+    ]
+  },
+  {
+    "name": "Cụm từ ôn Thi THPT Quốc Gia",
+    "description": "Nắm vững các cụm từ tiếng Anh cho kỳ thi THPT Quốc Gia",
+    "subDescription": "200 cụm từ thông dụng trong đề thi THPT Quốc Gia",
+    "lessons": [
+    ]
+  },
+  {
+    "name": "Tiếng Anh 12",
+    "description": "Nắm vững từ vựng tiếng Anh lớp 12",
+    "subDescription": "Từ vựng trọng tâm trong chương trình tiếng Anh lớp 12",
+    "lessons": [
+    ]
+  },
+  {
+    "name": "Tiếng Anh 11",
+    "description": "Nắm vững từ vựng tiếng Anh lớp 11",
+    "subDescription": "Từ vựng trọng tâm trong chương trình tiếng Anh lớp 11",
+    "lessons": [
+    ]
+  },
+  {
+    "name": "Tiếng Anh 10",
+    "description": "Nắm vững từ vựng tiếng Anh lớp 10",
+    "subDescription": "Từ vựng trọng tâm trong chương trình tiếng Anh lớp 10",
+    "lessons": [
+    ]
+  },
+  {
+    "name": "Tiếng Anh 9",
+    "description": "Nắm vững từ vựng tiếng Anh lớp 9",
+    "subDescription": "Từ vựng trọng tâm trong chương trình tiếng Anh lớp 9",
+    "lessons": [
+    ]
+  },
+  {
+    "name": "Tiếng Anh 8",
+    "description": "Nắm vững từ vựng tiếng Anh lớp 8",
+    "subDescription": "Từ vựng trọng tâm trong chương trình tiếng Anh lớp 8",
+    "lessons": [
+    ]
+  },
+  {
+    "name": "Tiếng Anh 7",
+    "description": "Nắm vững từ vựng tiếng Anh lớp 7",
+    "subDescription": "Từ vựng trọng tâm trong chương trình tiếng Anh lớp 7",
+    "lessons": [
+    ]
+  },
+  {
+    "name": "Tiếng Anh 6",
+    "description": "Nắm vững từ vựng tiếng Anh lớp 6",
+    "subDescription": "Từ vựng trọng tâm trong chương trình tiếng Anh lớp 6",
+    "lessons": [
     ]
   }
 ]

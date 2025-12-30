@@ -165,6 +165,8 @@ final class Meaning: Codable {
 // --- USER & TRACKING GROUP (Giữ nguyên như cũ) ---
 @Model
 final class User {
+    @Attribute(.unique) var id: String
+    
     var name: String
     var phone: String
     var createdAt: Date
@@ -173,7 +175,8 @@ final class User {
     @Relationship(deleteRule: .cascade) var account: Account?
     @Relationship(deleteRule: .cascade) var studyRecords: [StudyRecord] = []
     @Relationship(deleteRule: .cascade) var lessonRecords: [LessonRecord] = []
-    init(name: String, phone: String, isPremium: Bool = false) {
+    init(id: String, name: String, phone: String, isPremium: Bool = false) {
+        self.id = id
         self.name = name
         self.phone = phone
         self.isPremium = isPremium

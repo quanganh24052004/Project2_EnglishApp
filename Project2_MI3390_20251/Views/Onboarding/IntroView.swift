@@ -47,7 +47,11 @@ struct IntroView: View {
                 .padding(.horizontal, 100)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color.neutral01)
+            .background(Color.primary01.edgesIgnoringSafeArea(.all))
         }
     }
+}
+
+#Preview {
+    IntroView(isOnboardingDone: .constant(false))
 }

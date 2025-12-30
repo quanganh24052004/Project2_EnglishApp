@@ -20,7 +20,7 @@ struct SplashScreenView: View {
                     .frame(width: 200, height: 200)
                 
                 Text("Capy Vocab")
-                    .font(.appFont(size: 48))
+                    .font(.system(size: 48, design: .rounded))
                     .fontWeight(.bold)
                     .foregroundColor(.white)
             }

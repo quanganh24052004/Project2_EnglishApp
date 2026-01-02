@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct SettingsView: View {
     // MARK: - ViewModel & Environment
     @StateObject private var viewModel = SettingsViewModel()
     @EnvironmentObject var languageManager: LanguageManager
+    @Environment(\.modelContext) private var modelContext
     
     // MARK: - AppStorage (Lưu cấu hình đơn giản)
     @AppStorage("soundEffects") private var isSoundEffectsOn = true
@@ -33,11 +35,13 @@ struct SettingsView: View {
             }
             .navigationTitle(languageManager.currentLanguage == "vi" ? "Cài đặt" : "Settings")
                         
-            .alert("Warning", isPresented: $showingResetAlert) {
-                Button("Cancel", role: .cancel) { }
-                Button("Delete all", role: .destructive) { viewModel.resetAllProgress() }
+            .alert("Đặt lại tiến độ?", isPresented: $showingResetAlert) {
+                Button("Hủy", role: .cancel) { }
+                Button("Xóa tất cả", role: .destructive) {
+                    viewModel.resetAllProgress(modelContext: modelContext)
+                }
             } message: {
-                Text("This action cannot be undone.")
+                Text("Hành động này sẽ xóa toàn bộ lịch sử học tập, từ vựng đã lưu và đưa ứng dụng về trạng thái ban đầu. Bạn không thể hoàn tác.")
             }
         }
     }
@@ -93,7 +97,7 @@ private extension SettingsView {
                 }
             }
             .padding(.vertical, 5)
-        }
+            }
         }
     }
     
@@ -104,11 +108,12 @@ private extension SettingsView {
     }
     
     var dataSection: some View {
-        Section(header: Text("Data")) {
+        Section(header: Text("Dữ liệu")) {
             Button(role: .destructive) {
-                showingResetAlert = true
+                showingResetAlert = true // Kích hoạt Alert
             } label: {
-                Label("Reset the entire progress", systemImage: "trash")
+                Label("Reset toàn bộ tiến độ", systemImage: "trash")
+                    .foregroundColor(.red)
             }
         }
     }

@@ -6,7 +6,7 @@
 //
 import SwiftUI
 
-struct WordRow: View {
+struct WordRowSearch: View {
     let word: Word
     
     var body: some View {

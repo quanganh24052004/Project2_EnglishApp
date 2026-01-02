@@ -20,65 +20,40 @@ struct LessonContainerView: View {
     }
     
     var body: some View {
-        VStack {
-            // MARK: - Header
-            HStack {
-                Button(action: { showExitSheet = true }) {
-                    Image(systemName: "xmark")
-                        .font(.system(size: 28, weight: .bold))
-                        .foregroundColor(.gray)
+        ZStack {
+            Color(.neutral01)
+                .ignoresSafeArea()
+            
+            VStack(spacing: 0) {
+                if !viewModel.isLessonFinished {
+                    headerView
+                        .padding()
+                        .transition(.move(edge: .top).combined(with: .opacity))
                 }
                 
-                ProgressBar(
-                    value: viewModel.progress,
-                    height: 16,
-                    color: .orange,
-                    iconName: "iconProgressBar"
-                )
-                .padding(.horizontal, 4)
-            }
-            .padding()
-            
-            // MARK: - Main Content
-            Group {
-                if viewModel.isLessonFinished {
-                    SummarizeView(
-                        items: viewModel.items,
-                        onSave: { selectedIDs in
-                            // 1. Lưu các từ user đã chọn
-                            viewModel.saveSelectedWords(selectedIDs)
-                            // 2. Thoát ra ngoài
-                            dismiss()
-                        },
-                        onCancel: {
-                            dismiss()
-                        }
-                    )
-                    .transition(.move(edge: .trailing))
-                    
-                } else {
-                    switch viewModel.currentStep {
-                    case .flashcard:
-                        FlashcardStepView(
-                            item: viewModel.currentItem,
-                            onContinue: { viewModel.moveToNextStage() }
+                ZStack {
+                    if viewModel.isLessonFinished {
+                        SummarizeView(
+                            items: viewModel.items,
+                            onSave: { selectedIDs in
+                                viewModel.saveSelectedWords(selectedIDs)
+                                dismiss()
+                            },
+                            onCancel: {
+                                dismiss()
+                            }
                         )
-                    case .fillBlank:
-                        SpellingGameView(
-                            item: viewModel.currentItem,
-                            onCheck: { viewModel.checkListenWrite(userAnswer: $0) }
-                        )
-                    case .listenWrite:
-                        InputStepView(
-                            item: viewModel.currentItem,
-                            onCheck: { viewModel.checkFillBlank(userAnswer: $0) }
-                        )
+                        .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                    } else {
+                        lessonContentView
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
                     }
                 }
+                .animation(.easeInOut(duration: 0.35), value: viewModel.isLessonFinished)
+                .animation(.easeInOut(duration: 0.35), value: viewModel.currentStep)
             }
-            Spacer()
         }
-        .background(Color(.neutral01))
         .onAppear {
              if viewModel.learningManager == nil {
                  viewModel.learningManager = LearningManager(modelContext: modelContext)
@@ -86,16 +61,19 @@ struct LessonContainerView: View {
             AudioManager.shared.stopBackgroundMusic()
         }
         .onDisappear {
-            // Khi thoát màn hình học -> Gọi bật lại nhạc
-            // (Hàm này đã có logic check setting bên trong, nếu user tắt trong setting thì nó sẽ không phát)
             AudioManager.shared.playBackgroundMusic()
         }
         .sheet(isPresented: $viewModel.showFeedbackSheet, onDismiss: {
-            viewModel.moveToNextStage()
+            withAnimation {
+                viewModel.moveToNextStage()
+            }
         }) {
             if let result = viewModel.currentFeedback {
-                FeedbackSheetView(result: result)
-                    .presentationDetents([.fraction(0.40)])
+                FeedbackSheetView(
+                    result: result,
+                    item: viewModel.currentItem
+                )
+                    .presentationDetents([.fraction(0.65)])
                     .presentationDragIndicator(.visible)
             }
         }
@@ -110,5 +88,55 @@ struct LessonContainerView: View {
             .presentationDetents([.fraction(0.40)])
         }
         .environmentObject(viewModel)
+    }
+    
+    // MARK: - Subviews
+    
+    private var headerView: some View {
+        HStack {
+            Button(action: { showExitSheet = true }) {
+                Image(systemName: "xmark")
+                    .font(.system(size: 28, weight: .bold))
+                    .foregroundColor(.gray)
+            }
+            
+            ProgressBar(
+                value: viewModel.progress,
+                height: 16,
+                color: .orange,
+                iconName: "iconProgressBar"
+            )
+            .padding(.horizontal, 4)
+        }
+    }
+    
+    @ViewBuilder
+    private var lessonContentView: some View {
+        Group {
+            switch viewModel.currentStep {
+            case .flashcard:
+                FlashcardStepView(
+                    item: viewModel.currentItem,
+                    onContinue: {
+                        withAnimation {
+                            viewModel.moveToNextStage()
+                        }
+                    }
+                )
+                
+            case .fillBlank:
+                SpellingGameView(
+                    item: viewModel.currentItem,
+                    onCheck: { viewModel.checkListenWrite(userAnswer: $0) }
+                )
+                
+            case .listenWrite:
+                InputStepView(
+                    item: viewModel.currentItem,
+                    onCheck: { viewModel.checkFillBlank(userAnswer: $0) }
+                )
+            }
+        }
+        .id(viewModel.currentStep)
     }
 }

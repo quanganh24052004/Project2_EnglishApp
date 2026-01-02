@@ -16,6 +16,7 @@ struct LearningItem: Identifiable {
     let partOfSpeech: String
     let meaning: String
     let example: String
+    let exampleVi: String
     let audioUrl: String?
     let vietnamese: String
 }

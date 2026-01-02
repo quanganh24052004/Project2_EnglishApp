@@ -11,7 +11,6 @@ struct InputStepView: View {
     @EnvironmentObject var viewModel: LessonViewModel
     
     let item: LearningItem
-    let mainColor: Color = .blue
     
     var onCheck: (String) -> Void
     
@@ -28,7 +27,8 @@ struct InputStepView: View {
             ScrollView {
                 VStack(spacing: 20) {
                     Text("Listen and rewrite")
-                        .font(.system(size: 20, weight: .semibold))
+                        .font(.system(size: 20, design: .rounded))
+                        .fontWeight(.semibold)
                         .foregroundColor(Color.neutral06)
                         .padding(.top, 20)
                     
@@ -41,6 +41,7 @@ struct InputStepView: View {
                         }
                     }
                     .padding(.top, 10)
+                    .padding(.bottom, 20)
                     
                     AppTextField(text: $textInput, placeholder: "Enter vocabulary...")
                         .focused($isInputFocused)
@@ -58,7 +59,7 @@ struct InputStepView: View {
                 viewModel.checkListenWrite(userAnswer: textInput)
                 textInput = ""
             }
-            .buttonStyle(ThreeDButtonStyle(color: isValidInput ? mainColor : .gray))
+            .buttonStyle(ThreeDButtonStyle(color: isValidInput ? .pGreen : .gray))
             .disabled(!isValidInput)
             .padding(.horizontal, 100)
             .padding(.bottom, 20)
@@ -66,7 +67,6 @@ struct InputStepView: View {
         .padding(.bottom)
         .onAppear {
             viewModel.playCurrentAudio()
-            
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.isInputFocused = true
             }

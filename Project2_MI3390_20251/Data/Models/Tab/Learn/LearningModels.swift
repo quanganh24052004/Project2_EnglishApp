@@ -19,7 +19,7 @@ final class Course: Codable {
     
     enum CodingKeys: String, CodingKey {
         case name
-        case desc = "description" // JSON key là "description", Swift biến là "desc"
+        case desc = "description"
         case subDescription, lessons
     }
     
@@ -38,7 +38,6 @@ final class Course: Codable {
         self.createdAt = Date()
         self.lessons = try container.decodeIfPresent([Lesson].self, forKey: .lessons) ?? []
         
-        // Gán cha cho con (QUAN TRỌNG)
         for lesson in self.lessons {
             lesson.course = self
         }

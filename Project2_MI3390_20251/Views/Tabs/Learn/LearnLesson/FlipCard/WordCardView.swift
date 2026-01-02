@@ -21,22 +21,33 @@ struct WordCardView: View {
             cardFace(color: .white) {
                 VStack(spacing: 16) {
                     Text(item.word)
-                        .font(.system(size: 28, weight: .bold))
-                    
+                        .font(.system(size: 28, design: .rounded))
+                        .fontWeight(.bold)
+                        .lineLimit(2)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal)
+
+
                     Text(item.phonetic)
-                        .font(.system(size: 20))
-                    
+                        .font(.system(size: 20, design: .rounded))
+                        .padding(.horizontal)
+
                     Divider()
                         .frame(width: 150)
                     
                     Text(item.partOfSpeech)
-                        .font(.system(size: 18, weight: .semibold))
+                        .font(.system(size: 18, design: .rounded))
+                        .fontWeight(.semibold)
                         .padding(8)
-                        .background(Color.blue.opacity(0.1))
-                        .cornerRadius(8)
-                    
+                        .background(Color.orange.opacity(0.1))
+                        .cornerRadius(16)
+
                     Text(item.vietnamese)
-                        .font(.system(size: 18, weight: .regular))
+                        .font(.system(size: 18, design: .rounded))
+                        .fontWeight(.semibold)
+                        .lineLimit(2)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal)
                 }
             }
 
@@ -45,10 +56,14 @@ struct WordCardView: View {
             cardFace(color: .white) {
                 VStack(spacing: 20) {
                     Text(item.word)
-                        .font(.system(size: 32, weight: .bold))
-                    
+                        .font(.system(size: 28, design: .rounded))
+                        .fontWeight(.bold)
+                        .lineLimit(2)
+                        .padding(.horizontal)
+
                     Text(highlightedExample(sentence: item.example, target: item.word))
-                        .font(.system(size: 20, weight: .light))
+                        .font(.system(size: 20, design: .rounded))
+                        .fontWeight(.light)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal)
                 }
@@ -116,6 +131,7 @@ extension LearningItem {
             partOfSpeech: "noun",
             meaning: "Sự tình cờ may mắn",
             example: "Finding this shop was pure serendipity.",
+            exampleVi: "aba",
             audioUrl: nil,
             vietnamese: "Sự may mắn tình cờ"
         )

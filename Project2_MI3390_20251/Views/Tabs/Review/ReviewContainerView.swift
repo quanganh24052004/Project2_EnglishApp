@@ -24,7 +24,7 @@ struct ReviewContainerView: View {
     // MARK: - Main Body
     var body: some View {
         ZStack {
-            // 1. Màu nền Neutral01 (Yêu cầu mới)
+            // 1. Màu nền Neutral01
             Color.neutral01
                 .ignoresSafeArea()
             
@@ -53,14 +53,22 @@ struct ReviewContainerView: View {
         // Sheet kết quả
         .sheet(isPresented: $viewModel.showResult) {
             if !viewModel.questions.isEmpty {
+                // 1. Lấy câu hỏi hiện tại
+                let currentQuestion = viewModel.questions[viewModel.currentIndex]
+                
+                // 2. Chuyển đổi Word (SwiftData) thành LearningItem
+                // Lưu ý: ReviewQuestion phải có thuộc tính .word
+                let item = currentQuestion.word.toLearningItem()
+                
+                // 3. Gọi FeedbackSheetView mới (Có item)
                 FeedbackSheetView(
                     isCorrect: viewModel.isLastAnswerCorrect,
-                    correctAnswer: viewModel.questions[viewModel.currentIndex].correctAnswer,
+                    item: item, // ✅ Truyền LearningItem vào đây
                     onNext: {
                         viewModel.nextQuestion()
                     }
                 )
-                .presentationDetents([.fraction(0.40)])
+                .presentationDetents([.fraction(0.65)]) // Tăng chiều cao lên 60% để hiển thị đủ nghĩa/ví dụ
                 .interactiveDismissDisabled()
             }
         }
@@ -99,8 +107,10 @@ extension ReviewContainerView {
             )
             .padding(.horizontal, 4)
             
+            // Font Rounded cho số đếm
             Text("\(viewModel.currentIndex + 1)/\(max(viewModel.questions.count, 1))")
-                .font(.caption)
+                .font(.system(.caption, design: .rounded))
+                .fontWeight(.medium)
                 .foregroundColor(.gray)
         }
         .padding()
@@ -116,14 +126,14 @@ extension ReviewContainerView {
                 emptyStateView
             } else {
                 VStack (spacing: 16) {
+                    // Tiêu đề loại câu hỏi (Font Rounded)
                     Text(viewModel.questions[viewModel.currentIndex].type.title)
-                        .font(.system(size: 20))
+                        .font(.system(size: 20, design: .rounded))
                         .fontWeight(.semibold)
                         .foregroundColor(.neutral06)
                     
                     currentQuestionView
                 }
-                // Logic hiển thị câu hỏi được tách ra function riêng
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -175,15 +185,19 @@ extension ReviewContainerView {
     private var footerView: some View {
         if !viewModel.isLoading && !viewModel.questions.isEmpty {
             Button(action: {
+                // 1. Ẩn bàn phím ngay lập tức để animation mượt
+                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                
+                // 2. Kiểm tra kết quả
                 viewModel.checkAnswer()
             }) {
                 Text("Kiểm tra")
+                    // Font Rounded cho nút bấm
+                    .font(.system(size: 18, weight: .bold, design: .rounded))
             }
-            // Áp dụng logic màu sắc dựa trên trạng thái active
             .buttonStyle(ThreeDButtonStyle(
                 color: canSubmit ? .pGreen : .gray
             ))
-            // Áp dụng logic disabled
             .disabled(!canSubmit)
             .padding(.horizontal, 100)
             .padding(.bottom, 50)
@@ -214,4 +228,3 @@ extension Collection {
         return indices.contains(index) ? self[index] : nil
     }
 }
-

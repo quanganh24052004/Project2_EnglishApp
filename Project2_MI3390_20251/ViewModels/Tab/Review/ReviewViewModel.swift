@@ -280,6 +280,7 @@ extension ReviewQuestion {
         
         return ReviewQuestion(
             type: type,
+            word: target,
             promptText: promptText,
             audioUrl: audioUrl,
             highlightedWord: highlighted,

@@ -59,7 +59,7 @@ struct ReviewOption: Identifiable, Hashable {
 struct ReviewQuestion: Identifiable {
     let id = UUID()
     let type: ReviewQuestionType
-    
+    let word: Word
     // --- INPUT (Đề bài) ---
     let promptText: String?    // Câu ví dụ, Nghĩa tiếng Việt, hoặc Hint
     let audioUrl: String?      // URL Audio đề bài (cho loại 3, 8)

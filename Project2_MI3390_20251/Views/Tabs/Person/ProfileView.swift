@@ -3,116 +3,48 @@
 //  Project2_MI3390_20251
 //
 //  Created by Nguyễn Quang Anh on 9/12/25.
+//  Refactored for Clean Code & Rounded Design.
 //
 
 import SwiftUI
 import Supabase
 
+/// Màn hình Hồ sơ người dùng (Profile).
+/// Hiển thị thông tin cá nhân, trạng thái đăng nhập và các tùy chọn tài khoản.
 struct ProfileView: View {
-    // 1. Gọi AuthViewModel
+    
+    // MARK: - Properties
+    
+    /// ViewModel quản lý trạng thái xác thực (Auth).
     @EnvironmentObject var authVM: AuthViewModel
+    
+    /// ViewModel quản lý ngôn ngữ
+    @EnvironmentObject var languageManager: LanguageManager
+
+    // MARK: - Body
     
     var body: some View {
         NavigationStack {
             List {
-                // TRƯỜNG HỢP 1: ĐÃ ĐĂNG NHẬP
                 if let user = authVM.currentUser {
-                    
-                    // Header (Avatar + Tên)
-                    Section {
-                        HStack {
-                            Spacer()
-                            VStack(spacing: 12) {
-                                Circle()
-                                    .fill(Color.orange.gradient)
-                                    .frame(width: 80, height: 80)
-                                    .overlay(
-                                        Text(user.initials)
-                                            .font(.title).bold().foregroundColor(.white)
-                                    )
-                                    .shadow(radius: 5)
-                                
-                                Text(user.fullName)
-                                    .font(.title2).fontWeight(.bold)
-                                
-                                Text(user.email ?? "No Email")
-                                    .font(.subheadline).foregroundColor(.secondary)
-                            }
-                            Spacer()
-                        }
-                        .padding(.vertical, 10)
-                    }
-                    .listRowBackground(Color.clear)
-                    
-                    // Thông tin chi tiết
-                    Section("Thông tin cá nhân") {
-                        ProfileRow(icon: "person.fill", title: "Họ", value: user.firstName)
-                        ProfileRow(icon: "person.fill", title: "Tên", value: user.lastName)
-                        ProfileRow(icon: "phone.fill", title: "Số điện thoại", value: user.phoneNumber)
-                        ProfileRow(icon: "envelope.fill", title: "Email", value: user.email ?? "")
-                    }
-                    
-                    // Đăng xuất
-                    Section {
-                        Button(role: .destructive) {
-                            authVM.signOut()
-                        } label: {
-                            HStack {
-                                Image(systemName: "rectangle.portrait.and.arrow.right")
-                                Text("Đăng xuất")
-                            }
-                        }
-                    }
-                }
-                // TRƯỜNG HỢP 2: CHƯA ĐĂNG NHẬP (GUEST) HOẶC ĐANG TẢI
-                else {
-                    Section {
-                        VStack(spacing: 16) {
-                            if authVM.isLoading {
-                                ProgressView("Đang tải thông tin...")
-                            } else {
-                                // Giao diện cho Guest
-                                Image(systemName: "person.crop.circle.badge.questionmark")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 80, height: 80)
-                                    .foregroundColor(.gray)
-                                
-                                Text("Bạn chưa đăng nhập")
-                                    .font(.headline)
-                                
-                                Text("Vui lòng đăng nhập để xem thông tin cá nhân và lưu tiến độ học tập.")
-                                    .font(.subheadline)
-                                    .foregroundColor(.secondary)
-                                    .multilineTextAlignment(.center)
-                            }
-                        }
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 20)
-                    }
-                    .listRowBackground(Color.clear)
+                    // 1. Trạng thái Đã đăng nhập
+                    loggedInContent(user: user)
+                } else {
+                    // 2. Trạng thái Chưa đăng nhập (Guest)
+                    guestContent
                 }
             }
-            .navigationTitle("Hồ sơ")
+            .listStyle(.insetGrouped) // Style danh sách hiện đại hơn
+            .navigationTitle(languageManager.currentLanguage == "vi" ? "Hồ sơ" : "Profile")
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    // Chỉ hiện nút Đăng nhập nếu chưa có user
-                    if authVM.currentUser == nil && !authVM.isLoading {
-                        NavigationLink(
-                            destination: LoginView()
-                                .toolbar(.hidden, for: .tabBar)
-                        ) {
-                            Text("Đăng nhập")
-                                .fontWeight(.bold)
-                                .foregroundColor(.orange)
-                        }
-                    }
-                }
+                toolbarContent
             }
+            // Kéo xuống để làm mới dữ liệu
             .refreshable {
                 await authVM.fetchCurrentUser()
             }
         }
+        // Tự động tải dữ liệu khi vào màn hình nếu chưa có
         .onAppear {
             if authVM.currentUser == nil {
                 Task { await authVM.fetchCurrentUser() }
@@ -121,23 +53,168 @@ struct ProfileView: View {
     }
 }
 
-// Subview hiển thị từng dòng thông tin
+// MARK: - Subviews (Components)
+
+extension ProfileView {
+    
+    /// Nội dung hiển thị khi người dùng ĐÃ đăng nhập.
+    @ViewBuilder
+    private func loggedInContent(user: Auth.User) -> some View {
+        // Section 1: Header (Avatar + Tên)
+        Section {
+            HStack {
+                Spacer()
+                VStack(spacing: 12) {
+                    // Avatar tròn với Initials
+                    Circle()
+                        .fill(Color.orange.gradient)
+                        .frame(width: 86, height: 86)
+                        .overlay(
+                            Text(user.initials)
+                                .font(.system(size: 32, weight: .bold, design: .rounded))
+                                .foregroundColor(.white)
+                        )
+                        .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 3)
+                    
+                    // Tên hiển thị
+                    Text(user.fullName)
+                        .font(.system(.title2, design: .rounded))
+                        .fontWeight(.bold)
+                    
+                    // Email
+                    Text(user.email ?? "No Email")
+                        .font(.system(.subheadline, design: .rounded))
+                        .foregroundColor(.secondary)
+                }
+                .padding(.vertical, 10)
+                Spacer()
+            }
+        }
+        .listRowBackground(Color.clear) // Xóa nền row để Avatar nổi bật trên nền List
+        
+        // Section 2: Thông tin chi tiết
+        Section("Thông tin cá nhân") {
+            ProfileRow(icon: "phone.fill", title: "Số điện thoại", value: user.phoneNumber)
+            
+            // Định dạng ngày tham gia (Optional: có thể move logic date formatter ra ngoài)
+            let joinedDate = user.createdAt.formatted(date: .abbreviated, time: .omitted)
+            ProfileRow(icon: "calendar", title: "Tham gia từ", value: joinedDate)
+        }
+        
+        // Section 3: Đăng xuất
+        Section {
+            Button(role: .destructive) {
+                authVM.signOut()
+            } label: {
+                HStack {
+                    Spacer()
+                    Text("Đăng xuất")
+                        .font(.system(.body, design: .rounded))
+                        .fontWeight(.semibold)
+                    Spacer()
+                }
+            }
+            .padding(.vertical, 4)
+        }
+    }
+    
+    /// Nội dung hiển thị khi người dùng CHƯA đăng nhập (Khách).
+    private var guestContent: some View {
+        Section {
+            VStack(spacing: 20) {
+                Spacer()
+                Image(systemName: "person.crop.circle.badge.questionmark")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 80, height: 80)
+                    .foregroundColor(.gray.opacity(0.5))
+                
+                Text("Bạn chưa đăng nhập")
+                    .font(.system(.title3, design: .rounded))
+                    .fontWeight(.medium)
+                    .foregroundColor(.secondary)
+                
+                NavigationLink {
+                    LoginView()
+                        .toolbar(.hidden, for: .tabBar)
+                } label: {
+                    Text("Đăng nhập ngay")
+                        .font(.system(.headline, design: .rounded))
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 12)
+                        .background(Color.orange)
+                        .cornerRadius(12)
+                }
+                .buttonStyle(.plain) // Bỏ style mặc định của List button
+                
+                Spacer()
+            }
+            .padding(.vertical, 40)
+        }
+        .listRowBackground(Color.clear)
+    }
+    
+    /// Nội dung trên thanh Toolbar.
+    @ToolbarContentBuilder
+    private var toolbarContent: some ToolbarContent {
+        ToolbarItem(placement: .navigationBarTrailing) {
+            // Chỉ hiện nút Đăng nhập nhỏ ở góc nếu đang ở chế độ khách
+            if authVM.currentUser == nil && !authVM.isLoading {
+                NavigationLink(
+                    destination: LoginView().toolbar(.hidden, for: .tabBar)
+                ) {
+                    Text("Login")
+                        .font(.system(.body, design: .rounded))
+                        .fontWeight(.bold)
+                        .foregroundColor(.orange)
+                }
+            }
+        }
+    }
+}
+
+// MARK: - Helper Views
+
+/// Row hiển thị thông tin cá nhân (Icon - Title - Value).
 struct ProfileRow: View {
+    
+    // MARK: - Properties
     let icon: String
     let title: String
     let value: String
     
+    // MARK: - Body
     var body: some View {
-        HStack {
-            Image(systemName: icon)
-                .foregroundColor(.orange)
-                .frame(width: 24)
-            Text(title).foregroundColor(.primary)
+        HStack(spacing: 12) {
+            // Icon container
+            ZStack {
+                Circle()
+                    .fill(Color.orange.opacity(0.15))
+                    .frame(width: 32, height: 32)
+                
+                Image(systemName: icon)
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundColor(.orange)
+            }
+            
+            // Title
+            Text(title)
+                .font(.system(.body, design: .rounded))
+                .foregroundColor(.primary)
+            
             Spacer()
-            Text(value).foregroundColor(.secondary)
+            
+            // Value
+            Text(value)
+                .font(.system(.callout, design: .rounded))
+                .foregroundColor(.secondary)
         }
+        .padding(.vertical, 4)
     }
 }
+
+// MARK: - Preview
 
 #Preview {
     ProfileView()

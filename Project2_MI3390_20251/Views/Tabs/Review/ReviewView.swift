@@ -2,7 +2,7 @@
 //  ReviewView.swift
 //  Project2_MI3390_20251
 //
-//  Refactored: Fix lỗi hiển thị từ của User khác
+//  Refactored: Fixed Navigation & Touch Events
 //
 
 import SwiftUI
@@ -14,21 +14,19 @@ import Supabase
 struct ReviewView: View {
     // MARK: - Properties
     @Environment(\.modelContext) private var modelContext
-    
-    // 1. Lấy AuthViewModel để biết ai đang đăng nhập
     @EnvironmentObject var authVM: AuthViewModel
     
-    // 2. Thay @Query bằng @State để tự quản lý dữ liệu
     @State private var studyRecords: [StudyRecord] = []
     
-    // Trạng thái thời gian thực
+    // Trạng thái
     @State private var currentTime = Date()
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
+    @State private var navigateToHandbook = false
     @State private var showPractice = false
     
     // MARK: - Computed Properties
-    
+    // (Giữ nguyên các logic tính toán của bạn)
     var dueRecords: [StudyRecord] {
         return studyRecords.filter { $0.nextReview <= currentTime }
     }
@@ -55,12 +53,12 @@ struct ReviewView: View {
             counts[level] += 1
         }
         return [
-            LevelStat(level: "0", count: counts[0], color: .gray.opacity(0.8)),
-            LevelStat(level: "1", count: counts[1], color: .blue.opacity(0.6)),
-            LevelStat(level: "2", count: counts[2], color: .blue),
-            LevelStat(level: "3", count: counts[3], color: .green.opacity(0.6)),
-            LevelStat(level: "4", count: counts[4], color: .green),
-            LevelStat(level: "5", count: counts[5], color: .orange)
+            LevelStat(level: "0", count: counts[0], color: .gray),
+            LevelStat(level: "1", count: counts[1], color: .red.opacity(0.8)),
+            LevelStat(level: "2", count: counts[2], color: .yellow),
+            LevelStat(level: "3", count: counts[3], color: .cyan),
+            LevelStat(level: "4", count: counts[4], color: .blue),
+            LevelStat(level: "5", count: counts[5], color: .purple)
         ]
     }
     
@@ -70,85 +68,73 @@ struct ReviewView: View {
             ScrollView {
                 VStack(spacing: 24) {
                     
-                    // 1. Header & Summary
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text("Tổng quan")
-                                .font(.headline)
-                                .foregroundColor(.gray)
-                            // Bây giờ biến này chỉ đếm số bản ghi của User hiện tại
-                            Text("\(studyRecords.count) từ vựng")
-                                .font(.system(size: 24, design: .rounded))
-                                .fontWeight(.bold)
+                    // 1. Nút Sổ tay (Đã sửa lỗi chạm)
+                    ZStack {
+                        // Nền và Text
+                        HStack(spacing: 8) {
+                            Text("Sổ tay đã có")
+                                .font(.system(size: 20, design: .rounded))
+                                .fontWeight(.regular)
+                            Text("\(studyRecords.count)")
+                                .font(.system(size: 20, design: .rounded))
+                                .fontWeight(.semibold)
+                            Text("từ vựng")
+                                .font(.system(size: 20, design: .rounded))
+                                .fontWeight(.regular)
                         }
-                        Spacer()
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 40)
+                        .background(Color.neutral04)
+                        .cornerRadius(16)
+                        .padding(.horizontal, 32)
                         
-                        // Circle Indicator
-                        ZStack {
-                            Circle()
-                                .fill(dueRecords.isEmpty ? Color.green.opacity(0.1) : Color.red.opacity(0.1))
-                                .frame(width: 60, height: 60)
-                            
-                            VStack(spacing: 0) {
-                                Text("\(dueRecords.count)")
-                                    .font(.title2)
-                                    .bold()
-                                    .foregroundColor(dueRecords.isEmpty ? .green : .red)
-                                Text("cần ôn")
-                                    .font(.caption2)
-                                    .foregroundColor(.gray)
-                            }
+                        HStack(spacing: 8) {
+                            HandbookButton {}
+                                .allowsHitTesting(false) // ✅ FIX: Để tap xuyên qua nút này
+                            Spacer()
                         }
+                        .padding(.leading, 16)
                     }
-                    .padding()
-                    .background(Color.white)
-                    .cornerRadius(16)
-                    .shadow(color: .black.opacity(0.05), radius: 5, x: 0, y: 2)
+                    .contentShape(Rectangle()) // ✅ FIX: Mở rộng vùng bấm
+                    .onTapGesture {
+                        navigateToHandbook = true
+                    }
                     
-                    // 2. Chart
-                    VStack(alignment: .leading) {
-                        Text("Mức độ ghi nhớ")
-                            .font(.headline)
-                            .padding(.bottom, 8)
-                        
+                    VStack(alignment: .leading, spacing: 10) {
                         if studyRecords.isEmpty {
                             ContentUnavailableView("Chưa có dữ liệu", systemImage: "chart.bar")
                                 .frame(height: 200)
                         } else {
-                            Chart(levelStats) { item in
-                                BarMark(
-                                    x: .value("Level", item.level),
-                                    y: .value("Number of words", item.count)
-                                )
-                                .foregroundStyle(item.color.gradient)
-                                .annotation(position: .top) {
-                                    if item.count > 0 {
-                                        Text("\(item.count)")
-                                            .font(.caption)
-                                            .foregroundColor(.secondary)
-                                    }
-                                }
-                            }
-                            .frame(height: 220)
+                            ReviewChartView(
+                                dataPoints: levelStats.map { $0.count }
+                            )
                         }
                     }
-                    .padding()
-                    .background(Color.white)
-                    .cornerRadius(16)
-                    .shadow(color: .black.opacity(0.05), radius: 5, x: 0, y: 2)
                     
-                    // 3. Action Area
                     VStack {
                         if !dueRecords.isEmpty {
+                            HStack(spacing: 4) {
+                                Text("Chuẩn bị ôn tập: ")
+                                    .font(.system(size: 18, design: .rounded))
+                                    .fontWeight(.semibold)
+                                Text("\(dueRecords.count)")
+                                    .font(.system(size: 18, design: .rounded))
+                                    .fontWeight(.semibold)
+                                Text("từ")
+                                    .font(.system(size: 18, design: .rounded))
+                                    .fontWeight(.semibold)
+                            }
+                            .padding()
+                            
                             Button(action: { showPractice = true }) {
                                 HStack {
-                                    Image(systemName: "play.circle.fill").font(.title2)
-                                    Text("Bắt đầu ôn tập ngay").fontWeight(.bold)
+                                    Text("Bắt đầu ôn tập ngay")
+                                        .fontWeight(.bold)
                                 }
                                 .frame(maxWidth: .infinity)
                             }
                             .buttonStyle(ThreeDButtonStyle(color: .pGreen))
-                            .padding(.horizontal, 20)
+                            .padding(.horizontal, 48)
                         } else {
                             if let nextDate = nextReviewDate {
                                 VStack(spacing: 12) {
@@ -166,9 +152,13 @@ struct ReviewView: View {
                                     Divider().padding(.horizontal, 40)
                                     
                                     HStack(spacing: 4) {
-                                        Text("Sắp có").foregroundColor(.gray)
-                                        Text("\(upcomingCount)").fontWeight(.bold).foregroundColor(.blue)
-                                        Text("từ chuẩn bị ôn tập").foregroundColor(.gray)
+                                        Text("Sắp có")
+                                            .foregroundColor(.gray)
+                                        Text("\(upcomingCount)")
+                                            .fontWeight(.bold)
+                                            .foregroundColor(.blue)
+                                        Text("từ chuẩn bị ôn tập")
+                                            .foregroundColor(.gray)
                                     }
                                     .font(.caption)
                                 }
@@ -190,35 +180,33 @@ struct ReviewView: View {
             }
             .background(Color(.neutral01))
             .navigationTitle("Ôn tập")
+            // ✅ FIX: Đặt navigationDestination ra ngoài ZStack (gắn vào ScrollView hoặc NavigationStack)
+            .navigationDestination(isPresented: $navigateToHandbook) {
+                HandBookView()
+            }
             .onReceive(timer) { input in currentTime = input }
             .fullScreenCover(isPresented: $showPractice) {
-                // Khi đóng màn hình ôn tập về, cần load lại dữ liệu để cập nhật progress
                 ReviewContainerView(modelContext: modelContext)
                     .onDisappear {
                         loadDashboardData()
                     }
             }
         }
-        // 3. Gọi hàm load dữ liệu khi màn hình xuất hiện
         .onAppear {
             loadDashboardData()
         }
-        // 4. Load lại khi trạng thái đăng nhập thay đổi (User A -> User B)
         .onChange(of: authVM.currentUser) { _, _ in
             loadDashboardData()
         }
     }
     
-    // MARK: - Data Loading Logic
-    // Hàm này lọc dữ liệu chính xác theo User ID
+    // MARK: - Logic
+    
     func loadDashboardData() {
         let userID = authVM.currentUser?.id.uuidString ?? "guest_user_id"
-        
-        // Predicate: Chỉ lấy record của user hiện tại
         let descriptor = FetchDescriptor<StudyRecord>(
             predicate: #Predicate { $0.user?.id == userID }
         )
-        
         do {
             self.studyRecords = try modelContext.fetch(descriptor)
         } catch {
@@ -237,7 +225,7 @@ struct ReviewView: View {
     }
 }
 
-// Model phụ cho biểu đồ
+// Model phụ
 struct LevelStat: Identifiable {
     let id = UUID()
     let level: String

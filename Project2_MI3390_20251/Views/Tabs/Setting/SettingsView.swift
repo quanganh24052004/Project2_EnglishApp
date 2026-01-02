@@ -13,8 +13,6 @@ struct SettingsView: View {
     @EnvironmentObject var languageManager: LanguageManager
     
     // MARK: - AppStorage (Lưu cấu hình đơn giản)
-    @AppStorage("isDarkMode") private var isDarkMode = false
-    
     @AppStorage("soundEffects") private var isSoundEffectsOn = true
     @AppStorage("musicVolume") private var musicVolume = 0.5
     
@@ -28,7 +26,6 @@ struct SettingsView: View {
         NavigationStack {
             Form {
                 languageSection
-                experienceSection
                 audioSection
                 studyTargetSection
                 dataSection
@@ -43,7 +40,6 @@ struct SettingsView: View {
                 Text("This action cannot be undone.")
             }
         }
-        .preferredColorScheme(isDarkMode ? .dark : .light)
     }
 }
 
@@ -57,12 +53,6 @@ private extension SettingsView {
                 Text("Vietnamese").tag("vi")
             }
             .pickerStyle(.menu)
-        }
-    }
-    
-    var experienceSection: some View {
-        Section(header: Text("Experience")) {
-            Toggle("Dark mode", isOn: $isDarkMode)
         }
     }
     

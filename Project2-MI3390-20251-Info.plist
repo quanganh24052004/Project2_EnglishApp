@@ -9,5 +9,7 @@
 		<string>ChalkboardSE-Light-01_0.ttf</string>
 		<string>ChalkboardSE-Regular-02_0.ttf</string>
 	</array>
+	<key>User Interface Style</key>
+	<string>Light</string>
 </dict>
 </plist>

@@ -57,12 +57,15 @@ struct SpellingGameView: View {
                 VStack(spacing: 30) {
                     VStack(spacing: 15) {
                         Text("Fill in the word")
-                            .font(.system(size: 20, weight: .semibold))
+                            .font(.system(size: 20, design: .rounded))
+                            .fontWeight(.semibold)
                             .foregroundColor(Color.neutral06)
                         
                         Text(item.meaning)
-                            .font(.system(size: 24, weight: .regular))
+                            .font(.system(size: 24, design: .rounded))
+                            .fontWeight(.semibold)
                             .multilineTextAlignment(.center)
+                            .lineLimit(3)
                             .padding(.horizontal)
                     }
                     .padding(.top, 20)
@@ -88,27 +91,33 @@ struct SpellingGameView: View {
                     .padding(.horizontal)
                     
                     Text("\(userInput.count) / \(item.word.count)")
-                        .font(.caption)
+                        .font(.system(size: 16, design: .rounded))
+                        .fontWeight(.semibold)
                         .foregroundColor(.gray)
-                        .monospacedDigit()
                         .padding(.top, 10)
                 }
                 .padding(.bottom, 20)
             }
             .onTapGesture {
                 isFocused = true
-                viewModel.playCurrentAudio()
+                // viewModel.playCurrentAudio() // Bỏ comment nếu muốn bấm vào là đọc
             }
             
             Spacer()
             
-            // MARK: - [MỚI] Nút Check
+            // MARK: Nút Check (Đã sửa logic Disable)
             Button("Check") {
-                onCheck(userInput)
+                isFocused = false
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    onCheck(userInput)
+                }
             }
-            .buttonStyle(ThreeDButtonStyle(color: .blue)) // Dùng style giống dự án
-            .padding(.horizontal, 40)
-            .padding(.bottom, 20) // Khoảng cách với đáy màn hình/bàn phím
+            // Logic đổi màu: Có chữ -> Xanh, Rỗng -> Xám
+            .buttonStyle(ThreeDButtonStyle(color: userInput.isEmpty ? .gray : .pGreen))
+            // Logic chặn bấm: Rỗng -> Disabled
+            .disabled(userInput.isEmpty)
+            .padding(.horizontal, 100)
+            .padding(.bottom, 40)
         }
         .onAppear {
             setupGame()
@@ -180,12 +189,14 @@ struct SpellingGameView: View {
                             .fontWeight(.bold)
                             .foregroundColor(.gray.opacity(0.3))
                     } else {
+                        // Ký tự ẩn để giữ chỗ chiều cao
                         Text("w")
                             .fontWeight(.bold)
                             .foregroundColor(.clear)
                     }
                 }
-                .font(.system(size: fontSize, design: .monospaced))
+                // 👇 CẬP NHẬT FONT Ở ĐÂY: Rounded thay vì Monospaced
+                .font(.system(size: fontSize, design: .rounded))
                 
                 Rectangle()
                     .fill(lineColor(userChar: userChar, isActive: isActiveCursor))
@@ -199,7 +210,7 @@ struct SpellingGameView: View {
         if userChar != nil {
             return .orange // Màu khi đã nhập
         } else if isActive {
-            return .orange.opacity(0.6) // Màu con trỏ nhấp nháy (hoặc vị trí active)
+            return .orange.opacity(0.6) // Màu con trỏ nhấp nháy
         } else {
             return Color(UIColor.neutral04) // Màu mặc định
         }

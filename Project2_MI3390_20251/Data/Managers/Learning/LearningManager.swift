@@ -116,7 +116,7 @@ class LearningManager {
         switch level {
         case 0:
             // Level 0 (Mới/Quên): 10 phút
-            return now.addingTimeInterval(1 * 15)
+            return now.addingTimeInterval(10 * 60)
             
         case 1:
             // Level 1: 1 giờ

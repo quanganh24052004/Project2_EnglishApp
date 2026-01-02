@@ -50,7 +50,7 @@ struct FlashcardStepView: View {
                 Spacer()
                 
                 // MARK: - 4. Nút Tiếp tục (Disable nếu chưa tương tác)
-                Button("Tiếp tục") {
+                Button("Continue") {
                     onContinue()
                 }
                 .buttonStyle(ThreeDButtonStyle(color: hasInteracted ? mainColor : .gray))

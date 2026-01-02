@@ -20,7 +20,7 @@ struct ExitConfirmationSheet: View {
                 .frame(width: 128, height: 128)
                 .padding(.top, 20)
             
-            Text("Làm nốt bài đi. Thoát bây giờ là toàn bộ kết quả học sẽ không được lưu lại đó!")
+            Text("Làm nốt bài đi.\n Thoát bây giờ là toàn bộ\n kết quả học sẽ không được lưu lại đó!")
                 .multilineTextAlignment(.center)
                 .lineLimit(3)
                 .font(.system(size: 18))

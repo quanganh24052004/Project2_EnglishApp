@@ -8,5 +8,6 @@
 import Foundation
 
 enum Constants {
-
+    static let projectURLString =
+    static let projectAPIKey = 
 }

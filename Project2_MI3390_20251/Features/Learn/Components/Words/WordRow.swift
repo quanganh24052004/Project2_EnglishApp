@@ -70,7 +70,7 @@ struct WordRow: View {
                             .padding(.top, 1)
                     }
                 } else {
-                    Text("Chưa có nghĩa")
+                    Text("It's not meaningful yet")
                         .font(.system(size: 14, design: .rounded))
                         .italic()
                         .foregroundColor(.gray)

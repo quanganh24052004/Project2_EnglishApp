@@ -93,12 +93,12 @@ extension ProfileView {
         .listRowBackground(Color.clear) // Xóa nền row để Avatar nổi bật trên nền List
         
         // Section 2: Thông tin chi tiết
-        Section("Thông tin cá nhân") {
-            ProfileRow(icon: "phone.fill", title: "Số điện thoại", value: user.phoneNumber)
+        Section("My profile") {
+            ProfileRow(icon: "phone.fill", title: "Phone", value: user.phoneNumber)
             
             // Định dạng ngày tham gia (Optional: có thể move logic date formatter ra ngoài)
             let joinedDate = user.createdAt.formatted(date: .abbreviated, time: .omitted)
-            ProfileRow(icon: "calendar", title: "Tham gia từ", value: joinedDate)
+            ProfileRow(icon: "calendar", title: "Join from", value: joinedDate)
         }
         
         // Section 3: Đăng xuất
@@ -108,7 +108,7 @@ extension ProfileView {
             } label: {
                 HStack {
                     Spacer()
-                    Text("Đăng xuất")
+                    Text("Log out")
                         .font(.system(.body, design: .rounded))
                         .fontWeight(.semibold)
                     Spacer()
@@ -129,7 +129,7 @@ extension ProfileView {
                     .frame(width: 80, height: 80)
                     .foregroundColor(.gray.opacity(0.5))
                 
-                Text("Bạn chưa đăng nhập")
+                Text("You are not logged in yet")
                     .font(.system(.title3, design: .rounded))
                     .fontWeight(.medium)
                     .foregroundColor(.secondary)
@@ -138,7 +138,7 @@ extension ProfileView {
                     LoginView()
                         .toolbar(.hidden, for: .tabBar)
                 } label: {
-                    Text("Đăng nhập ngay")
+                    Text("Login now")
                         .font(.system(.headline, design: .rounded))
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)

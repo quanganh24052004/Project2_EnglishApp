@@ -13,14 +13,13 @@ struct WordListByLevelView: View {
     let words: [StudyRecord]
     
     var body: some View {
-        // ✅ Sử dụng List thay vì ScrollView + VStack để tối ưu hiệu năng
         List {
             ForEach(words) { record in
                 StudyRecordRow(record: record)
                     .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16)) // Padding cho từng Row
             }
         }
-        .navigationTitle("\(words.count) từ")
+        .navigationTitle("\(words.count) words")
         .navigationBarTitleDisplayMode(.inline)
     }
 }
@@ -56,7 +55,7 @@ struct StudyRecordRow: View {
                         HStack(spacing: 4) {
                             Image(systemName: "clock")
                                 .font(.system(size: 10))
-                            Text("Ôn tiếp:")
+                            Text("Review again!")
                                 .font(.system(size: 10, design: .rounded))
                         }
                         .foregroundColor(.gray)
@@ -114,14 +113,14 @@ struct StudyRecordRow: View {
                                 )
                         }
                     } else {
-                        Text("Chưa có nghĩa")
+                        Text("It's not meaningful yet")
                             .font(.system(size: 14, design: .rounded))
                             .italic()
                             .foregroundColor(.gray)
                     }
                 }
             } else {
-                Text("Dữ liệu từ bị lỗi")
+                Text("Data from error!!!")
                     .foregroundColor(.red)
             }
         }

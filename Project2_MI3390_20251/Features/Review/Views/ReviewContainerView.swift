@@ -120,7 +120,7 @@ extension ReviewContainerView {
     private var questionAreaView: some View {
         ZStack {
             if viewModel.isLoading {
-                ProgressView("Đang tạo bài ôn tập...")
+                ProgressView("Creating a review...")
                     .controlSize(.large)
             } else if viewModel.questions.isEmpty {
                 emptyStateView
@@ -144,12 +144,12 @@ extension ReviewContainerView {
     private var emptyStateView: some View {
         VStack {
             ContentUnavailableView(
-                "Không có dữ liệu",
+                "No data",
                 systemImage: "exclamationmark.triangle",
-                description: Text("Không tạo được câu hỏi nào từ dữ liệu hiện tại.")
+                description: Text("No questions can be created from the current data.")
             )
             Spacer()
-            Button("Quay lại") { dismiss() }
+            Button("Go back") { dismiss() }
                 .padding()
         }
     }
@@ -191,7 +191,7 @@ extension ReviewContainerView {
                 // 2. Kiểm tra kết quả
                 viewModel.checkAnswer()
             }) {
-                Text("Kiểm tra")
+                Text("Check")
                     // Font Rounded cho nút bấm
                     .font(.system(size: 18, weight: .bold, design: .rounded))
             }

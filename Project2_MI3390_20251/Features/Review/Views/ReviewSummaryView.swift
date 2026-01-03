@@ -66,12 +66,12 @@ extension ReviewSummaryView {
     /// Phần tiêu đề và nội dung text
     private var headerSection: some View {
         VStack(spacing: 12) {
-            Text("Tuyệt vời! 🎉")
-                .font(.system(size: 28, design: .rounded)) // Tiêu đề lớn hơn chút để nổi bật
+            Text("Great! 🎉")
+                .font(.system(size: 28, design: .rounded))
                 .fontWeight(.bold)
                 .foregroundColor(.green)
             
-            Text("Bạn đã hoàn thành phiên ôn tập này.\nHãy giữ vững phong độ nhé!")
+            Text("You have completed this review session.\nKeep up the form!")
                 .font(.system(size: 18, design: .rounded)) // Nội dung size 18
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
@@ -83,27 +83,24 @@ extension ReviewSummaryView {
     private var actionButtons: some View {
         VStack(spacing: 16) {
             
-            // 1. Nút quay về / Học từ mới
             Button {
                 dismiss()
             } label: {
                 HStack {
                     Image(systemName: "book.fill")
-                    Text("Học từ mới")
+                    Text("Learn new words")
                 }
             }
-            .buttonStyle(ThreeDButtonStyle(color: .pGreen)) // Dùng style 3D chuẩn
+            .buttonStyle(ThreeDButtonStyle(color: .pGreen))
             
-            // 2. Nút Ôn tập tiếp (Chỉ hiện nếu còn từ cần ôn)
             if dueRecordsCount > 0 {
                 Button {
                     onContinueReview()
                 } label: {
                     HStack {
                         Image(systemName: "arrow.clockwise.circle.fill")
-                        Text("Ôn tập tiếp")
+                        Text("Continue to review")
                         
-                        // Badge số lượng
                         Text("(\(dueRecordsCount))")
                             .font(.system(size: 14, design: .rounded))
                             .fontWeight(.semibold)
@@ -113,14 +110,13 @@ extension ReviewSummaryView {
                             .cornerRadius(8)
                     }
                 }
-                .buttonStyle(ThreeDButtonStyle(color: .orange)) // Màu cam để thôi thúc hành động
+                .buttonStyle(ThreeDButtonStyle(color: .orange))
             }
             
-            // 3. Nút về trang chủ (Text Button nhẹ nhàng)
             Button {
                 dismiss()
             } label: {
-                Text("Về trang chủ")
+                Text("Back to homepage")
                     .font(.system(size: 16, design: .rounded))
                     .fontWeight(.semibold)
                     .foregroundColor(.neutral04)

@@ -41,7 +41,6 @@ struct FeedbackSheetView: View {
     // MARK: - Body
     var body: some View {
         ZStack {
-            // 1. Background tint (Xanh hoặc Đỏ nhạt)
             (isCorrect ? Color.green : Color.red).opacity(0.9)
                 .ignoresSafeArea()
             
@@ -72,7 +71,7 @@ struct FeedbackSheetView: View {
                 .font(.system(size: 32))
                 .foregroundColor(.white)
             
-            Text(isCorrect ? "Chính xác! 🎉" : "Chưa chính xác")
+            Text(isCorrect ? "Exactly! 🎉" : "Not accurate")
                 .font(.system(size: 24, weight: .bold, design: .rounded))
                 .foregroundColor(.white)
             
@@ -159,7 +158,7 @@ struct FeedbackSheetView: View {
             }
             dismiss()
         }) {
-            Text("Tiếp tục")
+            Text("Continue")
                 .font(.system(size: 18, weight: .bold, design: .rounded))
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 14)

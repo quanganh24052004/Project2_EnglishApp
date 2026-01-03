@@ -22,10 +22,8 @@ struct HandBookView: View {
                 ScrollView {
                     VStack(spacing: 16) {
                         ForEach(levels, id: \.self) { level in
-                            // Lọc các từ thuộc level hiện tại
                             let wordsInLevel = studyRecords.filter { $0.memoryLevel == level }
                             
-                            // Navigation chuyển sang màn hình chi tiết
                             NavigationLink(destination: WordListByLevelView(level: level, words: wordsInLevel)) {
                                 LevelCardView(level: level, count: wordsInLevel.count)
                             }
@@ -33,10 +31,9 @@ struct HandBookView: View {
                     }
                     .padding()
                 }
-                // 2. Hiển thị tổng số từ lên Navigation Title
-                .navigationTitle("\(totalWordsCount) từ ôn tập")
+                .navigationTitle("\(totalWordsCount) words for review")
                 .navigationBarTitleDisplayMode(.inline)
-                .background(Color(.systemGroupedBackground)) // Màu nền xám nhẹ cho toàn màn hình
+                .background(Color(.systemGroupedBackground))
             }
         }
     }
@@ -61,7 +58,6 @@ struct HandBookView: View {
         
         var body: some View {
             HStack(spacing: 20) {
-                // Vòng tròn chứa tên Level (Bên trái)
                 ZStack {
                     Circle()
                         .fill(Color.white)
@@ -69,12 +65,10 @@ struct HandBookView: View {
                     
                     Text("LV\(level)")
                         .font(.system(size: 16, weight: .bold, design: .rounded))
-                        .foregroundColor(cardColor) // Chữ cùng màu với nền thẻ
+                        .foregroundColor(cardColor)
                 }
                 .padding(.leading, 20)
-                
-                // Số lượng từ (Ở giữa)
-                Text("\(count) từ")
+                Text("\(count) words")
                     .font(.system(size: 20, weight: .bold, design: .rounded))
                     .foregroundColor(.white)
                 
@@ -83,7 +77,6 @@ struct HandBookView: View {
             .frame(height: 80)
             .background(cardColor)
             .cornerRadius(16)
-            // Hiệu ứng đổ bóng 3D nhẹ bên dưới
             .shadow(color: cardColor.opacity(0.5), radius: 5, x: 0, y: 5)
         }
     }

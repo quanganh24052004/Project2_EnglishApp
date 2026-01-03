@@ -12,7 +12,6 @@ struct SummarizeView: View {
     // MARK: - Properties
     let items: [LearningItem]
     
-    // Actions
     var onSave: (Set<PersistentIdentifier>) -> Void
     var onCancel: () -> Void
     
@@ -21,24 +20,22 @@ struct SummarizeView: View {
     // MARK: - Body
     var body: some View {
         ZStack {
-            // 1. Background toàn màn hình
             Color.neutral01
                 .ignoresSafeArea()
             
             VStack(spacing: 0) {
                 // MARK: - Header Section
                 VStack(spacing: 12) {
-                    // Hình ảnh minh họa (Dùng ảnh có sẵn trong Assets)
                     Image("wow")
                         .resizable()
                         .scaledToFit()
                         .frame(height: 120)
                     
-                    Text("Tuyệt vời! 🎉")
+                    Text("Great!🎉")
                         .font(.system(size: 28, weight: .bold, design: .rounded))
                         .foregroundColor(.primary)
                     
-                    Text("Bạn đã hoàn thành bài học.\nChọn từ vựng bạn muốn lưu vào sổ tay:")
+                    Text("You have completed the lesson.\nChoose the vocabulary you want to save in your notebook:")
                         .font(.system(size: 16, design: .rounded))
                         .foregroundColor(.gray)
                         .multilineTextAlignment(.center)
@@ -63,7 +60,7 @@ struct SummarizeView: View {
                     Button(action: {
                         onSave(selectedIDs)
                     }) {
-                        Text("Lưu vào sổ tay (\(selectedIDs.count))")
+                        Text("Save to Notebook (\(selectedIDs.count))")
                     }
                     .buttonStyle(ThreeDButtonStyle(
                         color: selectedIDs.isEmpty ? .gray : .pGreen
@@ -72,7 +69,7 @@ struct SummarizeView: View {
                     .disabled(selectedIDs.isEmpty)
                     
                     Button(action: onCancel) {
-                        Text("Không lưu & Thoát")
+                        Text("Don't save & Exit")
                             .font(.system(size: 16, weight: .medium, design: .rounded))
                             .foregroundColor(.gray)
                             .underline()
@@ -81,7 +78,6 @@ struct SummarizeView: View {
             }
         }
         .onAppear {
-            // Mặc định chọn tất cả khi vào màn hình
             let allIDs = items.map { $0.wordID }
             selectedIDs = Set(allIDs)
         }
@@ -89,7 +85,6 @@ struct SummarizeView: View {
     
     // MARK: - Helper Views
     
-    // Component Card cho từng từ
     private func wordSelectionCard(item: LearningItem) -> some View {
         let isSelected = selectedIDs.contains(item.wordID)
         
@@ -112,7 +107,6 @@ struct SummarizeView: View {
                     }
                 }
                 
-                // Nội dung từ
                 VStack(alignment: .leading, spacing: 4) {
                     Text(item.word)
                         .font(.system(size: 18, weight: .bold, design: .rounded))
@@ -130,14 +124,13 @@ struct SummarizeView: View {
             .padding(16)
             .background(Color.white)
             .cornerRadius(16)
-            // Hiệu ứng viền khi chọn
             .overlay(
                 RoundedRectangle(cornerRadius: 16)
                     .stroke(isSelected ? Color.pGreen : Color.clear, lineWidth: 1.5)
             )
             .shadow(color: Color.black.opacity(0.03), radius: 5, x: 0, y: 2)
         }
-        .buttonStyle(.plain) // Bỏ hiệu ứng mờ mặc định của Button
+        .buttonStyle(.plain)
     }
     
     private func toggleSelection(for id: PersistentIdentifier) {

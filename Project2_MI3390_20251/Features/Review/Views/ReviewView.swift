@@ -15,7 +15,8 @@ struct ReviewView: View {
     // MARK: - Properties
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var authVM: AuthViewModel
-    
+    @EnvironmentObject var languageManager: LanguageManager
+
     @State private var studyRecords: [StudyRecord] = []
     
     // Trạng thái
@@ -68,17 +69,15 @@ struct ReviewView: View {
             ScrollView {
                 VStack(spacing: 24) {
                     
-                    // 1. Nút Sổ tay (Đã sửa lỗi chạm)
                     ZStack {
-                        // Nền và Text
                         HStack(spacing: 8) {
-                            Text("Sổ tay đã có")
+                            Text("The Notebook has")
                                 .font(.system(size: 20, design: .rounded))
                                 .fontWeight(.regular)
                             Text("\(studyRecords.count)")
                                 .font(.system(size: 20, design: .rounded))
                                 .fontWeight(.semibold)
-                            Text("từ vựng")
+                            Text("words")
                                 .font(.system(size: 20, design: .rounded))
                                 .fontWeight(.regular)
                         }
@@ -102,7 +101,7 @@ struct ReviewView: View {
                     
                     VStack(alignment: .leading, spacing: 10) {
                         if studyRecords.isEmpty {
-                            ContentUnavailableView("Chưa có dữ liệu", systemImage: "chart.bar")
+                            ContentUnavailableView("To activate the Review feature, learn new words!", systemImage: "chart.bar")
                                 .frame(height: 200)
                         } else {
                             ReviewChartView(
@@ -114,13 +113,13 @@ struct ReviewView: View {
                     VStack {
                         if !dueRecords.isEmpty {
                             HStack(spacing: 4) {
-                                Text("Chuẩn bị ôn tập: ")
+                                Text("Prepare to review: ")
                                     .font(.system(size: 18, design: .rounded))
                                     .fontWeight(.semibold)
                                 Text("\(dueRecords.count)")
                                     .font(.system(size: 18, design: .rounded))
                                     .fontWeight(.semibold)
-                                Text("từ")
+                                Text("words")
                                     .font(.system(size: 18, design: .rounded))
                                     .fontWeight(.semibold)
                             }
@@ -128,7 +127,7 @@ struct ReviewView: View {
                             
                             Button(action: { showPractice = true }) {
                                 HStack {
-                                    Text("Bắt đầu ôn tập ngay")
+                                    Text("Review now!")
                                         .fontWeight(.bold)
                                 }
                                 .frame(maxWidth: .infinity)
@@ -138,13 +137,13 @@ struct ReviewView: View {
                         } else {
                             if let nextDate = nextReviewDate {
                                 VStack(spacing: 12) {
-                                    Text("Bạn đã hoàn thành tất cả bài ôn tập! 🎉")
+                                    Text("You have completed all the review exercises!🎉")
                                         .font(.subheadline)
                                         .foregroundColor(.green)
                                     
                                     HStack {
                                         Image(systemName: "clock")
-                                        Text("Bài tiếp theo sau: \(timeString(to: nextDate))")
+                                        Text("Next review: \(timeString(to: nextDate))")
                                             .font(.system(.body, design: .monospaced))
                                     }
                                     .foregroundColor(.gray)
@@ -152,12 +151,12 @@ struct ReviewView: View {
                                     Divider().padding(.horizontal, 40)
                                     
                                     HStack(spacing: 4) {
-                                        Text("Sắp có")
+                                        Text("Coming soon")
                                             .foregroundColor(.gray)
                                         Text("\(upcomingCount)")
                                             .fontWeight(.bold)
                                             .foregroundColor(.blue)
-                                        Text("từ chuẩn bị ôn tập")
+                                        Text("words to review")
                                             .foregroundColor(.gray)
                                     }
                                     .font(.caption)
@@ -167,7 +166,7 @@ struct ReviewView: View {
                                 .background(Color.gray.opacity(0.1))
                                 .cornerRadius(16)
                             } else {
-                                Text("Hãy học thêm từ mới để bắt đầu ôn tập!")
+                                Text("Learn more new words to start reviewing!")
                                     .font(.subheadline)
                                     .foregroundColor(.gray)
                                     .padding()
@@ -179,8 +178,7 @@ struct ReviewView: View {
                 .padding()
             }
             .background(Color(.neutral01))
-            .navigationTitle("Ôn tập")
-            // ✅ FIX: Đặt navigationDestination ra ngoài ZStack (gắn vào ScrollView hoặc NavigationStack)
+            .navigationTitle(languageManager.currentLanguage == "vi" ? "Ôn tập" : "Review")
             .navigationDestination(isPresented: $navigateToHandbook) {
                 HandBookView()
             }
@@ -217,7 +215,7 @@ struct ReviewView: View {
     
     func timeString(to target: Date) -> String {
         let diff = target.timeIntervalSince(currentTime)
-        if diff <= 0 { return "Sẵn sàng" }
+        if diff <= 0 { return "Ready" }
         let hours = Int(diff) / 3600
         let minutes = (Int(diff) % 3600) / 60
         let seconds = Int(diff) % 60

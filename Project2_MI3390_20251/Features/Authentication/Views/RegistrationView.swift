@@ -54,7 +54,7 @@ struct RegistrationView: View {
                 }
             }
         }
-        .alert("Thông báo", isPresented: $viewModel.showingError) {
+        .alert("Notice", isPresented: $viewModel.showingError) {
             Button("OK") {}
         } message: {
             Text(viewModel.errorMessage ?? "")

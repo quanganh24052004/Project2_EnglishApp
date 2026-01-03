@@ -28,7 +28,7 @@ struct ChartBarItemView: View {
     // MARK: - Body
     var body: some View {
         VStack(spacing: 6) {
-            Text("\(value) từ")
+            Text("\(value) words")
                 .font(.system(size: 14, weight: .bold, design: .rounded))
                 .opacity(isVisible ? 1 : 0)
                 .animation(.easeOut(duration: 0.5).delay(0.3), value: isVisible)

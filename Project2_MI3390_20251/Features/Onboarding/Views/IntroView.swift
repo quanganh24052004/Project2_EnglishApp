@@ -26,7 +26,7 @@ struct IntroView: View {
                     .scaledToFit()
                     .frame(width: 256, height: 256)
                 
-                Text("Ghi nhớ 1000 từ vựng \n chỉ trong 1 tháng")
+                Text("Memorize 500 words \n in just 1 month")
                     .font(.system(size: 18, weight: .semibold))
                     .multilineTextAlignment(.center)
                 
@@ -34,14 +34,13 @@ struct IntroView: View {
                 
                 // LUỒNG 1: Khách -> Survey -> MainTab
                 NavigationLink(destination: SurveyView(isOnboardingDone: $isOnboardingDone)) {
-                    Text("Bắt đầu ngay")
+                    Text("Start now")
                 }
                 .buttonStyle(ThreeDButtonStyle())
                 .padding(.horizontal, 100)
                 
-                // LUỒNG 2: User có acc -> Login -> MainTab
                 NavigationLink(destination: LoginView()) {
-                    Text("Đăng nhập")
+                    Text("Login")
                 }
                 .buttonStyle(ThreeDButtonStyle(color: .gray))
                 .padding(.horizontal, 100)

@@ -20,7 +20,7 @@ struct ExitConfirmationSheet: View {
                 .frame(width: 128, height: 128)
                 .padding(.top, 20)
             
-            Text("Làm nốt bài đi.\n Thoát bây giờ là toàn bộ\n kết quả học sẽ không được lưu lại đó!")
+            Text("Finish the lesson.\n Escape now is all\n the learning results will not be saved there!")
                 .multilineTextAlignment(.center)
                 .lineLimit(3)
                 .font(.system(size: 18))
@@ -31,11 +31,11 @@ struct ExitConfirmationSheet: View {
             
             HStack(spacing: 24) {
                 Button(action: onContinue) {
-                    Text("Ở lại học tiếp")
+                    Text("Stay and continue studying")
                 }
                 .buttonStyle(ThreeDButtonStyle(color: .pGreen))
                 Button(action: onExit) {
-                    Text("Thoát")
+                    Text("Exit")
                 }
                 .buttonStyle(ThreeDButtonStyle(color: .red))
             }

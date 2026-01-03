@@ -63,7 +63,7 @@ private extension SpellingView {
     
     var keyboardSection: some View {
         VStack {
-            Text("Chọn các ký tự bên dưới")
+            Text("Select the characters below")
                 .font(.caption)
                 .foregroundColor(.gray)
                 .padding(.bottom, 8)
@@ -238,7 +238,6 @@ struct CenteredFlowLayout: Layout {
         var maxY: CGFloat = 0
         
         mutating func add(view: LayoutSubview, size: CGSize) {
-            // SỬA LỖI TẠI ĐÂY:
             // Tính toán vị trí X dựa trên width hiện tại (nếu items rỗng thì x=0, ngược lại cộng thêm spacing)
             let xPosition = items.isEmpty ? 0 : width + spacing
             

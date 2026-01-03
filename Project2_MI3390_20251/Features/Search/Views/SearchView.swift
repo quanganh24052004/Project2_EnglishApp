@@ -8,35 +8,29 @@
 import SwiftUI
 import SwiftData
 
-// 1. Định nghĩa Enum để quản lý chế độ tìm kiếm
 enum SearchMode: String, CaseIterable, Identifiable {
     case local = "Handbook"
     case online = "Online"
     
     var id: String { self.rawValue }
     
-    // Icon đại diện cho từng chế độ
     var iconName: String {
         switch self {
-        case .local: return "internaldrive" // Icon ổ cứng/nội bộ
-        case .online: return "globe"        // Icon quả địa cầu
+        case .local: return "book"
+        case .online: return "globe"
         }
     }
 }
 
 struct SearchView: View {
-    // --- Môi trường & SwiftData ---
     @Environment(\.modelContext) private var context
     
-    // --- State Quản lý chung ---
     @State private var searchText = ""
-    @State private var searchMode: SearchMode = .local // Mặc định tìm Local
+    @State private var searchMode: SearchMode = .online
     @State private var hasSearched = false
     
-    // --- State cho Local Search ---
-    @State private var localResults: [Word] = [] // (Giả sử model của bạn tên là Word)
+    @State private var localResults: [Word] = []
     
-    // --- State cho Online Search ---
     @State private var apiResults: [DictionaryEntry] = []
     @State private var isLoading = false
     @State private var errorMessage: String? = nil
@@ -44,7 +38,6 @@ struct SearchView: View {
     var body: some View {
         NavigationStack {
             Group {
-                // Điều hướng giao diện dựa trên chế độ đang chọn
                 switch searchMode {
                 case .local:
                     localSearchContent
@@ -55,7 +48,6 @@ struct SearchView: View {
             .navigationTitle(searchMode == .local ? "Look up Offline" : "Look up Online")
             .searchable(text: $searchText, placement: .automatic, prompt: searchMode == .local ? "Find it in the notebook..." : "Search online...")
             
-            // Xử lý khi nhấn Enter/Search
             .onSubmit(of: .search) {
                 if searchMode == .local {
                     performLocalSearch()
@@ -63,20 +55,16 @@ struct SearchView: View {
                     Task { await performOnlineSearch() }
                 }
             }
-            // Reset khi xoá text hoặc đổi chế độ
             .onChange(of: searchText) { oldValue, newValue in
                 if newValue.isEmpty { resetState() }
             }
             .onChange(of: searchMode) { oldValue, newValue in
-                // Khi đổi chế độ tìm kiếm, xoá kết quả cũ đi cho đỡ rối
                 resetState()
                 searchText = ""
             }
             
-            // --- TOOLBAR ---
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    // Menu cho phép chọn chế độ
                     Menu {
                         Picker("Search mode", selection: $searchMode) {
                             ForEach(SearchMode.allCases) { mode in
@@ -85,7 +73,6 @@ struct SearchView: View {
                             }
                         }
                     } label: {
-                        // Hiển thị icon của chế độ đang chọn
                         Image(systemName: searchMode.iconName)
                             .imageScale(.large)
                     }
@@ -103,7 +90,7 @@ struct SearchView: View {
                 ContentUnavailableView.search(text: searchText)
             } else {
                 List {
-                    Section(header: Text("\(localResults.count) từ vựng trong bộ sưu tập")) {
+                    Section(header: Text("\(localResults.count) words in the collection")) {
                         ForEach(localResults) { word in
                             ZStack(alignment: .leading) {
                                 WordRow(word: word)
@@ -132,7 +119,6 @@ struct SearchView: View {
         } else {
             List(apiResults) { entry in
                 VStack(alignment: .leading, spacing: 6) {
-                    // --- HEADER: Word + Phonetic + Button ---
                     HStack(alignment: .center, spacing: 8) {
                         Text(entry.word)
                             .font(.system(size: 18, weight: .bold, design: .rounded))
@@ -146,10 +132,7 @@ struct SearchView: View {
                         
                         Spacer()
                         
-                        // --- NÚT LOA (Đồng bộ design) ---
                         Button(action: {
-                            // Ưu tiên play link audio từ API nếu có, nếu không thì dùng TTS
-                            // Ở đây dùng TTS theo yêu cầu của bạn cho đơn giản
                             AudioManager.shared.playTTS(text: entry.word)
                         }) {
                             Image(systemName: "speaker.wave.3.fill")
@@ -165,11 +148,9 @@ struct SearchView: View {
                     Divider()
                         .foregroundColor(Color.orange.opacity(0.3))
                     
-                    // --- MEANINGS LIST ---
                     ForEach(entry.meanings) { meaning in
                         VStack(alignment: .leading, spacing: 4) {
                             
-                            // Style Badge cho Part of Speech (Đồng bộ)
                             Text(meaning.partOfSpeech)
                                 .font(.system(size: 10, weight: .semibold, design: .rounded))
                                 .padding(.horizontal, 6)
@@ -195,7 +176,6 @@ struct SearchView: View {
                     }
                 }
                 .padding(.vertical, 6)
-                .listRowSeparator(.hidden) // Ẩn dòng kẻ list mặc định cho đẹp hơn
             }
             .listStyle(.plain)
         }
@@ -229,7 +209,7 @@ struct SearchView: View {
         do {
             localResults = try context.fetch(descriptor)
         } catch {
-            print("❌ Lỗi tìm kiếm local: \(error)")
+            print("❌ Search error: \(error)")
         }
     }
     
@@ -250,7 +230,7 @@ struct SearchView: View {
             self.isLoading = false
         } catch {
             self.isLoading = false
-            self.errorMessage = "Không tìm thấy hoặc lỗi mạng."
+            self.errorMessage = "Not found or network error."
         }
     }
 }

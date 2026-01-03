@@ -35,13 +35,13 @@ struct SettingsView: View {
             }
             .navigationTitle(languageManager.currentLanguage == "vi" ? "Cài đặt" : "Settings")
                         
-            .alert("Đặt lại tiến độ?", isPresented: $showingResetAlert) {
-                Button("Hủy", role: .cancel) { }
-                Button("Xóa tất cả", role: .destructive) {
+            .alert("Reset the progress?", isPresented: $showingResetAlert) {
+                Button("Cancel", role: .cancel) { }
+                Button("Delete all", role: .destructive) {
                     viewModel.resetAllProgress(modelContext: modelContext)
                 }
             } message: {
-                Text("Hành động này sẽ xóa toàn bộ lịch sử học tập, từ vựng đã lưu và đưa ứng dụng về trạng thái ban đầu. Bạn không thể hoàn tác.")
+                Text("This action will delete all saved learning history, vocabulary and bring the application back to its original state. You cannot undo.")
             }
         }
     }
@@ -76,7 +76,7 @@ private extension SettingsView {
             }
             if viewModel.isMusicEnabled {
             VStack(alignment: .leading) {
-                Text("Âm lượng: \(Int(viewModel.musicVolume * 100))%")
+                Text("Volume: \(Int(viewModel.musicVolume * 100))%")
                     .font(.caption)
                     .foregroundColor(.gray)
                 
@@ -108,11 +108,11 @@ private extension SettingsView {
     }
     
     var dataSection: some View {
-        Section(header: Text("Dữ liệu")) {
+        Section(header: Text("Data")) {
             Button(role: .destructive) {
                 showingResetAlert = true // Kích hoạt Alert
             } label: {
-                Label("Reset toàn bộ tiến độ", systemImage: "trash")
+                Label("Reset the entire progress", systemImage: "trash")
                     .foregroundColor(.red)
             }
         }

@@ -198,60 +198,22 @@
 		0804F2F72EE79FD900A982D3 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				0804F2F82EE79FDC00A982D3 /* AppTab.swift */,
 			);
 			path = Main;
-			sourceTree = "<group>";
-		};
-		082EC9FD2EFCF42400645D3A /* Warning */ = {
-			isa = PBXGroup;
-			children = (
-				082EC9FE2EFCF42C00645D3A /* ExitConfirmationSheet.swift */,
-				08BE819F2EE7B7E5004181EE /* FeedbackSheetView.swift */,
-				082ECA022EFD079400645D3A /* SummarizeView.swift */,
-				082ECA042EFD098900645D3A /* CorrectSheetView.swift */,
-			);
-			path = Warning;
 			sourceTree = "<group>";
 		};
 		083369DC2EE58426003B2FEF /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				08E36CCC2F01C82E00B86794 /* Music */,
 				08E36CCB2F01C82200B86794 /* Asset */,
 				085781652EEFDFA30003618D /* Font */,
+				08E36CCC2F01C82E00B86794 /* Music */,
+				088881AD2EF3F5A500F8E198 /* Language */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
 		};
 		083369DD2EE58503003B2FEF /* Authentication */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Authentication;
-			sourceTree = "<group>";
-		};
-		083369DE2EE58545003B2FEF /* Managers */ = {
-			isa = PBXGroup;
-			children = (
-				08E4C4E92F022D7B00D18145 /* UserSyncManager.swift */,
-				08BE81CC2EE852CD004181EE /* AudioPlayer */,
-				084CB4A42EF406D600B1CBBE /* NotificationManager.swift */,
-				088881A02EF2B5A400F8E198 /* Learning */,
-				083369E02EE58551003B2FEF /* Authentication */,
-			);
-			path = Managers;
-			sourceTree = "<group>";
-		};
-		083369DF2EE58550003B2FEF /* Authentication */ = {
-			isa = PBXGroup;
-			children = (
-				08E4C4CC2F02012F00D18145 /* SupabaseAuthService.swift */,
-			);
-			path = Authentication;
-			sourceTree = "<group>";
-		};
-		083369E02EE58551003B2FEF /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
 			);
@@ -274,37 +236,263 @@
 		085B5FF42EEC327E00B6BE5F /* SearchAPI */ = {
 			isa = PBXGroup;
 			children = (
-				085B5FF52EEC32B200B6BE5F /* DictionaryEntry.swift */,
 			);
 			path = SearchAPI;
 			sourceTree = "<group>";
 		};
-		085B5FF72EEC366000B6BE5F /* SearchAPI */ = {
+		0868CD782F08E7A900222EAD /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				085B5FF82EEC366400B6BE5F /* DictionaryService.swift */,
+				08BE81CD2EE852D2004181EE /* AudioManager.swift */,
+				084CB4A42EF406D600B1CBBE /* NotificationManager.swift */,
+				08E4C4E92F022D7B00D18145 /* UserSyncManager.swift */,
+				088881A12EF2B5AC00F8E198 /* LearningManager.swift */,
 			);
-			path = SearchAPI;
+			path = Managers;
 			sourceTree = "<group>";
 		};
-		0868CD402F0441DF00222EAD /* Word */ = {
+		0868CD792F08E7E200222EAD /* DesignSystem */ = {
 			isa = PBXGroup;
 			children = (
-				0868CD472F04423B00222EAD /* WordListView.swift */,
-				0868CD452F04423600222EAD /* WordRow.swift */,
-			);
-			path = Word;
-			sourceTree = "<group>";
-		};
-		0868CD492F04739000222EAD /* Path */ = {
-			isa = PBXGroup;
-			children = (
+				085781632EEFDAF70003618D /* AppButtonStyles.swift */,
+				088ECA5A2EF7DD5400323A08 /* AppCircleButtons.swift */,
+				088ECA582EF6EB9900323A08 /* AppTextField.swift */,
+				088ECA5E2EF7EAC800323A08 /* ProgressBar.swift */,
 				0868CD532F0476E200222EAD /* BarChartShape.swift */,
 			);
-			path = Path;
+			path = DesignSystem;
 			sourceTree = "<group>";
 		};
-		0868CD522F0475E800222EAD /* Chart */ = {
+		0868CD7B2F08E92200222EAD /* Local */ = {
+			isa = PBXGroup;
+			children = (
+				0868CD3E2F041E5100222EAD /* courses_data.json */,
+			);
+			path = Local;
+			sourceTree = "<group>";
+		};
+		0868CD7C2F08E94800222EAD /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				0868CD7D2F08E95600222EAD /* Onboarding */,
+				0868CD802F08E9C500222EAD /* Authentication */,
+				0868CD832F08EA2700222EAD /* Main */,
+				0868CD842F08EB9300222EAD /* Learn */,
+				0868CD8C2F08EC8500222EAD /* Review */,
+				0868CD912F08ED0A00222EAD /* Handbook */,
+				0868CD952F08ED7500222EAD /* Search */,
+				0868CD962F08ED7A00222EAD /* Profile */,
+				0868CD9E2F08EDC100222EAD /* Settings */,
+				0868CDA02F08EE1B00222EAD /* PushUp */,
+				0868CDA12F08EE5100222EAD /* Summarize */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		0868CD7D2F08E95600222EAD /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				0868CD7E2F08E96400222EAD /* Views */,
+				0868CD7F2F08E96C00222EAD /* ViewModels */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		0868CD7E2F08E96400222EAD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				088F26112EE510E300E89167 /* SplashScreenView.swift */,
+				08E4C4DE2F02160400D18145 /* IntroView.swift */,
+				088F260A2EE50D3900E89167 /* SurveyView.swift */,
+				088F260B2EE50D3900E89167 /* SurveyOptionRow.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		0868CD7F2F08E96C00222EAD /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				088F260F2EE50D4700E89167 /* SurveyViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		0868CD802F08E9C500222EAD /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				0868CD812F08E9CE00222EAD /* Views */,
+				0868CD822F08E9D300222EAD /* ViewModels */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		0868CD812F08E9CE00222EAD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				083369E12EE58583003B2FEF /* LoginView.swift */,
+				083369E32EE585A2003B2FEF /* RegistrationView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		0868CD822F08E9D300222EAD /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				0868CD6D2F0822DD00222EAD /* LoginViewModel.swift */,
+				0868CD6F2F0822E400222EAD /* RegistrationViewModel.swift */,
+				08E4C4E12F021C3100D18145 /* AuthViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		0868CD832F08EA2700222EAD /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				0804F2F52EE79E4B00A982D3 /* MainTabView.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		0868CD842F08EB9300222EAD /* Learn */ = {
+			isa = PBXGroup;
+			children = (
+				0868CD852F08EBA500222EAD /* Views */,
+				0868CD862F08EBD100222EAD /* ViewModels */,
+				0868CD872F08EBE100222EAD /* Components */,
+			);
+			path = Learn;
+			sourceTree = "<group>";
+		};
+		0868CD852F08EBA500222EAD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				08BE81A22EE7B7E5004181EE /* LessonContainerView.swift */,
+				08BE81742EE7A83D004181EE /* LearnView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		0868CD862F08EBD100222EAD /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				08BE81A32EE7B7E5004181EE /* LessonViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		0868CD872F08EBE100222EAD /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				0868CD882F08EBFD00222EAD /* Words */,
+				0868CD892F08EC2C00222EAD /* FlashCard */,
+				0868CD8A2F08EC4700222EAD /* GameView */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		0868CD882F08EBFD00222EAD /* Words */ = {
+			isa = PBXGroup;
+			children = (
+				0868CD452F04423600222EAD /* WordRow.swift */,
+				0868CD472F04423B00222EAD /* WordListView.swift */,
+				08BE81CA2EE7F743004181EE /* WordCardView.swift */,
+			);
+			path = Words;
+			sourceTree = "<group>";
+		};
+		0868CD892F08EC2C00222EAD /* FlashCard */ = {
+			isa = PBXGroup;
+			children = (
+				08BE81C72EE7F713004181EE /* FlipCardContainer.swift */,
+				08BE81A02EE7B7E5004181EE /* FlashcardStepView.swift */,
+			);
+			path = FlashCard;
+			sourceTree = "<group>";
+		};
+		0868CD8A2F08EC4700222EAD /* GameView */ = {
+			isa = PBXGroup;
+			children = (
+				08BE81A12EE7B7E5004181EE /* InputStepView.swift */,
+				08625DD02EF594F900CD5619 /* SpellingGameView.swift */,
+			);
+			path = GameView;
+			sourceTree = "<group>";
+		};
+		0868CD8C2F08EC8500222EAD /* Review */ = {
+			isa = PBXGroup;
+			children = (
+				0868CD8D2F08EC9200222EAD /* Views */,
+				0868CD8E2F08EC9700222EAD /* ViewModels */,
+				0868CD8F2F08ECD100222EAD /* Components */,
+			);
+			path = Review;
+			sourceTree = "<group>";
+		};
+		0868CD8D2F08EC9200222EAD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				08D649232EFEAC33004F9C65 /* ReviewContainerView.swift */,
+				088881A32EF2B9F000F8E198 /* ReviewView.swift */,
+				08D649252EFEB575004F9C65 /* ReviewSummaryView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		0868CD8E2F08EC9700222EAD /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				08D649132EFEA4E2004F9C65 /* ReviewViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		0868CD8F2F08ECD100222EAD /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				0868CD942F08ED6200222EAD /* Chart */,
+				0868CD902F08ECF600222EAD /* Game */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		0868CD902F08ECF600222EAD /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				08D649212EFEAB96004F9C65 /* ReviewPromptView.swift */,
+				08D6491F2EFEAB88004F9C65 /* TypingView.swift */,
+				08D6491D2EFEAB78004F9C65 /* SpellingView.swift */,
+				08D6491B2EFEAB55004F9C65 /* MultipleChoiceView.swift */,
+				08D649182EFEAAF1004F9C65 /* ReviewOptionButton.swift */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		0868CD912F08ED0A00222EAD /* Handbook */ = {
+			isa = PBXGroup;
+			children = (
+				0868CD922F08ED3800222EAD /* Views */,
+				0868CD932F08ED4000222EAD /* Components */,
+			);
+			path = Handbook;
+			sourceTree = "<group>";
+		};
+		0868CD922F08ED3800222EAD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0868CD722F0835D000222EAD /* HandBookView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		0868CD932F08ED4000222EAD /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				0868CD742F083AA800222EAD /* WordListByLevelView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		0868CD942F08ED6200222EAD /* Chart */ = {
 			isa = PBXGroup;
 			children = (
 				0868CD502F0475CA00222EAD /* ReviewChartView.swift */,
@@ -313,40 +501,105 @@
 			path = Chart;
 			sourceTree = "<group>";
 		};
-		0868CD6C2F0822D200222EAD /* Authentication */ = {
+		0868CD952F08ED7500222EAD /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				0868CD6D2F0822DD00222EAD /* LoginViewModel.swift */,
-				0868CD6F2F0822E400222EAD /* RegistrationViewModel.swift */,
-				08E4C4E12F021C3100D18145 /* AuthViewModel.swift */,
+				0868CD972F08ED9000222EAD /* Views */,
+				0868CD992F08ED9800222EAD /* Components */,
 			);
-			path = Authentication;
+			path = Search;
 			sourceTree = "<group>";
 		};
-		0868CD712F0835BC00222EAD /* HandBook */ = {
+		0868CD962F08ED7A00222EAD /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				0868CD742F083AA800222EAD /* WordListByLevelView.swift */,
-				0868CD722F0835D000222EAD /* HandBookView.swift */,
+				0868CD9A2F08EDA600222EAD /* Views */,
+				0868CD9B2F08EDA600222EAD /* Components */,
 			);
-			path = HandBook;
+			path = Profile;
 			sourceTree = "<group>";
 		};
-		088881A02EF2B5A400F8E198 /* Learning */ = {
+		0868CD972F08ED9000222EAD /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				088881A12EF2B5AC00F8E198 /* LearningManager.swift */,
+				08BE81702EE7A5BF004181EE /* SearchView.swift */,
 			);
-			path = Learning;
+			path = Views;
 			sourceTree = "<group>";
 		};
-		088881A72EF3DDB400F8E198 /* Setting */ = {
+		0868CD992F08ED9800222EAD /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				08BE818A2EE7B50E004181EE /* WordRowSearch.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		0868CD9A2F08EDA600222EAD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				08BE81762EE7A874004181EE /* ProfileView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		0868CD9B2F08EDA600222EAD /* Components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		0868CD9C2F08EDC100222EAD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				088881A52EF3DBEE00F8E198 /* SettingsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		0868CD9D2F08EDC100222EAD /* Components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		0868CD9E2F08EDC100222EAD /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				0868CD9C2F08EDC100222EAD /* Views */,
+				0868CD9F2F08EDE700222EAD /* ViewModels */,
+				0868CD9D2F08EDC100222EAD /* Components */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		0868CD9F2F08EDE700222EAD /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
 				088881A82EF3DDBE00F8E198 /* SettingsViewModel.swift */,
 				088881B22EF3F81A00F8E198 /* LanguageManage.swift */,
 			);
-			path = Setting;
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		0868CDA02F08EE1B00222EAD /* PushUp */ = {
+			isa = PBXGroup;
+			children = (
+				082EC9FE2EFCF42C00645D3A /* ExitConfirmationSheet.swift */,
+				08BE819F2EE7B7E5004181EE /* FeedbackSheetView.swift */,
+				082ECA042EFD098900645D3A /* CorrectSheetView.swift */,
+			);
+			path = PushUp;
+			sourceTree = "<group>";
+		};
+		0868CDA12F08EE5100222EAD /* Summarize */ = {
+			isa = PBXGroup;
+			children = (
+				082ECA022EFD079400645D3A /* SummarizeView.swift */,
+			);
+			path = Summarize;
 			sourceTree = "<group>";
 		};
 		088881AD2EF3F5A500F8E198 /* Language */ = {
@@ -355,24 +608,6 @@
 				088881AE2EF3F5BA00F8E198 /* Localizable.xcstrings */,
 			);
 			path = Language;
-			sourceTree = "<group>";
-		};
-		088ECA5C2EF7E69900323A08 /* StudyScenario */ = {
-			isa = PBXGroup;
-			children = (
-				08BE81A02EE7B7E5004181EE /* FlashcardStepView.swift */,
-				08BE81A12EE7B7E5004181EE /* InputStepView.swift */,
-				08625DD02EF594F900CD5619 /* SpellingGameView.swift */,
-			);
-			path = StudyScenario;
-			sourceTree = "<group>";
-		};
-		088ECA5D2EF7EABE00323A08 /* ProgressBar */ = {
-			isa = PBXGroup;
-			children = (
-				088ECA5E2EF7EAC800323A08 /* ProgressBar.swift */,
-			);
-			path = ProgressBar;
 			sourceTree = "<group>";
 		};
 		088F25CB2EE50A4200E89167 = {
@@ -400,9 +635,8 @@
 				088F25ED2EE50A9D00E89167 /* App */,
 				088F25F12EE50AD400E89167 /* Core */,
 				088F25EE2EE50A9F00E89167 /* Data */,
+				0868CD7C2F08E94800222EAD /* Features */,
 				083369DC2EE58426003B2FEF /* Resource */,
-				088F25EF2EE50AAB00E89167 /* Views */,
-				088F25F02EE50AAE00E89167 /* ViewModels */,
 			);
 			path = Project2_MI3390_20251;
 			sourceTree = "<group>";
@@ -419,42 +653,20 @@
 		088F25EE2EE50A9F00E89167 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				08BE81842EE7ABD2004181EE /* Dictionary */,
-				083369DE2EE58545003B2FEF /* Managers */,
 				088F25F52EE50AFC00E89167 /* Models */,
 				088F25F62EE50B0200E89167 /* Services */,
+				0868CD7B2F08E92200222EAD /* Local */,
 			);
 			path = Data;
-			sourceTree = "<group>";
-		};
-		088F25EF2EE50AAB00E89167 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				0868CD492F04739000222EAD /* Path */,
-				088F25F72EE50B0E00E89167 /* Authentication */,
-				088F25F82EE50B1300E89167 /* Onboarding */,
-				088F25F92EE50B1800E89167 /* Main */,
-				088F25FC2EE50B2200E89167 /* Tabs */,
-				088F25FD2EE50B2700E89167 /* Components */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		088F25F02EE50AAE00E89167 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				08D649112EFEA4CD004F9C65 /* Tab */,
-				088F260E2EE50D4200E89167 /* Onboarding */,
-			);
-			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		088F25F12EE50AD400E89167 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				088881AD2EF3F5A500F8E198 /* Language */,
-				088F25F22EE50AEB00E89167 /* Extensions */,
 				088F25F32EE50AEF00E89167 /* Constants */,
+				088F25F22EE50AEB00E89167 /* Extensions */,
+				0868CD782F08E7A900222EAD /* Managers */,
+				0868CD792F08E7E200222EAD /* DesignSystem */,
 				088F25F42EE50AF400E89167 /* Utils */,
 			);
 			path = Core;
@@ -481,9 +693,6 @@
 		088F25F42EE50AF400E89167 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				085781632EEFDAF70003618D /* AppButtonStyles.swift */,
-				088ECA5A2EF7DD5400323A08 /* AppCircleButtons.swift */,
-				088ECA582EF6EB9900323A08 /* AppTextField.swift */,
 				08E4C4DC2F02142F00D18145 /* AppleSignInUtils.swift */,
 			);
 			path = Utils;
@@ -492,6 +701,12 @@
 		088F25F52EE50AFC00E89167 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				0804F2F82EE79FDC00A982D3 /* AppTab.swift */,
+				088F26082EE50D3100E89167 /* SurveyModel.swift */,
+				08BE81BD2EE7C41A004181EE /* LearningItem.swift */,
+				08BE81882EE7AD40004181EE /* LearningModels.swift */,
+				08D6490F2EFE9AC6004F9C65 /* ReviewModels.swift */,
+				085B5FF52EEC32B200B6BE5F /* DictionaryEntry.swift */,
 				08D6490D2EFE9A91004F9C65 /* Tab */,
 				0804F2F72EE79FD900A982D3 /* Main */,
 				088F26072EE50D2500E89167 /* Onboarding */,
@@ -502,191 +717,24 @@
 		088F25F62EE50B0200E89167 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				085B5FF72EEC366000B6BE5F /* SearchAPI */,
-				083369DF2EE58550003B2FEF /* Authentication */,
+				08E4C4CC2F02012F00D18145 /* SupabaseAuthService.swift */,
+				085B5FF82EEC366400B6BE5F /* DictionaryService.swift */,
 			);
 			path = Services;
-			sourceTree = "<group>";
-		};
-		088F25F72EE50B0E00E89167 /* Authentication */ = {
-			isa = PBXGroup;
-			children = (
-				083369E12EE58583003B2FEF /* LoginView.swift */,
-				083369E32EE585A2003B2FEF /* RegistrationView.swift */,
-			);
-			path = Authentication;
-			sourceTree = "<group>";
-		};
-		088F25F82EE50B1300E89167 /* Onboarding */ = {
-			isa = PBXGroup;
-			children = (
-				08E4C4DE2F02160400D18145 /* IntroView.swift */,
-				088F26112EE510E300E89167 /* SplashScreenView.swift */,
-				088F260A2EE50D3900E89167 /* SurveyView.swift */,
-				088F260B2EE50D3900E89167 /* SurveyOptionRow.swift */,
-			);
-			path = Onboarding;
-			sourceTree = "<group>";
-		};
-		088F25F92EE50B1800E89167 /* Main */ = {
-			isa = PBXGroup;
-			children = (
-				0804F2F52EE79E4B00A982D3 /* MainTabView.swift */,
-			);
-			path = Main;
-			sourceTree = "<group>";
-		};
-		088F25FC2EE50B2200E89167 /* Tabs */ = {
-			isa = PBXGroup;
-			children = (
-				088F26002EE50B3A00E89167 /* Review */,
-				088F25FF2EE50B3600E89167 /* Learn */,
-				088F26012EE50B3D00E89167 /* Person */,
-				088F26022EE50B4000E89167 /* Setting */,
-				088F25FE2EE50B2F00E89167 /* Search */,
-			);
-			path = Tabs;
-			sourceTree = "<group>";
-		};
-		088F25FD2EE50B2700E89167 /* Components */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
-		088F25FE2EE50B2F00E89167 /* Search */ = {
-			isa = PBXGroup;
-			children = (
-				08BE81C02EE7E107004181EE /* Components */,
-				08BE81702EE7A5BF004181EE /* SearchView.swift */,
-			);
-			path = Search;
-			sourceTree = "<group>";
-		};
-		088F25FF2EE50B3600E89167 /* Learn */ = {
-			isa = PBXGroup;
-			children = (
-				08BE819E2EE7B7D3004181EE /* LearnLesson */,
-				08BE81742EE7A83D004181EE /* LearnView.swift */,
-			);
-			path = Learn;
-			sourceTree = "<group>";
-		};
-		088F26002EE50B3A00E89167 /* Review */ = {
-			isa = PBXGroup;
-			children = (
-				0868CD712F0835BC00222EAD /* HandBook */,
-				08D649232EFEAC33004F9C65 /* ReviewContainerView.swift */,
-				088881A32EF2B9F000F8E198 /* ReviewView.swift */,
-				0868CD522F0475E800222EAD /* Chart */,
-				08D6491A2EFEAB46004F9C65 /* SubViews */,
-				08D649172EFEAAE9004F9C65 /* Components */,
-			);
-			path = Review;
-			sourceTree = "<group>";
-		};
-		088F26012EE50B3D00E89167 /* Person */ = {
-			isa = PBXGroup;
-			children = (
-				08BE81762EE7A874004181EE /* ProfileView.swift */,
-			);
-			path = Person;
-			sourceTree = "<group>";
-		};
-		088F26022EE50B4000E89167 /* Setting */ = {
-			isa = PBXGroup;
-			children = (
-				088881A52EF3DBEE00F8E198 /* SettingsView.swift */,
-			);
-			path = Setting;
 			sourceTree = "<group>";
 		};
 		088F26072EE50D2500E89167 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				088F26082EE50D3100E89167 /* SurveyModel.swift */,
 			);
 			path = Onboarding;
-			sourceTree = "<group>";
-		};
-		088F260E2EE50D4200E89167 /* Onboarding */ = {
-			isa = PBXGroup;
-			children = (
-				088F260F2EE50D4700E89167 /* SurveyViewModel.swift */,
-			);
-			path = Onboarding;
-			sourceTree = "<group>";
-		};
-		08BE81842EE7ABD2004181EE /* Dictionary */ = {
-			isa = PBXGroup;
-			children = (
-				0868CD3E2F041E5100222EAD /* courses_data.json */,
-			);
-			path = Dictionary;
 			sourceTree = "<group>";
 		};
 		08BE81872EE7AD39004181EE /* Learn */ = {
 			isa = PBXGroup;
 			children = (
-				08BE81BD2EE7C41A004181EE /* LearningItem.swift */,
-				08BE81882EE7AD40004181EE /* LearningModels.swift */,
 			);
 			path = Learn;
-			sourceTree = "<group>";
-		};
-		08BE819E2EE7B7D3004181EE /* LearnLesson */ = {
-			isa = PBXGroup;
-			children = (
-				082EC9FD2EFCF42400645D3A /* Warning */,
-				088ECA5D2EF7EABE00323A08 /* ProgressBar */,
-				08BE81C22EE7F13D004181EE /* FlipCard */,
-				08BE81C12EE7F126004181EE /* ProcessStudy */,
-			);
-			path = LearnLesson;
-			sourceTree = "<group>";
-		};
-		08BE81BF2EE7E0C7004181EE /* Learn */ = {
-			isa = PBXGroup;
-			children = (
-				08BE81A32EE7B7E5004181EE /* LessonViewModel.swift */,
-			);
-			path = Learn;
-			sourceTree = "<group>";
-		};
-		08BE81C02EE7E107004181EE /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				08BE818A2EE7B50E004181EE /* WordRowSearch.swift */,
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
-		08BE81C12EE7F126004181EE /* ProcessStudy */ = {
-			isa = PBXGroup;
-			children = (
-				0868CD402F0441DF00222EAD /* Word */,
-				088ECA5C2EF7E69900323A08 /* StudyScenario */,
-				08BE81A22EE7B7E5004181EE /* LessonContainerView.swift */,
-			);
-			path = ProcessStudy;
-			sourceTree = "<group>";
-		};
-		08BE81C22EE7F13D004181EE /* FlipCard */ = {
-			isa = PBXGroup;
-			children = (
-				08BE81CA2EE7F743004181EE /* WordCardView.swift */,
-				08BE81C72EE7F713004181EE /* FlipCardContainer.swift */,
-			);
-			path = FlipCard;
-			sourceTree = "<group>";
-		};
-		08BE81CC2EE852CD004181EE /* AudioPlayer */ = {
-			isa = PBXGroup;
-			children = (
-				08BE81CD2EE852D2004181EE /* AudioManager.swift */,
-			);
-			path = AudioPlayer;
 			sourceTree = "<group>";
 		};
 		08D6490D2EFE9A91004F9C65 /* Tab */ = {
@@ -703,48 +751,8 @@
 		08D6490E2EFE9AAC004F9C65 /* Review */ = {
 			isa = PBXGroup;
 			children = (
-				08D6490F2EFE9AC6004F9C65 /* ReviewModels.swift */,
 			);
 			path = Review;
-			sourceTree = "<group>";
-		};
-		08D649112EFEA4CD004F9C65 /* Tab */ = {
-			isa = PBXGroup;
-			children = (
-				08E4C4E02F021C2C00D18145 /* Profile */,
-				08D649122EFEA4D6004F9C65 /* Review */,
-				08BE81BF2EE7E0C7004181EE /* Learn */,
-				088881A72EF3DDB400F8E198 /* Setting */,
-			);
-			path = Tab;
-			sourceTree = "<group>";
-		};
-		08D649122EFEA4D6004F9C65 /* Review */ = {
-			isa = PBXGroup;
-			children = (
-				08D649132EFEA4E2004F9C65 /* ReviewViewModel.swift */,
-			);
-			path = Review;
-			sourceTree = "<group>";
-		};
-		08D649172EFEAAE9004F9C65 /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				08D649182EFEAAF1004F9C65 /* ReviewOptionButton.swift */,
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
-		08D6491A2EFEAB46004F9C65 /* SubViews */ = {
-			isa = PBXGroup;
-			children = (
-				08D649252EFEB575004F9C65 /* ReviewSummaryView.swift */,
-				08D649212EFEAB96004F9C65 /* ReviewPromptView.swift */,
-				08D6491F2EFEAB88004F9C65 /* TypingView.swift */,
-				08D6491D2EFEAB78004F9C65 /* SpellingView.swift */,
-				08D6491B2EFEAB55004F9C65 /* MultipleChoiceView.swift */,
-			);
-			path = SubViews;
 			sourceTree = "<group>";
 		};
 		08E36CCB2F01C82200B86794 /* Asset */ = {
@@ -768,14 +776,6 @@
 			children = (
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		08E4C4E02F021C2C00D18145 /* Profile */ = {
-			isa = PBXGroup;
-			children = (
-				0868CD6C2F0822D200222EAD /* Authentication */,
-			);
-			path = Profile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1088,7 +1088,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1129,7 +1129,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

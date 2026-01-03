@@ -29,7 +29,7 @@ struct ChartBarItemView: View {
     var body: some View {
         VStack(spacing: 6) {
             Text("\(value) words")
-                .font(.system(size: 14, weight: .bold, design: .rounded))
+                .font(.system(size: 10, weight: .bold, design: .rounded))
                 .opacity(isVisible ? 1 : 0)
                 .animation(.easeOut(duration: 0.5).delay(0.3), value: isVisible)
             

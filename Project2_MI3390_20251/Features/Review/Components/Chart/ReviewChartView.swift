@@ -48,7 +48,7 @@ struct ReviewChartView: View {
                 .frame(height: chartHeight + 40)
             }
         }
-        .padding(20)
+        .padding()
         .background(Color.white)
         .cornerRadius(20)
         .shadow(color: Color.black.opacity(0.05), radius: 15, x: 0, y: 5)

@@ -87,14 +87,14 @@ struct ReviewView: View {
                         .cornerRadius(16)
                         .padding(.horizontal, 32)
                         
-                        HStack(spacing: 8) {
+                        HStack(spacing: 16) {
                             HandbookButton {}
                                 .allowsHitTesting(false) // ✅ FIX: Để tap xuyên qua nút này
                             Spacer()
                         }
                         .padding(.leading, 16)
                     }
-                    .contentShape(Rectangle()) // ✅ FIX: Mở rộng vùng bấm
+                    .contentShape(Rectangle())
                     .onTapGesture {
                         navigateToHandbook = true
                     }
@@ -175,7 +175,7 @@ struct ReviewView: View {
                     }
                     .animation(.easeInOut, value: dueRecords.isEmpty)
                 }
-                .padding()
+                .padding(8)
             }
             .background(Color(.neutral01))
             .navigationTitle(languageManager.currentLanguage == "vi" ? "Ôn tập" : "Review")

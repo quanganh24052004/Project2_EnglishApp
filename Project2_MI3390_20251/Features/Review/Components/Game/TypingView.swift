@@ -10,15 +10,17 @@ import SwiftUI
 
 struct TypingView: View {
     let question: ReviewQuestion
-    @Binding var textInput: String
     
+    @Binding var textInput: String
+    @EnvironmentObject var languageManager: LanguageManager
+
     var body: some View {
         VStack(spacing: 48) {
             AudioButton(action: {
                 AudioManager.shared.playTTS(text: question.targetWord.english, language: "en-US")
             })
             
-            AppTextField(text: $textInput, placeholder: "Gõ lại từ bạn nghe được")
+            AppTextField(text: $textInput, placeholder: languageManager.currentLanguage == "vi" ? "Gõ lại từ bạn nghe được" : "Retype the word you can hear")
             Spacer()
         }
         .padding()

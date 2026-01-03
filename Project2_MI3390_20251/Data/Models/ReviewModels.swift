@@ -24,25 +24,26 @@ enum ReviewQuestionType: CaseIterable {
     case chooseMeaningFromContext   // 7
     
     // MARK: - Tiêu đề hiển thị (Computed Property)
+    // Đã thay đổi để hỗ trợ đa ngôn ngữ (Localization)
     var title: String {
         switch self {
         case .listenAndChooseWord, .listenAndChooseMeaning, .listenToAudioChooseMeaning:
-            return "Nghe và chọn đáp án đúng"
+            return String(localized: "review_title_listen_choose")
             
         case .fillInTheBlank:
-            return "Điền từ vào chỗ trống"
+            return String(localized: "review_title_fill_blank")
             
         case .listenAndWrite:
-            return "Nghe và viết lại"
+            return String(localized: "review_title_listen_write")
             
         case .translateAndFill:
-            return "Sắp xếp lại ký tự"
+            return String(localized: "review_title_rearrange")
             
         case .chooseWordFromContext:
-            return "Chọn từ thích hợp điền vào chỗ trống"
+            return String(localized: "review_title_choose_context")
             
         case .chooseMeaningFromContext:
-            return "Chọn nghĩa của từ được gạch chân"
+            return String(localized: "review_title_choose_meaning")
         }
     }
 }

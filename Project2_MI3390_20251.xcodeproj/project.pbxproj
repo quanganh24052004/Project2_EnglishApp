@@ -37,7 +37,6 @@
 		0868CD702F0822E400222EAD /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868CD6F2F0822E400222EAD /* RegistrationViewModel.swift */; };
 		0868CD732F0835D000222EAD /* HandBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868CD722F0835D000222EAD /* HandBookView.swift */; };
 		0868CD752F083AA800222EAD /* WordListByLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868CD742F083AA800222EAD /* WordListByLevelView.swift */; };
-		0868CDA42F0900F300222EAD /* readme.md in Resources */ = {isa = PBXBuildFile; fileRef = 0868CDA32F0900ED00222EAD /* readme.md */; };
 		088881A22EF2B5AC00F8E198 /* LearningManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088881A12EF2B5AC00F8E198 /* LearningManager.swift */; };
 		088881A42EF2B9F000F8E198 /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088881A32EF2B9F000F8E198 /* ReviewView.swift */; };
 		088881A62EF3DBEE00F8E198 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088881A52EF3DBEE00F8E198 /* SettingsView.swift */; };
@@ -127,7 +126,6 @@
 		0868CD6F2F0822E400222EAD /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		0868CD722F0835D000222EAD /* HandBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandBookView.swift; sourceTree = "<group>"; };
 		0868CD742F083AA800222EAD /* WordListByLevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListByLevelView.swift; sourceTree = "<group>"; };
-		0868CDA32F0900ED00222EAD /* readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
 		088881A12EF2B5AC00F8E198 /* LearningManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningManager.swift; sourceTree = "<group>"; };
 		088881A32EF2B9F000F8E198 /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
 		088881A52EF3DBEE00F8E198 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -632,7 +630,6 @@
 		088F25E82EE50A8000E89167 /* Project2_MI3390_20251 */ = {
 			isa = PBXGroup;
 			children = (
-				0868CDA32F0900ED00222EAD /* readme.md */,
 				085781702EEFE0D40003618D /* Project2-MI3390-20251-Info.plist */,
 				088F26052EE50C0900E89167 /* .gitignore */,
 				088F25ED2EE50A9D00E89167 /* App */,
@@ -852,7 +849,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0868CDA42F0900F300222EAD /* readme.md in Resources */,
 				0868CD3F2F041E5100222EAD /* courses_data.json in Resources */,
 				088F26062EE50C0900E89167 /* .gitignore in Resources */,
 				0857816B2EEFDFC50003618D /* COPYRIGHT.txt in Resources */,

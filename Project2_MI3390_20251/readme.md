@@ -1,9 +1,3 @@
-Dựa trên việc phân tích toàn bộ mã nguồn, cấu trúc thư mục (đặc biệt là sau khi refactor theo hướng **Feature-based**) và các thư viện được sử dụng (SwiftData, Supabase, SwiftUI Charts...), dưới đây là file `README.md` chi tiết và chuyên nghiệp dành cho dự án **CapyVocab** (tên lấy từ `Info.plist`) của bạn.
-
-Bạn có thể tạo một file tên là `README.md` ở thư mục gốc của dự án và dán nội dung này vào.
-
----
-
 # 🧢 CapyVocab - Ứng dụng học tiếng Anh thông minh
 
 **CapyVocab** là ứng dụng iOS được xây dựng bằng **SwiftUI**, giúp người dùng học và ghi nhớ từ vựng tiếng Anh hiệu quả thông qua phương pháp **Lặp lại ngắt quãng (Spaced Repetition System - SRS)**. Ứng dụng kết hợp giữa việc học theo chủ đề, trò chơi tương tác và biểu đồ theo dõi tiến độ trực quan.

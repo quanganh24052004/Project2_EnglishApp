@@ -8,6 +8,7 @@
 import Foundation
 
 enum Constants {
-    static let projectURLString =
-    static let projectAPIKey = 
+    static let projectURLString = Secrets.projectURLString
+    
+    static let projectAPIKey = Secrets.projectAPIKey
 }

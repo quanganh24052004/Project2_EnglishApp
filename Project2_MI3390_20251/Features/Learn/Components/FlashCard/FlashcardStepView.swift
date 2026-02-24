@@ -9,7 +9,6 @@ import SwiftUI
 import Combine
 
 struct FlashcardStepView: View {
-    @StateObject private var audioManager = AudioManager()
     
     // MARK: - New States for Logic
     @State private var hasInteracted = false
@@ -71,7 +70,7 @@ struct FlashcardStepView: View {
     // MARK: - Logic Functions
     
     private func startStepLogic() {
-        audioManager.playTTS(text: item.word, language: "en-US", speed: 0.5)
+        AudioManager.shared.playTTS(text: item.word, language: "en-US", speed: 0.5)
         
         timer = Timer.publish(every: 5, on: .main, in: .common)
             .autoconnect()
@@ -92,7 +91,7 @@ struct FlashcardStepView: View {
     }
     
     private func stopStepLogic() {
-        audioManager.stop()
+        AudioManager.shared.stop()
         timer?.cancel()
     }
 }

@@ -4,11 +4,10 @@
 //
 //  Created by Nguyễn Quang Anh on 9/12/25.
 //
-    
+
 import Foundation
 import AVFoundation
 import Combine
-import AudioToolbox
 import UIKit
 import SwiftUI
 
@@ -18,8 +17,8 @@ class AudioManager: NSObject, ObservableObject {
     //Player riêng cho nhạc nền
     private var backgroundPlayer: AVAudioPlayer?
     
-    // Player cho âm thanh hiệu ứng (đúng/sai)
-    private var effectPlayer: AVPlayer?
+    // Player cho âm thanh hiệu ứng (đúng/sai) - dùng file MP3 local
+    private var effectPlayer: AVAudioPlayer?
     private let synthesizer = AVSpeechSynthesizer()
     
     private var player: AVPlayer?
@@ -36,6 +35,9 @@ class AudioManager: NSObject, ObservableObject {
         }
     }
     
+    // Cài đặt âm thanh hiệu ứng (TTS + phản hồi đúng/sai)
+    @AppStorage("soundEffects") var isSoundEffectsEnabled: Bool = true
+    
     @Published var isSpeaking: Bool = false
     
     override init() {
@@ -46,7 +48,8 @@ class AudioManager: NSObject, ObservableObject {
     
     private func configureAudioSession() {
         do {
-            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [.duckOthers, .mixWithOthers])
+            // .duckOthers: giảm âm lượng app khác khi phát audio
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [.duckOthers])
             try AVAudioSession.sharedInstance().setActive(true)
         } catch {
             print("Audio Config Error: \(error.localizedDescription)")
@@ -105,6 +108,7 @@ class AudioManager: NSObject, ObservableObject {
     
     // MARK: - Chức năng 1: Text-to-Speech
     func playTTS(text: String, language: String = "en-US", speed: Float = 0.5) {
+        guard isSoundEffectsEnabled else { return }
         stop()
         
         let utterance = AVSpeechUtterance(string: text)
@@ -142,12 +146,22 @@ class AudioManager: NSObject, ObservableObject {
     }
     // MARK: - Chức năng 3: Hiệu ứng Phản hồi
     func playFeedback(isCorrect: Bool) {
-        if isCorrect {
-            AudioServicesPlaySystemSound(1407)
-        } else {
-            AudioServicesPlaySystemSound(1073)
+        // Phát âm thanh MP3 local (nếu setting cho phép)
+        if isSoundEffectsEnabled {
+            let soundName = isCorrect ? "Correct" : "Incorrect"
+            if let path = Bundle.main.path(forResource: soundName, ofType: "mp3") {
+                let url = URL(fileURLWithPath: path)
+                do {
+                    effectPlayer = try AVAudioPlayer(contentsOf: url)
+                    effectPlayer?.prepareToPlay()
+                    effectPlayer?.play()
+                } catch {
+                    print("Lỗi phát âm thanh hiệu ứng: \(error.localizedDescription)")
+                }
+            }
         }
         
+        // Haptic feedback luôn chạy bất kể setting âm thanh
         let generator = UINotificationFeedbackGenerator()
         generator.prepare()
         

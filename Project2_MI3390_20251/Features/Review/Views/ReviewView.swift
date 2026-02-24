@@ -132,7 +132,7 @@ struct ReviewView: View {
                                 }
                                 .frame(maxWidth: .infinity)
                             }
-                            .buttonStyle(ThreeDButtonStyle(color: .pGreen))
+                            .buttonStyle(PrimaryPhysicalButtonStyle(color: .pGreen))
                             .padding(.horizontal, 48)
                         } else {
                             if let nextDate = nextReviewDate {

@@ -195,7 +195,7 @@ extension ReviewContainerView {
                     // Font Rounded cho nút bấm
                     .font(.system(size: 18, weight: .bold, design: .rounded))
             }
-            .buttonStyle(ThreeDButtonStyle(
+            .buttonStyle(PrimaryPhysicalButtonStyle(
                 color: canSubmit ? .pGreen : .gray
             ))
             .disabled(!canSubmit)

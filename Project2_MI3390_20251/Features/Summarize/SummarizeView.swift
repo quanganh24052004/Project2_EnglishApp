@@ -62,7 +62,7 @@ struct SummarizeView: View {
                     }) {
                         Text("Save to Notebook (\(selectedIDs.count))")
                     }
-                    .buttonStyle(ThreeDButtonStyle(
+                    .buttonStyle(PrimaryPhysicalButtonStyle(
                         color: selectedIDs.isEmpty ? .gray : .pGreen
                     ))
                     .padding(.horizontal, 24)

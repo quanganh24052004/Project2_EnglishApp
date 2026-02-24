@@ -160,21 +160,8 @@ private extension SpellingView {
 }
 
 // MARK: - Styles
-struct TileButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        let isPressed = configuration.isPressed
-        configuration.label
-            .font(.system(size: 22, weight: .bold))
-            .foregroundColor(.neutral04)
-            .frame(width: 55, height: 60)
-            .background(Color.white)
-            .cornerRadius(12)
-            .shadow(color: .gray.opacity(0.3), radius: 0, x: 0, y: isPressed ? 0 : 4)
-            .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color.gray.opacity(0.2), lineWidth: 1))
-            .offset(y: isPressed ? 4 : 0)
-            .animation(.linear(duration: 0.1), value: isPressed)
-    }
-}
+// TileButtonStyle đã được chuyển vào Core/DesignSystem/AppButtonStyles.swift
+
 
 // MARK: - Custom Layout
 struct CenteredFlowLayout: Layout {

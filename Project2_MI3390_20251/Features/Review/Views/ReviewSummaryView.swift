@@ -91,7 +91,7 @@ extension ReviewSummaryView {
                     Text("Learn new words")
                 }
             }
-            .buttonStyle(ThreeDButtonStyle(color: .pGreen))
+            .buttonStyle(PrimaryPhysicalButtonStyle(color: .pGreen))
             
             if dueRecordsCount > 0 {
                 Button {
@@ -110,7 +110,7 @@ extension ReviewSummaryView {
                             .cornerRadius(8)
                     }
                 }
-                .buttonStyle(ThreeDButtonStyle(color: .orange))
+                .buttonStyle(PrimaryPhysicalButtonStyle(color: .orange))
             }
             
             Button {

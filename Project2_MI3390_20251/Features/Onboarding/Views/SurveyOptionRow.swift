@@ -20,20 +20,16 @@ struct SurveyOptionRow: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 24, height: 24)
+                    .font(.system(size: 18, design: .rounded))
                 
                 Text(option.text)
-                    .font(.body)
-                    .fontWeight(.medium)
                     .multilineTextAlignment(.leading)
                 
                 Spacer()
-                
-                if isSelected {
-                    Image(systemName: "checkmark.circle.fill")
-                        .foregroundColor(.white)
-                }
+    
             }
             .padding(.horizontal, 16)
+            .padding(.vertical, 8)
             .frame(maxWidth: .infinity)
         }
         .buttonStyle(SelectionThreeDButtonStyle(isSelected: isSelected))

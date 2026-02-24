@@ -44,7 +44,7 @@ struct MainTabView: View {
                     }
                 }
                 .tabViewStyle(.sidebarAdaptable)
-                .tint(.orange)
+                .tint(.primary01)
                 
             } else {
                 // MARK: - Giao diện cho iOS 17 trở xuống

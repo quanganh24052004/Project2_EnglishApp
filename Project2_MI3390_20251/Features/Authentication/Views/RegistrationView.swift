@@ -84,8 +84,15 @@ extension RegistrationView {
     /// Nút Đăng ký (Disable nếu mật khẩu chưa khớp hoặc đang loading).
     private var signUpButton: some View {
         Button(viewModel.isLoading ? "Loading..." : "Sign Up") {
-            viewModel.register(authVM: authVM) {
-                dismiss()
+            Task {
+                do {
+                    try await viewModel.register()
+                    await authVM.fetchCurrentUser()
+                    authVM.isAuthenticated = true
+                    dismiss()
+                } catch {
+                    // Error handled in ViewModel
+                }
             }
         }
         .buttonStyle(ThreeDButtonStyle(color: viewModel.passwordMatch ? .pGreen : .gray))
@@ -104,7 +111,7 @@ extension RegistrationView {
                 Text("Sign in")
                     .font(.system(size: 10, design: .rounded))
                     .fontWeight(.semibold)
-                    .foregroundColor(.primary02)
+                    .foregroundColor(.primary01)
             }
             .padding(8)
         }

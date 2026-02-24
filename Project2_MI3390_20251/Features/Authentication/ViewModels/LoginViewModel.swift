@@ -33,39 +33,32 @@ class LoginViewModel: ObservableObject {
     // MARK: - Actions
     
     /// Thực hiện hành động Đăng nhập.
-    /// - Parameters:
-    ///   - authVM: ViewModel xác thực gốc để cập nhật trạng thái App.
-    ///   - onSuccess: Closure được gọi khi đăng nhập thành công (thường dùng để dismiss View).
+    /// - Returns: `Void` nếu thành công, ném ra lỗi nếu thất bại.
     @MainActor
-    func login(authVM: AuthViewModel, onSuccess: @escaping () -> Void) {
+    func login() async throws {
         // Validate cơ bản
         guard !email.isEmpty, !password.isEmpty else {
-            errorMessage = "Vui lòng nhập đầy đủ Email và Mật khẩu."
+            let error = AuthError.message("Vui lòng nhập đầy đủ Email và Mật khẩu.")
+            errorMessage = error.localizedDescription
             showingError = true
-            return
+            throw error
         }
         
         isLoading = true
         
-        Task {
-            do {
-                // 1. Gọi API Supabase để đăng nhập
-                _ = try await SupabaseAuthService.shared.signIn(email: email, password: password)
-                
-                // 2. Đồng bộ thông tin User về AuthViewModel toàn cục
-                await authVM.fetchCurrentUser()
-                
-                // 3. Cập nhật trạng thái thành công
-                isLoading = false
-                authVM.isAuthenticated = true
-                onSuccess()
-                
-            } catch {
-                // Xử lý lỗi
-                isLoading = false
-                errorMessage = error.localizedDescription
-                showingError = true
-            }
+        do {
+            // 1. Gọi API Supabase để đăng nhập
+            _ = try await SupabaseAuthService.shared.signIn(email: email, password: password)
+            
+            // 2. Cập nhật trạng thái thành công
+            isLoading = false
+            
+        } catch {
+            // Xử lý lỗi
+            isLoading = false
+            errorMessage = error.localizedDescription
+            showingError = true
+            throw error
         }
     }
 }

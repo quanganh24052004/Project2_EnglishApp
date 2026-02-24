@@ -7,6 +7,98 @@
 
 import SwiftUI
 
+// MARK: -1. Primary Button Style
+
+struct PrimaryPhysicalButtonStyle: ButtonStyle {
+    var textSize: CGFloat = 16
+    var textColor: Color = .primaryBG
+    var backgroundColor: Color = .brand
+    var shadowColor: Color = .shadow
+    var heightShadow: CGFloat = 4
+    var height: CGFloat = 48
+    var cornerRadius: CGFloat = 16
+    
+    func makeBody(configuration: Configuration) -> some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: cornerRadius)
+                .fill(Color.shadow)
+                .offset(y: heightShadow)
+                .frame(maxWidth: .infinity)
+                .frame(height: height)
+            
+            configuration.label
+                .font(.system(size: textSize, design: .rounded))
+                .fontWeight(.bold)
+                .foregroundColor(textColor)
+                .frame(maxWidth: .infinity)
+                .frame(height: height)
+                .background(
+                    RoundedRectangle(cornerRadius: cornerRadius)
+                        .fill(backgroundColor)
+                )
+                .offset(y: configuration.isPressed ? heightShadow : 0)
+                .animation(.spring(response: 0.2, dampingFraction: 0.6), value: configuration.isPressed)
+        }
+        .frame(height: height + heightShadow)
+        .onChange(of: configuration.isPressed) { oldValue, newValue in
+            if newValue && !oldValue {
+                triggerHaptic(style: .medium)
+            }
+        }
+    }
+}
+
+// MARK: -2. Secondary Button Style
+struct SecondaryPhysicalButtonStyle: ButtonStyle {
+    var textSize: CGFloat = 16
+    var textColor: Color = Color.brand
+    var backgroundColor: Color = Color.primaryBG
+    var heightShadow: CGFloat = 4
+    var height: CGFloat = 48
+    var cornerRadius: CGFloat = 16
+    var strokeWidth: CGFloat = 2
+    var strokeColor: Color = .strokeBtn
+    
+    func makeBody(configuration: Configuration) -> some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: cornerRadius)
+                .fill(strokeColor)
+                .offset(y: heightShadow)
+                .frame(maxWidth: .infinity)
+                .frame(height: height)
+            
+            configuration.label
+                .font(.system(size: textSize, design: .rounded))
+                .fontWeight(.semibold)
+                .foregroundColor(Color.brand)
+                .frame(maxWidth: .infinity)
+                .frame(height: height)
+                .background(
+                    RoundedRectangle(cornerRadius: cornerRadius)
+                        .fill(backgroundColor)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: cornerRadius)
+                                .stroke(strokeColor, lineWidth: strokeWidth)
+                        )
+                )
+                .offset(y: configuration.isPressed ? heightShadow : 0)
+                .animation(.spring(response: 0.2, dampingFraction: 0.6), value: configuration.isPressed)
+        }
+        .frame(height: height + heightShadow)
+        .onChange(of: configuration.isPressed) { oldValue, newValue in
+            if newValue && !oldValue {
+                triggerHaptic(style: .medium)
+            }
+        }
+    }
+}
+
+public func triggerHaptic(style: UIImpactFeedbackGenerator.FeedbackStyle) {
+    let generator = UIImpactFeedbackGenerator(style: style)
+    generator.prepare()
+    generator.impactOccurred()
+}
+
 // MARK: - 1. Action Button Style (Nút bấm hành động)
 
 /// Style nút bấm dạng 3D có hiệu ứng đổ bóng và nhấn xuống.
@@ -118,8 +210,8 @@ struct SelectionThreeDButtonStyle: ButtonStyle {
     ///   - depth: Độ sâu hiệu ứng nhấn (Mặc định là 4).
     ///   - height: Chiều cao nút (Mặc định là 56).
     init(isSelected: Bool,
-         color: Color = .white,
-         strokeColor: Color = .neutral04,
+         color: Color = .primaryBG,
+         strokeColor: Color = .border,
          depth: CGFloat = 4,
          height: CGFloat = 56) {
         
@@ -139,25 +231,23 @@ struct SelectionThreeDButtonStyle: ButtonStyle {
         let currentOffset = isPressed ? depth : 0
         
         // Khi được chọn, bóng chuyển sang màu Cam, ngược lại là màu mặc định
-        let activeShadowColor = isSelected ? Color.orange : shadowColor
+        let activeShadowColor = isSelected ? Color.primary01 : shadowColor
         
         return configuration.label
             .font(.system(size: 16, design: .rounded))
-            .fontWeight(.medium)
-            // Đổi màu chữ khi chọn
-            .foregroundColor(isSelected ? .orange : .neutral04)
+            .fontWeight(.bold)
+            .foregroundColor(isSelected ? .primary01 : .primaryText)
             .frame(maxWidth: .infinity)
             .frame(height: height)
+            .background(isSelected ? .primary01.opacity(0.1) : .primaryBG)
             .background(
                 ZStack {
                     color
-                    // Viền: Khi chọn sẽ dày hơn (3pt) và màu cam
                     RoundedRectangle(cornerRadius: 16)
-                        .stroke(isSelected ? Color.orange : strokeColor, lineWidth: isSelected ? 3 : 1.5)
+                        .stroke(isSelected ? Color.primary01 : strokeColor, lineWidth: isSelected ? 3 : 3)
                 }
             )
             .cornerRadius(16)
-            // Đổ bóng
             .shadow(
                 color: activeShadowColor,
                 radius: 0,
@@ -166,7 +256,8 @@ struct SelectionThreeDButtonStyle: ButtonStyle {
             )
             .offset(y: currentOffset)
             // Animation khi nhấn và khi đổi trạng thái chọn
-            .animation(.spring(response: 0.3, dampingFraction: 0.6), value: isPressed)
+            .animation(.spring(response: 0.3, dampingFraction: 0.6, blendDuration: 0), value: isPressed)
             .animation(.easeInOut(duration: 0.2), value: isSelected)
     }
 }
+

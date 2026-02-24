@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct IntroView: View {
-    // Nhận Binding từ RootView
     @Binding var isOnboardingDone: Bool
     @EnvironmentObject var authVM: AuthViewModel
     
@@ -34,19 +33,19 @@ struct IntroView: View {
                 
                 // LUỒNG 1: Khách -> Survey -> MainTab
                 NavigationLink(destination: SurveyView(isOnboardingDone: $isOnboardingDone)) {
-                    Text("Start now")
+                    Text("STARTING NOW")
                 }
-                .buttonStyle(ThreeDButtonStyle())
-                .padding(.horizontal, 100)
+                .buttonStyle(PrimaryPhysicalButtonStyle())
+                .padding(.horizontal, 16)
                 
                 NavigationLink(destination: LoginView()) {
-                    Text("Login")
+                    Text("I HAVE ALRAEDY AN ACCOUNT")
                 }
-                .buttonStyle(ThreeDButtonStyle(color: .gray))
-                .padding(.horizontal, 100)
+                .buttonStyle(SecondaryPhysicalButtonStyle())
+                .padding(.horizontal, 16)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color.primary01.edgesIgnoringSafeArea(.all))
+            .background(Color.primaryBG.edgesIgnoringSafeArea(.all))
         }
     }
 }

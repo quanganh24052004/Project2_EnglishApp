@@ -102,7 +102,7 @@ extension LoginView {
                     }
                     .font(.system(size: 15, design: .rounded))
                     .fontWeight(.semibold)
-                    .foregroundColor(.primary02)
+                    .foregroundColor(.primary01)
                     Spacer()
                 }
             }
@@ -112,8 +112,16 @@ extension LoginView {
     /// Nút Đăng nhập chính.
     private var loginButton: some View {
         Button(viewModel.isLoading ? "Loading..." : "Login") {
-            viewModel.login(authVM: authVM) {
-                dismiss()
+            Task {
+                do {
+                    try await viewModel.login()
+                    // Sau khi login thành công tại VM local, cập nhật Global State
+                    await authVM.fetchCurrentUser()
+                    authVM.isAuthenticated = true
+                    dismiss()
+                } catch {
+                    // Lỗi đã được ViewModel handle hiển thị Alert
+                }
             }
         }
         .buttonStyle(ThreeDButtonStyle(color: .pGreen))
@@ -161,7 +169,7 @@ extension LoginView {
                 Text("Don't have an account?").foregroundColor(.neutral08)
                     .font(.system(size: 12, design: .rounded))
                     .fontWeight(.medium)
-                Text("Sign up").fontWeight(.semibold).foregroundColor(.primary02)
+                Text("Sign up").fontWeight(.semibold).foregroundColor(.primary01)
                     .font(.system(size: 12, design: .rounded))
                     .fontWeight(.medium)
             }

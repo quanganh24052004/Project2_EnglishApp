@@ -11,33 +11,46 @@ import SwiftUI
 struct SurveyView: View {
     @StateObject private var viewModel = SurveyViewModel()
     @Binding var isOnboardingDone: Bool
-    
+    let shape = RoundedCorner(radius: 16, corners: [.topRight, .bottomLeft, .bottomRight])
+
     var body: some View {
         VStack(spacing: 0) {
+            
+            // Question
             VStack(alignment: .leading, spacing: 10) {
                 HStack(alignment: .top, spacing: 10) {
                     Image(.imgHappy)
                         .resizable()
                         .frame(width: 50, height: 50)
-                        .foregroundColor(.orange)
+                        .foregroundColor(.primary01)
                         .padding(.top, 20)
                     
                     if viewModel.currentIndex < viewModel.questions.count {
+                        
                         Text(viewModel.questions[viewModel.currentIndex].text)
-                            .font(.headline)
+                            .font(.system(size: 18, design: .rounded))
+                            .fontWeight(.regular)
                             .padding()
-                            .background(Color.white)
-                            .cornerRadius(20, corners: [.topRight, .bottomLeft, .bottomRight])
-                            .shadow(color: .black.opacity(0.05), radius: 5, x: 2, y: 2)
-                            .transition(.opacity) // Hiệu ứng mờ dần khi đổi câu hỏi
-                            .id("Question-\(viewModel.currentIndex)") // 
+                            .frame(maxWidth: .infinity, alignment: .leading) // Thêm dòng này để text căn trái đẹp hơn nếu câu hỏi dài
+                            .background(Color("SecondaryBG")) // Đảm bảo tên màu trong Assets đúng
+                            
+                            // 2. Cắt nền theo shape
+                            .clipShape(shape)
+                            
+                            // 3. Vẽ viền đè lên theo đúng shape đó
+                            .overlay(
+                                shape.stroke(Color.border, lineWidth: 2)
+                            )
+                            
+                            // 4. Animation
+                            .transition(.opacity.combined(with: .scale(scale: 0.95))) // Hiệu ứng mờ + phóng to nhẹ sẽ mượt hơn
+                            .id("Question-\(viewModel.currentIndex)")
                     }
                 }
                 .padding(.horizontal)
-                .padding(.top, 20)
+                .padding(.vertical, 20)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            .background(Color(.primary01))
             
             ScrollView {
                 VStack(spacing: 12) {
@@ -56,7 +69,6 @@ struct SurveyView: View {
                 }
                 .padding()
             }
-            .background(Color(.primary01))
             
             VStack {
                 Button(action: {
@@ -74,8 +86,8 @@ struct SurveyView: View {
                 .disabled(!viewModel.canProceed)
                 .padding()
             }
-            .background(Color(.primary01)) // Nền toàn màn hình
         }
+        .background(Color(.primaryBG))
     }
 }
 

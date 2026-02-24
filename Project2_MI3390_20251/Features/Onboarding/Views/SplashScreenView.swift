@@ -11,7 +11,7 @@ struct SplashScreenView: View {
 
     var body: some View {
         ZStack {
-            Color.orange.ignoresSafeArea()
+            Color.primary01.ignoresSafeArea()
             
             VStack(spacing: 20) {
                 Image("img_hi_capy")

@@ -39,44 +39,37 @@ class RegistrationViewModel: ObservableObject {
     // MARK: - Actions
     
     /// Thực hiện hành động Đăng ký tài khoản mới.
-    /// - Parameters:
-    ///   - authVM: ViewModel xác thực gốc.
-    ///   - onSuccess: Closure gọi lại khi thành công.
+    /// - Returns: `Void` nếu thành công, ném ra lỗi nếu thất bại.
     @MainActor
-    func register(authVM: AuthViewModel, onSuccess: @escaping () -> Void) {
+    func register() async throws {
         // Double check trước khi gọi API
         guard passwordMatch else {
-            errorMessage = "Mật khẩu xác nhận không khớp."
+            let error = AuthError.message("Mật khẩu xác nhận không khớp.")
+            errorMessage = error.localizedDescription
             showingError = true
-            return
+            throw error
         }
         
         isLoading = true
         
-        Task {
-            do {
-                // 1. Gọi API Đăng ký kèm Metadata (Họ tên, SĐT)
-                _ = try await SupabaseAuthService.shared.signUp(
-                    email: email,
-                    password: password,
-                    firstName: firstname,
-                    lastName: lastname,
-                    phone: phone
-                )
-                
-                // 2. Tải thông tin user vừa tạo
-                await authVM.fetchCurrentUser()
-                
-                // 3. Hoàn tất
-                isLoading = false
-                authVM.isAuthenticated = true
-                onSuccess()
-                
-            } catch {
-                isLoading = false
-                errorMessage = error.localizedDescription
-                showingError = true
-            }
+        do {
+            // 1. Gọi API Đăng ký kèm Metadata (Họ tên, SĐT)
+            _ = try await SupabaseAuthService.shared.signUp(
+                email: email,
+                password: password,
+                firstName: firstname,
+                lastName: lastname,
+                phone: phone
+            )
+            
+            // 2. Hoàn tất
+            isLoading = false
+            
+        } catch {
+            isLoading = false
+            errorMessage = error.localizedDescription
+            showingError = true
+            throw error
         }
     }
 }

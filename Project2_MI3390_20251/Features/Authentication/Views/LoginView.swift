@@ -124,7 +124,7 @@ extension LoginView {
                 }
             }
         }
-        .buttonStyle(PrimaryPhysicalButtonStyle(color: .pGreen))
+        .buttonStyle(ThreeDButtonStyle(color: .pGreen))
         .disabled(viewModel.isLoading)
     }
     
@@ -144,7 +144,7 @@ extension LoginView {
             Button { print("Google Login") } label: {
                 HStack { Image("img_google").resizable().frame(width: 24, height: 24) }
             }
-        .buttonStyle(PrimaryPhysicalButtonStyle(color: .black, height: 50))
+            .buttonStyle(ThreeDButtonStyle(color: .black, height: 50))
             
             Button { } label: {
                 HStack {
@@ -155,7 +155,7 @@ extension LoginView {
                         .foregroundColor(.white)
                 }
             }
-        .buttonStyle(PrimaryPhysicalButtonStyle(color: .black, height: 50))
+            .buttonStyle(ThreeDButtonStyle(color: .black, height: 50))
         }
     }
     

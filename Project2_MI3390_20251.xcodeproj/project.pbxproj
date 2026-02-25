@@ -72,7 +72,6 @@
 		08CEB6642F31601D002138D9 /* LessonListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEB6632F31601D002138D9 /* LessonListView.swift */; };
 		08CEB6662F316319002138D9 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEB6652F316319002138D9 /* Secrets.swift */; };
 		08CEB6692F323242002138D9 /* LevelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEB6682F323242002138D9 /* LevelNode.swift */; };
-		08CEB66B2F3283F8002138D9 /* DuoButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEB66A2F3283F8002138D9 /* DuoButtonStyle.swift */; };
 		08D649102EFE9AC6004F9C65 /* ReviewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D6490F2EFE9AC6004F9C65 /* ReviewModels.swift */; };
 		08D649142EFEA4E2004F9C65 /* ReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D649132EFEA4E2004F9C65 /* ReviewViewModel.swift */; };
 		08D649192EFEAAF1004F9C65 /* ReviewOptionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D649182EFEAAF1004F9C65 /* ReviewOptionButton.swift */; };
@@ -171,7 +170,6 @@
 		08CEB6632F31601D002138D9 /* LessonListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonListView.swift; sourceTree = "<group>"; };
 		08CEB6652F316319002138D9 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		08CEB6682F323242002138D9 /* LevelNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelNode.swift; sourceTree = "<group>"; };
-		08CEB66A2F3283F8002138D9 /* DuoButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuoButtonStyle.swift; sourceTree = "<group>"; };
 		08D6490F2EFE9AC6004F9C65 /* ReviewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewModels.swift; sourceTree = "<group>"; };
 		08D649132EFEA4E2004F9C65 /* ReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewModel.swift; sourceTree = "<group>"; };
 		08D649182EFEAAF1004F9C65 /* ReviewOptionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewOptionButton.swift; sourceTree = "<group>"; };
@@ -273,7 +271,6 @@
 		0868CD792F08E7E200222EAD /* DesignSystem */ = {
 			isa = PBXGroup;
 			children = (
-				08CEB66A2F3283F8002138D9 /* DuoButtonStyle.swift */,
 				085781632EEFDAF70003618D /* AppButtonStyles.swift */,
 				088ECA5A2EF7DD5400323A08 /* AppCircleButtons.swift */,
 				088ECA582EF6EB9900323A08 /* AppTextField.swift */,
@@ -980,7 +977,6 @@
 				082ECA032EFD079400645D3A /* SummarizeView.swift in Sources */,
 				084CB4A52EF406D600B1CBBE /* NotificationManager.swift in Sources */,
 				08BE81752EE7A83D004181EE /* LearnView.swift in Sources */,
-				08CEB66B2F3283F8002138D9 /* DuoButtonStyle.swift in Sources */,
 				08D6491E2EFEAB78004F9C65 /* SpellingView.swift in Sources */,
 				08E4C4DD2F02142F00D18145 /* AppleSignInUtils.swift in Sources */,
 				088F26122EE510E300E89167 /* SplashScreenView.swift in Sources */,

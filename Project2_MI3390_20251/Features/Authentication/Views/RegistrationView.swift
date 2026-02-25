@@ -95,7 +95,7 @@ extension RegistrationView {
                 }
             }
         }
-        .buttonStyle(PrimaryPhysicalButtonStyle(color: viewModel.passwordMatch ? .pGreen : .gray))
+        .buttonStyle(ThreeDButtonStyle(color: viewModel.passwordMatch ? .pGreen : .gray))
         .disabled(!viewModel.passwordMatch || viewModel.isLoading)
     }
     
@@ -139,7 +139,7 @@ extension RegistrationView {
             Button { print("Google Login") } label: {
                 HStack { Image("img_google").resizable().frame(width: 24, height: 24) }
             }
-            .buttonStyle(PrimaryPhysicalButtonStyle(color: .black, height: 50))
+            .buttonStyle(ThreeDButtonStyle(color: .black, height: 50))
             
             Button { } label: {
                 HStack {
@@ -150,7 +150,7 @@ extension RegistrationView {
                         .foregroundColor(.white)
                 }
             }
-            .buttonStyle(PrimaryPhysicalButtonStyle(color: .black, height: 50))
+            .buttonStyle(ThreeDButtonStyle(color: .black, height: 50))
         }
     }
     

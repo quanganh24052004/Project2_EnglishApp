@@ -52,7 +52,7 @@ struct FlashcardStepView: View {
                 Button("Continue") {
                     onContinue()
                 }
-                .buttonStyle(PrimaryPhysicalButtonStyle(color: hasInteracted ? mainColor : .gray))
+                .buttonStyle(ThreeDButtonStyle(color: hasInteracted ? mainColor : .gray))
                 .disabled(!hasInteracted) // Disable nếu chưa lật thẻ
                 .padding(.horizontal, 100)
                 .padding(.bottom, 40)

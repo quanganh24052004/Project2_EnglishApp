@@ -33,11 +33,11 @@ struct ExitConfirmationSheet: View {
                 Button(action: onContinue) {
                     Text("Stay and continue studying")
                 }
-                .buttonStyle(PrimaryPhysicalButtonStyle(color: .pGreen))
+                .buttonStyle(ThreeDButtonStyle(color: .pGreen))
                 Button(action: onExit) {
                     Text("Exit")
                 }
-                .buttonStyle(PrimaryPhysicalButtonStyle(color: .red))
+                .buttonStyle(ThreeDButtonStyle(color: .red))
             }
             .padding(.horizontal, 16)
         }

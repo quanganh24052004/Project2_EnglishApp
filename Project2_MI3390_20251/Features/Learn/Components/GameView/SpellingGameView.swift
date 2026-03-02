@@ -112,8 +112,8 @@ struct SpellingGameView: View {
                     onCheck(userInput)
                 }
             }
-            // Logic đổi màu: Có chữ -> Xanh, Rỗng -> Xám
-            .buttonStyle(ThreeDButtonStyle(color: userInput.isEmpty ? .gray : .pGreen))
+            // Logic giao diện Disable được tự động xử lý
+            .buttonStyle(PrimaryPhysicalButtonStyle())
             // Logic chặn bấm: Rỗng -> Disabled
             .disabled(userInput.isEmpty)
             .padding(.horizontal, 100)

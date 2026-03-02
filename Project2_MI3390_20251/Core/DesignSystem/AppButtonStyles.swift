@@ -10,39 +10,93 @@ import SwiftUI
 // MARK: -1. Primary Button Style
 
 struct PrimaryPhysicalButtonStyle: ButtonStyle {
-    var textSize: CGFloat = 16
-    var textColor: Color = .primaryBG
-    var backgroundColor: Color = .brand
-    var shadowColor: Color = .shadow
-    var heightShadow: CGFloat = 4
-    var height: CGFloat = 48
-    var cornerRadius: CGFloat = 16
-    
+
+    // MARK: - Environment
+    @Environment(\.isEnabled) private var isEnabled
+
+    // MARK: - Stored Properties
+
+    private let textSize: CGFloat
+    private let textColor: Color
+    private let fontWeight: Font.Weight
+    private let fontDesign: Font.Design
+    private let backgroundColor: Color
+    private let shadowColor: Color
+    private let cornerRadius: CGFloat
+    private let height: CGFloat
+    private let heightShadow: CGFloat
+    private let isFullWidth: Bool
+    private let hapticStyle: UIImpactFeedbackGenerator.FeedbackStyle
+
+    // MARK: - Init
+
+    init(
+        textSize: CGFloat = 16,
+        textColor: Color = .primaryBG,
+        fontWeight: Font.Weight = .bold,
+        fontDesign: Font.Design = .rounded,
+        backgroundColor: Color = .brand,
+        shadowColor: Color = .shadow,
+        cornerRadius: CGFloat = 16,
+        height: CGFloat = 48,
+        heightShadow: CGFloat = 4,
+        isFullWidth: Bool = true,
+        hapticStyle: UIImpactFeedbackGenerator.FeedbackStyle = .medium
+    ) {
+        self.textSize = textSize
+        self.textColor = textColor
+        self.fontWeight = fontWeight
+        self.fontDesign = fontDesign
+        self.backgroundColor = backgroundColor
+        self.shadowColor = shadowColor
+        self.cornerRadius = cornerRadius
+        self.height = height
+        self.heightShadow = heightShadow
+        self.isFullWidth = isFullWidth
+        self.hapticStyle = hapticStyle
+    }
+
+    // MARK: - Body
+
     func makeBody(configuration: Configuration) -> some View {
+        let maxWidth: CGFloat? = isFullWidth ? .infinity : nil
+        
+        let currentBgColor = isEnabled ? backgroundColor : .buttonDisable
+        let currentTextColor = isEnabled ? textColor : .textDisable
+        let currentShadowColor = isEnabled ? shadowColor : .clear
+
+        // Khi nút nổi 3D (Enabled & Không bị đè ngón tay), offset của Label bằng 0.
+        // Khi nút xẹp xuống (Bị Disable HOẶC bị đè), offset tụt xuống bằng độ sâu của bóng.
+        let isFlat = !isEnabled || configuration.isPressed
+        let labelOffset: CGFloat = isFlat ? heightShadow : 0
+
         ZStack {
+            // Shadow Layer (Luôn cố định dính chặt tay ở độ sâu tối đa)
             RoundedRectangle(cornerRadius: cornerRadius)
-                .fill(Color.shadow)
+                .fill(currentShadowColor)
                 .offset(y: heightShadow)
-                .frame(maxWidth: .infinity)
+                .frame(maxWidth: maxWidth)
                 .frame(height: height)
-            
+
+            // Lớp chứa Text + Background chính (Sẽ trồi/sụt trên nền shadow)
             configuration.label
-                .font(.system(size: textSize, design: .rounded))
-                .fontWeight(.bold)
-                .foregroundColor(textColor)
-                .frame(maxWidth: .infinity)
+                .font(.system(size: textSize, design: fontDesign))
+                .fontWeight(fontWeight)
+                .foregroundColor(currentTextColor)
+                .frame(maxWidth: maxWidth)
                 .frame(height: height)
                 .background(
                     RoundedRectangle(cornerRadius: cornerRadius)
-                        .fill(backgroundColor)
+                        .fill(currentBgColor)
                 )
-                .offset(y: configuration.isPressed ? heightShadow : 0)
-                .animation(.spring(response: 0.2, dampingFraction: 0.6), value: configuration.isPressed)
+                .offset(y: labelOffset)
         }
         .frame(height: height + heightShadow)
+        .animation(.spring(response: 0.2, dampingFraction: 0.6), value: configuration.isPressed)
+        .animation(.easeInOut(duration: 0.2), value: isEnabled)
         .onChange(of: configuration.isPressed) { oldValue, newValue in
-            if newValue && !oldValue {
-                triggerHaptic(style: .medium)
+            if isEnabled && newValue && !oldValue {
+                triggerHaptic(style: hapticStyle)
             }
         }
     }
@@ -50,28 +104,69 @@ struct PrimaryPhysicalButtonStyle: ButtonStyle {
 
 // MARK: -2. Secondary Button Style
 struct SecondaryPhysicalButtonStyle: ButtonStyle {
-    var textSize: CGFloat = 16
-    var textColor: Color = Color.brand
-    var backgroundColor: Color = Color.primaryBG
-    var heightShadow: CGFloat = 4
-    var height: CGFloat = 48
-    var cornerRadius: CGFloat = 16
-    var strokeWidth: CGFloat = 2
-    var strokeColor: Color = .strokeBtn
-    
+
+    // MARK: - Stored Properties
+
+    private let textSize: CGFloat
+    private let textColor: Color
+    private let fontWeight: Font.Weight
+    private let fontDesign: Font.Design
+    private let backgroundColor: Color
+    private let strokeColor: Color
+    private let strokeWidth: CGFloat
+    private let cornerRadius: CGFloat
+    private let height: CGFloat
+    private let heightShadow: CGFloat
+    private let isFullWidth: Bool
+    private let hapticStyle: UIImpactFeedbackGenerator.FeedbackStyle
+
+    // MARK: - Init
+
+    init(
+        textSize: CGFloat = 16,
+        textColor: Color = .brand,
+        fontWeight: Font.Weight = .semibold,
+        fontDesign: Font.Design = .rounded,
+        backgroundColor: Color = .primaryBG,
+        strokeColor: Color = .strokeBtn,
+        strokeWidth: CGFloat = 2,
+        cornerRadius: CGFloat = 16,
+        height: CGFloat = 48,
+        heightShadow: CGFloat = 4,
+        isFullWidth: Bool = true,
+        hapticStyle: UIImpactFeedbackGenerator.FeedbackStyle = .medium
+    ) {
+        self.textSize = textSize
+        self.textColor = textColor
+        self.fontWeight = fontWeight
+        self.fontDesign = fontDesign
+        self.backgroundColor = backgroundColor
+        self.strokeColor = strokeColor
+        self.strokeWidth = strokeWidth
+        self.cornerRadius = cornerRadius
+        self.height = height
+        self.heightShadow = heightShadow
+        self.isFullWidth = isFullWidth
+        self.hapticStyle = hapticStyle
+    }
+
+    // MARK: - Body
+
     func makeBody(configuration: Configuration) -> some View {
+        let maxWidth: CGFloat? = isFullWidth ? .infinity : nil
+
         ZStack {
             RoundedRectangle(cornerRadius: cornerRadius)
                 .fill(strokeColor)
                 .offset(y: heightShadow)
-                .frame(maxWidth: .infinity)
+                .frame(maxWidth: maxWidth)
                 .frame(height: height)
-            
+
             configuration.label
-                .font(.system(size: textSize, design: .rounded))
-                .fontWeight(.semibold)
-                .foregroundColor(Color.brand)
-                .frame(maxWidth: .infinity)
+                .font(.system(size: textSize, design: fontDesign))
+                .fontWeight(fontWeight)
+                .foregroundColor(textColor)
+                .frame(maxWidth: maxWidth)
                 .frame(height: height)
                 .background(
                     RoundedRectangle(cornerRadius: cornerRadius)
@@ -87,7 +182,7 @@ struct SecondaryPhysicalButtonStyle: ButtonStyle {
         .frame(height: height + heightShadow)
         .onChange(of: configuration.isPressed) { oldValue, newValue in
             if newValue && !oldValue {
-                triggerHaptic(style: .medium)
+                triggerHaptic(style: hapticStyle)
             }
         }
     }

@@ -59,7 +59,7 @@ struct InputStepView: View {
                 viewModel.checkListenWrite(userAnswer: textInput)
                 textInput = ""
             }
-            .buttonStyle(ThreeDButtonStyle(color: isValidInput ? .pGreen : .gray))
+            .buttonStyle(PrimaryPhysicalButtonStyle())
             .disabled(!isValidInput)
             .padding(.horizontal, 100)
             .padding(.bottom, 20)

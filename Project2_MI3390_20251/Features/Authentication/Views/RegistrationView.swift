@@ -95,7 +95,7 @@ extension RegistrationView {
                 }
             }
         }
-        .buttonStyle(ThreeDButtonStyle(color: viewModel.passwordMatch ? .pGreen : .gray))
+        .buttonStyle(PrimaryPhysicalButtonStyle())
         .disabled(!viewModel.passwordMatch || viewModel.isLoading)
     }
     

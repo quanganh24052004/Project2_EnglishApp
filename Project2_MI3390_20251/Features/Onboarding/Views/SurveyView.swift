@@ -80,9 +80,7 @@ struct SurveyView: View {
                 }) {
                     Text(viewModel.currentIndex == viewModel.questions.count - 1 ? "Finish" : "Continue")
                 }
-                .buttonStyle(ThreeDButtonStyle(
-                    color: viewModel.canProceed ? .pGreen : .gray
-                ))
+                .buttonStyle(PrimaryPhysicalButtonStyle())
                 .disabled(!viewModel.canProceed)
                 .padding()
             }

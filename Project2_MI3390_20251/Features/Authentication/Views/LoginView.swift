@@ -27,12 +27,15 @@ struct LoginView: View {
     var body: some View {
         ZStack {
             // Lớp nền (Tràn viền)
-            Color.primary01.ignoresSafeArea()
+            Color.snow.ignoresSafeArea()
             
             // Lớp nội dung (Sử dụng GeometryReader để xử lý Keyboard Avoidance)
             GeometryReader { geometry in
                 ScrollView(showsIndicators: false) {
                     VStack(spacing: 0) {
+                        Text("Đăng nhập")
+                            .font(.system(size: 24, weight: .bold))
+                            .foregroundColor(Color.textPrimary)
                         // Spacer linh hoạt để đẩy nội dung xuống giữa
                         Spacer()
                         
@@ -85,6 +88,7 @@ extension LoginView {
                 .font(.system(size: 22, design: .rounded))
                 .fontWeight(.bold)
                 .frame(height: 56)
+                .foregroundColor(Color.textPrimary)
         }
     }
     
@@ -124,7 +128,7 @@ extension LoginView {
                 }
             }
         }
-        .buttonStyle(ThreeDButtonStyle(color: .pGreen))
+        .buttonStyle(PrimaryPhysicalButtonStyle())
         .disabled(viewModel.isLoading)
     }
     
@@ -186,7 +190,7 @@ extension LoginView {
                     .font(.system(size: 15, design: .rounded))
                     .fontWeight(.semibold)
                     .frame(height: 20)
-                    .foregroundColor(.neutral08)
+                    .foregroundColor(.textPrimary)
                 Spacer()
             }
             AppTextField(text: text, placeholder: placeholder, isSecure: isSecure)

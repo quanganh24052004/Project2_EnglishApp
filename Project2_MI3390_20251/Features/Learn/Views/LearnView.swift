@@ -57,10 +57,10 @@ struct LearnView: View {
         VStack(spacing: 16) {
             Image(systemName: "books.vertical")
                 .font(.system(size: 50))
-                .foregroundColor(.gray)
+                .foregroundColor(.textPrimary)
             Text("No courses available yet.")
                 .font(.headline)
-                .foregroundColor(.gray)
+                .foregroundColor(.textSecondary)
         }
     }
     
@@ -69,7 +69,7 @@ struct LearnView: View {
             Text(course.name)
                 .font(.system(size: 20, design: .rounded))
                 .fontWeight(.bold)
-                .foregroundColor(Color.black)
+                .foregroundColor(.textPrimary)
             
             HStack(spacing: 16) {
                 // Icon Column
@@ -89,7 +89,7 @@ struct LearnView: View {
                         Text(course.desc)
                             .font(.system(size: 14, design: .rounded))
                             .fontWeight(.semibold)
-                            .foregroundColor(Color.neutral06)
+                            .foregroundColor(.textSecondary)
                             .multilineTextAlignment(.leading)
                             .lineLimit(2)
                         Spacer()
@@ -98,7 +98,7 @@ struct LearnView: View {
                         Text(course.subDescription)
                             .font(.system(size: 14, design: .rounded))
                             .fontWeight(.semibold)
-                            .foregroundColor(Color.neutral06)
+                            .foregroundColor(.textSecondary)
                             .multilineTextAlignment(.leading)
                             .lineLimit(2)
                         Spacer()

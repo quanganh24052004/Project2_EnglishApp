@@ -60,7 +60,7 @@ struct HandBookView: View {
             HStack(spacing: 20) {
                 ZStack {
                     Circle()
-                        .fill(Color.white)
+                        .fill(.primaryBG)
                         .frame(width: 50, height: 50)
                     
                     Text("LV\(level)")

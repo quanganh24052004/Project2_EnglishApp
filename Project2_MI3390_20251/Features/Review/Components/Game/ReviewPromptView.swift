@@ -36,7 +36,7 @@ struct ReviewPromptView: View {
                         .padding(.horizontal)
                         .padding()
                         .frame(maxWidth: .infinity)
-                        .background(Color.white)
+                        .background(.primaryBG)
                         .cornerRadius(16)
                         .overlay(
                             RoundedRectangle(cornerRadius: 16)
@@ -51,7 +51,7 @@ struct ReviewPromptView: View {
                         .padding(.horizontal)
                         .padding()
                         .frame(maxWidth: .infinity)
-                        .background(Color.white)
+                        .background(.primaryBG)
                         .cornerRadius(16)
                         .overlay(
                             RoundedRectangle(cornerRadius: 16)

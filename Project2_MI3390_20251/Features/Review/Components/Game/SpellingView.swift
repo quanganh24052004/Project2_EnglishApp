@@ -167,7 +167,7 @@ struct TileButtonStyle: ButtonStyle {
             .font(.system(size: 22, weight: .bold))
             .foregroundColor(.neutral04)
             .frame(width: 55, height: 60)
-            .background(Color.white)
+            .background(.primaryBG)
             .cornerRadius(12)
             .shadow(color: .gray.opacity(0.3), radius: 0, x: 0, y: isPressed ? 0 : 4)
             .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color.gray.opacity(0.2), lineWidth: 1))

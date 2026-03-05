@@ -86,7 +86,7 @@ struct SpellingGameView: View {
                         RoundedRectangle(cornerRadius: 16)
                             .stroke(Color(UIColor.neutral04), lineWidth: 1.5)
                     )
-                    .background(Color.white)
+                    .background(.primaryBG)
                     .cornerRadius(16)
                     .padding(.horizontal)
                     

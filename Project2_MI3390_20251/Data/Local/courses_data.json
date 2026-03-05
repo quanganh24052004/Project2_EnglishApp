@@ -9174,6 +9174,195 @@
     "description": "Nắm vững từ vựng tiếng Anh lớp 6",
     "subDescription": "Từ vựng trọng tâm trong chương trình tiếng Anh lớp 6",
     "lessons": [
+      {
+        "name": "Unit 1",
+        "subName": "Bài 1",
+        "quantityOfWord": 13,
+        "words": [
+          {
+            "english": "cabin",
+            "phonetic": "/'kæbɪn/",
+            "partOfSpeech": "n.",
+            "audioUrl": "",
+            "CEFR": "grade6",
+            "meanings": [
+              {
+                "vietnamese": "buồng nhỏ / khoang trên tàu thủy, máy bay",
+                "exampleEn": "a small bedroom on a ship.",
+                "exampleVi": "một phòng ngủ nhỏ trên tàu thủy."
+              }
+            ]
+          },
+          {
+            "english": "chef",
+            "phonetic": "/'ʃef/",
+            "partOfSpeech": "n.",
+            "audioUrl": "",
+            "CEFR": "grade6",
+            "meanings": [
+              {
+                "vietnamese": "Bếp trưởng, đầu bếp",
+                "exampleEn": "The chef prepared a delicious meal.",
+                "exampleVi": "Đầu bếp đã chuẩn bị một bữa ăn ngon miệng."
+              }
+            ]
+          },
+          {
+            "english": "climbing wall",
+            "phonetic": "/'klaɪmbɪŋ wɔːl/",
+            "partOfSpeech": "n.",
+            "audioUrl": "",
+            "CEFR": "grade6",
+            "meanings": [
+              {
+                "vietnamese": "tường leo",
+                "exampleEn": "The climbing wall is a popular activity in the gym.",
+                "exampleVi": "Tường leo là một hoạt động phổ biến trong phòng tập thể dục."
+              }
+            ]
+          },
+          {
+            "english": "cruise ship",
+            "phonetic": "/ˈkruːz ʃɪp/",
+            "partOfSpeech": "n.",
+            "audioUrl": "",
+            "CEFR": "grade6",
+            "meanings": [
+              {
+                "vietnamese": "Tàu du lịch trên biển",
+                "exampleEn": "The cruise ship sailed to many beautiful destinations.",
+                "exampleVi": "Tàu du lịch đã cập bến nhiều điểm đến đẹp."
+              }
+            ]
+          },
+          {
+            "english": "description",
+            "phonetic": "/ˌdɛskrɪpˈʃən/",
+            "partOfSpeech": "n.",
+            "audioUrl": "",
+            "CEFR": "grade6",
+            "meanings": [
+              {
+                "vietnamese": "văn miêu tả",
+                "exampleEn": "The description of the product was very helpful.",
+                "exampleVi": "Mô tả sản phẩm rất hữu ích."
+              }
+            ]
+          },
+          {
+            "english": "flat",
+            "phonetic": "/ˈflæt/",
+            "partOfSpeech": "n.",
+            "audioUrl": "",
+            "CEFR": "grade6",
+            "meanings": [
+              {
+                "vietnamese": "căn hộ",
+                "exampleEn": "The flat is located in a quiet neighborhood.",
+                "exampleVi": "Căn hộ này nằm trong khu phố yên tĩnh."
+              }
+            ]
+          },
+          {
+            "english": "modern",
+            "phonetic": "/ˈmɒdən/",
+            "partOfSpeech": "adj.",
+            "audioUrl": "",
+            "CEFR": "grade6",
+            "meanings": [
+              {
+                "vietnamese": "hiện đại",
+                "exampleEn": "The modern building has a glass facade.",
+                "exampleVi": "Tòa nhà hiện đại có mặt tiền bằng kính."
+              }
+            ]
+          },
+          {
+            "english": "monument",
+            "phonetic": "/ˈmɒnjʊmənt/",
+            "partOfSpeech": "n.",
+            "audioUrl": "",
+            "CEFR": "grade6",
+            "meanings": [
+              {
+                "vietnamese": "đài tưởng niệm",
+                "exampleEn": "The monument was built to honor the fallen soldiers.",
+                "exampleVi": "Đài tưởng niệm được xây dựng để tưởng nhớ các chiến sĩ đã hy sinh."
+              }
+            ]
+          },
+          {
+            "english": "old part",
+            "phonetic": "/'əʊld pɑːt/",
+            "partOfSpeech": "adj.",
+            "audioUrl": "",
+            "CEFR": "grade6",
+            "meanings": [
+              {
+                "vietnamese": "khu phố cổ",
+                "exampleEn": "The old part of the city is known for its historic architecture.",
+                "exampleVi": "Khu phố cổ của thành phố nổi tiếng với kiến trúc lịch sử."
+              }
+            ]
+          },
+          {
+            "english": "population",
+            "phonetic": "/pɒpjʊˈleɪʃn/",
+            "partOfSpeech": "n.",
+            "audioUrl": "",
+            "CEFR": "grade6",
+            "meanings": [
+              {
+                "vietnamese": "Dân số",
+                "exampleEn": "The population of the city has grown significantly over the past decade.",
+                "exampleVi": "Dân số của thành phố đã tăng đáng kể trong thập kỷ qua."
+              }
+            ]
+          },
+          {
+            "english": "square",
+            "phonetic": "/skweə/",
+            "partOfSpeech": "adj.",
+            "audioUrl": "",
+            "CEFR": "grade6",
+              "meanings": [
+                {
+                  "vietnamese": "quảng trường",
+                  "exampleEn": "The square is a popular gathering place for locals and tourists alike.",
+                  "exampleVi": "Quảng trường là một nơi tụ tập phổ biến cho cả người dân địa phương và khách du lịch."
+                }
+              ]
+          },
+          {
+            "english": "tourist",
+            "phonetic": "/ˈtʊrɪst/",
+            "partOfSpeech": "n.",
+            "audioUrl": "",
+            "CEFR": "grade6",
+            "meanings": [
+              {
+                "vietnamese": "du khách",
+                "exampleEn": "The tourist visited many historical sites.",
+                "exampleVi": "Du khách đã ghé thăm nhiều địa điểm lịch sử."
+              }
+            ]
+          },
+          {
+            "english": "transport",
+            "phonetic": "/ˈtrænspɔːt/",
+            "partOfSpeech": "n.",
+            "audioUrl": "",
+            "CEFR": "grade6",
+            "meanings": [
+              {
+                "vietnamese": "sự vận chuyển",
+                "exampleEn": "The city's transport system is very efficient.",
+                "exampleVi": "Hệ thống vận chuyển của thành phố rất hiệu quả."
+              }
+            ]
+          }
+        ]
+      }
     ]
   }
 ]

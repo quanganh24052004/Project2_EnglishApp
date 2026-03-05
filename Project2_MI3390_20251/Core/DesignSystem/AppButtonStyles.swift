@@ -7,6 +7,73 @@
 
 import SwiftUI
 
+// 1. Định nghĩa Style cho nút bấm
+struct DuolingoButtonStyle: ButtonStyle {
+    // Màu sắc mặc định dựa trên CSS của bạn
+    var mainColor = Color(red: 28/255, green: 176/255, blue: 246/255)   // #1cb0f6
+    var shadowColor = Color(red: 24/255, green: 153/255, blue: 214/255) // #1899d6
+    var lipWidth: CGFloat = 4.0 // Độ dày của đế
+    
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            // Typography (Tương đương lớp ._275sd)
+            .font(.system(size: 15, weight: .bold, design: .rounded))
+            .textCase(.uppercase)
+            .tracking(0.8) // Tương đương letter-spacing: .8px
+            .foregroundColor(.white)
+            .padding(.vertical, 16)
+            .padding(.horizontal, 24)
+            .frame(maxWidth: .infinity) // Cho nút rộng ra
+            
+            // Xây dựng khối 3D (Tương đương lớp ._3XvZO và ._2NolF)
+            .background(
+                ZStack {
+                    // Lớp đế (Shadow/Lip): Cố định ở dưới
+                    RoundedRectangle(cornerRadius: 12, style: .continuous)
+                        .fill(shadowColor)
+                        .offset(y: lipWidth)
+                    
+                    // Lớp nền chính: Di chuyển xuống khi bị nhấn
+                    RoundedRectangle(cornerRadius: 12, style: .continuous)
+                        .fill(mainColor)
+                        .offset(y: configuration.isPressed ? lipWidth : 0)
+                }
+            )
+            // Di chuyển phần chữ (Label) xuống cùng với lớp nền chính
+            .offset(y: configuration.isPressed ? lipWidth : 0)
+            
+            // Hiệu ứng chuyển động mượt mà khi nhả tay ra
+            .animation(.spring(response: 0.15, dampingFraction: 0.6), value: configuration.isPressed)
+    }
+}
+
+// 2. Chạy thử nghiệm trên View
+struct ContentView: View {
+    var body: some View {
+        VStack(spacing: 30) {
+            Button("Kiểm tra") {
+                print("Đã nhấn nút Kiểm tra!")
+            }
+            .buttonStyle(DuolingoButtonStyle())
+            .frame(width: 250) // Tương đương ._1hV0H { width: 250px; }
+            
+            // Bạn có thể dễ dàng đổi màu bằng cách truyền tham số mới
+            Button("Tiếp tục") {
+                print("Đã nhấn nút Tiếp tục!")
+            }
+            .buttonStyle(DuolingoButtonStyle(
+                mainColor: Color(red: 88/255, green: 204/255, blue: 2/255),   // Xanh lá Duolingo
+                shadowColor: Color(red: 88/255, green: 167/255, blue: 0/255)
+            ))
+            .frame(width: 250)
+        }
+        .padding()
+    }
+}
+
+#Preview {
+    ContentView()
+}
 // MARK: -1. Primary Button Style
 
 struct PrimaryPhysicalButtonStyle: ButtonStyle {

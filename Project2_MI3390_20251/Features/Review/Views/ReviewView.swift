@@ -177,7 +177,7 @@ struct ReviewView: View {
                 }
                 .padding(8)
             }
-            .background(Color(.neutral01))
+            .background(.primaryBG)
             .navigationTitle(languageManager.currentLanguage == "vi" ? "Ôn tập" : "Review")
             .navigationDestination(isPresented: $navigateToHandbook) {
                 HandBookView()

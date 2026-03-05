@@ -30,7 +30,7 @@ struct ReviewSummaryView: View {
     // MARK: - Body
     var body: some View {
         ZStack {
-            Color.white.ignoresSafeArea()
+            Color.primaryBG.ignoresSafeArea()
             
             VStack(spacing: 0) {
                 Spacer()

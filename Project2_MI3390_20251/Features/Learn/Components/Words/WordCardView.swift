@@ -18,7 +18,7 @@ struct WordCardView: View {
     var body: some View {
         FlipCardContainer(isFlipped: isFlipped) {
             // MARK: - FRONT CARD
-            cardFace(color: .white) {
+            cardFace(color: .primaryBG) {
                 VStack(spacing: 16) {
                     Text(item.word)
                         .font(.system(size: 28, design: .rounded))
@@ -53,7 +53,7 @@ struct WordCardView: View {
 
         } back: {
             // MARK: - BACK CARD
-            cardFace(color: .white) {
+            cardFace(color: .primaryBG) {
                 VStack(spacing: 20) {
                     Text(item.word)
                         .font(.system(size: 28, design: .rounded))

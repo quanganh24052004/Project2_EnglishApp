@@ -5,44 +5,74 @@
 //  Created by Nguyễn Quang Anh on 7/12/25.
 //
 
-
 import SwiftUI
 import Combine
+
 class SurveyViewModel: ObservableObject {
-    @Published var questions: [SurveyQuestion] = SurveyQuestion.samples
+    @Published var steps: [OnboardingStep] = []
     @Published var currentIndex: Int = 0
     
-    @Published var userAnswers: [UUID: Set<UUID>] = [:]
+    @Published var userAnswers: [Int: Set<String>] = [:]
+    
+    init() {
+        loadSurveyData()
+    }
+    
+    var currentStep: OnboardingStep? {
+        guard currentIndex >= 0 && currentIndex < steps.count else { return nil }
+        return steps[currentIndex]
+    }
     
     var canProceed: Bool {
-        let currentQ = questions[currentIndex]
-        let answers = userAnswers[currentQ.id] ?? []
-        return !answers.isEmpty
+        guard let step = currentStep else { return false }
+        
+        switch step.type {
+        case .question:
+            let answers = userAnswers[step.id] ?? []
+            return !answers.isEmpty
+        case .intro, .info, .permission, .outro:
+            return true
+        }
     }
     
-    func selectOption(_ option: SurveyOption, in question: SurveyQuestion) {
-        var currentSelected = userAnswers[question.id] ?? Set<UUID>()
-        
-        if question.type == .singleSelect {
-            currentSelected = [option.id]
-        } else {
-            if currentSelected.contains(option.id) {
-                currentSelected.remove(option.id)
-            } else {
-                currentSelected.insert(option.id)
-            }
+    func loadSurveyData() {
+        // Find survey_data.json in Bundle
+        guard let url = Bundle.main.url(forResource: "survey_data", withExtension: "json") else {
+            print("Không tìm thấy file survey_data.json trong Bundle")
+            return
         }
         
-        userAnswers[question.id] = currentSelected
+        do {
+            let data = try Data(contentsOf: url)
+            let decodedData = try JSONDecoder().decode(OnboardingData.self, from: data)
+            self.steps = decodedData.onboardingFlow
+        } catch {
+            print("Lỗi parse JSON survey_data.json: \(error)")
+        }
     }
     
-    func isSelected(_ option: SurveyOption, in question: SurveyQuestion) -> Bool {
-        let currentSelected = userAnswers[question.id] ?? Set<UUID>()
+    func selectOption(_ option: OnboardingOption, in step: OnboardingStep) {
+        // Default to single selection for now.
+        // We can check if multiple selection is needed later.
+        var currentSelected = userAnswers[step.id] ?? Set<String>()
+        
+        if currentSelected.contains(option.id) {
+            currentSelected.remove(option.id)
+        } else {
+            // For single selection:
+            currentSelected = [option.id]
+        }
+        
+        userAnswers[step.id] = currentSelected
+    }
+    
+    func isSelected(_ option: OnboardingOption, in step: OnboardingStep) -> Bool {
+        let currentSelected = userAnswers[step.id] ?? Set<String>()
         return currentSelected.contains(option.id)
     }
     
-    func nextStep(onFinish: () -> Void) {
-        if currentIndex < questions.count - 1 {
+    func nextStep(onFinish: @escaping () -> Void) {
+        if currentIndex < steps.count - 1 {
             withAnimation {
                 currentIndex += 1
             }
@@ -51,6 +81,7 @@ class SurveyViewModel: ObservableObject {
             onFinish()
         }
     }
+    
     func submitData() {
         if let jsonResult = exportSurveyData() {
             print("----- DỮ LIỆU ĐÃ TRÍCH XUẤT (JSON) -----")
@@ -67,19 +98,17 @@ extension SurveyViewModel {
         
         var submissionList: [SurveySubmission] = []
         
-        for (questionID, answerIDs) in userAnswers {
-            if let question = questions.first(where: { $0.id == questionID }) {
-                
-                let selectedTexts = question.options
-                    .filter { answerIDs.contains($0.id) }
-                    .map { $0.text }
-                
-                let submission = SurveySubmission(
-                    question: question.text,
-                    answer: selectedTexts
-                )
-                submissionList.append(submission)
-            }
+        for step in steps where step.type == .question {
+            let answerIDs = userAnswers[step.id] ?? []
+            let selectedTexts = step.options?
+                .filter { answerIDs.contains($0.id) }
+                .map { $0.label } ?? []
+            
+            let submission = SurveySubmission(
+                question: step.questionText ?? "",
+                answer: selectedTexts
+            )
+            submissionList.append(submission)
         }
         
         let encoder = JSONEncoder()
@@ -94,10 +123,10 @@ extension SurveyViewModel {
             return nil
         }
     }
-    
 
     private func saveToLocal(jsonString: String) {
         UserDefaults.standard.set(jsonString, forKey: "UserSurveyResult")
         print("Đã lưu kết quả vào bộ nhớ máy!")
     }
 }
+

@@ -35,13 +35,13 @@ struct IntroView: View {
                 NavigationLink(destination: SurveyView(isOnboardingDone: $isOnboardingDone)) {
                     Text("STARTING NOW")
                 }
-                .buttonStyle(PrimaryPhysicalButtonStyle())
+                .capyButton(.primary(color: CapyColors.green, shadow: CapyColors.greenShadow))
                 .padding(.horizontal, 16)
                 
                 NavigationLink(destination: LoginView()) {
                     Text("I HAVE ALRAEDY AN ACCOUNT")
                 }
-                .buttonStyle(SecondaryPhysicalButtonStyle())
+                .capyButton(.secondary)
                 .padding(.horizontal, 16)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)

@@ -5,33 +5,55 @@
 //  Created by Nguyễn Quang Anh on 7/12/25.
 //
 
-
 import SwiftUI
 
 struct SurveyOptionRow: View {
-    let option: SurveyOption
+    let option: OnboardingOption
     let isSelected: Bool
     let action: () -> Void
     
     var body: some View {
         Button(action: action) {
             HStack(spacing: 16) {
-                Image(systemName: option.iconName)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 24, height: 24)
-                    .font(.system(size: 18, design: .rounded))
-                
-                Text(option.text)
-                    .multilineTextAlignment(.leading)
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(option.label)
+                        .font(.system(size: 16, weight: .semibold, design: .rounded))
+                        .multilineTextAlignment(.leading)
+                    
+                    if let desc = option.description {
+                        Text(desc)
+                            .font(.system(size: 14, design: .rounded))
+                            .foregroundColor(.gray)
+                            .multilineTextAlignment(.leading)
+                    }
+                }
                 
                 Spacer()
-    
+                
+                if let diff = option.difficulty {
+                    Text(diff)
+                        .font(.system(size: 12, weight: .bold))
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
+                        .background(difficultyColor(diff).opacity(0.2))
+                        .foregroundColor(difficultyColor(diff))
+                        .cornerRadius(8)
+                }
             }
             .padding(.horizontal, 16)
-            .padding(.vertical, 8)
-            .frame(maxWidth: .infinity)
+            .padding(.vertical, 12)
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .buttonStyle(SelectionThreeDButtonStyle(isSelected: isSelected))
+        .capyButton(.card(isChecked: isSelected))
+    }
+    
+    private func difficultyColor(_ difficulty: String) -> Color {
+        switch difficulty {
+        case "Dễ": return .green
+        case "Vừa": return .orange
+        case "Khó": return .red
+        case "Siêu khó": return .purple
+        default: return .blue
+        }
     }
 }

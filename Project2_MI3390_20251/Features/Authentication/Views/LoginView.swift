@@ -128,7 +128,7 @@ extension LoginView {
                 }
             }
         }
-        .buttonStyle(PrimaryPhysicalButtonStyle())
+        .capyButton(.primary(color: CapyColors.green, shadow: CapyColors.greenShadow))
         .disabled(viewModel.isLoading)
     }
     
@@ -148,7 +148,7 @@ extension LoginView {
             Button { print("Google Login") } label: {
                 HStack { Image("img_google").resizable().frame(width: 24, height: 24) }
             }
-            .buttonStyle(ThreeDButtonStyle(color: .black, height: 50))
+            .capyButton(.primary(color: .black, shadow: Color(white: 0.2), textColor: .white))
             
             Button { } label: {
                 HStack {
@@ -159,7 +159,7 @@ extension LoginView {
                         .foregroundColor(.white)
                 }
             }
-            .buttonStyle(ThreeDButtonStyle(color: .black, height: 50))
+            .capyButton(.primary(color: .black, shadow: Color(white: 0.2), textColor: .white))
         }
     }
     

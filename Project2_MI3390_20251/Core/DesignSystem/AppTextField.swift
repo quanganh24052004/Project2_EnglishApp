@@ -43,7 +43,7 @@ struct AppTextField: View {
         }
         .padding(16)
         .background(backgroundStyle)
-        .animation(.easeInOut(duration: 0.2), value: isFocused)
+        .animation(.smooth(duration: 0.2), value: isFocused)
     }
     
     // MARK: - Subviews

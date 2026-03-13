@@ -29,7 +29,7 @@ struct ProgressBar: View {
                 Capsule()
                     .fill(color)
                     .frame(width: fillWidth, height: height)
-                    .animation(.spring(response: 0.4, dampingFraction: 0.7), value: progress)
+                    .animation(.smooth(duration: 0.4), value: progress)
                 
                 Image(iconName)
                     .resizable()
@@ -38,7 +38,7 @@ struct ProgressBar: View {
                     .foregroundColor(color)
                     .shadow(radius: 2)
                     .offset(x: fillWidth - (height * 1.5 / 2))
-                    .animation(.spring(response: 0.4, dampingFraction: 0.7), value: progress)
+                    .animation(.smooth(duration: 0.4), value: progress)
 
             }
             .frame(height: height * 2)

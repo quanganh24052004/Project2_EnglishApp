@@ -43,37 +43,37 @@ struct DuolingoButtonStyle: ButtonStyle {
             .offset(y: configuration.isPressed ? lipWidth : 0)
             
             // Hiệu ứng chuyển động mượt mà khi nhả tay ra
-            .animation(.spring(response: 0.15, dampingFraction: 0.6), value: configuration.isPressed)
+            .animation(.snappy, value: configuration.isPressed)
     }
 }
 
 // 2. Chạy thử nghiệm trên View
-struct ContentView: View {
-    var body: some View {
-        VStack(spacing: 30) {
-            Button("Kiểm tra") {
-                print("Đã nhấn nút Kiểm tra!")
-            }
-            .buttonStyle(DuolingoButtonStyle())
-            .frame(width: 250) // Tương đương ._1hV0H { width: 250px; }
-            
-            // Bạn có thể dễ dàng đổi màu bằng cách truyền tham số mới
-            Button("Tiếp tục") {
-                print("Đã nhấn nút Tiếp tục!")
-            }
-            .buttonStyle(DuolingoButtonStyle(
-                mainColor: Color(red: 88/255, green: 204/255, blue: 2/255),   // Xanh lá Duolingo
-                shadowColor: Color(red: 88/255, green: 167/255, blue: 0/255)
-            ))
-            .frame(width: 250)
-        }
-        .padding()
-    }
-}
+//struct ContentView: View {
+//    var body: some View {
+//        VStack(spacing: 30) {
+//            Button("Kiểm tra") {
+//                print("Đã nhấn nút Kiểm tra!")
+//            }
+//            .buttonStyle(DuolingoButtonStyle())
+//            .frame(width: 250) // Tương đương ._1hV0H { width: 250px; }
+//            
+//            // Bạn có thể dễ dàng đổi màu bằng cách truyền tham số mới
+//            Button("Tiếp tục") {
+//                print("Đã nhấn nút Tiếp tục!")
+//            }
+//            .buttonStyle(DuolingoButtonStyle(
+//                mainColor: Color(red: 88/255, green: 204/255, blue: 2/255),   // Xanh lá Duolingo
+//                shadowColor: Color(red: 88/255, green: 167/255, blue: 0/255)
+//            ))
+//            .frame(width: 250)
+//        }
+//        .padding()
+//    }
+//}
 
-#Preview {
-    ContentView()
-}
+//#Preview {
+//    ContentView()
+//}
 // MARK: -1. Primary Button Style
 
 struct PrimaryPhysicalButtonStyle: ButtonStyle {
@@ -159,8 +159,8 @@ struct PrimaryPhysicalButtonStyle: ButtonStyle {
                 .offset(y: labelOffset)
         }
         .frame(height: height + heightShadow)
-        .animation(.spring(response: 0.2, dampingFraction: 0.6), value: configuration.isPressed)
-        .animation(.easeInOut(duration: 0.2), value: isEnabled)
+        .animation(.snappy, value: configuration.isPressed)
+        .animation(.smooth, value: isEnabled)
         .onChange(of: configuration.isPressed) { oldValue, newValue in
             if isEnabled && newValue && !oldValue {
                 triggerHaptic(style: hapticStyle)
@@ -244,7 +244,7 @@ struct SecondaryPhysicalButtonStyle: ButtonStyle {
                         )
                 )
                 .offset(y: configuration.isPressed ? heightShadow : 0)
-                .animation(.spring(response: 0.2, dampingFraction: 0.6), value: configuration.isPressed)
+                .animation(.snappy, value: configuration.isPressed)
         }
         .frame(height: height + heightShadow)
         .onChange(of: configuration.isPressed) { oldValue, newValue in
@@ -333,7 +333,7 @@ struct ThreeDButtonStyle: ButtonStyle {
             // Hiệu ứng dịch chuyển khi nhấn
             .offset(y: isPressed ? depth : 0)
             // Animation nảy nhẹ
-            .animation(.interactiveSpring(response: 0.15, dampingFraction: 0.6), value: isPressed)
+            .animation(.bouncy, value: isPressed)
             // Viền nhẹ cho nút trắng để tách biệt với nền
             .overlay(
                 RoundedRectangle(cornerRadius: 16)
@@ -418,8 +418,8 @@ struct SelectionThreeDButtonStyle: ButtonStyle {
             )
             .offset(y: currentOffset)
             // Animation khi nhấn và khi đổi trạng thái chọn
-            .animation(.spring(response: 0.3, dampingFraction: 0.6, blendDuration: 0), value: isPressed)
-            .animation(.easeInOut(duration: 0.2), value: isSelected)
+            .animation(.bouncy, value: isPressed)
+            .animation(.smooth(duration: 0.2), value: isSelected)
     }
 }
 

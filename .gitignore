@@ -70,3 +70,6 @@ Secrets.swift
 
 export_project.sh
 project_context.txt
+
+#Agents
+.agents/

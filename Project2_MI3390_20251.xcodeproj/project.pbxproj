@@ -9,12 +9,17 @@
 /* Begin PBXBuildFile section */
 		0804F2F62EE79E4B00A982D3 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0804F2F52EE79E4B00A982D3 /* MainTabView.swift */; };
 		0804F2F92EE79FDC00A982D3 /* AppTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0804F2F82EE79FDC00A982D3 /* AppTab.swift */; };
+		081D1AFE2F5A4D08001F67BE /* OnboardingModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081D1AFD2F5A4D08001F67BE /* OnboardingModels.swift */; };
+		081D1B002F5A4D1B001F67BE /* survey_data.json in Sources */ = {isa = PBXBuildFile; fileRef = 081D1AFF2F5A4D13001F67BE /* survey_data.json */; };
+		081D1B012F5A4F06001F67BE /* survey_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 081D1AFF2F5A4D13001F67BE /* survey_data.json */; };
 		082EC9FF2EFCF42C00645D3A /* ExitConfirmationSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082EC9FE2EFCF42C00645D3A /* ExitConfirmationSheet.swift */; };
 		082ECA032EFD079400645D3A /* SummarizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082ECA022EFD079400645D3A /* SummarizeView.swift */; };
 		082ECA052EFD098900645D3A /* CorrectSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082ECA042EFD098900645D3A /* CorrectSheetView.swift */; };
 		083369DB2EE57F1D003B2FEF /* String+Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083369DA2EE57F1D003B2FEF /* String+Validation.swift */; };
 		083369E22EE58583003B2FEF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083369E12EE58583003B2FEF /* LoginView.swift */; };
 		083369E42EE585A2003B2FEF /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083369E32EE585A2003B2FEF /* RegistrationView.swift */; };
+		083E7D0F2F60FF82009EF10C /* App3DButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083E7D0E2F60FF82009EF10C /* App3DButtonStyle.swift */; };
+		083E7D112F6100D6009EF10C /* CapyColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083E7D102F6100D6009EF10C /* CapyColors.swift */; };
 		084CB4A52EF406D600B1CBBE /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084CB4A42EF406D600B1CBBE /* NotificationManager.swift */; };
 		085781642EEFDAF70003618D /* AppButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085781632EEFDAF70003618D /* AppButtonStyles.swift */; };
 		0857816B2EEFDFC50003618D /* COPYRIGHT.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0857816A2EEFDFC50003618D /* COPYRIGHT.txt */; };
@@ -100,17 +105,22 @@
 		08E4C7EA2F4D3A09000EFEC2 /* Correct.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 08E4C7E42F4D3A09000EFEC2 /* Correct.mp3 */; };
 		08E4C7EB2F4D3A09000EFEC2 /* Fail.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 08E4C7E52F4D3A09000EFEC2 /* Fail.mp3 */; };
 		08E4C7EC2F4D3A09000EFEC2 /* Complete.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 08E4C7E32F4D3A09000EFEC2 /* Complete.mp3 */; };
+		08E4C7F02F4ED8B9000EFEC2 /* GeneratedColors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08E4C7EF2F4ED8B9000EFEC2 /* GeneratedColors.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0804F2F52EE79E4B00A982D3 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		0804F2F82EE79FDC00A982D3 /* AppTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTab.swift; sourceTree = "<group>"; };
+		081D1AFD2F5A4D08001F67BE /* OnboardingModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingModels.swift; sourceTree = "<group>"; };
+		081D1AFF2F5A4D13001F67BE /* survey_data.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = survey_data.json; sourceTree = "<group>"; };
 		082EC9FE2EFCF42C00645D3A /* ExitConfirmationSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitConfirmationSheet.swift; sourceTree = "<group>"; };
 		082ECA022EFD079400645D3A /* SummarizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummarizeView.swift; sourceTree = "<group>"; };
 		082ECA042EFD098900645D3A /* CorrectSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorrectSheetView.swift; sourceTree = "<group>"; };
 		083369DA2EE57F1D003B2FEF /* String+Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Validation.swift"; sourceTree = "<group>"; };
 		083369E12EE58583003B2FEF /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		083369E32EE585A2003B2FEF /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
+		083E7D0E2F60FF82009EF10C /* App3DButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App3DButtonStyle.swift; sourceTree = "<group>"; };
+		083E7D102F6100D6009EF10C /* CapyColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapyColors.swift; sourceTree = "<group>"; };
 		084CB4A42EF406D600B1CBBE /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		085781632EEFDAF70003618D /* AppButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppButtonStyles.swift; sourceTree = "<group>"; };
 		085781662EEFDFC50003618D /* chalkboardse.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = chalkboardse.otf; sourceTree = "<group>"; };
@@ -192,6 +202,7 @@
 		08E4C7E42F4D3A09000EFEC2 /* Correct.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Correct.mp3; sourceTree = "<group>"; };
 		08E4C7E52F4D3A09000EFEC2 /* Fail.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Fail.mp3; sourceTree = "<group>"; };
 		08E4C7E62F4D3A09000EFEC2 /* Incorrect.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Incorrect.mp3; sourceTree = "<group>"; };
+		08E4C7EF2F4ED8B9000EFEC2 /* GeneratedColors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = GeneratedColors.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -271,6 +282,8 @@
 		0868CD792F08E7E200222EAD /* DesignSystem */ = {
 			isa = PBXGroup;
 			children = (
+				083E7D102F6100D6009EF10C /* CapyColors.swift */,
+				083E7D0E2F60FF82009EF10C /* App3DButtonStyle.swift */,
 				085781632EEFDAF70003618D /* AppButtonStyles.swift */,
 				088ECA5A2EF7DD5400323A08 /* AppCircleButtons.swift */,
 				088ECA582EF6EB9900323A08 /* AppTextField.swift */,
@@ -283,6 +296,7 @@
 		0868CD7B2F08E92200222EAD /* Local */ = {
 			isa = PBXGroup;
 			children = (
+				081D1AFF2F5A4D13001F67BE /* survey_data.json */,
 				0868CD3E2F041E5100222EAD /* courses_data.json */,
 			);
 			path = Local;
@@ -320,9 +334,9 @@
 			isa = PBXGroup;
 			children = (
 				088F26112EE510E300E89167 /* SplashScreenView.swift */,
+				088F260B2EE50D3900E89167 /* SurveyOptionRow.swift */,
 				08E4C4DE2F02160400D18145 /* IntroView.swift */,
 				088F260A2EE50D3900E89167 /* SurveyView.swift */,
-				088F260B2EE50D3900E89167 /* SurveyOptionRow.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -730,6 +744,7 @@
 				08D6490D2EFE9A91004F9C65 /* Tab */,
 				0804F2F72EE79FD900A982D3 /* Main */,
 				088F26072EE50D2500E89167 /* Onboarding */,
+				081D1AFD2F5A4D08001F67BE /* OnboardingModels.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -786,6 +801,7 @@
 		08E36CCB2F01C82200B86794 /* Asset */ = {
 			isa = PBXGroup;
 			children = (
+				08E4C7EF2F4ED8B9000EFEC2 /* GeneratedColors.xcassets */,
 				088F25E42EE50A8000E89167 /* Assets.xcassets */,
 			);
 			path = Asset;
@@ -889,6 +905,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				081D1B012F5A4F06001F67BE /* survey_data.json in Resources */,
 				08E4C7E82F4D3A09000EFEC2 /* 7abe057dc8446ad325229edd6d8fd250.mp3 in Resources */,
 				08E4C7E92F4D3A09000EFEC2 /* Incorrect.mp3 in Resources */,
 				08E4C7EA2F4D3A09000EFEC2 /* Correct.mp3 in Resources */,
@@ -898,6 +915,7 @@
 				0857816B2EEFDFC50003618D /* COPYRIGHT.txt in Resources */,
 				0857816C2EEFDFC50003618D /* chalkboardse.otf in Resources */,
 				08E36CCA2F01C81B00B86794 /* BackGroundMusic.mp3 in Resources */,
+				08E4C7F02F4ED8B9000EFEC2 /* GeneratedColors.xcassets in Resources */,
 				0857816D2EEFDFC50003618D /* ChalkboardSE-Light-01_0.ttf in Resources */,
 				0857816E2EEFDFC50003618D /* ChalkboardSE-Regular-02_0.ttf in Resources */,
 				0857816F2EEFDFC50003618D /* ChalkboardSE-Bold-03_0.ttf in Resources */,
@@ -924,6 +942,7 @@
 				083369DB2EE57F1D003B2FEF /* String+Validation.swift in Sources */,
 				08D6491C2EFEAB55004F9C65 /* MultipleChoiceView.swift in Sources */,
 				0868CD442F04421300222EAD /* Word+Extension.swift in Sources */,
+				081D1B002F5A4D1B001F67BE /* survey_data.json in Sources */,
 				088881A22EF2B5AC00F8E198 /* LearningManager.swift in Sources */,
 				0804F2F62EE79E4B00A982D3 /* MainTabView.swift in Sources */,
 				085B5FF62EEC32B200B6BE5F /* DictionaryEntry.swift in Sources */,
@@ -950,11 +969,13 @@
 				08BE81A52EE7B7E5004181EE /* FlashcardStepView.swift in Sources */,
 				08625DD12EF594F900CD5619 /* SpellingGameView.swift in Sources */,
 				0868CD702F0822E400222EAD /* RegistrationViewModel.swift in Sources */,
+				083E7D0F2F60FF82009EF10C /* App3DButtonStyle.swift in Sources */,
 				08D649222EFEAB96004F9C65 /* ReviewPromptView.swift in Sources */,
 				08BE81A62EE7B7E5004181EE /* LessonContainerView.swift in Sources */,
 				08CEB6642F31601D002138D9 /* LessonListView.swift in Sources */,
 				088881A42EF2B9F000F8E198 /* ReviewView.swift in Sources */,
 				08E4C4CD2F02012F00D18145 /* SupabaseAuthService.swift in Sources */,
+				081D1AFE2F5A4D08001F67BE /* OnboardingModels.swift in Sources */,
 				08BE81A72EE7B7E5004181EE /* LessonViewModel.swift in Sources */,
 				08BE81A82EE7B7E5004181EE /* FeedbackSheetView.swift in Sources */,
 				08BE81C82EE7F713004181EE /* FlipCardContainer.swift in Sources */,
@@ -965,6 +986,7 @@
 				08E4C4EA2F022D7B00D18145 /* UserSyncManager.swift in Sources */,
 				08D649242EFEAC33004F9C65 /* ReviewContainerView.swift in Sources */,
 				083369E22EE58583003B2FEF /* LoginView.swift in Sources */,
+				083E7D112F6100D6009EF10C /* CapyColors.swift in Sources */,
 				08E4C4CA2F01EE2F00D18145 /* Constants.swift in Sources */,
 				085781642EEFDAF70003618D /* AppButtonStyles.swift in Sources */,
 				0868CD4F2F0475BE00222EAD /* ChartBarItemView.swift in Sources */,

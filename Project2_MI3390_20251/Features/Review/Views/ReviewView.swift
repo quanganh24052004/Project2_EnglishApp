@@ -132,7 +132,7 @@ struct ReviewView: View {
                                 }
                                 .frame(maxWidth: .infinity)
                             }
-                            .buttonStyle(ThreeDButtonStyle(color: .pGreen))
+                            .capyButton(.primary(color: CapyColors.green, shadow: CapyColors.greenShadow))
                             .padding(.horizontal, 48)
                         } else {
                             if let nextDate = nextReviewDate {
@@ -173,7 +173,7 @@ struct ReviewView: View {
                             }
                         }
                     }
-                    .animation(.easeInOut, value: dueRecords.isEmpty)
+                    .animation(.smooth, value: dueRecords.isEmpty)
                 }
                 .padding(8)
             }

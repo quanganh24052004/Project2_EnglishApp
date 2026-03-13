@@ -50,8 +50,8 @@ struct LessonContainerView: View {
                             .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
                     }
                 }
-                .animation(.easeInOut(duration: 0.35), value: viewModel.isLessonFinished)
-                .animation(.easeInOut(duration: 0.35), value: viewModel.currentStep)
+                .animation(.smooth(duration: 0.35), value: viewModel.isLessonFinished)
+                .animation(.smooth(duration: 0.35), value: viewModel.currentStep)
             }
         }
         .onAppear {

@@ -137,7 +137,7 @@ extension ReviewContainerView {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .animation(.default, value: viewModel.currentIndex)
+        .animation(.smooth, value: viewModel.currentIndex)
     }
     
     /// View hiển thị khi không có dữ liệu
@@ -195,9 +195,7 @@ extension ReviewContainerView {
                     // Font Rounded cho nút bấm
                     .font(.system(size: 18, weight: .bold, design: .rounded))
             }
-            .buttonStyle(ThreeDButtonStyle(
-                color: canSubmit ? .pGreen : .gray
-            ))
+            .capyButton(.primary(color: CapyColors.green, shadow: CapyColors.greenShadow))
             .disabled(!canSubmit)
             .padding(.horizontal, 100)
             .padding(.bottom, 50)

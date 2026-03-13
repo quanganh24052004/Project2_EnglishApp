@@ -29,7 +29,7 @@ struct ReviewOptionButton: View {
                 }
             }
         }
-        .buttonStyle(SelectionThreeDButtonStyle(isSelected: isSelected))
+        .capyButton(.card(isChecked: isSelected))
         .onAppear {
             if isAudioMode && isSelected {
                 AudioManager.shared.playTTS(text: text)

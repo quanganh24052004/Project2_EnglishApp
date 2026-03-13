@@ -59,7 +59,7 @@ struct InputStepView: View {
                 viewModel.checkListenWrite(userAnswer: textInput)
                 textInput = ""
             }
-            .buttonStyle(PrimaryPhysicalButtonStyle())
+            .capyButton(.primary(color: CapyColors.green, shadow: CapyColors.greenShadow))
             .disabled(!isValidInput)
             .padding(.horizontal, 100)
             .padding(.bottom, 20)

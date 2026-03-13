@@ -58,7 +58,7 @@ private extension SpellingView {
                 .transition(.scale.combined(with: .opacity))
             }
         }
-        .animation(.spring(response: 0.4, dampingFraction: 0.6), value: currentInput)
+        .animation(.bouncy, value: currentInput)
     }
     
     var keyboardSection: some View {
@@ -79,7 +79,7 @@ private extension SpellingView {
                     .disabled(currentInput.count >= question.correctAnswer.count)
                 }
             }
-            .animation(.easeInOut(duration: 0.2), value: availableChars)
+            .animation(.smooth(duration: 0.2), value: availableChars)
         }
         .padding(.bottom, 20)
     }
@@ -172,7 +172,7 @@ struct TileButtonStyle: ButtonStyle {
             .shadow(color: .gray.opacity(0.3), radius: 0, x: 0, y: isPressed ? 0 : 4)
             .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color.gray.opacity(0.2), lineWidth: 1))
             .offset(y: isPressed ? 4 : 0)
-            .animation(.linear(duration: 0.1), value: isPressed)
+            .animation(.smooth(duration: 0.1), value: isPressed)
     }
 }
 

@@ -52,11 +52,11 @@ struct FlashcardStepView: View {
                 Button("Continue") {
                     onContinue()
                 }
-                .buttonStyle(PrimaryPhysicalButtonStyle())
+                .capyButton(.primary(color: CapyColors.green, shadow: CapyColors.greenShadow))
                 .disabled(!hasInteracted) // Disable nếu chưa lật thẻ
                 .padding(.horizontal, 100)
                 .padding(.bottom, 40)
-                .animation(.easeInOut, value: hasInteracted)
+                .animation(.smooth, value: hasInteracted)
             }
         }
         .onAppear {
@@ -76,7 +76,7 @@ struct FlashcardStepView: View {
             .autoconnect()
             .sink { _ in
                 if !hasInteracted {
-                    withAnimation(.spring()) {
+                    withAnimation(.bouncy) {
                         self.isFlipped = true
                         enableContinue()
                     }

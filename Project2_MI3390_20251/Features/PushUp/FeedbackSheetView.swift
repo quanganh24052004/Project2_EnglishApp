@@ -163,7 +163,7 @@ struct FeedbackSheetView: View {
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 14)
         }
-        .buttonStyle(ThreeDButtonStyle(color: .white))
+        .capyButton(.secondary)
         .padding(.horizontal, 100)
     }
 }   

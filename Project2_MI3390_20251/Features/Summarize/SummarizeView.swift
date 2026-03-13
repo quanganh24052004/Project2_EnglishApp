@@ -89,7 +89,7 @@ struct SummarizeView: View {
         let isSelected = selectedIDs.contains(item.wordID)
         
         return Button(action: {
-            withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+            withAnimation(.bouncy(duration: 0.3)) {
                 toggleSelection(for: item.wordID)
             }
         }) {

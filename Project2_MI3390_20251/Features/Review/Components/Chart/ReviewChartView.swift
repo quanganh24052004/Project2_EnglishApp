@@ -27,7 +27,7 @@ struct ReviewChartView: View {
                 
                 Rectangle()
                     .frame(height: 3)
-                    .foregroundStyle(Color.neutral03)
+                    .foregroundStyle(Color(UIColor.separator))
                     .padding(.bottom, 20)
                 
                 HStack(alignment: .bottom, spacing: 6) {
@@ -49,9 +49,9 @@ struct ReviewChartView: View {
             }
         }
         .padding()
-        .background(.primaryBG)
+        .background(CapyColors.secondaryBackground)
         .cornerRadius(20)
-        .shadow(color: Color.black.opacity(0.05), radius: 15, x: 0, y: 5)
+        .shadow(color: Color.primary.opacity(0.05), radius: 15, x: 0, y: 5)
         .padding()
         .onAppear {
             isVisible = true

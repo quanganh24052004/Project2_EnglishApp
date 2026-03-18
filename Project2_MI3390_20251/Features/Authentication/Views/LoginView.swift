@@ -14,10 +14,10 @@ struct LoginView: View {
     // MARK: - Properties
     
     /// ViewModel quản lý logic riêng của màn hình Login.
-    @StateObject private var viewModel = LoginViewModel()
+    @State private var viewModel = LoginViewModel()
     
     /// ViewModel xác thực toàn cục (Shared).
-    @EnvironmentObject var authVM: AuthViewModel
+    @Environment(AuthViewModel.self) var authVM
     
     /// Action để đóng màn hình hiện tại.
     @Environment(\.dismiss) private var dismiss
@@ -27,7 +27,7 @@ struct LoginView: View {
     var body: some View {
         ZStack {
             // Lớp nền (Tràn viền)
-            Color.snow.ignoresSafeArea()
+            CapyColors.background.ignoresSafeArea()
             
             // Lớp nội dung (Sử dụng GeometryReader để xử lý Keyboard Avoidance)
             GeometryReader { geometry in
@@ -35,7 +35,7 @@ struct LoginView: View {
                     VStack(spacing: 0) {
                         Text("Đăng nhập")
                             .font(.system(size: 24, weight: .bold))
-                            .foregroundColor(Color.textPrimary)
+                            .foregroundColor(.primary)
                         // Spacer linh hoạt để đẩy nội dung xuống giữa
                         Spacer()
                         
@@ -88,7 +88,7 @@ extension LoginView {
                 .font(.system(size: 22, design: .rounded))
                 .fontWeight(.bold)
                 .frame(height: 56)
-                .foregroundColor(Color.textPrimary)
+                .foregroundColor(.primary)
         }
     }
     
@@ -135,9 +135,9 @@ extension LoginView {
     /// Đường kẻ phân cách "Or".
     private var dividerView: some View {
         HStack(spacing: 15) {
-            Rectangle().frame(height: 0.8).foregroundColor(.neutral04)
-            Text("Or").font(.system(size: 15)).foregroundColor(.neutral04)
-            Rectangle().frame(height: 0.8).foregroundColor(.neutral04)
+            Rectangle().frame(height: 0.8).foregroundColor(Color(UIColor.separator))
+            Text("Or").font(.system(size: 15)).foregroundColor(.secondary)
+            Rectangle().frame(height: 0.8).foregroundColor(Color(UIColor.separator))
         }
         .padding(.vertical, 24)
     }
@@ -148,7 +148,7 @@ extension LoginView {
             Button { print("Google Login") } label: {
                 HStack { Image("img_google").resizable().frame(width: 24, height: 24) }
             }
-            .capyButton(.primary(color: .black, shadow: Color(white: 0.2), textColor: .white))
+            .capyButton(.primary(color: CapyColors.secondaryBackground, shadow: CapyColors.swanShadow, textColor: .primary))
             
             Button { } label: {
                 HStack {
@@ -156,10 +156,10 @@ extension LoginView {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 24, height: 24)
-                        .foregroundColor(.white)
+                        .foregroundColor(.primary)
                 }
             }
-            .capyButton(.primary(color: .black, shadow: Color(white: 0.2), textColor: .white))
+            .capyButton(.primary(color: CapyColors.secondaryBackground, shadow: CapyColors.swanShadow, textColor: .primary))
         }
     }
     
@@ -190,7 +190,7 @@ extension LoginView {
                     .font(.system(size: 15, design: .rounded))
                     .fontWeight(.semibold)
                     .frame(height: 20)
-                    .foregroundColor(.textPrimary)
+                    .foregroundColor(.primary)
                 Spacer()
             }
             AppTextField(text: text, placeholder: placeholder, isSecure: isSecure)

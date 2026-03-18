@@ -9,7 +9,7 @@ import SwiftUI
 
 struct IntroView: View {
     @Binding var isOnboardingDone: Bool
-    @EnvironmentObject var authVM: AuthViewModel
+    @Environment(AuthViewModel.self) var authVM
     
     var body: some View {
         NavigationStack {
@@ -31,18 +31,12 @@ struct IntroView: View {
                 
                 Spacer()
                 
-                // LUỒNG 1: Khách -> Survey -> MainTab
                 NavigationLink(destination: SurveyView(isOnboardingDone: $isOnboardingDone)) {
                     Text("STARTING NOW")
                 }
                 .capyButton(.primary(color: CapyColors.green, shadow: CapyColors.greenShadow))
                 .padding(.horizontal, 16)
                 
-                NavigationLink(destination: LoginView()) {
-                    Text("I HAVE ALRAEDY AN ACCOUNT")
-                }
-                .capyButton(.secondary)
-                .padding(.horizontal, 16)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.primaryBG.edgesIgnoringSafeArea(.all))

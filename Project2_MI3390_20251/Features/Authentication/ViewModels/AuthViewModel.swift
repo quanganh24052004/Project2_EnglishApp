@@ -6,27 +6,28 @@
 //
 
 import SwiftUI
-import Combine
 import Supabase
+import Observation
 
 /// ViewModel quản lý trạng thái xác thực toàn cục của ứng dụng.
 /// Chịu trách nhiệm kiểm tra phiên đăng nhập, lưu trữ thông tin User hiện tại và xử lý Đăng xuất.
+@Observable
 @MainActor
-class AuthViewModel: ObservableObject {
+class AuthViewModel {
     
-    // MARK: - Published Properties
+    // MARK: - Properties
     
     /// Trạng thái xác thực: `true` nếu đã đăng nhập, ngược lại là `false`.
-    @Published var isAuthenticated: Bool = false
+    var isAuthenticated: Bool = false
     
     /// Trạng thái tải dữ liệu (Loading).
-    @Published var isLoading: Bool = false
+    var isLoading: Bool = false
     
     /// Thông báo lỗi nếu có (dùng để hiển thị Alert).
-    @Published var errorMessage: String?
+    var errorMessage: String?
     
     /// Thông tin chi tiết của người dùng hiện tại (lấy từ Supabase Auth).
-    @Published var currentUser: Auth.User?
+    var currentUser: Auth.User?
     
     // MARK: - Initialization
     

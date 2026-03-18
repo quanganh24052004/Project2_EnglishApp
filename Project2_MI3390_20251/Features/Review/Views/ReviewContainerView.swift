@@ -12,20 +12,21 @@ struct ReviewContainerView: View {
     // MARK: - Environment & State
     @Environment(\.dismiss) var dismiss
     @Environment(\.modelContext) var modelContext
+    @Environment(AuthViewModel.self) var authVM
     
-    @StateObject var viewModel: ReviewViewModel
+    @State var viewModel: ReviewViewModel
     
     // MARK: - Init
     init(modelContext: ModelContext) {
         let manager = LearningManager(modelContext: modelContext)
-        _viewModel = StateObject(wrappedValue: ReviewViewModel(modelContext: modelContext, learningManager: manager))
+        _viewModel = State(wrappedValue: ReviewViewModel(modelContext: modelContext, learningManager: manager))
     }
     
     // MARK: - Main Body
     var body: some View {
         ZStack {
             // 1. Màu nền Neutral01
-            Color.neutral01
+            CapyColors.background
                 .ignoresSafeArea()
             
             // 2. Nội dung chính
@@ -33,7 +34,7 @@ struct ReviewContainerView: View {
                 if viewModel.isSessionCompleted {
                     ReviewSummaryView(
                         onContinueReview: {
-                            viewModel.loadReviewSession()
+                            viewModel.loadReviewSession(currentUser: authVM.currentUser)
                         }
                     )
                 } else {
@@ -43,7 +44,7 @@ struct ReviewContainerView: View {
         }
         .onAppear {
             if viewModel.questions.isEmpty && !viewModel.isSessionCompleted {
-                viewModel.loadReviewSession()
+                viewModel.loadReviewSession(currentUser: authVM.currentUser)
             }
             AudioManager.shared.stopBackgroundMusic()
         }
@@ -96,7 +97,7 @@ extension ReviewContainerView {
             Button(action: { dismiss() }) {
                 Image(systemName: "xmark")
                     .font(.system(size: 28, weight: .bold))
-                    .foregroundColor(.gray)
+                    .foregroundColor(.secondary)
             }
             
             ProgressBar(
@@ -111,7 +112,7 @@ extension ReviewContainerView {
             Text("\(viewModel.currentIndex + 1)/\(max(viewModel.questions.count, 1))")
                 .font(.system(.caption, design: .rounded))
                 .fontWeight(.medium)
-                .foregroundColor(.gray)
+                .foregroundColor(.secondary)
         }
         .padding()
     }
@@ -130,7 +131,7 @@ extension ReviewContainerView {
                     Text(viewModel.questions[viewModel.currentIndex].type.title)
                         .font(.system(size: 20, design: .rounded))
                         .fontWeight(.semibold)
-                        .foregroundColor(.neutral06)
+                        .foregroundColor(.primary)
                     
                     currentQuestionView
                 }

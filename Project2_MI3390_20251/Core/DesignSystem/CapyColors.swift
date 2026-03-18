@@ -9,21 +9,27 @@ import SwiftUI
 
 // MARK: - 1. COLOR PALETTE
 public struct CapyColors {
-    public static let swan = Color(red: 229/255, green: 229/255, blue: 229/255)
-    public static let swanShadow = Color(red: 175/255, green: 175/255, blue: 175/255)
-    public static let swanText = Color(UIColor.systemGray)
-    public static let swanBorder = Color(UIColor.systemGray4)
+    // Grayscale / Adaptive Colors
+    public static let swan = Color(UIColor.systemGray6) // Light gray in light, dark gray in dark
+    public static let swanShadow = Color(UIColor.systemGray4)
+    public static let swanText = Color(UIColor.secondaryLabel)
+    public static let swanBorder = Color(UIColor.separator)
     
-    public static let blueJay = Color(red: 28/255, green: 176/255, blue: 246/255)
-    public static let blueJayShadow = Color(red: 24/255, green: 153/255, blue: 214/255)
-    public static let iguana = Color(red: 221/255, green: 244/255, blue: 255/255)
-    public static let whale = Color(red: 24/255, green: 153/255, blue: 214/255)
+    // Brand Colors (Dynamic Tints)
+    public static let blueJay = Color.blue // Use system blue for automatic adaptation
+    public static let blueJayShadow = Color.blue.opacity(0.8)
+    public static let iguana = Color.blue.opacity(0.15)
+    public static let whale = Color.blue
     
-    public static let green = Color(red: 88/255, green: 204/255, blue: 2/255)
-    public static let greenShadow = Color(red: 88/255, green: 167/255, blue: 0/255)
+    public static let green = Color.green
+    public static let greenShadow = Color.green.opacity(0.8)
     
-    public static let red = Color(red: 255/255, green: 75/255, blue: 75/255)
-    public static let redShadow = Color(red: 234/255, green: 43/255, blue: 43/255)
+    public static let red = Color.red
+    public static let redShadow = Color.red.opacity(0.8)
+    
+    // Backgrounds
+    public static let background = Color(UIColor.systemBackground)
+    public static let secondaryBackground = Color(UIColor.secondarySystemBackground)
 }
 
 // MARK: - 2. UNIFIED BUTTON STYLE
@@ -97,9 +103,9 @@ private struct CapyButtonBody: View {
                 .animation(.easeInOut(duration: 0.2), value: isEnabled)
                 
         case .secondary:
-            let mainColor = isEnabled ? Color.white : CapyColors.swan
-            let shadowColor = isEnabled ? CapyColors.swanBorder : CapyColors.swanShadow
-            let textColor = isEnabled ? CapyColors.blueJay : CapyColors.swanShadow
+            let mainColor = isEnabled ? CapyColors.background : CapyColors.swan
+            let shadowColor = isEnabled ? CapyColors.swanShadow : CapyColors.swanShadow
+            let textColor = isEnabled ? CapyColors.blueJay : CapyColors.swanText
             let lip: CGFloat = 4.0
             
             let faceOffset: CGFloat = (!isEnabled || isPressed) ? lip : 0
@@ -132,7 +138,7 @@ private struct CapyButtonBody: View {
             
         case .card(let isChecked):
             let borderColor = isChecked ? CapyColors.blueJay : CapyColors.swanBorder
-            let bgColor = isChecked ? CapyColors.iguana : Color.white
+            let bgColor = isChecked ? CapyColors.iguana : CapyColors.background
             let textColor = !isEnabled ? CapyColors.swanText : (isChecked ? CapyColors.whale : Color.primary)
             let lip: CGFloat = 2.0
             

@@ -20,7 +20,7 @@ struct SummarizeView: View {
     // MARK: - Body
     var body: some View {
         ZStack {
-            Color.neutral01
+            CapyColors.background
                 .ignoresSafeArea()
             
             VStack(spacing: 0) {
@@ -96,8 +96,8 @@ struct SummarizeView: View {
             HStack(spacing: 16) {
                 ZStack {
                     Circle()
-                        .stroke(isSelected ? Color.pGreen : Color.neutral04, lineWidth: 2)
-                        .background(Circle().fill(isSelected ? Color.pGreen : Color.white))
+                        .stroke(isSelected ? Color.pGreen : Color(UIColor.systemGray4), lineWidth: 2)
+                        .background(Circle().fill(isSelected ? Color.pGreen : CapyColors.background))
                         .frame(width: 24, height: 24)
                     
                     if isSelected {
@@ -122,13 +122,13 @@ struct SummarizeView: View {
                 
             }
             .padding(16)
-            .background(Color.white)
+            .background(CapyColors.secondaryBackground)
             .cornerRadius(16)
             .overlay(
                 RoundedRectangle(cornerRadius: 16)
                     .stroke(isSelected ? Color.pGreen : Color.clear, lineWidth: 1.5)
             )
-            .shadow(color: Color.black.opacity(0.03), radius: 5, x: 0, y: 2)
+            .shadow(color: Color.primary.opacity(0.05), radius: 5, x: 0, y: 2)
         }
         .buttonStyle(.plain)
     }

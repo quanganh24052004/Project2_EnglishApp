@@ -42,8 +42,8 @@ struct ThreeDCircleButtonStyle: ButtonStyle {
     ///   - size: Kích thước nút (Mặc định: 48).
     ///   - depth: Độ sâu hiệu ứng (Mặc định: 4).
     init(
-        iconColor: Color = .white,
-        backgroundColor: Color = .blue,
+        iconColor: Color = .primary,
+        backgroundColor: Color = .accentColor,
         size: CGFloat = 48,
         depth: CGFloat = 4
     ) {

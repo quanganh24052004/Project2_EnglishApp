@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import Combine
 import SwiftData
 import Supabase // Import để định nghĩa kiểu dữ liệu Auth.User trong helper
 
@@ -27,7 +26,7 @@ struct RootView: View {
     @AppStorage("isOnboardingDone") var isOnboardingDone: Bool = false
     
     /// ViewModel quản lý trạng thái xác thực (Auth).
-    @StateObject private var authViewModel = AuthViewModel()
+    @State private var authViewModel = AuthViewModel()
     
     // MARK: - Body
     
@@ -68,11 +67,11 @@ extension RootView {
         if authViewModel.isAuthenticated || isOnboardingDone {
             // Người dùng đã đăng nhập hoặc đã qua Onboarding -> Vào App chính
             MainTabView()
-                .environmentObject(authViewModel)
+                .environment(authViewModel)
         } else {
             // Người dùng mới -> Vào màn hình giới thiệu
             IntroView(isOnboardingDone: $isOnboardingDone)
-                .environmentObject(authViewModel)
+                .environment(authViewModel)
         }
     }
     

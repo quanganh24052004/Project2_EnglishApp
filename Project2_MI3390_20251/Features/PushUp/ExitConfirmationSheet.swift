@@ -25,11 +25,11 @@ struct ExitConfirmationSheet: View {
                 .lineLimit(3)
                 .font(.system(size: 18))
                 .fontWeight(.bold)
-                .foregroundColor(Color.black)
+                .foregroundColor(.primary)
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.horizontal)
             
-            HStack(spacing: 24) {
+            VStack(spacing: 24) {
                 Button(action: onContinue) {
                     Text("Stay and continue studying")
                 }

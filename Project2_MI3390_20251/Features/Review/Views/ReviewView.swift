@@ -14,53 +14,21 @@ import Supabase
 struct ReviewView: View {
     // MARK: - Properties
     @Environment(\.modelContext) private var modelContext
-    @EnvironmentObject var authVM: AuthViewModel
+    @Environment(AuthViewModel.self) var authVM
     @EnvironmentObject var languageManager: LanguageManager
 
-    @State private var studyRecords: [StudyRecord] = []
+    @State private var viewModel: ReviewViewModel
     
-    // Trạng thái
-    @State private var currentTime = Date()
-    private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    
+    // Trạng thái điều hướng
     @State private var navigateToHandbook = false
     @State private var showPractice = false
     
-    // MARK: - Computed Properties
-    // (Giữ nguyên các logic tính toán của bạn)
-    var dueRecords: [StudyRecord] {
-        return studyRecords.filter { $0.nextReview <= currentTime }
-    }
+    private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
-    var nextReviewDate: Date? {
-        return studyRecords
-            .filter { $0.nextReview > currentTime }
-            .map { $0.nextReview }
-            .min()
-    }
-    
-    var upcomingCount: Int {
-        guard let nextDate = nextReviewDate else { return 0 }
-        let windowEnd = nextDate.addingTimeInterval(60 * 60)
-        return studyRecords.filter { record in
-            return record.nextReview >= nextDate && record.nextReview <= windowEnd
-        }.count
-    }
-    
-    var levelStats: [LevelStat] {
-        var counts = [Int](repeating: 0, count: 6)
-        for record in studyRecords {
-            let level = min(max(record.memoryLevel, 0), 5)
-            counts[level] += 1
-        }
-        return [
-            LevelStat(level: "0", count: counts[0], color: .gray),
-            LevelStat(level: "1", count: counts[1], color: .red.opacity(0.8)),
-            LevelStat(level: "2", count: counts[2], color: .yellow),
-            LevelStat(level: "3", count: counts[3], color: .cyan),
-            LevelStat(level: "4", count: counts[4], color: .blue),
-            LevelStat(level: "5", count: counts[5], color: .purple)
-        ]
+    // MARK: - Init
+    init(modelContext: ModelContext) {
+        let manager = LearningManager(modelContext: modelContext)
+        _viewModel = State(wrappedValue: ReviewViewModel(modelContext: modelContext, learningManager: manager))
     }
     
     // MARK: - Body
@@ -74,7 +42,7 @@ struct ReviewView: View {
                             Text("The Notebook has")
                                 .font(.system(size: 20, design: .rounded))
                                 .fontWeight(.regular)
-                            Text("\(studyRecords.count)")
+                            Text("\(viewModel.studyRecords.count)")
                                 .font(.system(size: 20, design: .rounded))
                                 .fontWeight(.semibold)
                             Text("words")
@@ -89,7 +57,7 @@ struct ReviewView: View {
                         
                         HStack(spacing: 16) {
                             HandbookButton {}
-                                .allowsHitTesting(false) // ✅ FIX: Để tap xuyên qua nút này
+                                .allowsHitTesting(false)
                             Spacer()
                         }
                         .padding(.leading, 16)
@@ -100,23 +68,23 @@ struct ReviewView: View {
                     }
                     
                     VStack(alignment: .leading, spacing: 10) {
-                        if studyRecords.isEmpty {
+                        if viewModel.studyRecords.isEmpty {
                             ContentUnavailableView("To activate the Review feature, learn new words!", systemImage: "chart.bar")
                                 .frame(height: 200)
                         } else {
                             ReviewChartView(
-                                dataPoints: levelStats.map { $0.count }
+                                dataPoints: viewModel.levelStats.map { $0.count }
                             )
                         }
                     }
                     
                     VStack {
-                        if !dueRecords.isEmpty {
+                        if !viewModel.dueRecords.isEmpty {
                             HStack(spacing: 4) {
                                 Text("Prepare to review: ")
                                     .font(.system(size: 18, design: .rounded))
                                     .fontWeight(.semibold)
-                                Text("\(dueRecords.count)")
+                                Text("\(viewModel.dueRecords.count)")
                                     .font(.system(size: 18, design: .rounded))
                                     .fontWeight(.semibold)
                                 Text("words")
@@ -135,7 +103,7 @@ struct ReviewView: View {
                             .capyButton(.primary(color: CapyColors.green, shadow: CapyColors.greenShadow))
                             .padding(.horizontal, 48)
                         } else {
-                            if let nextDate = nextReviewDate {
+                            if let nextDate = viewModel.nextReviewDate {
                                 VStack(spacing: 12) {
                                     Text("You have completed all the review exercises!🎉")
                                         .font(.subheadline)
@@ -153,7 +121,7 @@ struct ReviewView: View {
                                     HStack(spacing: 4) {
                                         Text("Coming soon")
                                             .foregroundColor(.gray)
-                                        Text("\(upcomingCount)")
+                                        Text("\(viewModel.upcomingCount)")
                                             .fontWeight(.bold)
                                             .foregroundColor(.blue)
                                         Text("words to review")
@@ -173,7 +141,7 @@ struct ReviewView: View {
                             }
                         }
                     }
-                    .animation(.smooth, value: dueRecords.isEmpty)
+                    .animation(.smooth, value: viewModel.dueRecords.isEmpty)
                 }
                 .padding(8)
             }
@@ -182,39 +150,26 @@ struct ReviewView: View {
             .navigationDestination(isPresented: $navigateToHandbook) {
                 HandBookView()
             }
-            .onReceive(timer) { input in currentTime = input }
+            .onReceive(timer) { _ in viewModel.updateCurrentTime() }
             .fullScreenCover(isPresented: $showPractice) {
                 ReviewContainerView(modelContext: modelContext)
                     .onDisappear {
-                        loadDashboardData()
+                        viewModel.loadDashboardData(currentUser: authVM.currentUser)
                     }
             }
         }
         .onAppear {
-            loadDashboardData()
+            viewModel.loadDashboardData(currentUser: authVM.currentUser)
         }
         .onChange(of: authVM.currentUser) { _, _ in
-            loadDashboardData()
+            viewModel.loadDashboardData(currentUser: authVM.currentUser)
         }
     }
     
-    // MARK: - Logic
-    
-    func loadDashboardData() {
-        let userID = authVM.currentUser?.id.uuidString ?? "guest_user_id"
-        let descriptor = FetchDescriptor<StudyRecord>(
-            predicate: #Predicate { $0.user?.id == userID }
-        )
-        do {
-            self.studyRecords = try modelContext.fetch(descriptor)
-        } catch {
-            print("❌ Dashboard Load Error: \(error)")
-            self.studyRecords = []
-        }
-    }
+    // MARK: - Helpers
     
     func timeString(to target: Date) -> String {
-        let diff = target.timeIntervalSince(currentTime)
+        let diff = target.timeIntervalSince(viewModel.currentTime)
         if diff <= 0 { return "Ready" }
         let hours = Int(diff) / 3600
         let minutes = (Int(diff) % 3600) / 60

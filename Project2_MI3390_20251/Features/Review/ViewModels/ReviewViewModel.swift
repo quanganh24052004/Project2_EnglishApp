@@ -10,31 +10,37 @@ import SwiftData
 import AVFoundation
 import Combine
 import Supabase
+import Observation
 
+@Observable
 @MainActor
-class ReviewViewModel: ObservableObject {
+class ReviewViewModel {
     // MARK: - Properties
     private var modelContext: ModelContext
     private var learningManager: LearningManager
     
-    // Dữ liệu hiển thị
-    @Published var questions: [ReviewQuestion] = []
-    @Published var currentIndex: Int = 0
-    @Published var progress: Double = 0.0
+    // Dữ liệu cho Dashboard Review
+    var studyRecords: [StudyRecord] = []
+    var currentTime: Date = Date()
+    
+    // Dữ liệu hiển thị phiên học
+    var questions: [ReviewQuestion] = []
+    var currentIndex: Int = 0
+    var progress: Double = 0.0
     
     // Trạng thái phiên học
-    @Published var isLoading: Bool = true
-    @Published var isSessionCompleted: Bool = false
+    var isLoading: Bool = true
+    var isSessionCompleted: Bool = false
     
     // Inputs của User (Binding với View)
-    @Published var selectedOptionID: UUID? = nil // Cho trắc nghiệm
-    @Published var textInput: String = ""        // Cho Typing
-    @Published var spellingInput: [String] = []  // Cho Spelling
+    var selectedOptionID: UUID? = nil // Cho trắc nghiệm
+    var textInput: String = ""        // Cho Typing
+    var spellingInput: [String] = []  // Cho Spelling
     
     // Kết quả check
-    @Published var showResult: Bool = false
-    @Published var isLastAnswerCorrect: Bool = false
-    @Published var currentFeedbackMessage: String = ""
+    var showResult: Bool = false
+    var isLastAnswerCorrect: Bool = false
+    var currentFeedbackMessage: String = ""
     
     // Cache StudyRecord để update sau khi trả lời
     private var currentStudyRecord: StudyRecord? {
@@ -48,75 +54,121 @@ class ReviewViewModel: ObservableObject {
     // Dictionary để map câu hỏi về Record gốc (để update DB)
     private var reviewMap: [UUID: StudyRecord] = [:]
     
+    // MARK: - Computed Properties for Dashboard
+    
+    var dueRecords: [StudyRecord] {
+        return studyRecords.filter { $0.nextReview <= currentTime }
+    }
+    
+    var nextReviewDate: Date? {
+        return studyRecords
+            .filter { $0.nextReview > currentTime }
+            .map { $0.nextReview }
+            .min()
+    }
+    
+    var upcomingCount: Int {
+        guard let nextDate = nextReviewDate else { return 0 }
+        let windowEnd = nextDate.addingTimeInterval(60 * 60)
+        return studyRecords.filter { record in
+            return record.nextReview >= nextDate && record.nextReview <= windowEnd
+        }.count
+    }
+    
+    var levelStats: [LevelStat] {
+        var counts = [Int](repeating: 0, count: 6)
+        for record in studyRecords {
+            let level = min(max(record.memoryLevel, 0), 5)
+            counts[level] += 1
+        }
+        return [
+            LevelStat(level: "0", count: counts[0], color: .gray),
+            LevelStat(level: "1", count: counts[1], color: .red.opacity(0.8)),
+            LevelStat(level: "2", count: counts[2], color: .yellow),
+            LevelStat(level: "3", count: counts[3], color: .cyan),
+            LevelStat(level: "4", count: counts[4], color: .blue),
+            LevelStat(level: "5", count: counts[5], color: .purple)
+        ]
+    }
+    
     // MARK: - Init
     init(modelContext: ModelContext, learningManager: LearningManager) {
         self.modelContext = modelContext
         self.learningManager = learningManager
     }
     
+    // MARK: - Dashboard Actions
+    
+    func updateCurrentTime() {
+        self.currentTime = Date()
+    }
+    
+    func loadDashboardData(currentUser: Auth.User?) {
+        let userID = currentUser?.id.uuidString ?? "guest_user_id"
+        let descriptor = FetchDescriptor<StudyRecord>(
+            predicate: #Predicate { $0.user?.id == userID }
+        )
+        do {
+            self.studyRecords = try modelContext.fetch(descriptor)
+        } catch {
+            print("❌ Dashboard Load Error: \(error)")
+            self.studyRecords = []
+        }
+    }
+    
     // MARK: - 1. Load Data & Generate Questions
-    func loadReviewSession() {
+    func loadReviewSession(currentUser: Auth.User?) {
         isLoading = true
+        let currentUserID = currentUser?.id.uuidString ?? "guest_user_id"
         
-        Task {
-            // 1. Lấy ID người dùng hiện tại (Async)
-            // Nếu chưa đăng nhập (nil) -> Lấy ID của Khách (đã quy định bên UserSyncManager)
-            let currentUser = await SupabaseAuthService.shared.currentUser
-            let currentUserID = currentUser?.id.uuidString ?? "guest_user_id" // "guest_user_id" phải khớp với bên UserSyncManager
+        do {
+            // A. Lấy các từ đến hạn VÀ thuộc về User này
+            let now = Date()
             
-            await MainActor.run {
-                do {
-                    // A. Lấy các từ đến hạn VÀ thuộc về User này
-                    let now = Date()
-                    
-                    // 👇 QUAN TRỌNG: Thêm điều kiện record.user?.id == currentUserID
-                    let descriptor = FetchDescriptor<StudyRecord>(
-                        predicate: #Predicate { record in
-                            record.nextReview <= now && record.user?.id == currentUserID
-                        },
-                        sortBy: [SortDescriptor(\.nextReview)]
-                    )
-                    
-                    let dueRecords = try modelContext.fetch(descriptor)
-                    
-                    if dueRecords.isEmpty {
-                        self.questions = []
-                        self.isLoading = false
-                        return
-                    }
-                    
-                    // B. Lấy pool từ vựng (Distractors) - Cái này lấy tất cả cũng được, không cần lọc user
-                    // Vì từ điển là dùng chung cho mọi người
-                    let allWordsDescriptor = FetchDescriptor<Word>()
-                    let allWords = try modelContext.fetch(allWordsDescriptor)
-                    
-                    var generatedQuestions: [ReviewQuestion] = []
-                    
-                    // C. Sinh câu hỏi (Giữ nguyên logic cũ)
-                    for record in dueRecords {
-                        guard let targetWord = record.word else { continue }
-                        
-                        let type = determineQuestionType(level: record.memoryLevel)
-                        
-                        let distractors = Array(allWords
-                            .filter { $0.english != targetWord.english }
-                            .shuffled()
-                            .prefix(3))
-                        
-                        if let question = ReviewQuestion.create(type: type, target: targetWord, distractors: distractors) {
-                            generatedQuestions.append(question)
-                            reviewMap[question.id] = record
-                        }
-                    }
-                    
-                    self.questions = generatedQuestions.shuffled()
-                    self.isLoading = false
-                    
-                } catch {
-                    print("❌ Error loading review session: \(error)")
-                    self.isLoading = false
+            let descriptor = FetchDescriptor<StudyRecord>(
+                predicate: #Predicate { record in
+                    record.nextReview <= now && record.user?.id == currentUserID
+                },
+                sortBy: [SortDescriptor(\.nextReview)]
+            )
+            
+            let dueRecords = try modelContext.fetch(descriptor)
+            
+            if dueRecords.isEmpty {
+                self.questions = []
+                self.isLoading = false
+                return
+            }
+            
+            // B. Lấy pool từ vựng (Distractors)
+            let allWordsDescriptor = FetchDescriptor<Word>()
+            let allWords = try modelContext.fetch(allWordsDescriptor)
+            
+            var generatedQuestions: [ReviewQuestion] = []
+            
+            // C. Sinh câu hỏi
+            for record in dueRecords {
+                guard let targetWord = record.word else { continue }
+                
+                let type = determineQuestionType(level: record.memoryLevel)
+                
+                let distractors = Array(allWords
+                    .filter { $0.english != targetWord.english }
+                    .shuffled()
+                    .prefix(3))
+                
+                if let question = ReviewQuestion.create(type: type, target: targetWord, distractors: distractors) {
+                    generatedQuestions.append(question)
+                    reviewMap[question.id] = record
                 }
             }
+            
+            self.questions = generatedQuestions.shuffled()
+            self.isLoading = false
+            
+        } catch {
+            print("❌ Error loading review session: \(error)")
+            self.isLoading = false
         }
     }
     

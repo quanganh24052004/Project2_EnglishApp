@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MainTabView: View {
+    @Environment(\.modelContext) private var modelContext
     @State private var selectedTab: AppTab = .review
     
     var body: some View {
@@ -16,7 +17,7 @@ struct MainTabView: View {
                 // MARK: - Giao diện cho iOS 18+
                 TabView(selection: $selectedTab) {
                     Tab(AppTab.review.title, systemImage: AppTab.review.icon, value: .review) {
-                        ReviewView()
+                        ReviewView(modelContext: modelContext)
                     }
                     
                     Tab(value: .learn) {
@@ -31,16 +32,13 @@ struct MainTabView: View {
                         }
                     }
                     
-                    Tab(AppTab.profile.title, systemImage: AppTab.profile.icon, value: .profile) {
-                        ProfileView()
-                    }
                     
                     Tab(AppTab.settings.title, systemImage: AppTab.settings.icon, value: .settings) {
                         SettingsView()
                     }
                     
                     Tab(AppTab.search.title, systemImage: AppTab.search.icon, value: .search, role: .search) {
-                        SearchView()
+                        SearchView(modelContext: modelContext)
                     }
                 }
                 .tabViewStyle(.sidebarAdaptable)
@@ -49,7 +47,7 @@ struct MainTabView: View {
             } else {
                 // MARK: - Giao diện cho iOS 17 trở xuống
                 TabView(selection: $selectedTab) {
-                    ReviewView()
+                    ReviewView(modelContext: modelContext)
                         .tabItem {
                             Label(AppTab.review.title, systemImage: AppTab.review.icon)
                         }
@@ -65,11 +63,6 @@ struct MainTabView: View {
                         }
                         .tag(AppTab.learn)
                     
-                    ProfileView()
-                        .tabItem {
-                            Label(AppTab.profile.title, systemImage: AppTab.profile.icon)
-                        }
-                        .tag(AppTab.profile)
                     
                     SettingsView()
                         .tabItem {
@@ -77,7 +70,7 @@ struct MainTabView: View {
                         }
                         .tag(AppTab.settings)
                     
-                    SearchView()
+                    SearchView(modelContext: modelContext)
                         .tabItem {
                             Label(AppTab.search.title, systemImage: AppTab.search.icon)
                         }

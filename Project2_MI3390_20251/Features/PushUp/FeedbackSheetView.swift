@@ -41,7 +41,12 @@ struct FeedbackSheetView: View {
     // MARK: - Body
     var body: some View {
         ZStack {
-            (isCorrect ? Color.green : Color.red).opacity(0.9)
+            (isCorrect ? Color.green : Color.red).opacity(0.15)
+                .ignoresSafeArea()
+            
+            // Background blur or solid depending on needed punch
+            CapyColors.background
+                .opacity(0.8)
                 .ignoresSafeArea()
             
             VStack(spacing: 24) {
@@ -69,11 +74,11 @@ struct FeedbackSheetView: View {
         HStack(spacing: 12) {
             Image(systemName: isCorrect ? "checkmark.circle.fill" : "xmark.circle.fill")
                 .font(.system(size: 32))
-                .foregroundColor(.white)
+                .foregroundColor(isCorrect ? .green : .red)
             
             Text(isCorrect ? "Exactly! 🎉" : "Not accurate")
                 .font(.system(size: 24, weight: .bold, design: .rounded))
-                .foregroundColor(.white)
+                .foregroundColor(isCorrect ? .green : .red)
             
             Spacer()
         }
@@ -96,21 +101,21 @@ struct FeedbackSheetView: View {
                 HStack(alignment: .firstTextBaseline, spacing: 8) {
                     Text(item.word)
                         .font(.system(size: 22, weight: .bold, design: .rounded))
-                        .foregroundColor(.white)
+                        .foregroundColor(.primary)
                     
                     Text("(\(item.partOfSpeech))")
                         .font(.system(size: 14, weight: .medium, design: .rounded))
-                        .foregroundColor(.white)
+                        .foregroundColor(.secondary)
                         .italic()
                 }
                 
                 Text(item.phonetic)
                     .font(.system(size: 16, weight: .regular, design: .rounded))
-                    .foregroundColor(.white)
+                    .foregroundColor(.secondary)
                 
                 Text(item.meaning)
                     .font(.system(size: 18, weight: .medium, design: .rounded))
-                    .foregroundColor(.white)
+                    .foregroundColor(.primary)
                     .padding(.top, 4)
                 
                 if !item.example.isEmpty {
@@ -118,7 +123,7 @@ struct FeedbackSheetView: View {
                         HStack(alignment: .top) {
                             Text("Ex: \(item.example)")
                                 .font(.system(size: 15, design: .rounded))
-                                .foregroundColor(.white)
+                                .foregroundColor(.primary)
                                 .italic()
                                 .fixedSize(horizontal: false, vertical: true)
                             
@@ -142,7 +147,7 @@ struct FeedbackSheetView: View {
                         if showTranslation {
                             Text(item.exampleVi)
                                 .font(.system(size: 15, design: .rounded))
-                                .foregroundColor(.white)
+                                .foregroundColor(.secondary)
                                 .transition(.opacity.combined(with: .move(edge: .top)))
                         }
                     }

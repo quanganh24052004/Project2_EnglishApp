@@ -21,7 +21,7 @@ struct FlashcardStepView: View {
     
     var body: some View {
         ZStack {
-            Color(.neutral01).ignoresSafeArea()
+            CapyColors.background.ignoresSafeArea()
             
             VStack(spacing: 30) {
                 Spacer()

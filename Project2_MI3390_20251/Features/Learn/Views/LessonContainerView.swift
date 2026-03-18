@@ -9,19 +9,19 @@ import SwiftUI
 import SwiftData
 
 struct LessonContainerView: View {
-    @StateObject private var viewModel: LessonViewModel
+    @State private var viewModel: LessonViewModel
     @Environment(\.dismiss) var dismiss
     @Environment(\.modelContext) var modelContext
 
     @State private var showExitSheet = false
 
     init(items: [LearningItem]) {
-        _viewModel = StateObject(wrappedValue: LessonViewModel(items: items))
+        _viewModel = State(wrappedValue: LessonViewModel(items: items))
     }
     
     var body: some View {
         ZStack {
-            Color(.neutral01)
+            CapyColors.background
                 .ignoresSafeArea()
             
             VStack(spacing: 0) {
@@ -87,7 +87,7 @@ struct LessonContainerView: View {
             )
             .presentationDetents([.fraction(0.40)])
         }
-        .environmentObject(viewModel)
+        .environment(viewModel)
     }
     
     // MARK: - Subviews
@@ -97,7 +97,7 @@ struct LessonContainerView: View {
             Button(action: { showExitSheet = true }) {
                 Image(systemName: "xmark")
                     .font(.system(size: 28, weight: .bold))
-                    .foregroundColor(.gray)
+                    .foregroundColor(.secondary)
             }
             
             ProgressBar(

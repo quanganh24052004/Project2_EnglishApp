@@ -14,17 +14,17 @@ struct RegistrationView: View {
     // MARK: - Properties
     
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject var authVM: AuthViewModel
+    @Environment(AuthViewModel.self) var authVM
     
     /// ViewModel quản lý logic riêng cho màn hình Đăng ký.
-    @StateObject private var viewModel = RegistrationViewModel()
+    @State private var viewModel = RegistrationViewModel()
     
     // MARK: - Body
     
     var body: some View {
         ZStack {
             // Lớp nền
-            Color.primary01.ignoresSafeArea()
+            CapyColors.background.ignoresSafeArea()
             
             // Lớp nội dung
             GeometryReader { geometry in
@@ -111,7 +111,7 @@ extension RegistrationView {
                 Text("Sign in")
                     .font(.system(size: 10, design: .rounded))
                     .fontWeight(.semibold)
-                    .foregroundColor(.primary01)
+                    .foregroundColor(.blue) // Use a standard blue or accent
             }
             .padding(8)
         }
@@ -122,13 +122,13 @@ extension RegistrationView {
             HStack(spacing: 15) {
                 Rectangle()
                     .frame(height: 0.8)
-                    .foregroundColor(.neutral04)
+                    .foregroundColor(Color(UIColor.separator))
                 Text("Or")
                     .font(.system(size: 15, design: .rounded))
-                    .foregroundColor(.neutral04)
+                    .foregroundColor(.secondary)
                 Rectangle()
                     .frame(height: 0.8)
-                    .foregroundColor(.neutral04)
+                    .foregroundColor(Color(UIColor.separator))
             }
         }
         .padding(.vertical, 12)
@@ -139,7 +139,7 @@ extension RegistrationView {
             Button { print("Google Login") } label: {
                 HStack { Image("img_google").resizable().frame(width: 24, height: 24) }
             }
-            .capyButton(.primary(color: .black, shadow: Color(white: 0.2), textColor: .white))
+            .capyButton(.primary(color: CapyColors.secondaryBackground, shadow: CapyColors.swanShadow, textColor: .primary))
             
             Button { } label: {
                 HStack {
@@ -147,10 +147,10 @@ extension RegistrationView {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 24, height: 24)
-                        .foregroundColor(.white)
+                        .foregroundColor(.primary)
                 }
             }
-            .capyButton(.primary(color: .black, shadow: Color(white: 0.2), textColor: .white))
+            .capyButton(.primary(color: CapyColors.secondaryBackground, shadow: CapyColors.swanShadow, textColor: .primary))
         }
     }
     

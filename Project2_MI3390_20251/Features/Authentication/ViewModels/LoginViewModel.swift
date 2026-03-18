@@ -6,29 +6,30 @@
 //
 
 import SwiftUI
-import Combine
+import Observation
 
 /// ViewModel quản lý logic cho màn hình Đăng nhập (LoginView).
-class LoginViewModel: ObservableObject {
+@Observable
+class LoginViewModel {
     
     // MARK: - Input Properties
     
     /// Email người dùng nhập vào.
-    @Published var email = ""
+    var email = ""
     
     /// Mật khẩu người dùng nhập vào.
-    @Published var password = ""
+    var password = ""
     
     // MARK: - State Properties
     
     /// Trạng thái đang xử lý đăng nhập (để hiện Loading Spinner).
-    @Published var isLoading = false
+    var isLoading = false
     
     /// Nội dung lỗi cần hiển thị.
-    @Published var errorMessage: String?
+    var errorMessage: String?
     
     /// Cờ điều khiển việc hiển thị Alert lỗi.
-    @Published var showingError = false
+    var showingError = false
     
     // MARK: - Actions
     
@@ -45,6 +46,8 @@ class LoginViewModel: ObservableObject {
         }
         
         isLoading = true
+        errorMessage = nil
+        showingError = false
         
         do {
             // 1. Gọi API Supabase để đăng nhập

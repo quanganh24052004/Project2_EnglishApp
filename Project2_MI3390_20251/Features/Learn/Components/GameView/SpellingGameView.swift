@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import Combine
 struct WordToken: Identifiable {
     var id: String { "\(text)_\(globalStartIndex)" }
     let text: String
@@ -19,7 +19,7 @@ struct LineModel: Identifiable {
 }
 
 struct SpellingGameView: View {
-    @EnvironmentObject var viewModel: LessonViewModel
+    @Environment(LessonViewModel.self) var viewModel
     let item: LearningItem
     var onCheck: (String) -> Void
     

@@ -18,7 +18,7 @@ struct WordCardView: View {
     var body: some View {
         FlipCardContainer(isFlipped: isFlipped) {
             // MARK: - FRONT CARD
-            cardFace(color: .primaryBG) {
+            cardFace(color: CapyColors.background) {
                 VStack(spacing: 16) {
                     Text(item.word)
                         .font(.system(size: 28, design: .rounded))
@@ -53,7 +53,7 @@ struct WordCardView: View {
 
         } back: {
             // MARK: - BACK CARD
-            cardFace(color: .primaryBG) {
+            cardFace(color: CapyColors.background) {
                 VStack(spacing: 20) {
                     Text(item.word)
                         .font(.system(size: 28, design: .rounded))
@@ -79,7 +79,7 @@ struct WordCardView: View {
         ZStack {
             RoundedRectangle(cornerRadius: 20)
                 .fill(color)
-                .shadow(color: .black.opacity(0.1), radius: 10, x: 0, y: 5)
+                .shadow(color: Color.primary.opacity(0.1), radius: 10, x: 0, y: 5)
             
             RoundedRectangle(cornerRadius: 20)
                 .stroke(Color.gray.opacity(0.2), lineWidth: 1)
@@ -97,7 +97,7 @@ struct WordCardView: View {
         
         if let range = attributedString.range(of: target, options: .caseInsensitive) {
             attributedString[range].underlineStyle = .single
-            attributedString[range].foregroundColor = .black //
+            attributedString[range].foregroundColor = .primary 
             attributedString[range].font = .system(size: 20, weight: .semibold)
         }
         

@@ -10,7 +10,6 @@
 		0804F2F62EE79E4B00A982D3 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0804F2F52EE79E4B00A982D3 /* MainTabView.swift */; };
 		0804F2F92EE79FDC00A982D3 /* AppTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0804F2F82EE79FDC00A982D3 /* AppTab.swift */; };
 		081D1AFE2F5A4D08001F67BE /* OnboardingModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081D1AFD2F5A4D08001F67BE /* OnboardingModels.swift */; };
-		081D1B002F5A4D1B001F67BE /* survey_data.json in Sources */ = {isa = PBXBuildFile; fileRef = 081D1AFF2F5A4D13001F67BE /* survey_data.json */; };
 		081D1B012F5A4F06001F67BE /* survey_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 081D1AFF2F5A4D13001F67BE /* survey_data.json */; };
 		082EC9FF2EFCF42C00645D3A /* ExitConfirmationSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082EC9FE2EFCF42C00645D3A /* ExitConfirmationSheet.swift */; };
 		082ECA032EFD079400645D3A /* SummarizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082ECA022EFD079400645D3A /* SummarizeView.swift */; };
@@ -61,7 +60,6 @@
 		088F26142EE5113C00E89167 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088F26132EE5113C00E89167 /* RootView.swift */; };
 		08BE81712EE7A5BF004181EE /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BE81702EE7A5BF004181EE /* SearchView.swift */; };
 		08BE81752EE7A83D004181EE /* LearnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BE81742EE7A83D004181EE /* LearnView.swift */; };
-		08BE81772EE7A874004181EE /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BE81762EE7A874004181EE /* ProfileView.swift */; };
 		08BE81892EE7AD40004181EE /* LearningModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BE81882EE7AD40004181EE /* LearningModels.swift */; };
 		08BE818B2EE7B50E004181EE /* WordRowSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BE818A2EE7B50E004181EE /* WordRowSearch.swift */; };
 		08BE81A52EE7B7E5004181EE /* FlashcardStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BE81A02EE7B7E5004181EE /* FlashcardStepView.swift */; };
@@ -105,7 +103,6 @@
 		08E4C7EA2F4D3A09000EFEC2 /* Correct.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 08E4C7E42F4D3A09000EFEC2 /* Correct.mp3 */; };
 		08E4C7EB2F4D3A09000EFEC2 /* Fail.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 08E4C7E52F4D3A09000EFEC2 /* Fail.mp3 */; };
 		08E4C7EC2F4D3A09000EFEC2 /* Complete.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 08E4C7E32F4D3A09000EFEC2 /* Complete.mp3 */; };
-		08E4C7F02F4ED8B9000EFEC2 /* GeneratedColors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08E4C7EF2F4ED8B9000EFEC2 /* GeneratedColors.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -164,7 +161,6 @@
 		088F26132EE5113C00E89167 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		08BE81702EE7A5BF004181EE /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		08BE81742EE7A83D004181EE /* LearnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnView.swift; sourceTree = "<group>"; };
-		08BE81762EE7A874004181EE /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		08BE81882EE7AD40004181EE /* LearningModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningModels.swift; sourceTree = "<group>"; };
 		08BE818A2EE7B50E004181EE /* WordRowSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordRowSearch.swift; sourceTree = "<group>"; };
 		08BE819F2EE7B7E5004181EE /* FeedbackSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackSheetView.swift; sourceTree = "<group>"; };
@@ -202,7 +198,6 @@
 		08E4C7E42F4D3A09000EFEC2 /* Correct.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Correct.mp3; sourceTree = "<group>"; };
 		08E4C7E52F4D3A09000EFEC2 /* Fail.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Fail.mp3; sourceTree = "<group>"; };
 		08E4C7E62F4D3A09000EFEC2 /* Incorrect.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Incorrect.mp3; sourceTree = "<group>"; };
-		08E4C7EF2F4ED8B9000EFEC2 /* GeneratedColors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = GeneratedColors.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -313,7 +308,6 @@
 				0868CD8C2F08EC8500222EAD /* Review */,
 				0868CD912F08ED0A00222EAD /* Handbook */,
 				0868CD952F08ED7500222EAD /* Search */,
-				0868CD962F08ED7A00222EAD /* Profile */,
 				0868CD9E2F08EDC100222EAD /* Settings */,
 				0868CDA02F08EE1B00222EAD /* PushUp */,
 				0868CDA12F08EE5100222EAD /* Summarize */,
@@ -544,15 +538,6 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
-		0868CD962F08ED7A00222EAD /* Profile */ = {
-			isa = PBXGroup;
-			children = (
-				0868CD9A2F08EDA600222EAD /* Views */,
-				0868CD9B2F08EDA600222EAD /* Components */,
-			);
-			path = Profile;
-			sourceTree = "<group>";
-		};
 		0868CD972F08ED9000222EAD /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -565,21 +550,6 @@
 			isa = PBXGroup;
 			children = (
 				08BE818A2EE7B50E004181EE /* WordRowSearch.swift */,
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
-		0868CD9A2F08EDA600222EAD /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				08BE81762EE7A874004181EE /* ProfileView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		0868CD9B2F08EDA600222EAD /* Components */ = {
-			isa = PBXGroup;
-			children = (
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -801,7 +771,6 @@
 		08E36CCB2F01C82200B86794 /* Asset */ = {
 			isa = PBXGroup;
 			children = (
-				08E4C7EF2F4ED8B9000EFEC2 /* GeneratedColors.xcassets */,
 				088F25E42EE50A8000E89167 /* Assets.xcassets */,
 			);
 			path = Asset;
@@ -870,7 +839,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 2610;
-				LastUpgradeCheck = 2620;
+				LastUpgradeCheck = 2630;
 				TargetAttributes = {
 					088F25D32EE50A4200E89167 = {
 						CreatedOnToolsVersion = 26.1.1;
@@ -915,7 +884,6 @@
 				0857816B2EEFDFC50003618D /* COPYRIGHT.txt in Resources */,
 				0857816C2EEFDFC50003618D /* chalkboardse.otf in Resources */,
 				08E36CCA2F01C81B00B86794 /* BackGroundMusic.mp3 in Resources */,
-				08E4C7F02F4ED8B9000EFEC2 /* GeneratedColors.xcassets in Resources */,
 				0857816D2EEFDFC50003618D /* ChalkboardSE-Light-01_0.ttf in Resources */,
 				0857816E2EEFDFC50003618D /* ChalkboardSE-Regular-02_0.ttf in Resources */,
 				0857816F2EEFDFC50003618D /* ChalkboardSE-Bold-03_0.ttf in Resources */,
@@ -942,13 +910,11 @@
 				083369DB2EE57F1D003B2FEF /* String+Validation.swift in Sources */,
 				08D6491C2EFEAB55004F9C65 /* MultipleChoiceView.swift in Sources */,
 				0868CD442F04421300222EAD /* Word+Extension.swift in Sources */,
-				081D1B002F5A4D1B001F67BE /* survey_data.json in Sources */,
 				088881A22EF2B5AC00F8E198 /* LearningManager.swift in Sources */,
 				0804F2F62EE79E4B00A982D3 /* MainTabView.swift in Sources */,
 				085B5FF62EEC32B200B6BE5F /* DictionaryEntry.swift in Sources */,
 				08E4C4E82F02222800D18145 /* User+Extensions.swift in Sources */,
 				083369E42EE585A2003B2FEF /* RegistrationView.swift in Sources */,
-				08BE81772EE7A874004181EE /* ProfileView.swift in Sources */,
 				082EC9FF2EFCF42C00645D3A /* ExitConfirmationSheet.swift in Sources */,
 				088F260C2EE50D3900E89167 /* SurveyView.swift in Sources */,
 				088F260D2EE50D3900E89167 /* SurveyOptionRow.swift in Sources */,
@@ -1019,6 +985,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -1085,6 +1052,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -1158,7 +1126,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1200,7 +1168,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

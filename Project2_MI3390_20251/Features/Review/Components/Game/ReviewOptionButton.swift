@@ -25,7 +25,7 @@ struct ReviewOptionButton: View {
                     Text(text)
                         .font(.system(size: 16))
                         .fontWeight(.semibold)
-                        .foregroundColor(.black)
+                        .foregroundColor(.primary)
                 }
             }
         }

@@ -23,7 +23,7 @@ struct ProgressBar: View {
             
             ZStack(alignment: .leading) {
                 Capsule()
-                    .fill(backgroundColor)
+                    .fill(CapyColors.secondaryBackground)
                     .frame(height: height)
                 
                 Capsule()

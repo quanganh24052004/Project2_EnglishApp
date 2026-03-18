@@ -96,18 +96,18 @@ private struct AnswerSlotItem: View {
             if isEmpty {
                 // Trạng thái: Ô trống (Placeholder)
                 RoundedRectangle(cornerRadius: 12)
-                    .stroke(Color.gray.opacity(0.3), style: StrokeStyle(lineWidth: 2, dash: [5]))
+                    .stroke(Color.primary.opacity(0.1), style: StrokeStyle(lineWidth: 2, dash: [5]))
                     .frame(width: 45, height: 52)
-                    .background(Color.gray.opacity(0.05).cornerRadius(12))
+                    .background(Color.primary.opacity(0.02).cornerRadius(12))
             } else if let char = char {
                 // Trạng thái: Đã điền (Filled)
                 Text(char)
                     .font(.system(size: 24, weight: .bold))
                     .foregroundColor(.white)
                     .frame(width: 45, height: 52)
-                    .background(Color.orange)
+                    .background(Color.accentColor) // Thay .orange bằng accentColor để đồng bộ
                     .cornerRadius(12)
-                    .shadow(color: Color.orange.opacity(0.5), radius: 0, x: 0, y: 4)
+                    .shadow(color: Color.accentColor.opacity(0.3), radius: 0, x: 0, y: 4)
                     .offset(y: -4)
             }
         }
@@ -165,12 +165,12 @@ struct TileButtonStyle: ButtonStyle {
         let isPressed = configuration.isPressed
         configuration.label
             .font(.system(size: 22, weight: .bold))
-            .foregroundColor(.neutral04)
+            .foregroundColor(.primary)
             .frame(width: 55, height: 60)
-            .background(.primaryBG)
+            .background(CapyColors.background)
             .cornerRadius(12)
-            .shadow(color: .gray.opacity(0.3), radius: 0, x: 0, y: isPressed ? 0 : 4)
-            .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color.gray.opacity(0.2), lineWidth: 1))
+            .shadow(color: Color.primary.opacity(0.1), radius: 0, x: 0, y: isPressed ? 0 : 4)
+            .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color.primary.opacity(0.1), lineWidth: 1))
             .offset(y: isPressed ? 4 : 0)
             .animation(.smooth(duration: 0.1), value: isPressed)
     }

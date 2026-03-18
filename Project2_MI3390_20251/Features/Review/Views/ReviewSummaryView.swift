@@ -30,7 +30,7 @@ struct ReviewSummaryView: View {
     // MARK: - Body
     var body: some View {
         ZStack {
-            Color.primaryBG.ignoresSafeArea()
+            CapyColors.background.ignoresSafeArea()
             
             VStack(spacing: 0) {
                 Spacer()
@@ -60,7 +60,7 @@ extension ReviewSummaryView {
             .resizable()
             .scaledToFit()
             .frame(height: 220)
-            .shadow(color: .black.opacity(0.1), radius: 10, x: 0, y: 5)
+            .shadow(color: Color.primary.opacity(0.1), radius: 10, x: 0, y: 5)
     }
     
     /// Phần tiêu đề và nội dung text
@@ -106,7 +106,7 @@ extension ReviewSummaryView {
                             .fontWeight(.semibold)
                             .padding(.horizontal, 6)
                             .padding(.vertical, 2)
-                            .background(Color.white.opacity(0.2))
+                            .background(Color.primary.opacity(0.1))
                             .cornerRadius(8)
                     }
                 }
@@ -119,7 +119,7 @@ extension ReviewSummaryView {
                 Text("Back to homepage")
                     .font(.system(size: 16, design: .rounded))
                     .fontWeight(.semibold)
-                    .foregroundColor(.neutral04)
+                    .foregroundColor(.secondary)
             }
             .padding(.top, 8)
         }

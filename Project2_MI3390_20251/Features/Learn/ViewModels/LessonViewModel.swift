@@ -10,6 +10,8 @@ import Combine
 import SwiftData
 import Supabase
 
+import Observation
+
 enum LearningStep {
     case flashcard
     case listenWrite
@@ -21,21 +23,22 @@ enum CheckResult {
     case wrong(correctAnswer: String)
 }
 
-class LessonViewModel: ObservableObject {
+@Observable
+class LessonViewModel {
     // MARK: - Properties
     let items: [LearningItem]
     
-    @Published var retryQueue: [LearningItem] = []
-    @Published var isRetryMode: Bool = false
-    @Published var currentRetryItem: LearningItem?
+    var retryQueue: [LearningItem] = []
+    var isRetryMode: Bool = false
+    var currentRetryItem: LearningItem?
     
-    @Published var currentItemIndex: Int = 0
-    @Published var currentStep: LearningStep = .flashcard
+    var currentItemIndex: Int = 0
+    var currentStep: LearningStep = .flashcard
     
-    @Published var progress: Double = 0.0
-    @Published var showFeedbackSheet: Bool = false
-    @Published var currentFeedback: CheckResult? = nil
-    @Published var isLessonFinished: Bool = false
+    var progress: Double = 0.0
+    var showFeedbackSheet: Bool = false
+    var currentFeedback: CheckResult? = nil
+    var isLessonFinished: Bool = false
     
     var learningManager: LearningManager?
     

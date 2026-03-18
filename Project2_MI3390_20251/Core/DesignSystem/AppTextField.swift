@@ -101,8 +101,8 @@ struct AppTextField: View {
     /// Style nền và viền của TextField
     private var backgroundStyle: some View {
         RoundedRectangle(cornerRadius: 16)
-            .stroke(isFocused ? Color.orange : Color.neutral04, lineWidth: 2)
-            .background(Color.white) // Nền trắng nội bộ
+            .stroke(isFocused ? Color.orange : Color(UIColor.systemGray4), lineWidth: 2)
+            .background(Color(UIColor.secondarySystemBackground)) // Phù hợp cho cả Light và Dark Mode
             .cornerRadius(16)
     }
 }

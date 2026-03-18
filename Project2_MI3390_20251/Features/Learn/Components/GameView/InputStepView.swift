@@ -6,9 +6,9 @@
 //
 
 import SwiftUI
-
+import Combine
 struct InputStepView: View {
-    @EnvironmentObject var viewModel: LessonViewModel
+    @Environment(LessonViewModel.self) var viewModel
     
     let item: LearningItem
     

@@ -6,28 +6,29 @@
 //
 
 import SwiftUI
-import Combine
+import Observation
 
 /// ViewModel quản lý logic cho màn hình Đăng ký (RegistrationView).
-class RegistrationViewModel: ObservableObject {
+@Observable
+class RegistrationViewModel {
     
     // MARK: - Input Properties
     
-    @Published var firstname = ""
-    @Published var lastname = ""
-    @Published var phone = ""
-    @Published var email = ""
-    @Published var password = ""
-    @Published var confirmPassword = ""
+    var firstname = ""
+    var lastname = ""
+    var phone = ""
+    var email = ""
+    var password = ""
+    var confirmPassword = ""
     
     /// Trạng thái kiểm tra mật khẩu khớp nhau.
-    @Published var passwordMatch = false
+    var passwordMatch = false
     
     // MARK: - State Properties
     
-    @Published var isLoading = false
-    @Published var errorMessage: String?
-    @Published var showingError = false
+    var isLoading = false
+    var errorMessage: String?
+    var showingError = false
     
     // MARK: - Helper Methods
     
@@ -51,6 +52,8 @@ class RegistrationViewModel: ObservableObject {
         }
         
         isLoading = true
+        errorMessage = nil
+        showingError = false
         
         do {
             // 1. Gọi API Đăng ký kèm Metadata (Họ tên, SĐT)
